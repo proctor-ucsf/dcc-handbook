@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Workflows | Proctor Foundation Data Science Handbook</title>
+  <title>Chapter 4 Communication and Coordination | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Workflows | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Chapter 4 Communication and Coordination | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Workflows | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Chapter 4 Communication and Coordination | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro.html"/>
-<link rel="next" href="directory-structure-and-code-repositories.html"/>
+<link rel="prev" href="directory-structure-and-code-repositories.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -115,90 +115,67 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="workflows" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Workflows</h1>
-<p><em>Contributors: Ben Arnold</em></p>
-<p>A data science work flow typically progresses through 4 steps that rarely evolve in a purely linear fashion, but in the end should flow in this direction:</p>
-<div class="figure"><span id="fig:fig-workflow2"></span>
-<img src="images/workflow.png" alt="Overview of the four main steps in a typical data science workflow" width="75%" />
-<p class="caption">
-Figure 2.1: Overview of the four main steps in a typical data science workflow
-</p>
+<div id="commcoord" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Communication and Coordination</h1>
+<p><em>Contributors: Jade Benjamin-Chung, Ben Arnold</em></p>
+<p><strong>These communications guidelines are evolving as we increasingly adopt Slack, but here some general principles if you work closely with Ben.</strong></p>
+<div id="slack" class="section level2">
+<h2><span class="header-section-number">4.1</span> Slack</h2>
+<ul>
+<li>If you work with Ben but are not a member of Ben’s Slack workspace then ask him to invite you!</li>
+<li><p>Use Slack for scheduling, coding related questions, quick check ins, etc. If your Slack message exceeds 200 words, it might be time to use email.</p></li>
+<li><p>Use channels instead of direct messages unless you need to discuss something private.</p></li>
+<li><p>Include tags on your message (e.g., <code>@Ben</code>) when you want to ensure that a person sees the message. Ben doesn’t regularly read messages where he isn’t tagged.</p></li>
+<li><p>Please make an effort to respond to messages that message you (e.g., <code>@Ben</code>) as quickly as possible and always within 24 hours, unless of course you are on vacation!</p></li>
+<li>If you are unusually busy (e.g., taking MCAT/GRE, taking many exams) or on vacation please alert the team in advance so we can expect you not to respond at all / as quickly as usual and also <a href="https://get.slack.help/hc/en-us/articles/201864558-Set-your-Slack-status-and-availability">set your status in Slack</a> (e.g., it could say “On vacation”) so we know not to expect to see you online.</li>
+<li><p>Please thread messages in Slack as much as possible.</p></li>
+</ul>
 </div>
-<table>
-<caption><span id="tab:workflow">Table 2.1: </span> Workflow basics</caption>
-<colgroup>
-<col width="8%" />
-<col width="28%" />
-<col width="31%" />
-<col width="32%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Steps</th>
-<th align="left">Example activities</th>
-<th align="center"><span class="math inline">\(\Rightarrow\)</span> Inputs</th>
-<th align="center"><span class="math inline">\(\Rightarrow\)</span> Outputs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">1</td>
-<td align="left"><strong>Data cleaning and processing</strong></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">.</td>
-<td align="left">make a plan for final datasets, fix data entry errors, create derived variables, plan for public replication files</td>
-<td align="center">untouched datasets</td>
-<td align="center">final datasets</td>
-</tr>
-<tr class="odd">
-<td align="center">2-3</td>
-<td align="left"><strong>Analyses</strong></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">.</td>
-<td align="left">exploratory data analysis, study monitoring, summary statistics, statistical analyses, independent replication of analyses, make figures and tables</td>
-<td align="center">final datasets</td>
-<td align="center">saved results (.rds/.csv), tables (.html,.pdf), figures (.html/.png)</td>
-</tr>
-<tr class="odd">
-<td align="center">4</td>
-<td align="left"><strong>Communication</strong></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">.</td>
-<td align="left">results synthesis</td>
-<td align="center">saved results, figures, tables</td>
-<td align="center">monitoring reports, presentations, scientific articles</td>
-</tr>
-</tbody>
-</table>
-<p>In many modern data science workflows, steps 2-4 can be accomplished in a single R notebook or Jupyter notebook: the statistical analysis, creation of figures and tables, and creation of reports.</p>
-<p>However, it is still useful to think of the distinct stages in many cases. For example, a single statistical analysis might contribute to a DSMC report, a scientific conference presentation, and a scientific article. In this example, each piece of scientific communication would take the same input (stored analysis results as .csv/.rds) and then proceed along slightly different downstream workflows.</p>
-<p>It would be more error prone to replicate the same statistical analysis in three parallel downstream work flows. This illustrates a key idea that holds more generally:</p>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Key idea for workflows:</strong> Whenever possible, avoid repeating the same data processing or statistical analysis in separate streams. <em>Key data processing and analyses should be done once</em>.</td>
-</tr>
-</tbody>
-</table>
+<div id="email" class="section level2">
+<h2><span class="header-section-number">4.2</span> Email</h2>
+<ul>
+<li>Use email for longer messages (&gt;200 words) or messages that merit preservation.</li>
+<li>Generally, strive to respond within 24 hours. If you are unusually busy or on vacation please alert the team in advance so we can expect you not to respond at all / as quickly as usual.</li>
+</ul>
+</div>
+<div id="trello" class="section level2">
+<h2><span class="header-section-number">4.3</span> Trello</h2>
+<ul>
+<li>Ben manages projects and teams using a <a href="https://www.atlassian.com/agile/kanban/boards">kanban board approach</a> in <a href="https://www.trello.com">Trello</a>.</li>
+<li>You and/or Ben will add new cards within our team’s Trello boards and assign them to team members.</li>
+<li>Each card represents a discrete chunk of work.</li>
+<li>Cards higher in a list are higher priority.</li>
+<li>Strive to complete the tasks in your card by the card’s due date. Talk to Ben about deadlines – we can always manage the calendar!</li>
+<li>Use checklists to break down a task into smaller chunks. Usually, you can do this yourself (but ask Ben if you ever want input).</li>
+<li>Move cards to the “DONE” list on a board when they are done.</li>
+</ul>
+</div>
+<div id="google-drive" class="section level2">
+<h2><span class="header-section-number">4.4</span> Google Drive</h2>
+<ul>
+<li>We mostly use Google Drive to create shared documents with longer descriptions of tasks. These documents are linked to Trello cards. Ben often shares these docs with a whole project team since tasks are overlapping, and even if a task is assigned to one person, others may have valuable insights.</li>
+<li>Please invite both of Ben’s email addresses to any documents you create (<a href="mailto:bfarnold@gmail.com" class="email">bfarnold@gmail.com</a>, <a href="mailto:ben.arnold@ucsf.edu" class="email">ben.arnold@ucsf.edu</a>).</li>
+</ul>
+</div>
+<div id="calendar-meetings" class="section level2">
+<h2><span class="header-section-number">4.5</span> Calendar / Meetings</h2>
+<ul>
+<li>Ben will schedule most meetings through the calendar.</li>
+<li>Our meetings start on the hour.</li>
+<li>If you are going to be late, please send a message in our Slack channel.</li>
+<li>If you are regularly not able to come on the hour, notify the team and we might choose the modify the agenda order or the start time.</li>
+<li>Add hoc meetings are welcome. If Ben’s office door is open, come in!</li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="directory-structure-and-code-repositories.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="directory-structure-and-code-repositories.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
