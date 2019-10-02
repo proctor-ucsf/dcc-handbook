@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Directory Structure and Code Repositories | Proctor Foundation Data Science Handbook</title>
+  <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Directory Structure and Code Repositories | Proctor Foundation Data Science Handbook" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Directory Structure and Code Repositories | Proctor Foundation Data Science Handbook" />
+  
+  <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Stephanie Djajadi, Nolan Pokpongkiat" />
+
+
+<meta name="date" content="2019-10-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="workflows.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Proctor Data Science Handbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction: Work Flow and Reproducible Analyses</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#workflow"><i class="fa fa-check"></i><b>1.1</b> Workflow</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#reproducibility"><i class="fa fa-check"></i><b>1.2</b> Reproducibility</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#automation"><i class="fa fa-check"></i><b>1.3</b> Automation</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="workflows.html"><a href="workflows.html"><i class="fa fa-check"></i><b>2</b> Workflows</a></li>
+<li class="chapter" data-level="3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html"><i class="fa fa-check"></i><b>3</b> Directory Structure and Code Repositories</a><ul>
+<li class="chapter" data-level="3.1" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#small-and-large-projects"><i class="fa fa-check"></i><b>3.1</b> Small and large projects</a></li>
+<li class="chapter" data-level="3.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#directory-structure"><i class="fa fa-check"></i><b>3.2</b> Directory Structure</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#first-level-data-and-analyses"><i class="fa fa-check"></i><b>3.2.1</b> First level: data and analyses</a></li>
+<li class="chapter" data-level="3.2.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#second-level-data"><i class="fa fa-check"></i><b>3.2.2</b> Second level: data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#second-level-analysis"><i class="fa fa-check"></i><b>3.2.3</b> Second level: analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#code-repositories"><i class="fa fa-check"></i><b>3.3</b> Code Repositories</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#rproj-files"><i class="fa fa-check"></i><b>3.3.1</b> <code>.Rproj</code> files</a></li>
+<li class="chapter" data-level="3.3.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#configuration-config-file"><i class="fa fa-check"></i><b>3.3.2</b> Configuration (‘config’) File</a></li>
+<li class="chapter" data-level="3.3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#order-files-and-subdirectories"><i class="fa fa-check"></i><b>3.3.3</b> Order Files and Subdirectories</a></li>
+<li class="chapter" data-level="3.3.4" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#use-bash-scripts-to-ensure-reproducibility"><i class="fa fa-check"></i><b>3.3.4</b> Use Bash scripts to ensure reproducibility</a></li>
+<li class="chapter" data-level="3.3.5" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#alternative-approach-for-code-repos"><i class="fa fa-check"></i><b>3.3.5</b> Alternative approach for code repos</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Proctor Foundation Data Science Handbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="directory-structure-and-code-repositories" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Directory Structure and Code Repositories</h1>
+<p><em>Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold</em></p>
+<p>The backbone of your project workflow is the file directory so it makes sense to spend time organizing the directory. Note that <code>directory</code> is the technical term for the system used to organize individual files. Most non-UNIX environments use a folder analogy, and directory and folder can be used interchangeably in a lot of cases. A well organized directory will make everything that follows much easier. Just like a well designed kitchen is essential to enjoy cooking (and avoid clutter), a well designed directory helps you enjoy working and stay organized in a complex project with literally thousands of related files. Just like a disorganized kitchen (“now where did I put that spatula?”) a disorganized project directory creates confusion, lost time, stress, and mistakes.</p>
+<p>Another huge advantage of maintaining a regular/predictable directory structure within a project and across projects is that it makes it more intuitive. When a directory is intuitive, it is easier to work collaboratively across a larger team; everybody can predict (at least approximately) where files should be.</p>
+<p>Nested within your directory will be a <code>code repository</code>. Sometimes we find it useful to manage the code repository using version control, such as git/GitHub.</p>
+<p>Other chapters will discuss <a href="#codingpractices">coding practices</a>, <a href="#datamanagement">data management</a>, and <a href="#github">GitHub/version control</a> that will build from the material here.</p>
+<p>Carrying the kitchen analogy further: here, we are designing the kitchen. Then, we’ll discuss approaches for how to cook in the kitchen that we designed/built.</p>
+<div id="small-and-large-projects" class="section level2">
+<h2><span class="header-section-number">3.1</span> Small and large projects</h2>
+<p>Our experience is that the overwhelming majority of projects come in two sizes: small and large. We recommend setting up your directory structure depending on how large you expect the project to be. Sometimes, small projects evolve into large projects, but only occasionally. A small project is something like a single data analysis with a single published article in mind. A large project is an epidemiologic field study, where there are multiple different types of data and different types of analyses (e.g., sample size calculations, survey data, biospecimens, substudies, etc.).</p>
+<hr />
+<p><strong>Small project:</strong> There is essentially one dataset and a single, coherent analysis. For example, a simulation study or a methodology study that will lead to a single article.</p>
+<p><strong>Large project:</strong> A field study that includes multiple activities, each of which generates data files. Multiple analyses are envisioned, leading to multiple scientific articles.</p>
+<hr />
+<p>Large projects are more common and more complicated. Most of this chapter focuses on large project organization (small projects can be thought of as essentially one piece of a large project).</p>
+</div>
+<div id="directory-structure" class="section level2">
+<h2><span class="header-section-number">3.2</span> Directory Structure</h2>
+<p>In the example below, we follow a basic directory naming convention that makes working in UNIX and typing directory statements in programs much easier:</p>
+<ul>
+<li><strong>short names</strong></li>
+<li><strong>no spaces in the names</strong> (not essential but a personal preference. Can use <code>_</code> or <code>-</code> instead)</li>
+<li><strong>lower case</strong> (not essential, again, personal preferences vary!)</li>
+</ul>
+<p>For example, Ben completed a study in Tamil Nadu, India during his dissertation to study the effect of improvements in water supply and sanitation on child health. Instead of naming the directory <code>Tamil Nadu</code> or <code>Tamil Nadu WASH Study</code>, he used <code>trichy</code> instead (a colloquial name for the city near the study, Tiruchirappalli), which was much easier to type in the terminal and in directory statements. A short name helps make directory references easier while programming.</p>
+<div id="first-level-data-and-analyses" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> First level: data and analyses</h3>
+<div class="figure"><span id="fig:dir-fig1"></span>
+<img src="images/mystudy-dir-fig1.png" alt="Example directory for `mystudy`" width="75%" />
+<p class="caption">
+Figure 3.1: Example directory for <code>mystudy</code>
+</p>
+</div>
+<p>Start by dividing a project into major activities. In the example abpve, the project is named <code>mystudy</code>. There is a <code>data</code> subdirectory (more in a sec), and then three major activities, each corresponding to a separate analysis: <code>primary-analysis</code>,<code>secondary-analysis-1</code>, and <code>secondary-analysis-2</code>. In a real project, the names could be more informative, such as “trachoma-qpcr”. Also, a real project might also include many additional subdirectories related to administrative and logistics activities that do not relate to data science, such as irb, travel, contracts, budget, survey forms, etc.).</p>
+<p>Dividing files into major activities helps keep things organized for really big projects. In a multi-site study, consider including a directory for each site before splitting files into major activities. Ideally, analyses will not span major activity subdirectories in a project folder, but sometimes you can’t predict/avoid that from happening.</p>
+</div>
+<div id="second-level-data" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Second level: data</h3>
+<p><img src="images/mystudy-dir-fig2.png" width="75%" /></p>
+<p>Each project will include a <code>data</code> directory. We recommend organizing it into 3 parts: <code>untouched</code>, <code>temp</code>, and <code>final</code>. Often, it is useful to include a fourth subdirectory called <code>public</code> for sharing public versions of datasets.</p>
+<p>The <code>untouched</code> directory includes all untouched datasets that are used for the study. Once saved in the directory never touch them; you will read them into the work flow, but <strong>never, ever save over them</strong>. If the study has repeated extracts from rolling data collection or electronic health records, consider subdirectories within <code>untouched</code> that are indexed by date.</p>
+<p>The <code>temp</code> directory (optional, not essential) includes temporary files that you might generate during the data management process. This is mainly a space for experimentation. As a rule, never save anything in the temp directory that you cannot delete. Regularly delete files in the temp directory to save disk space.</p>
+<p>The <code>final</code> directory includes final datasets for the activity. Final datasets are de-identified and require no further processing; they are clean and ready for analysis. They should be accompanied by meta-data, which at minimum includes the data’s provenance (i.e., how it was created) and what it includes (i.e., level of the data, plus variable coding/labels/descriptions). Clean/final datasets generated by one analysis might be reused in another.</p>
+</div>
+<div id="second-level-analysis" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Second level: analysis</h3>
+<p>We recommend maintaining a separate subdirectory for each major analysis in a project. In this example, there are three with not-very-creative names from the view of trial: <code>primary-analysis</code>, <code>secondary-analysis-1</code>, <code>secondary-analysis-2</code>.</p>
+<p>Think of each analysis as the scope of all of the work for a single, published paper. We recommend dividing the analysis project into a space for computational notebooks / scripts (i.e., a <code>code repository</code>), and a second for their output. The reason for the split is to make it easier to use version control (should you choose) for the code. Version control like <code>git</code> and <code>GitHub</code> (see the <a href="#GitHub">Chapter on GitHub</a>) works well for text files but isn’t really designed for binary files such as images (.png), datasets (.rds), or PDF files (.pdf). It is certainly possible to use git with those file types, but since git makes a new copy of the file every time it is changed the git repo can get horribly bloated and takes up too much space on disk. Consolidating the output into a separate directory makes it more obvious that it isn’t under version control. In this example, there are separate parts for code (<code>R</code>) and output (<code>output</code>). Output could include figures, tables, or saved analysis results stored as data files (.rds or .csv). Another conventional name for the code repository is <code>src</code> as an alternative to <code>R</code> if you use other languages.</p>
+<p><img src="images/mystudy-dir-fig3.png" width="75%" /></p>
+<hr />
+<p><em>Interdependence between analyses</em>: Sometimes a result from an analysis might be a cleaned dataset that could feed into future, distinct analyses. This is quite common, for example, in large trials where a set of baseline characteristics might be used in multiple separate papers for different endpoints, either for assessing balance of the trial population or subgroups, or used as adjustment covariates in additional analyses of the trial. In this case, the cleaned dataset would be written to the <code>data/final</code> directory and is thus available for future use.</p>
+<hr />
+</div>
+</div>
+<div id="code-repositories" class="section level2">
+<h2><span class="header-section-number">3.3</span> Code Repositories</h2>
+<p>Maintain a separate code repository for each major analysis activity (last section).</p>
+<p>We recommend the following structure for a code repository:</p>
+<p><img src="images/mystudy-dir-fig4.png" width="75%" /></p>
+<p>With subdirectories that generally look like this:</p>
+<pre><code>.gitignore
+primary-analysis.Rproj
+0-config.R
+0-primary-analysis-run-all.sh
+1-dm /
+    0-dm-run-all.sh
+    1-format-enrollment-data.R
+    2-format-adherence-data.R
+    3-format-LAZ-measurements.R
+2-baseline-balance /
+    0-baseline-balance-run-all.sh
+    ...
+3-consort /
+    0-consort-run-all.sh
+    ...
+4-adherence /
+    0-adherence-run-all.sh
+    ...
+5-laz /
+    0-laz-run-all.sh
+    1-laz-unadjusted-analysis.R
+    2-laz-adjusted-analysis.R
+6-figures / 
+    0-figures-run-all.sh
+    Fig1-consort.Rmd
+    Fig2-adherence.Rmd
+    Fig3-laz.Rmd</code></pre>
+<p>Note <code>dm</code> is shorthand for “data management.” You can call the data management directory anything you want, but just ensure that you have one. This helps ensure work conducted in step 1 of your workflow stays upstream from all analyses (see <a href="workflows.html#workflows">Chapter on workflows</a>). Also note that in this example, all of the scripts are <code>.R</code> files. Increasingly, we use R Markdown notebooks <code>.Rmd</code> instead of / in addition to R files.</p>
+<p>For brevity, we haven’t expanded every directory, but you can glean some important takeaways from what you <em>do</em> see.</p>
+<div id="rproj-files" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> <code>.Rproj</code> files</h3>
+<p>An “R Project” can be created within RStudio by going to <code>File &gt;&gt; New Project</code>. Depending on where you are with your research, choose the most appropriate option. This will save preferences, working directories, and even the results of running code/data (though we recommend starting from scratch each time you open your project, in general). Then, ensure that whenever you are working on that specific research project, you open your created project to enable the full utility of <code>.Rproj</code> files. This also automatically sets the directory to the top level of the project.</p>
+</div>
+<div id="configuration-config-file" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Configuration (‘config’) File</h3>
+<p>This is the single most important file for your project. It will be responsible for a variety of common tasks, declare global variables, load functions, declare paths, and more. <em>Every other file in the project</em> will begin with <code>source(&quot;0-config&quot;)</code>, and its role is to reduce redundancy and create an abstraction layer that allows you to make changes in one place (<code>0-config.R</code>) rather than 5 different files. To this end, paths that will be referenced in multiple scripts (e.g., a <code>clean_data_path</code>) can be declared in <code>0-config.R</code> and simply referred to by its variable name in scripts. If you ever want to change things, rename them, or even switch from a downsample to the full data, all you would then to need to do is modify the path in one place and the change will automatically update throughout your project. See the example config file for more details. The paths defined in the <code>0-config.R</code> file assume that users have opened the <code>.Rproj</code> file, which sets the directory to the top level of the project.</p>
+</div>
+<div id="order-files-and-subdirectories" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Order Files and Subdirectories</h3>
+<p>This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e. <code>primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R</code> =&gt; <code>primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS</code>). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.</p>
+<p>In the <code>6-figures</code> subdirectory, each RMarkdown file (computational notebook) is linked to a specific figure in a hypothetical manuscript. This makes it easier to link specific notebooks in figure legends, and to see which file creates each figure.</p>
+</div>
+<div id="use-bash-scripts-to-ensure-reproducibility" class="section level3">
+<h3><span class="header-section-number">3.3.4</span> Use Bash scripts to ensure reproducibility</h3>
+<p>Bash scripts are useful components of a reproducible workflow. At many of the directory levels (i.e. in <code>5-laz</code>), there is a bash script that runs each of the analysis scripts. This is exceptionally useful when data “upstream” changes – you simply run the bash script. See the <a href="#unix">UNIX Chapter</a> for further details.</p>
+</div>
+<div id="alternative-approach-for-code-repos" class="section level3">
+<h3><span class="header-section-number">3.3.5</span> Alternative approach for code repos</h3>
+<p>Another approach for organizing your code repository is to name all of your scripts according to the final figure or table that they generate for a particular article. In our experience, this <em>only</em> works for small projects, with a single set of coherent analyses. Here, you might have an alternative structure such as:</p>
+<pre><code>.gitignore
+primary-analysis.Rproj
+0-config.R
+0-primary-analysis-run-all.sh
+1-dm /
+    0-dm-run-all.sh
+    1-format-enrollment-data.R
+    2-format-adherence-data.R
+    3-format-LAZ-measurements.R
+Fig1-consort.Rmd
+Fig2-adherence.Rmd
+Fig3-1-laz-analysis.Rmd
+Fig3-2-laz-make-figure.Rmd</code></pre>
+<p>There is still a need for a separate data management directory (e.g., <code>dm</code>) to ensure that workflow is upstream from the analysis (more below in <a href="#unix">chapter on UNIX</a>), but then scripts are all together with clear labels. If a figure requires two stages to the analysis, then you can name them sequentially, such as <code>Fig3-1-laz-analysis.Rmd</code>, <code>Fig3-2-laz-make-figure.Rmd</code>. There is no way to divine how all of the analyses will neatly fit into files that correspond to separate figures. Instead, they will converge on these file names through the writing process, often through comsolidation or recombination.</p>
+<p>One example of a small repo is here:
+<a href="https://github.com/ben-arnold/enterics-seroepi" class="uri">https://github.com/ben-arnold/enterics-seroepi</a></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="workflows.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["dcc-handbook.pdf", "dcc-handbook.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
