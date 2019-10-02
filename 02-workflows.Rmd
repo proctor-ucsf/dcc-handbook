@@ -1,0 +1,41 @@
+# Workflows {#workflows}
+
+_Contributors: Ben Arnold_
+
+A data science work flow typically progresses through 4 steps that rarely evolve in a purely linear fashion, but in the end should flow in this direction:
+
+```{r fig-workflow2,echo=FALSE, message=FALSE, out.width='75%',fig.cap="Overview of the four main steps in a typical data science workflow"}
+library(here)
+knitr::include_graphics(here("images","workflow.png"))
+```
+
+
+Steps | Example activities  | $\Rightarrow$ Inputs  | $\Rightarrow$ Outputs  |
+:----:|:--------------------|:---------------------:|:----------------------:|
+1    | **Data cleaning and processing** |
+.    | make a plan for final datasets, fix data entry errors, create derived variables, plan for public replication files     | untouched datasets | final datasets |
+2-3  | **Analyses**
+.    | exploratory data analysis, study monitoring, summary statistics, statistical analyses, independent replication of analyses, make figures and tables    | final datasets      |  saved results (.rds/.csv), tables (.html,.pdf), figures (.html/.png) |
+4    | **Communication** |
+.    | results synthesis | saved results, figures, tables | monitoring reports, presentations, scientific articles
+
+Table: (\#tab:workflow) Workflow basics
+
+
+ In many modern data science workflows, steps 2-4 can be accomplished in a single R notebook or Jupyter notebook: the statistical analysis, creation of figures and tables, and creation of reports.  
+
+However, it is still useful to think of the distinct stages in many cases. For example, a single statistical analysis might contribute to a DSMC report, a scientific conference presentation, and a scientific article. In this example, each piece of scientific communication would take the same input (stored analysis results as .csv/.rds) and then proceed along slightly different downstream workflows.  
+
+It would be more error prone to replicate the same statistical analysis in three parallel downstream work flows. This illustrates a key idea that holds more generally:
+
+------
+**Key idea for workflows:** Whenever possible, avoid repeating the same data processing or statistical analysis in separate streams. _Key data processing and analyses should be done once_.
+------
+
+
+
+
+
+
+
+

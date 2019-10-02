@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Introduction: Work Flow and Reproducible Analyses | Proctor Foundation Data Science Handbook</title>
+  <title>Chapter 2 Workflows | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Introduction: Work Flow and Reproducible Analyses | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Chapter 2 Workflows | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Introduction: Work Flow and Reproducible Analyses | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Chapter 2 Workflows | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="workflows.html"/>
+<link rel="prev" href="intro.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -93,46 +93,90 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction: Work Flow and Reproducible Analyses</h1>
+<div id="workflows" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Workflows</h1>
 <p><em>Contributors: Ben Arnold</em></p>
-<p>This handbook collates a number of tips to help organize the workflow of epidemiologic data analyses. There are probably a dozen good ways to organize a workflow for reproducible research. This document includes recommendations that arise from our own team’s experience through numerous field trials and observational data analyses. The recommendations will not work for everybody or for all applications. But, they work well for most of us most of the time, else we wouldn’t put in the time to share them.</p>
-<p>Start with two organizing concepts:</p>
-<ul>
-<li><p><strong>Workflow</strong>. Defined here as the process required to draw scientific inference from data collected in the field or lab. I.e., the process by which we take data, and then process it, share it internally, analyze it, and communicate results to the scientific community.</p></li>
-<li><p><strong>Reproducible research</strong>. A fundamental characteristic of the scientific method is that study findings can be reproduced beyond the original investigators. Data analyses that contribute to scientific research should be described and organized in a way that they could be reproduced by an independent person or research group. A data analysis that is not reproducible violates a core principle of the scientific method.</p></li>
-</ul>
-<div id="workflow" class="section level2">
-<h2><span class="header-section-number">1.1</span> Workflow</h2>
-<p>Broadly speaking, a typical scientific data science work flow involves four steps to transform raw data (e.g., from the field) into summaries that communicate results to the scientific community.</p>
-<div class="figure"><span id="fig:fig-workflow"></span>
+<p>A data science work flow typically progresses through 4 steps that rarely evolve in a purely linear fashion, but in the end should flow in this direction:</p>
+<div class="figure"><span id="fig:fig-workflow2"></span>
 <img src="images/workflow.png" alt="Overview of the four main steps in a typical data science workflow" width="75%" />
 <p class="caption">
-Figure 1.1: Overview of the four main steps in a typical data science workflow
+Figure 2.1: Overview of the four main steps in a typical data science workflow
 </p>
 </div>
-<p>When starting a new project, the work flow tends to evolve gradually and by iteration. Data cleaning, data processing, exploratory analyses, back to data cleaning, and so forth. If the work takes place in an unstructured environment with no system to organize files and work flow, it rapidly devolves into into a disorganized mess; analyses become difficult or impossible to replicate and they are anything but scientific. Projects with short deadlines (e.g., proposals, conference abstract submissions, article revisions) are particularly vulnerable to this type of organizational entropy. Putting together a directory and workflow plan from the start helps keep files organized and prevent disorder. Modifications are inevitable – as long as the system is organized, modifications are usually no problem.</p>
-<p>Depending on the project, each step involves a different amount of work. Step 1 is by far the most time consuming, and often the most error-prone. We devote an entire chapter to it below (<a href="#datacleaning">Data cleaning and processing</a>)</p>
-</div>
-<div id="reproducibility" class="section level2">
-<h2><span class="header-section-number">1.2</span> Reproducibility</h2>
-<p>As a guiding directive, this process should be reproducible. If you are not familiar with the concept of reproducible research, start with this manifesto (<a href="https://www.nature.com/articles/s41562-016-0021">Munafo et al. 2017</a>). For a deeper dive, we highly recommend the recent book from Christensen, Freese, and Miguel (<a href="https://www.ucpress.edu/book/9780520296954/transparent-and-reproducible-social-science-research">2019</a>). Although it is framed around social science, the ideas apply generally.</p>
-</div>
-<div id="automation" class="section level2">
-<h2><span class="header-section-number">1.3</span> Automation</h2>
-<p>We recommend that the workflow be as automated as possible using a programming language. Automating the workflow in a programming language, and essentially reducing it to text, is advantageous because it makes the process transparent, well documented, easily modified, and amenable to version control; these characteristics lend themselves to reproducible research.</p>
-<p>At Proctor, we mostly use R. With the development of <a href="https://rstudio.com/">Rstudio</a>, <a href="https://rmarkdown.rstudio.com/">R Markdown</a> and the <a href="https://www.tidyverse.org/">tidyverse</a> ecosystem (among others), the R language has evolved as much in the past few years as in all previous decades since its inception. This has made the conduct of automated, reproducible research considerably easier than it was 10 years ago.</p>
-<p><strong>If you have a step in your analysis workflow that involves point-and-click or copy/paste, then STOP, and ask yourself (and your team): </strong> <strong><em>How can I automate this?</em></strong></p>
+<table>
+<caption><span id="tab:workflow">Table 2.1: </span> Workflow basics</caption>
+<colgroup>
+<col width="8%" />
+<col width="28%" />
+<col width="31%" />
+<col width="32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Steps</th>
+<th align="left">Example activities</th>
+<th align="center"><span class="math inline">\(\Rightarrow\)</span> Inputs</th>
+<th align="center"><span class="math inline">\(\Rightarrow\)</span> Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="left"><strong>Data cleaning and processing</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">.</td>
+<td align="left">make a plan for final datasets, fix data entry errors, create derived variables, plan for public replication files</td>
+<td align="center">untouched datasets</td>
+<td align="center">final datasets</td>
+</tr>
+<tr class="odd">
+<td align="center">2-3</td>
+<td align="left"><strong>Analyses</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">.</td>
+<td align="left">exploratory data analysis, study monitoring, summary statistics, statistical analyses, independent replication of analyses, make figures and tables</td>
+<td align="center">final datasets</td>
+<td align="center">saved results (.rds/.csv), tables (.html,.pdf), figures (.html/.png)</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="left"><strong>Communication</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">.</td>
+<td align="left">results synthesis</td>
+<td align="center">saved results, figures, tables</td>
+<td align="center">monitoring reports, presentations, scientific articles</td>
+</tr>
+</tbody>
+</table>
+<p>In many modern data science workflows, steps 2-4 can be accomplished in a single R notebook or Jupyter notebook: the statistical analysis, creation of figures and tables, and creation of reports.</p>
+<p>However, it is still useful to think of the distinct stages in many cases. For example, a single statistical analysis might contribute to a DSMC report, a scientific conference presentation, and a scientific article. In this example, each piece of scientific communication would take the same input (stored analysis results as .csv/.rds) and then proceed along slightly different downstream workflows.</p>
+<p>It would be more error prone to replicate the same statistical analysis in three parallel downstream work flows. This illustrates a key idea that holds more generally:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Key idea for workflows:</strong> Whenever possible, avoid repeating the same data processing or statistical analysis in separate streams. <em>Key data processing and analyses should be done once</em>.</td>
+</tr>
+</tbody>
+</table>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="workflows.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

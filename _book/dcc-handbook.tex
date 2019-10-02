@@ -156,6 +156,113 @@ At Proctor, we mostly use R. With the development of \href{https://rstudio.com/}
 
 \textbf{If you have a step in your analysis workflow that involves point-and-click or copy/paste, then STOP, and ask yourself (and your team): } \textbf{\emph{How can I automate this?}}
 
+\hypertarget{workflows}{%
+\chapter{Workflows}\label{workflows}}
+
+\emph{Contributors: Ben Arnold}
+
+A data science work flow typically progresses through 4 steps that rarely evolve in a purely linear fashion, but in the end should flow in this direction:
+
+\begin{figure}
+\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow2}
+\end{figure}
+
+\begin{longtable}[]{@{}clcc@{}}
+\caption{\label{tab:workflow} Workflow basics}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.07\columnwidth}\centering
+Steps\strut
+\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
+Example activities\strut
+\end{minipage} & \begin{minipage}[b]{0.28\columnwidth}\centering
+\(\Rightarrow\) Inputs\strut
+\end{minipage} & \begin{minipage}[b]{0.29\columnwidth}\centering
+\(\Rightarrow\) Outputs\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.07\columnwidth}\centering
+Steps\strut
+\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
+Example activities\strut
+\end{minipage} & \begin{minipage}[b]{0.28\columnwidth}\centering
+\(\Rightarrow\) Inputs\strut
+\end{minipage} & \begin{minipage}[b]{0.29\columnwidth}\centering
+\(\Rightarrow\) Outputs\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.07\columnwidth}\centering
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\textbf{Data cleaning and processing}\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering
+.\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+make a plan for final datasets, fix data entry errors, create derived variables, plan for public replication files\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
+untouched datasets\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
+final datasets\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering
+2-3\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\textbf{Analyses}\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering
+.\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+exploratory data analysis, study monitoring, summary statistics, statistical analyses, independent replication of analyses, make figures and tables\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
+final datasets\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
+saved results (.rds/.csv), tables (.html,.pdf), figures (.html/.png)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering
+4\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\textbf{Communication}\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering
+.\strut
+\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+results synthesis\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
+saved results, figures, tables\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
+monitoring reports, presentations, scientific articles\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+In many modern data science workflows, steps 2-4 can be accomplished in a single R notebook or Jupyter notebook: the statistical analysis, creation of figures and tables, and creation of reports.
+
+However, it is still useful to think of the distinct stages in many cases. For example, a single statistical analysis might contribute to a DSMC report, a scientific conference presentation, and a scientific article. In this example, each piece of scientific communication would take the same input (stored analysis results as .csv/.rds) and then proceed along slightly different downstream workflows.
+
+It would be more error prone to replicate the same statistical analysis in three parallel downstream work flows. This illustrates a key idea that holds more generally:
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+\endhead
+\textbf{Key idea for workflows:} Whenever possible, avoid repeating the same data processing or statistical analysis in separate streams. \emph{Key data processing and analyses should be done once}.\tabularnewline
+\bottomrule
+\end{longtable}
+
 \bibliography{book.bib,packages.bib}
 
 
