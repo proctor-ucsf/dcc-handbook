@@ -97,10 +97,11 @@
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="codingpractices.html"><a href="codingpractices.html#object-naming"><i class="fa fa-check"></i><b>4.3</b> Object naming</a></li>
 <li class="chapter" data-level="4.4" data-path="codingpractices.html"><a href="codingpractices.html#function-calls"><i class="fa fa-check"></i><b>4.4</b> Function calls</a></li>
-<li class="chapter" data-level="4.5" data-path="codingpractices.html"><a href="codingpractices.html#the-here-package"><i class="fa fa-check"></i><b>4.5</b> The here package</a></li>
+<li class="chapter" data-level="4.5" data-path="codingpractices.html"><a href="codingpractices.html#the-here-package"><i class="fa fa-check"></i><b>4.5</b> The <code>here</code> package</a></li>
 <li class="chapter" data-level="4.6" data-path="codingpractices.html"><a href="codingpractices.html#data-inputoutput-io"><i class="fa fa-check"></i><b>4.6</b> Data input/output (I/O)</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="codingpractices.html"><a href="codingpractices.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>4.6.1</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
 <li class="chapter" data-level="4.6.2" data-path="codingpractices.html"><a href="codingpractices.html#csvs"><i class="fa fa-check"></i><b>4.6.2</b> CSVs</a></li>
+<li class="chapter" data-level="4.6.3" data-path="codingpractices.html"><a href="codingpractices.html#publishing-public-data"><i class="fa fa-check"></i><b>4.6.3</b> Publishing public data</a></li>
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="codingpractices.html"><a href="codingpractices.html#tidyverse"><i class="fa fa-check"></i><b>4.7</b> Tidyverse</a></li>
 <li class="chapter" data-level="4.8" data-path="codingpractices.html"><a href="codingpractices.html#coding-with-r-and-python"><i class="fa fa-check"></i><b>4.8</b> Coding with R and Python</a></li>
@@ -240,8 +241,9 @@ calc_fluseas_mean = function(data, yname, silent = TRUE) {
 )</code></pre>
 </div>
 <div id="the-here-package" class="section level2">
-<h2><span class="header-section-number">4.5</span> The here package</h2>
+<h2><span class="header-section-number">4.5</span> The <code>here</code> package</h2>
 <p>The <code>here</code> package is one great R package that helps multiple collaborators deal with the mess that is working directories within an R project structure. Let’s say we have an R project at the path <code>/home/oski/Some-R-Project</code>. My collaborator might clone the repository and work with it at some other path, such as <code>/home/bear/R-Code/Some-R-Project</code>. Dealing with working directories and paths explicitly can be a very large pain, and as you might imagine, setting up a Config with paths requires those paths to flexibly work for all contributors to a project. This is where the <code>here</code> package comes in and this a <a href="https://github.com/jennybc/here_here">great vignette describing it</a>.</p>
+<p>For more motivation on why you should use the <code>here</code> and R projects (<code>.Rproj</code>), read this excellent blog post from <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">Tidyverse</a>.</p>
 </div>
 <div id="data-inputoutput-io" class="section level2">
 <h2><span class="header-section-number">4.6</span> Data input/output (I/O)</h2>
@@ -249,12 +251,23 @@ calc_fluseas_mean = function(data, yname, silent = TRUE) {
 <h3><span class="header-section-number">4.6.1</span> <code>.RDS</code> vs <code>.RData</code> Files</h3>
 <p>One of the most common ways to load and save data in Base R is with the <code>load()</code> and <code>save()</code> functions to serialize multiple objects in a single <code>.RData</code> file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using <code>saveRDS()</code> and its complement <code>readRDS()</code>.</p>
 <ul>
-<li><strong>Note</strong>: if you have many related R objects you would have otherwise saved all together using the <code>save</code> function, the functional equivalent with <code>RDS</code> would be to create a (named) list containing each of these objects, and saving it.</li>
+<li><p><strong>Note</strong>: if you have many related R objects you would have otherwise saved all together using the <code>save</code> function, the functional equivalent with <code>RDS</code> would be to create a (named) list containing each of these objects, and saving it.</p></li>
+<li><p><strong>Note</strong>: there is an important caveat for <code>.rds</code> files: they are not automatically backward compatible across different versions of R! So, while they are very useful in general, beware. See, for example, this thread on <a href="https://stackoverflow.com/questions/56704638/write-a-file-using-saverds-so-that-it-is-backwards-compatible-with-old-versi">StackExchange</a>. <code>.csv</code> files embed slightly less information (typically), but are more stable across different versions of R.</p></li>
 </ul>
 </div>
 <div id="csvs" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> CSVs</h3>
 <p>Once again, the <code>readr</code> package as part of the Tidvyerse is great, with a much faster <code>read_csv()</code> than Base R’s <code>read.csv()</code>. For massive CSVs (&gt; 5 GB), you’ll find <code>data.table::fread()</code> to be the fastest CSV reader in any data science language out there. For writing CSVs, <code>readr::write_csv()</code> and <code>data.table::fwrite()</code> outclass Base R’s <code>write.csv()</code> by a significant margin as well.</p>
+</div>
+<div id="publishing-public-data" class="section level3">
+<h3><span class="header-section-number">4.6.3</span> Publishing public data</h3>
+<p><strong>NEVER</strong> push a dataset into the public domain (e.g., GitHub, OSF) without first checking with Ben to ensure that it is appropriately de-identified and we have approval from the sponsor and/or human subjects review board to do so.</p>
+<p>If you are releasing data into the public domain, then consider making available <em>at minimum</em> a <code>.csv</code> file and a codebook of the same name (note: you should have a codebook for internal data as well). We often also make available <code>.rds</code> files as well. For example, your <code>mystudy/data/public</code> directory could include three files for a single dataset, two with the actual data in <code>.rds</code> and <code>.csv</code> formats, and a third that describes their contents:</p>
+<pre><code>analysis_data_public.csv
+analysis_data_public.rds
+analysis_data_public_codebook.txt</code></pre>
+<p>In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: <a href="https://github.com/ben-arnold/enterics-seroepi/tree/master/data" class="uri">https://github.com/ben-arnold/enterics-seroepi/tree/master/data</a> . If you inspect the codebooks you can see an example of what they could contain (overview, variable descriptions, references).</p>
+<p>If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (<a href="https://osf.io">osf.io</a>). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: <a href="https://osf.io/tprw2/" class="uri">https://osf.io/tprw2/</a>.</p>
 </div>
 </div>
 <div id="tidyverse" class="section level2">
