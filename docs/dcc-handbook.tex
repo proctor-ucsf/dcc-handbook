@@ -84,7 +84,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-01}
+    \date{2019-10-08}
 
 \usepackage{booktabs}
 
@@ -445,7 +445,327 @@ One example of a small repo is here:
 \hypertarget{codingpractices}{%
 \chapter{Coding Practices}\label{codingpractices}}
 
-TBD
+\emph{Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold}
+
+\hypertarget{organizing-scripts}{%
+\section{Organizing scripts}\label{organizing-scripts}}
+
+Just as your data ``flows'' through your project, data should flow naturally through a script. Very generally, you want to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  describe the work completed in the script in a comment header
+\item
+  source your configuration file (\texttt{0-config.R})
+\item
+  load all of your data
+\item
+  do all your analysis/computation in order
+\item
+  save your results
+\end{enumerate}
+
+Each section should be ``chunked together'' using comments, often with many chunks in a single section. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's\%20Thesis\%20-\%20Spatial\%20Epidemiology\%20of\%20Influenza/2a\%20-\%20Statistical-Inputs.R}{this file} for a good example of how to cleanly organize a file in a way that follows this ``flow'' and functionally separate pieces of code that are doing different things. \href{https://github.com/ben-arnold/enterics-seroepi/blob/master/R/Fig1-haiti-ab-distributions.Rmd}{This is another example} in a \texttt{.Rmd} format, where chunking is made even more obvious by the interleaving of markdown text and R code in the same notebook file.
+
+\hypertarget{documenting-your-code}{%
+\section{Documenting your code}\label{documenting-your-code}}
+
+\hypertarget{file-headers}{%
+\subsection{File headers}\label{file-headers}}
+
+Every file in a project should have a header that allows it to be interpreted on its own. It should include the name of the project and a short description for what this file (among the many in your project) does specifically. You may optionally wish to include the inputs and outputs of the script as well, though the next section makes this significantly less necessary. It can be very helpful to include your name and email address as well so others can identify who wrote the code. This is unnecessary if you are using version control (\texttt{git/GitHub}) becuase that information will be tracked by commits.
+
+\begin{verbatim}
+#-------------------------------------------------------------------------------
+# @Organization - Example Organization
+# @Project - Example Project
+# @Author - Your name, and possibly email address (if appropriate)
+# @Description - This file is responsible for [...]
+#-------------------------------------------------------------------------------
+\end{verbatim}
+
+Consider using RStudio's \href{https://support.rstudio.com/hc/en-us/articles/200484568-Code-Folding-and-Sections}{code folding} feature to collapse and expand different sections of your code. Any comment line with at least four trailing dashes (-), equal signs (=), or pound signs (\#) automatically creates a code section. Delimiters for chunks are a personal preference and all work equally well. For example:
+
+\begin{verbatim}
+# Section 1 ------------------
+\end{verbatim}
+
+works equally well as
+
+\begin{verbatim}
+##############################
+# Section 1 ##################
+##############################
+\end{verbatim}
+
+\hypertarget{comments-in-the-body-of-your-script}{%
+\subsection{Comments in the body of your script}\label{comments-in-the-body-of-your-script}}
+
+Commenting your code is an important part of reproducibility and helps document your code for the future. When things change or break, you'll be thankful for comments. When you revisit code you wrote two years earlier, you'll be thankful for comments. There's no need to comment excessively or unnecessarily, but a comment describing what a large or complex chunk of code does is always helpful. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's\%20Thesis\%20-\%20Spatial\%20Epidemiology\%20of\%20Influenza/1b\%20-\%20Map-Management.R}{this file} for an example of how to comment your code and notice that comments are always in the form of:
+
+\texttt{\#\ This\ is\ a\ comment\ -\/-\ first\ letter\ is\ capitalized\ and\ spaced\ away\ from\ the\ pound\ sign}
+
+\hypertarget{function-documentation}{%
+\subsection{Function documentation}\label{function-documentation}}
+
+Every function you write must include a header to document its purpose, inputs, and outputs. For any reproducible workflows, they are essential, because R is dynamically typed. This means, you can pass a \texttt{string} into an argument that is meant to be a \texttt{data.table}, or a \texttt{list} into an argument meant for a \texttt{tibble}. It is the responsibility of a function's author to document what each argument is meant to do and its basic type. This is an example for documenting a function (inspired by \href{https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html\#format}{JavaDocs}, R's \href{https://blog.rstudio.com/2018/10/23/rstudio-1-2-preview-plumber-integration/}{Plumber API docs}, and \href{https://kbroman.org/pkg_primer/pages/docs.html}{Roxygen2}):
+
+\begin{verbatim}
+#-----------------------------------------------------------------------------
+# Documentation: calc_fluseas_mean
+# Usage: calc_fluseas_mean(data, yname)
+# @description: Make a dataframe with rows for flu season and site
+#               and the number of patients with an outcome, the total patients,
+#               and the percent of patients with the outcome
+
+# Arguments/Options:
+# @param data: a data frame with variables flu_season, site, studyID, and yname
+# @param yname: a string for the outcome name
+# @param silent: a boolean specifying whether the function shouldn't output anything to the console (DEFAULT: TRUE)
+
+# @return: the dataframe as described above
+# @output: prints the data frame described above if silent is not True
+#-----------------------------------------------------------------------------
+
+calc_fluseas_mean = function(data, yname, silent = TRUE) {
+ ### function code here 
+
+}
+\end{verbatim}
+
+The header tells you what the function does, its various inputs, and how you might go about using the function to do what you want. Also notice that all optional arguments (i.e.~ones with pre-specified defaults) follow arguments that require user input.
+
+\begin{itemize}
+\item
+  \textbf{Note}: As someone trying to call a function, it is possible to access a function's documentation (and internal code) by \texttt{CMD-Left-Click}ing the function's name in RStudio
+\item
+  \textbf{Note}: Depending on how important your function is, the complexity of your function code, and the complexity of different types of data in your project, you can also add ``type-checking'' to your function with the \texttt{assertthat::assert\_that()} function. You can, for example, \texttt{assert\_that(is.data.frame(statistical\_input))}, which will ensure that collaborators or reviewers of your project attempting to use your function are using it in the way that it is intended by calling it with (at the minimum) the correct type of arguments. You can extend this to ensure that certain assumptions regarding the inputs are fulfilled as well (i.e.~that \texttt{time\_column}, \texttt{location\_column}, \texttt{value\_column}, and \texttt{population\_column} all exist within the \texttt{statistical\_input} tibble).
+\end{itemize}
+
+\hypertarget{object-naming}{%
+\section{Object naming}\label{object-naming}}
+
+Generally we recommend using nouns for objects and verbs for functions. This is because functions are performing actions, while objects are not.
+
+Try to make your variable names both more expressive and more explicit. Being a bit more verbose is useful and easy in the age of autocompletion! For example, instead of naming a variable \texttt{vaxcov\_1718}, try naming it \texttt{vaccination\_coverage\_2017\_18}. Similarly, \texttt{flu\_res} could be named \texttt{absentee\_flu\_residuals}, making your code more readable and explicit.
+
+\begin{itemize}
+\tightlist
+\item
+  For more help, check out \href{https://spin.atomicobject.com/2017/11/01/good-variable-names/}{Be Expressive: How to Give Your Variables Better Names}
+\end{itemize}
+
+We recommend you use \textbf{Snake\_Case}.
+
+\begin{itemize}
+\item
+  Base R allows \texttt{.} in variable names and functions (such as \texttt{read.csv()}), but this goes against best practices for variable naming in many other coding languages. For consistency's sake, \texttt{snake\_case} has been adopted across languages, and modern packages and functions typically use it (i.e. \texttt{readr::read\_csv()}). As a very general rule of thumb, if a package you're using doesn't use \texttt{snake\_case}, there may be an updated version or more modern package that \emph{does}, bringing with it the variety of performance improvements and bug fixes inherent in more mature and modern software.
+\item
+  \textbf{Note}: you may also see \texttt{camelCase} throughout the R code you come across. This is \emph{okay} but not ideal -- try to stay consistent across all your code with \texttt{snake\_case}.
+\item
+  \textbf{Note}: there is nothing inherently wrong with using \texttt{.} in variable names, just that it goes against style best practices that are cropping up in data science, so its worth getting rid of these bad habits now.
+\end{itemize}
+
+\hypertarget{function-calls}{%
+\section{Function calls}\label{function-calls}}
+
+In a function call, use ``named arguments'' and separate arguments by to make your code more readable.
+
+Here's an example of what not to do when calling the function a function \texttt{calc\_fluseas\_mean} (defined above):
+
+\begin{verbatim}
+mean_Y = calc_fluseas_mean(flu_data, "maari_yn", FALSE)
+\end{verbatim}
+
+And here it is again using the best practices we've outlined:
+
+\begin{verbatim}
+mean_Y = calc_fluseas_mean(
+  data = flu_data, 
+  yname = "maari_yn",
+  silent = FALSE
+)
+\end{verbatim}
+
+\hypertarget{the-here-package}{%
+\section{The here package}\label{the-here-package}}
+
+The \texttt{here} package is one great R package that helps multiple collaborators deal with the mess that is working directories within an R project structure. Let's say we have an R project at the path \texttt{/home/oski/Some-R-Project}. My collaborator might clone the repository and work with it at some other path, such as \texttt{/home/bear/R-Code/Some-R-Project}. Dealing with working directories and paths explicitly can be a very large pain, and as you might imagine, setting up a Config with paths requires those paths to flexibly work for all contributors to a project. This is where the \texttt{here} package comes in and this a \href{https://github.com/jennybc/here_here}{great vignette describing it}.
+
+\hypertarget{data-inputoutput-io}{%
+\section{Data input/output (I/O)}\label{data-inputoutput-io}}
+
+\hypertarget{rds-vs-.rdata-files}{%
+\subsection{\texorpdfstring{\texttt{.RDS} vs \texttt{.RData} Files}{.RDS vs .RData Files}}\label{rds-vs-.rdata-files}}
+
+One of the most common ways to load and save data in Base R is with the \texttt{load()} and \texttt{save()} functions to serialize multiple objects in a single \texttt{.RData} file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using \texttt{saveRDS()} and its complement \texttt{readRDS()}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Note}: if you have many related R objects you would have otherwise saved all together using the \texttt{save} function, the functional equivalent with \texttt{RDS} would be to create a (named) list containing each of these objects, and saving it.
+\end{itemize}
+
+\hypertarget{csvs}{%
+\subsection{CSVs}\label{csvs}}
+
+Once again, the \texttt{readr} package as part of the Tidvyerse is great, with a much faster \texttt{read\_csv()} than Base R's \texttt{read.csv()}. For massive CSVs (\textgreater{} 5 GB), you'll find \texttt{data.table::fread()} to be the fastest CSV reader in any data science language out there. For writing CSVs, \texttt{readr::write\_csv()} and \texttt{data.table::fwrite()} outclass Base R's \texttt{write.csv()} by a significant margin as well.
+
+\hypertarget{tidyverse}{%
+\section{Tidyverse}\label{tidyverse}}
+
+Throughout this document there have been references to the Tidyverse, but this section is to explicitly show you how to transform your Base R tendencies to Tidyverse (or Data.Table, Tidyverse's performance-optimized competitor). For most of our work that does not utilize very large datasets, we recommend that you code in Tidyverse rather than Base R. Tidyverse is quickly becoming \href{https://rviews.rstudio.com/2017/06/08/what-is-the-tidyverse/}{the gold standard} in R data analysis and modern data science packages and code should use Tidyverse style and packages unless there's a significant reason not to (i.e.~big data pipelines that would benefit from Data.Table's performance optimizations).
+
+The package author has published a \href{https://r4ds.had.co.nz/}{great textbook on R for Data Science}, which leans heavily on many Tidyverse packages and may be worth checking out.
+
+The following list is not exhaustive, but is a compact overview to begin to translate Base R into something better:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.47\columnwidth}\raggedright
+Base R\strut
+\end{minipage} & \begin{minipage}[b]{0.47\columnwidth}\raggedright
+Better Style, Performance, and Utility\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\_\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\_\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{read.csv()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{readr::read\_csv()} or \texttt{data.table::fread()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{write.csv()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{readr::write\_csv()} or \texttt{data.table::fwrite()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{readRDS}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{readr::read\_rds()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{saveRDS()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{readr::write\_rds()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\_\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\_\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{data.frame()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{tibble::tibble()} or \texttt{data.table::data.table()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{rbind()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{dplyr::bind\_rows()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{cbind()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{dplyr::bind\_cols()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df\$some\_column}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df\ \%\textgreater{}\%\ dplyr::pull(some\_column)}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df\$some\_column\ =\ ...}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df\ \%\textgreater{}\%\ dplyr::mutate(some\_column\ =\ ...)}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df{[}get\_rows\_condition,{]}}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df\ \%\textgreater{}\%\ dplyr::filter(get\_rows\_condition)}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df{[},c(col1,\ col2){]}}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df\ \%\textgreater{}\%\ dplyr::select(col1,\ col2)}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{merge(df1,\ df2,\ by\ =\ ...,\ all.x\ =\ ...,\ all.y\ =\ ...)}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{df1\ \%\textgreater{}\%\ dplyr::left\_join(df2,\ by\ =\ ...)} or \texttt{dplyr::full\_join} or \texttt{dplyr::inner\_join} or \texttt{dplyr::right\_join}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\_\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\_\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{str()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{dplyr::glimpse()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{grep(pattern,\ x)}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{stringr::str\_which(string,\ pattern)}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{gsub(pattern,\ replacement,\ x)}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{stringr::str\_replace(string,\ pattern,\ replacement)}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{ifelse(test\_expression,\ yes,\ no)}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{if\_else(condition,\ true,\ false)}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+Nested: \texttt{ifelse(test\_expression1,\ yes1,\ ifelse(test\_expression2,\ yes2,\ ifelse(test\_expression3,\ yes3,\ no)))}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{case\_when(test\_expression1\ \textasciitilde{}\ yes1,\ \ test\_expression2\ \textasciitilde{}\ yes2,\ test\_expression3\ \textasciitilde{}\ yes3,\ TRUE\ \textasciitilde{}\ no)}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{proc.time()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{tictoc::tic()} and \texttt{tictoc::toc()}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{stopifnot()}\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\texttt{assertthat::assert\_that()} or \texttt{assertthat::see\_if()} or \texttt{assertthat::validate\_that()}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+For a more extensive set of syntactical translations to Tidyverse, you can check out \href{https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html\#reshaping_data}{this document}.
+
+Working with Tidyverse within functions can be somewhat of a pain due to non-standard evaluation (NSE) semantics. If you're an avid function writer, we'd recommend checking out the following resources:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.youtube.com/watch?v=nERXS3ssntw}{Tidy Eval in 5 Minutes} (video)
+\item
+  \href{https://tidyeval.tidyverse.org/index.html}{Tidy Evaluation} (e-book)
+\item
+  \href{https://www.brodrigues.co/blog/2016-07-18-data-frame-columns-as-arguments-to-dplyr-functions/}{Data Frame Columns as Arguments to Dplyr Functions} (blog)
+\item
+  \href{https://stackoverflow.com/questions/28125816/r-standard-evaluation-for-join-dplyr}{Standard Evaluation for *\_join} (stackoverflow)
+\item
+  \href{https://dplyr.tidyverse.org/articles/programming.html}{Programming with dplyr} (package vignette)
+\end{itemize}
+
+\hypertarget{coding-with-r-and-python}{%
+\section{Coding with R and Python}\label{coding-with-r-and-python}}
+
+If you're using both R and Python, you may wish to check out the \href{https://www.rdocumentation.org/packages/feather/versions/0.3.3}{Feather package} for exchanging data between the two languages \href{https://blog.rstudio.com/2016/03/29/feather/}{extremely quickly}.
 
 \hypertarget{codingstyle}{%
 \chapter{Coding Style}\label{codingstyle}}

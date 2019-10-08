@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Coding Practices | Proctor Foundation Data Science Handbook</title>
+  <title>Chapter 5 Coding practices | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Coding Practices | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Chapter 5 Coding practices | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Coding Practices | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Chapter 5 Coding practices | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="directory-structure-and-code-repositories.html"/>
+<link rel="prev" href="codingpractices.html"/>
 <link rel="next" href="codingstyle.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -88,42 +88,43 @@
 <li class="chapter" data-level="3.3.5" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#alternative-approach-for-code-repos"><i class="fa fa-check"></i><b>3.3.5</b> Alternative approach for code repos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="codingpractices.html"><a href="codingpractices.html"><i class="fa fa-check"></i><b>4</b> Coding Practices</a><ul>
-<li class="chapter" data-level="4.1" data-path="codingpractices.html"><a href="codingpractices.html#organizing-scripts"><i class="fa fa-check"></i><b>4.1</b> Organizing scripts</a></li>
-<li class="chapter" data-level="4.2" data-path="codingpractices.html"><a href="codingpractices.html#documenting-your-code"><i class="fa fa-check"></i><b>4.2</b> Documenting your code</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="codingpractices.html"><a href="codingpractices.html#file-headers"><i class="fa fa-check"></i><b>4.2.1</b> File headers</a></li>
-<li class="chapter" data-level="4.2.2" data-path="codingpractices.html"><a href="codingpractices.html#comments-in-the-body-of-your-script"><i class="fa fa-check"></i><b>4.2.2</b> Comments in the body of your script</a></li>
-<li class="chapter" data-level="4.2.3" data-path="codingpractices.html"><a href="codingpractices.html#function-documentation"><i class="fa fa-check"></i><b>4.2.3</b> Function documentation</a></li>
+<li class="chapter" data-level="4" data-path="codingpractices.html"><a href="codingpractices.html"><i class="fa fa-check"></i><b>4</b> Coding Practices</a></li>
+<li class="chapter" data-level="5" data-path="coding-practices.html"><a href="coding-practices.html"><i class="fa fa-check"></i><b>5</b> Coding practices</a><ul>
+<li class="chapter" data-level="5.1" data-path="coding-practices.html"><a href="coding-practices.html#organizing-scripts"><i class="fa fa-check"></i><b>5.1</b> Organizing scripts</a></li>
+<li class="chapter" data-level="5.2" data-path="coding-practices.html"><a href="coding-practices.html#documenting-your-code"><i class="fa fa-check"></i><b>5.2</b> Documenting your code</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="coding-practices.html"><a href="coding-practices.html#file-headers"><i class="fa fa-check"></i><b>5.2.1</b> File headers</a></li>
+<li class="chapter" data-level="5.2.2" data-path="coding-practices.html"><a href="coding-practices.html#comments-in-the-body-of-your-script"><i class="fa fa-check"></i><b>5.2.2</b> Comments in the body of your script</a></li>
+<li class="chapter" data-level="5.2.3" data-path="coding-practices.html"><a href="coding-practices.html#function-documentation"><i class="fa fa-check"></i><b>5.2.3</b> Function documentation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="codingpractices.html"><a href="codingpractices.html#object-naming"><i class="fa fa-check"></i><b>4.3</b> Object naming</a></li>
-<li class="chapter" data-level="4.4" data-path="codingpractices.html"><a href="codingpractices.html#function-calls"><i class="fa fa-check"></i><b>4.4</b> Function calls</a></li>
-<li class="chapter" data-level="4.5" data-path="codingpractices.html"><a href="codingpractices.html#the-here-package"><i class="fa fa-check"></i><b>4.5</b> The here package</a></li>
-<li class="chapter" data-level="4.6" data-path="codingpractices.html"><a href="codingpractices.html#data-inputoutput-io"><i class="fa fa-check"></i><b>4.6</b> Data input/output (I/O)</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="codingpractices.html"><a href="codingpractices.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>4.6.1</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
-<li class="chapter" data-level="4.6.2" data-path="codingpractices.html"><a href="codingpractices.html#csvs"><i class="fa fa-check"></i><b>4.6.2</b> CSVs</a></li>
+<li class="chapter" data-level="5.3" data-path="coding-practices.html"><a href="coding-practices.html#object-naming"><i class="fa fa-check"></i><b>5.3</b> Object naming</a></li>
+<li class="chapter" data-level="5.4" data-path="coding-practices.html"><a href="coding-practices.html#function-calls"><i class="fa fa-check"></i><b>5.4</b> Function calls</a></li>
+<li class="chapter" data-level="5.5" data-path="coding-practices.html"><a href="coding-practices.html#the-here-package"><i class="fa fa-check"></i><b>5.5</b> The here package</a></li>
+<li class="chapter" data-level="5.6" data-path="coding-practices.html"><a href="coding-practices.html#readingsaving-data"><i class="fa fa-check"></i><b>5.6</b> Reading/Saving Data</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="coding-practices.html"><a href="coding-practices.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>5.6.1</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
+<li class="chapter" data-level="5.6.2" data-path="coding-practices.html"><a href="coding-practices.html#csvs"><i class="fa fa-check"></i><b>5.6.2</b> CSVs</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="codingpractices.html"><a href="codingpractices.html#tidyverse"><i class="fa fa-check"></i><b>4.7</b> Tidyverse</a></li>
-<li class="chapter" data-level="4.8" data-path="codingpractices.html"><a href="codingpractices.html#coding-with-r-and-python"><i class="fa fa-check"></i><b>4.8</b> Coding with R and Python</a></li>
+<li class="chapter" data-level="5.7" data-path="coding-practices.html"><a href="coding-practices.html#tidyverse"><i class="fa fa-check"></i><b>5.7</b> Tidyverse</a></li>
+<li class="chapter" data-level="5.8" data-path="coding-practices.html"><a href="coding-practices.html#coding-with-r-and-python"><i class="fa fa-check"></i><b>5.8</b> Coding with R and Python</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>5</b> Coding Style</a></li>
-<li class="chapter" data-level="6" data-path="datamanagement.html"><a href="datamanagement.html"><i class="fa fa-check"></i><b>6</b> Data Management</a></li>
-<li class="chapter" data-level="7" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>7</b> GitHub and Version Control</a></li>
-<li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a></li>
-<li class="chapter" data-level="9" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a></li>
-<li class="chapter" data-level="10" data-path="commcoord.html"><a href="commcoord.html"><i class="fa fa-check"></i><b>10</b> Communication and Coordination</a><ul>
-<li class="chapter" data-level="10.1" data-path="commcoord.html"><a href="commcoord.html#slack"><i class="fa fa-check"></i><b>10.1</b> Slack</a></li>
-<li class="chapter" data-level="10.2" data-path="commcoord.html"><a href="commcoord.html#email"><i class="fa fa-check"></i><b>10.2</b> Email</a></li>
-<li class="chapter" data-level="10.3" data-path="commcoord.html"><a href="commcoord.html#trello"><i class="fa fa-check"></i><b>10.3</b> Trello</a></li>
-<li class="chapter" data-level="10.4" data-path="commcoord.html"><a href="commcoord.html#google-drive"><i class="fa fa-check"></i><b>10.4</b> Google Drive</a></li>
-<li class="chapter" data-level="10.5" data-path="commcoord.html"><a href="commcoord.html#calendar-meetings"><i class="fa fa-check"></i><b>10.5</b> Calendar / Meetings</a></li>
+<li class="chapter" data-level="6" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>6</b> Coding Style</a></li>
+<li class="chapter" data-level="7" data-path="datamanagement.html"><a href="datamanagement.html"><i class="fa fa-check"></i><b>7</b> Data Management</a></li>
+<li class="chapter" data-level="8" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>8</b> GitHub and Version Control</a></li>
+<li class="chapter" data-level="9" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>9</b> Working with Big Data</a></li>
+<li class="chapter" data-level="10" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>10</b> UNIX Commands</a></li>
+<li class="chapter" data-level="11" data-path="commcoord.html"><a href="commcoord.html"><i class="fa fa-check"></i><b>11</b> Communication and Coordination</a><ul>
+<li class="chapter" data-level="11.1" data-path="commcoord.html"><a href="commcoord.html#slack"><i class="fa fa-check"></i><b>11.1</b> Slack</a></li>
+<li class="chapter" data-level="11.2" data-path="commcoord.html"><a href="commcoord.html#email"><i class="fa fa-check"></i><b>11.2</b> Email</a></li>
+<li class="chapter" data-level="11.3" data-path="commcoord.html"><a href="commcoord.html#trello"><i class="fa fa-check"></i><b>11.3</b> Trello</a></li>
+<li class="chapter" data-level="11.4" data-path="commcoord.html"><a href="commcoord.html#google-drive"><i class="fa fa-check"></i><b>11.4</b> Google Drive</a></li>
+<li class="chapter" data-level="11.5" data-path="commcoord.html"><a href="commcoord.html#calendar-meetings"><i class="fa fa-check"></i><b>11.5</b> Calendar / Meetings</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="code-of-conduct.html"><a href="code-of-conduct.html"><i class="fa fa-check"></i><b>11</b> Code of conduct</a><ul>
-<li class="chapter" data-level="11.1" data-path="code-of-conduct.html"><a href="code-of-conduct.html#group-culture"><i class="fa fa-check"></i><b>11.1</b> Group culture</a></li>
-<li class="chapter" data-level="11.2" data-path="code-of-conduct.html"><a href="code-of-conduct.html#protecting-human-subjects"><i class="fa fa-check"></i><b>11.2</b> Protecting human subjects</a></li>
-<li class="chapter" data-level="11.3" data-path="code-of-conduct.html"><a href="code-of-conduct.html#authorship"><i class="fa fa-check"></i><b>11.3</b> Authorship</a></li>
-<li class="chapter" data-level="11.4" data-path="code-of-conduct.html"><a href="code-of-conduct.html#work-hours"><i class="fa fa-check"></i><b>11.4</b> Work hours</a></li>
+<li class="chapter" data-level="12" data-path="code-of-conduct.html"><a href="code-of-conduct.html"><i class="fa fa-check"></i><b>12</b> Code of conduct</a><ul>
+<li class="chapter" data-level="12.1" data-path="code-of-conduct.html"><a href="code-of-conduct.html#group-culture"><i class="fa fa-check"></i><b>12.1</b> Group culture</a></li>
+<li class="chapter" data-level="12.2" data-path="code-of-conduct.html"><a href="code-of-conduct.html#protecting-human-subjects"><i class="fa fa-check"></i><b>12.2</b> Protecting human subjects</a></li>
+<li class="chapter" data-level="12.3" data-path="code-of-conduct.html"><a href="code-of-conduct.html#authorship"><i class="fa fa-check"></i><b>12.3</b> Authorship</a></li>
+<li class="chapter" data-level="12.4" data-path="code-of-conduct.html"><a href="code-of-conduct.html#work-hours"><i class="fa fa-check"></i><b>12.4</b> Work hours</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>12</b> Additional Resources</a></li>
+<li class="chapter" data-level="13" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>13</b> Additional Resources</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -145,30 +146,29 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="codingpractices" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Coding Practices</h1>
+<div id="coding-practices" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Coding practices</h1>
 <p><em>Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold</em></p>
 <div id="organizing-scripts" class="section level2">
-<h2><span class="header-section-number">4.1</span> Organizing scripts</h2>
+<h2><span class="header-section-number">5.1</span> Organizing scripts</h2>
 <p>Just as your data “flows” through your project, data should flow naturally through a script. Very generally, you want to:</p>
 <ol style="list-style-type: decimal">
 <li>describe the work completed in the script in a comment header</li>
 <li>source your configuration file (<code>0-config.R</code>)</li>
-<li>load all of your data</li>
+<li>load all your data</li>
 <li>do all your analysis/computation in order</li>
 <li>save your results</li>
 </ol>
-<p>Each section should be “chunked together” using comments, often with many chunks in a single section. See <a href="https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master&#39;s%20Thesis%20-%20Spatial%20Epidemiology%20of%20Influenza/2a%20-%20Statistical-Inputs.R">this file</a> for a good example of how to cleanly organize a file in a way that follows this “flow” and functionally separate pieces of code that are doing different things. <a href="https://github.com/ben-arnold/enterics-seroepi/blob/master/R/Fig1-haiti-ab-distributions.Rmd">This is another example</a> in a <code>.Rmd</code> format, where chunking is made even more obvious by the interleaving of markdown text and R code in the same notebook file.</p>
+<p>Each section should be “chunked together” using comments, often with many chunks in a single section. See <a href="https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master&#39;s%20Thesis%20-%20Spatial%20Epidemiology%20of%20Influenza/2a%20-%20Statistical-Inputs.R">this file</a> for a good example of how to cleanly organize a file in a way that follows this “flow” and functionally separate pieces of code that are doing different things. <a href="https://github.com/ben-arnold/enterics-seroepi/blob/master/R/Fig1-haiti-ab-distributions.Rmd">This is another example</a> in a <code>.Rmd</code> format, where chunking is made even more essential by the interleaving of markdown text and R code in the same notebook file.</p>
 </div>
 <div id="documenting-your-code" class="section level2">
-<h2><span class="header-section-number">4.2</span> Documenting your code</h2>
+<h2><span class="header-section-number">5.2</span> Documenting your code</h2>
 <div id="file-headers" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> File headers</h3>
-<p>Every file in a project should have a header that allows it to be interpreted on its own. It should include the name of the project and a short description for what this file (among the many in your project) does specifically. You may optionally wish to include the inputs and outputs of the script as well, though the next section makes this significantly less necessary. It can be very helpful to include your name and email address as well so others can identify who wrote the code. This is unnecessary if you are using version control (<code>git/GitHub</code>) becuase that information will be tracked by commits.</p>
+<h3><span class="header-section-number">5.2.1</span> File headers</h3>
+<p>Every file in a project should have a header that allows it to be interpreted on its own. It should include the name of the project and a short description for what this file (among the many in your project) does specifically. You may optionally wish to include the inputs and outputs of the script as well, though the next section makes this significantly less necessary.</p>
 <pre><code>#-------------------------------------------------------------------------------
 # @Organization - Example Organization
 # @Project - Example Project
-# @Author - Your name, and possibly email address (if appropriate)
 # @Description - This file is responsible for [...]
 #-------------------------------------------------------------------------------</code></pre>
 <p>Consider using RStudio’s <a href="https://support.rstudio.com/hc/en-us/articles/200484568-Code-Folding-and-Sections">code folding</a> feature to collapse and expand different sections of your code. Any comment line with at least four trailing dashes (-), equal signs (=), or pound signs (#) automatically creates a code section. Delimiters for chunks are a personal preference and all work equally well. For example:</p>
@@ -179,14 +179,14 @@
 ##############################</code></pre>
 </div>
 <div id="comments-in-the-body-of-your-script" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Comments in the body of your script</h3>
+<h3><span class="header-section-number">5.2.2</span> Comments in the body of your script</h3>
 <p>Commenting your code is an important part of reproducibility and helps document your code for the future. When things change or break, you’ll be thankful for comments. When you revisit code you wrote two years earlier, you’ll be thankful for comments. There’s no need to comment excessively or unnecessarily, but a comment describing what a large or complex chunk of code does is always helpful. See <a href="https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master&#39;s%20Thesis%20-%20Spatial%20Epidemiology%20of%20Influenza/1b%20-%20Map-Management.R">this file</a> for an example of how to comment your code and notice that comments are always in the form of:</p>
 <p><code># This is a comment -- first letter is capitalized and spaced away from the pound sign</code></p>
 </div>
 <div id="function-documentation" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> Function documentation</h3>
+<h3><span class="header-section-number">5.2.3</span> Function documentation</h3>
 <p>Every function you write must include a header to document its purpose, inputs, and outputs. For any reproducible workflows, they are essential, because R is dynamically typed. This means, you can pass a <code>string</code> into an argument that is meant to be a <code>data.table</code>, or a <code>list</code> into an argument meant for a <code>tibble</code>. It is the responsibility of a function’s author to document what each argument is meant to do and its basic type. This is an example for documenting a function (inspired by <a href="https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html#format">JavaDocs</a>, R’s <a href="https://blog.rstudio.com/2018/10/23/rstudio-1-2-preview-plumber-integration/">Plumber API docs</a>, and <a href="https://kbroman.org/pkg_primer/pages/docs.html">Roxygen2</a>):</p>
-<pre><code>#-----------------------------------------------------------------------------
+<pre><code>#----------------------------------------------------
 # Documentation: calc_fluseas_mean
 # Usage: calc_fluseas_mean(data, yname)
 # @description: Make a dataframe with rows for flu season and site
@@ -200,7 +200,7 @@
 
 # @return: the dataframe as described above
 # @output: prints the data frame described above if silent is not True
-#-----------------------------------------------------------------------------
+#----------------------------------------------------
 
 calc_fluseas_mean = function(data, yname, silent = TRUE) {
  ### function code here 
@@ -214,7 +214,7 @@ calc_fluseas_mean = function(data, yname, silent = TRUE) {
 </div>
 </div>
 <div id="object-naming" class="section level2">
-<h2><span class="header-section-number">4.3</span> Object naming</h2>
+<h2><span class="header-section-number">5.3</span> Object naming</h2>
 <p>Generally we recommend using nouns for objects and verbs for functions. This is because functions are performing actions, while objects are not.</p>
 <p>Try to make your variable names both more expressive and more explicit. Being a bit more verbose is useful and easy in the age of autocompletion! For example, instead of naming a variable <code>vaxcov_1718</code>, try naming it <code>vaccination_coverage_2017_18</code>. Similarly, <code>flu_res</code> could be named <code>absentee_flu_residuals</code>, making your code more readable and explicit.</p>
 <ul>
@@ -224,11 +224,11 @@ calc_fluseas_mean = function(data, yname, silent = TRUE) {
 <ul>
 <li><p>Base R allows <code>.</code> in variable names and functions (such as <code>read.csv()</code>), but this goes against best practices for variable naming in many other coding languages. For consistency’s sake, <code>snake_case</code> has been adopted across languages, and modern packages and functions typically use it (i.e. <code>readr::read_csv()</code>). As a very general rule of thumb, if a package you’re using doesn’t use <code>snake_case</code>, there may be an updated version or more modern package that <em>does</em>, bringing with it the variety of performance improvements and bug fixes inherent in more mature and modern software.</p></li>
 <li><p><strong>Note</strong>: you may also see <code>camelCase</code> throughout the R code you come across. This is <em>okay</em> but not ideal – try to stay consistent across all your code with <code>snake_case</code>.</p></li>
-<li><p><strong>Note</strong>: there is nothing inherently wrong with using <code>.</code> in variable names, just that it goes against style best practices that are cropping up in data science, so its worth getting rid of these bad habits now.</p></li>
+<li><p><strong>Note</strong>: again, its also worth noting there’s nothing inherently wrong with using <code>.</code> in variable names, just that it goes against style best practices that are cropping up in data science, so its worth getting rid of these bad habits now.</p></li>
 </ul>
 </div>
 <div id="function-calls" class="section level2">
-<h2><span class="header-section-number">4.4</span> Function calls</h2>
+<h2><span class="header-section-number">5.4</span> Function calls</h2>
 <p>In a function call, use “named arguments” and separate arguments by to make your code more readable.</p>
 <p>Here’s an example of what not to do when calling the function a function <code>calc_fluseas_mean</code> (defined above):</p>
 <pre><code>mean_Y = calc_fluseas_mean(flu_data, &quot;maari_yn&quot;, FALSE)</code></pre>
@@ -240,25 +240,25 @@ calc_fluseas_mean = function(data, yname, silent = TRUE) {
 )</code></pre>
 </div>
 <div id="the-here-package" class="section level2">
-<h2><span class="header-section-number">4.5</span> The here package</h2>
+<h2><span class="header-section-number">5.5</span> The here package</h2>
 <p>The <code>here</code> package is one great R package that helps multiple collaborators deal with the mess that is working directories within an R project structure. Let’s say we have an R project at the path <code>/home/oski/Some-R-Project</code>. My collaborator might clone the repository and work with it at some other path, such as <code>/home/bear/R-Code/Some-R-Project</code>. Dealing with working directories and paths explicitly can be a very large pain, and as you might imagine, setting up a Config with paths requires those paths to flexibly work for all contributors to a project. This is where the <code>here</code> package comes in and this a <a href="https://github.com/jennybc/here_here">great vignette describing it</a>.</p>
 </div>
-<div id="data-inputoutput-io" class="section level2">
-<h2><span class="header-section-number">4.6</span> Data input/output (I/O)</h2>
+<div id="readingsaving-data" class="section level2">
+<h2><span class="header-section-number">5.6</span> Reading/Saving Data</h2>
 <div id="rds-vs-.rdata-files" class="section level3">
-<h3><span class="header-section-number">4.6.1</span> <code>.RDS</code> vs <code>.RData</code> Files</h3>
-<p>One of the most common ways to load and save data in Base R is with the <code>load()</code> and <code>save()</code> functions to serialize multiple objects in a single <code>.RData</code> file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using <code>saveRDS()</code> and its complement <code>readRDS()</code>.</p>
+<h3><span class="header-section-number">5.6.1</span> <code>.RDS</code> vs <code>.RData</code> Files</h3>
+<p>One of the most common ways to load and save data in Base R is with the <code>load()</code> and <code>save()</code> functions to serialize multiple objects in a single <code>.RData</code> file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects.</p>
 <ul>
 <li><strong>Note</strong>: if you have many related R objects you would have otherwise saved all together using the <code>save</code> function, the functional equivalent with <code>RDS</code> would be to create a (named) list containing each of these objects, and saving it.</li>
 </ul>
 </div>
 <div id="csvs" class="section level3">
-<h3><span class="header-section-number">4.6.2</span> CSVs</h3>
+<h3><span class="header-section-number">5.6.2</span> CSVs</h3>
 <p>Once again, the <code>readr</code> package as part of the Tidvyerse is great, with a much faster <code>read_csv()</code> than Base R’s <code>read.csv()</code>. For massive CSVs (&gt; 5 GB), you’ll find <code>data.table::fread()</code> to be the fastest CSV reader in any data science language out there. For writing CSVs, <code>readr::write_csv()</code> and <code>data.table::fwrite()</code> outclass Base R’s <code>write.csv()</code> by a significant margin as well.</p>
 </div>
 </div>
 <div id="tidyverse" class="section level2">
-<h2><span class="header-section-number">4.7</span> Tidyverse</h2>
+<h2><span class="header-section-number">5.7</span> Tidyverse</h2>
 <p>Throughout this document there have been references to the Tidyverse, but this section is to explicitly show you how to transform your Base R tendencies to Tidyverse (or Data.Table, Tidyverse’s performance-optimized competitor). For most of our work that does not utilize very large datasets, we recommend that you code in Tidyverse rather than Base R. Tidyverse is quickly becoming <a href="https://rviews.rstudio.com/2017/06/08/what-is-the-tidyverse/">the gold standard</a> in R data analysis and modern data science packages and code should use Tidyverse style and packages unless there’s a significant reason not to (i.e. big data pipelines that would benefit from Data.Table’s performance optimizations).</p>
 <p>The package author has published a <a href="https://r4ds.had.co.nz/">great textbook on R for Data Science</a>, which leans heavily on many Tidyverse packages and may be worth checking out.</p>
 <p>The following list is not exhaustive, but is a compact overview to begin to translate Base R into something better:</p>
@@ -375,7 +375,7 @@ calc_fluseas_mean = function(data, yname, silent = TRUE) {
 </ul>
 </div>
 <div id="coding-with-r-and-python" class="section level2">
-<h2><span class="header-section-number">4.8</span> Coding with R and Python</h2>
+<h2><span class="header-section-number">5.8</span> Coding with R and Python</h2>
 <p>If you’re using both R and Python, you may wish to check out the <a href="https://www.rdocumentation.org/packages/feather/versions/0.3.3">Feather package</a> for exchanging data between the two languages <a href="https://blog.rstudio.com/2016/03/29/feather/">extremely quickly</a>.</p>
 
 </div>
@@ -385,7 +385,7 @@ calc_fluseas_mean = function(data, yname, silent = TRUE) {
           </div>
         </div>
       </div>
-<a href="directory-structure-and-code-repositories.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="codingpractices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="codingstyle.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
