@@ -84,7 +84,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-08}
+    \date{2019-10-09}
 
 \usepackage{booktabs}
 
@@ -596,43 +596,6 @@ The \texttt{here} package is one great R package that helps multiple collaborato
 
 For more motivation on why you should use the \texttt{here} and R projects (\texttt{.Rproj}), read this excellent blog post from \href{https://www.tidyverse.org/articles/2017/12/workflow-vs-script/}{Tidyverse}.
 
-\hypertarget{data-inputoutput-io}{%
-\section{Data input/output (I/O)}\label{data-inputoutput-io}}
-
-\hypertarget{rds-vs-.rdata-files}{%
-\subsection{\texorpdfstring{\texttt{.RDS} vs \texttt{.RData} Files}{.RDS vs .RData Files}}\label{rds-vs-.rdata-files}}
-
-One of the most common ways to load and save data in Base R is with the \texttt{load()} and \texttt{save()} functions to serialize multiple objects in a single \texttt{.RData} file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using \texttt{saveRDS()} and its complement \texttt{readRDS()}.
-
-\begin{itemize}
-\item
-  \textbf{Note}: if you have many related R objects you would have otherwise saved all together using the \texttt{save} function, the functional equivalent with \texttt{RDS} would be to create a (named) list containing each of these objects, and saving it.
-\item
-  \textbf{Note}: there is an important caveat for \texttt{.rds} files: they are not automatically backward compatible across different versions of R! So, while they are very useful in general, beware. See, for example, this thread on \href{https://stackoverflow.com/questions/56704638/write-a-file-using-saverds-so-that-it-is-backwards-compatible-with-old-versi}{StackExchange}. \texttt{.csv} files embed slightly less information (typically), but are more stable across different versions of R.
-\end{itemize}
-
-\hypertarget{csvs}{%
-\subsection{CSVs}\label{csvs}}
-
-Once again, the \texttt{readr} package as part of the Tidvyerse is great, with a much faster \texttt{read\_csv()} than Base R's \texttt{read.csv()}. For massive CSVs (\textgreater{} 5 GB), you'll find \texttt{data.table::fread()} to be the fastest CSV reader in any data science language out there. For writing CSVs, \texttt{readr::write\_csv()} and \texttt{data.table::fwrite()} outclass Base R's \texttt{write.csv()} by a significant margin as well.
-
-\hypertarget{publishing-public-data}{%
-\subsection{Publishing public data}\label{publishing-public-data}}
-
-\textbf{NEVER} push a dataset into the public domain (e.g., GitHub, OSF) without first checking with Ben to ensure that it is appropriately de-identified and we have approval from the sponsor and/or human subjects review board to do so.
-
-If you are releasing data into the public domain, then consider making available \emph{at minimum} a \texttt{.csv} file and a codebook of the same name (note: you should have a codebook for internal data as well). We often also make available \texttt{.rds} files as well. For example, your \texttt{mystudy/data/public} directory could include three files for a single dataset, two with the actual data in \texttt{.rds} and \texttt{.csv} formats, and a third that describes their contents:
-
-\begin{verbatim}
-analysis_data_public.csv
-analysis_data_public.rds
-analysis_data_public_codebook.txt
-\end{verbatim}
-
-In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: \url{https://github.com/ben-arnold/enterics-seroepi/tree/master/data} . If you inspect the codebooks you can see an example of what they could contain (overview, variable descriptions, references).
-
-If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (\href{https://osf.io}{osf.io}). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: \url{https://osf.io/tprw2/}.
-
 \hypertarget{tidyverse}{%
 \section{Tidyverse}\label{tidyverse}}
 
@@ -795,7 +758,55 @@ TBD
 \hypertarget{datamanagement}{%
 \chapter{Data Management}\label{datamanagement}}
 
-TBD
+\emph{Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold}
+
+2019-10-10: THIS CHAPTER IS A WORK IN PROGRESS (INCOMPLETE)
+
+\hypertarget{data-inputoutput-io}{%
+\section{Data input/output (I/O)}\label{data-inputoutput-io}}
+
+\hypertarget{rds-vs-.rdata-files}{%
+\subsection{\texorpdfstring{\texttt{.RDS} vs \texttt{.RData} Files}{.RDS vs .RData Files}}\label{rds-vs-.rdata-files}}
+
+One of the most common ways to load and save data in Base R is with the \texttt{load()} and \texttt{save()} functions to serialize multiple objects in a single \texttt{.RData} file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using \texttt{saveRDS()} and its complement \texttt{readRDS()}.
+
+\begin{itemize}
+\item
+  \textbf{Note}: if you have many related R objects you would have otherwise saved all together using the \texttt{save} function, the functional equivalent with \texttt{RDS} would be to create a (named) list containing each of these objects, and saving it.
+\item
+  \textbf{Note}: there is an important caveat for \texttt{.rds} files: they are not automatically backward compatible across different versions of R! So, while they are very useful in general, beware. See, for example, this thread on \href{https://stackoverflow.com/questions/56704638/write-a-file-using-saverds-so-that-it-is-backwards-compatible-with-old-versi}{StackExchange}. \texttt{.csv} files embed slightly less information (typically), but are more stable across different versions of R.
+\end{itemize}
+
+\hypertarget{csv-files}{%
+\subsection{\texorpdfstring{\texttt{.CSV} Files}{.CSV Files}}\label{csv-files}}
+
+Once again, the \texttt{readr} package as part of the Tidvyerse is great, with a much faster \texttt{read\_csv()} than Base R's \texttt{read.csv()}. For massive CSVs (\textgreater{} 5 GB), you'll find \texttt{data.table::fread()} to be the fastest CSV reader in any data science language out there. For writing CSVs, \texttt{readr::write\_csv()} and \texttt{data.table::fwrite()} outclass Base R's \texttt{write.csv()} by a significant margin as well.
+
+\hypertarget{publishing-public-data}{%
+\subsection{Publishing public data}\label{publishing-public-data}}
+
+\textbf{NEVER} push a dataset into the public domain (e.g., GitHub, OSF) without first checking with Ben to ensure that it is appropriately de-identified and we have approval from the sponsor and/or human subjects review board to do so.
+
+If you are releasing data into the public domain, then consider making available \emph{at minimum} a \texttt{.csv} file and a codebook of the same name (note: you should have a codebook for internal data as well). We often also make available \texttt{.rds} files as well. For example, your \texttt{mystudy/data/public} directory could include three files for a single dataset, two with the actual data in \texttt{.rds} and \texttt{.csv} formats, and a third that describes their contents:
+
+\begin{verbatim}
+analysis_data_public.csv
+analysis_data_public.rds
+analysis_data_public_codebook.txt
+\end{verbatim}
+
+In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: \url{https://github.com/ben-arnold/enterics-seroepi/tree/master/data} .
+
+If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (\href{https://osf.io}{osf.io}). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: \url{https://osf.io/tprw2/}.
+
+\hypertarget{documenting-datasets}{%
+\section{Documenting datasets}\label{documenting-datasets}}
+
+Datasets need to have metadata (documentation) associated with them to help people understand them. Well documented datasets save an enormous amount of time because it helps avoid lots of back-and-forth with new people orienting themselves with the data. This applies to both private and public data used in your work flow.
+
+Each final dataset should include a codebook. The file \href{https://github.com/ben-arnold/enterics-seroepi/blob/master/data/asembo_analysis_codebook.txt}{asembo\_analysis\_codebook.txt} provides one example of what a codebook for a simple dataset could contain.
+
+For complex studies with multiple, relational data files, it is exceptionally helpful to also include a README overview in plain text or markdown that explains the relationships between the datasets. Here is an example from the WASH Benefits Bangladesh trial primary outcomes analysis: \href{https://osf.io/v3nfs/}{README-WBB-primary-outcomes-datasets.md}.
 
 \hypertarget{github}{%
 \chapter{GitHub and Version Control}\label{github}}

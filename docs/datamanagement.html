@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi" />
 
 
-<meta name="date" content="2019-10-08" />
+<meta name="date" content="2019-10-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -98,16 +98,18 @@
 <li class="chapter" data-level="4.3" data-path="codingpractices.html"><a href="codingpractices.html#object-naming"><i class="fa fa-check"></i><b>4.3</b> Object naming</a></li>
 <li class="chapter" data-level="4.4" data-path="codingpractices.html"><a href="codingpractices.html#function-calls"><i class="fa fa-check"></i><b>4.4</b> Function calls</a></li>
 <li class="chapter" data-level="4.5" data-path="codingpractices.html"><a href="codingpractices.html#the-here-package"><i class="fa fa-check"></i><b>4.5</b> The <code>here</code> package</a></li>
-<li class="chapter" data-level="4.6" data-path="codingpractices.html"><a href="codingpractices.html#data-inputoutput-io"><i class="fa fa-check"></i><b>4.6</b> Data input/output (I/O)</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="codingpractices.html"><a href="codingpractices.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>4.6.1</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
-<li class="chapter" data-level="4.6.2" data-path="codingpractices.html"><a href="codingpractices.html#csvs"><i class="fa fa-check"></i><b>4.6.2</b> CSVs</a></li>
-<li class="chapter" data-level="4.6.3" data-path="codingpractices.html"><a href="codingpractices.html#publishing-public-data"><i class="fa fa-check"></i><b>4.6.3</b> Publishing public data</a></li>
-</ul></li>
-<li class="chapter" data-level="4.7" data-path="codingpractices.html"><a href="codingpractices.html#tidyverse"><i class="fa fa-check"></i><b>4.7</b> Tidyverse</a></li>
-<li class="chapter" data-level="4.8" data-path="codingpractices.html"><a href="codingpractices.html#coding-with-r-and-python"><i class="fa fa-check"></i><b>4.8</b> Coding with R and Python</a></li>
+<li class="chapter" data-level="4.6" data-path="codingpractices.html"><a href="codingpractices.html#tidyverse"><i class="fa fa-check"></i><b>4.6</b> Tidyverse</a></li>
+<li class="chapter" data-level="4.7" data-path="codingpractices.html"><a href="codingpractices.html#coding-with-r-and-python"><i class="fa fa-check"></i><b>4.7</b> Coding with R and Python</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>5</b> Coding Style</a></li>
-<li class="chapter" data-level="6" data-path="datamanagement.html"><a href="datamanagement.html"><i class="fa fa-check"></i><b>6</b> Data Management</a></li>
+<li class="chapter" data-level="6" data-path="datamanagement.html"><a href="datamanagement.html"><i class="fa fa-check"></i><b>6</b> Data Management</a><ul>
+<li class="chapter" data-level="6.1" data-path="datamanagement.html"><a href="datamanagement.html#data-inputoutput-io"><i class="fa fa-check"></i><b>6.1</b> Data input/output (I/O)</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="datamanagement.html"><a href="datamanagement.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>6.1.1</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
+<li class="chapter" data-level="6.1.2" data-path="datamanagement.html"><a href="datamanagement.html#csv-files"><i class="fa fa-check"></i><b>6.1.2</b> <code>.CSV</code> Files</a></li>
+<li class="chapter" data-level="6.1.3" data-path="datamanagement.html"><a href="datamanagement.html#publishing-public-data"><i class="fa fa-check"></i><b>6.1.3</b> Publishing public data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="datamanagement.html"><a href="datamanagement.html#documenting-datasets"><i class="fa fa-check"></i><b>6.2</b> Documenting datasets</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>7</b> GitHub and Version Control</a></li>
 <li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a></li>
 <li class="chapter" data-level="9" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a></li>
@@ -148,8 +150,40 @@
             <section class="normal" id="section-">
 <div id="datamanagement" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Data Management</h1>
-<p>TBD</p>
+<p><em>Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold</em></p>
+<p>2019-10-10: THIS CHAPTER IS A WORK IN PROGRESS (INCOMPLETE)</p>
+<div id="data-inputoutput-io" class="section level2">
+<h2><span class="header-section-number">6.1</span> Data input/output (I/O)</h2>
+<div id="rds-vs-.rdata-files" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> <code>.RDS</code> vs <code>.RData</code> Files</h3>
+<p>One of the most common ways to load and save data in Base R is with the <code>load()</code> and <code>save()</code> functions to serialize multiple objects in a single <code>.RData</code> file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using <code>saveRDS()</code> and its complement <code>readRDS()</code>.</p>
+<ul>
+<li><p><strong>Note</strong>: if you have many related R objects you would have otherwise saved all together using the <code>save</code> function, the functional equivalent with <code>RDS</code> would be to create a (named) list containing each of these objects, and saving it.</p></li>
+<li><p><strong>Note</strong>: there is an important caveat for <code>.rds</code> files: they are not automatically backward compatible across different versions of R! So, while they are very useful in general, beware. See, for example, this thread on <a href="https://stackoverflow.com/questions/56704638/write-a-file-using-saverds-so-that-it-is-backwards-compatible-with-old-versi">StackExchange</a>. <code>.csv</code> files embed slightly less information (typically), but are more stable across different versions of R.</p></li>
+</ul>
+</div>
+<div id="csv-files" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> <code>.CSV</code> Files</h3>
+<p>Once again, the <code>readr</code> package as part of the Tidvyerse is great, with a much faster <code>read_csv()</code> than Base R’s <code>read.csv()</code>. For massive CSVs (&gt; 5 GB), you’ll find <code>data.table::fread()</code> to be the fastest CSV reader in any data science language out there. For writing CSVs, <code>readr::write_csv()</code> and <code>data.table::fwrite()</code> outclass Base R’s <code>write.csv()</code> by a significant margin as well.</p>
+</div>
+<div id="publishing-public-data" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Publishing public data</h3>
+<p><strong>NEVER</strong> push a dataset into the public domain (e.g., GitHub, OSF) without first checking with Ben to ensure that it is appropriately de-identified and we have approval from the sponsor and/or human subjects review board to do so.</p>
+<p>If you are releasing data into the public domain, then consider making available <em>at minimum</em> a <code>.csv</code> file and a codebook of the same name (note: you should have a codebook for internal data as well). We often also make available <code>.rds</code> files as well. For example, your <code>mystudy/data/public</code> directory could include three files for a single dataset, two with the actual data in <code>.rds</code> and <code>.csv</code> formats, and a third that describes their contents:</p>
+<pre><code>analysis_data_public.csv
+analysis_data_public.rds
+analysis_data_public_codebook.txt</code></pre>
+<p>In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: <a href="https://github.com/ben-arnold/enterics-seroepi/tree/master/data" class="uri">https://github.com/ben-arnold/enterics-seroepi/tree/master/data</a> .</p>
+<p>If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (<a href="https://osf.io">osf.io</a>). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: <a href="https://osf.io/tprw2/" class="uri">https://osf.io/tprw2/</a>.</p>
+</div>
+</div>
+<div id="documenting-datasets" class="section level2">
+<h2><span class="header-section-number">6.2</span> Documenting datasets</h2>
+<p>Datasets need to have metadata (documentation) associated with them to help people understand them. Well documented datasets save an enormous amount of time because it helps avoid lots of back-and-forth with new people orienting themselves with the data. This applies to both private and public data used in your work flow.</p>
+<p>Each final dataset should include a codebook. The file <a href="https://github.com/ben-arnold/enterics-seroepi/blob/master/data/asembo_analysis_codebook.txt">asembo_analysis_codebook.txt</a> provides one example of what a codebook for a simple dataset could contain.</p>
+<p>For complex studies with multiple, relational data files, it is exceptionally helpful to also include a README overview in plain text or markdown that explains the relationships between the datasets. Here is an example from the WASH Benefits Bangladesh trial primary outcomes analysis: <a href="https://osf.io/v3nfs/">README-WBB-primary-outcomes-datasets.md</a>.</p>
 
+</div>
 </div>
             </section>
 
