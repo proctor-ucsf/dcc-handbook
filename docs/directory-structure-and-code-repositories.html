@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi" />
 
 
-<meta name="date" content="2019-10-09" />
+<meta name="date" content="2019-10-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -83,9 +83,10 @@
 <li class="chapter" data-level="3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#code-repositories"><i class="fa fa-check"></i><b>3.3</b> Code Repositories</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#rproj-files"><i class="fa fa-check"></i><b>3.3.1</b> <code>.Rproj</code> files</a></li>
 <li class="chapter" data-level="3.3.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#configuration-config-file"><i class="fa fa-check"></i><b>3.3.2</b> Configuration (‘config’) File</a></li>
-<li class="chapter" data-level="3.3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#order-files-and-subdirectories"><i class="fa fa-check"></i><b>3.3.3</b> Order Files and Subdirectories</a></li>
-<li class="chapter" data-level="3.3.4" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#use-bash-scripts-to-ensure-reproducibility"><i class="fa fa-check"></i><b>3.3.4</b> Use Bash scripts to ensure reproducibility</a></li>
-<li class="chapter" data-level="3.3.5" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#alternative-approach-for-code-repos"><i class="fa fa-check"></i><b>3.3.5</b> Alternative approach for code repos</a></li>
+<li class="chapter" data-level="3.3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#shared-functions-file"><i class="fa fa-check"></i><b>3.3.3</b> Shared Functions File</a></li>
+<li class="chapter" data-level="3.3.4" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#order-files-and-subdirectories"><i class="fa fa-check"></i><b>3.3.4</b> Order Files and Subdirectories</a></li>
+<li class="chapter" data-level="3.3.5" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#use-bash-scripts-to-ensure-reproducibility"><i class="fa fa-check"></i><b>3.3.5</b> Use Bash scripts to ensure reproducibility</a></li>
+<li class="chapter" data-level="3.3.6" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#alternative-approach-for-code-repos"><i class="fa fa-check"></i><b>3.3.6</b> Alternative approach for code repos</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="codingpractices.html"><a href="codingpractices.html"><i class="fa fa-check"></i><b>4</b> Coding Practices</a><ul>
@@ -212,6 +213,7 @@ Figure 3.1: Example directory for <code>mystudy</code>
 <pre><code>.gitignore
 primary-analysis.Rproj
 0-config.R
+0-shared-functions.R
 0-primary-analysis-run-all.sh
 1-dm /
     0-dm-run-all.sh
@@ -245,22 +247,28 @@ primary-analysis.Rproj
 <div id="configuration-config-file" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> Configuration (‘config’) File</h3>
 <p>This is the single most important file for your project. It will be responsible for a variety of common tasks, declare global variables, load functions, declare paths, and more. <em>Every other file in the project</em> will begin with <code>source(&quot;0-config&quot;)</code>, and its role is to reduce redundancy and create an abstraction layer that allows you to make changes in one place (<code>0-config.R</code>) rather than 5 different files. To this end, paths that will be referenced in multiple scripts (e.g., a <code>clean_data_path</code>) can be declared in <code>0-config.R</code> and simply referred to by its variable name in scripts. If you ever want to change things, rename them, or even switch from a downsample to the full data, all you would then to need to do is modify the path in one place and the change will automatically update throughout your project. See the example config file for more details. The paths defined in the <code>0-config.R</code> file assume that users have opened the <code>.Rproj</code> file, which sets the directory to the top level of the project.</p>
+<p>This <a href="https://github.com/jadebc-berkeley/WBB-STH-Kato-Katz">GitHub repository</a> that has replication files for <a href="https://www.biorxiv.org/content/10.1101/629501v1">this study</a> includes an example of a streamlined <code>config.R</code> file, with all packages loaded and directory references defined.</p>
+</div>
+<div id="shared-functions-file" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Shared Functions File</h3>
+<p>If you write a custom function for an analysis and need to use it repeatedly across multiple analysis scripts, then it is better to consolidate it into a single shared functions script and source that file into the analysis scripts. The reason for this is that it enables you to edit the function in a single place and ensure that the changes are implemented across your entire workflow. In extreme cases, you might have so many shared functions that you need an entire subdirectory with separate scripts. <a href="https://github.com/HBGD-UCB/ki-longitudinal-manuscripts/">This repository</a> includes an example (<code>0-project-functions</code>) of a large analysis (currently still a work in progress).</p>
 </div>
 <div id="order-files-and-subdirectories" class="section level3">
-<h3><span class="header-section-number">3.3.3</span> Order Files and Subdirectories</h3>
+<h3><span class="header-section-number">3.3.4</span> Order Files and Subdirectories</h3>
 <p>This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e. <code>primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R</code> =&gt; <code>primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS</code>). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.</p>
 <p>In the <code>6-figures</code> subdirectory, each RMarkdown file (computational notebook) is linked to a specific figure in a hypothetical manuscript. This makes it easier to link specific notebooks in figure legends, and to see which file creates each figure.</p>
 </div>
 <div id="use-bash-scripts-to-ensure-reproducibility" class="section level3">
-<h3><span class="header-section-number">3.3.4</span> Use Bash scripts to ensure reproducibility</h3>
+<h3><span class="header-section-number">3.3.5</span> Use Bash scripts to ensure reproducibility</h3>
 <p>Bash scripts are useful components of a reproducible workflow. At many of the directory levels (i.e. in <code>5-laz</code>), there is a bash script that runs each of the analysis scripts. This is exceptionally useful when data “upstream” changes – you simply run the bash script. See the <a href="unix.html#unix">UNIX Chapter</a> for further details.</p>
 </div>
 <div id="alternative-approach-for-code-repos" class="section level3">
-<h3><span class="header-section-number">3.3.5</span> Alternative approach for code repos</h3>
+<h3><span class="header-section-number">3.3.6</span> Alternative approach for code repos</h3>
 <p>Another approach for organizing your code repository is to name all of your scripts according to the final figure or table that they generate for a particular article. In our experience, this <em>only</em> works for small projects, with a single set of coherent analyses. Here, you might have an alternative structure such as:</p>
 <pre><code>.gitignore
 primary-analysis.Rproj
 0-config.R
+0-shared-functions.R
 0-primary-analysis-run-all.sh
 1-dm /
     0-dm-run-all.sh

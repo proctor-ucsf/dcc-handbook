@@ -84,7 +84,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-09}
+    \date{2019-10-14}
 
 \usepackage{booktabs}
 
@@ -364,6 +364,7 @@ With subdirectories that generally look like this:
 .gitignore
 primary-analysis.Rproj
 0-config.R
+0-shared-functions.R
 0-primary-analysis-run-all.sh
 1-dm /
     0-dm-run-all.sh
@@ -404,6 +405,13 @@ An ``R Project'' can be created within RStudio by going to \texttt{File\ \textgr
 
 This is the single most important file for your project. It will be responsible for a variety of common tasks, declare global variables, load functions, declare paths, and more. \emph{Every other file in the project} will begin with \texttt{source("0-config")}, and its role is to reduce redundancy and create an abstraction layer that allows you to make changes in one place (\texttt{0-config.R}) rather than 5 different files. To this end, paths that will be referenced in multiple scripts (e.g., a \texttt{clean\_data\_path}) can be declared in \texttt{0-config.R} and simply referred to by its variable name in scripts. If you ever want to change things, rename them, or even switch from a downsample to the full data, all you would then to need to do is modify the path in one place and the change will automatically update throughout your project. See the example config file for more details. The paths defined in the \texttt{0-config.R} file assume that users have opened the \texttt{.Rproj} file, which sets the directory to the top level of the project.
 
+This \href{https://github.com/jadebc-berkeley/WBB-STH-Kato-Katz}{GitHub repository} that has replication files for \href{https://www.biorxiv.org/content/10.1101/629501v1}{this study} includes an example of a streamlined \texttt{config.R} file, with all packages loaded and directory references defined.
+
+\hypertarget{shared-functions-file}{%
+\subsection{Shared Functions File}\label{shared-functions-file}}
+
+If you write a custom function for an analysis and need to use it repeatedly across multiple analysis scripts, then it is better to consolidate it into a single shared functions script and source that file into the analysis scripts. The reason for this is that it enables you to edit the function in a single place and ensure that the changes are implemented across your entire workflow. In extreme cases, you might have so many shared functions that you need an entire subdirectory with separate scripts. \href{https://github.com/HBGD-UCB/ki-longitudinal-manuscripts/}{This repository} includes an example (\texttt{0-project-functions}) of a large analysis (currently still a work in progress).
+
 \hypertarget{order-files-and-subdirectories}{%
 \subsection{Order Files and Subdirectories}\label{order-files-and-subdirectories}}
 
@@ -425,6 +433,7 @@ Another approach for organizing your code repository is to name all of your scri
 .gitignore
 primary-analysis.Rproj
 0-config.R
+0-shared-functions.R
 0-primary-analysis-run-all.sh
 1-dm /
     0-dm-run-all.sh
