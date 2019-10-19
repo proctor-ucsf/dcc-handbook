@@ -1,6 +1,6 @@
 --- 
 title: "Proctor Foundation Data Science Handbook"
-author: "Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi"
+author: "Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -10,13 +10,16 @@ link-citations: yes
 description: "This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook."
 ---
 
+
 # Welcome! {-}
 
 Welcome to the Francis I. Proctor Foundation at the University of California, San Francisco (https://proctor.ucsf.edu)!
 
 This handbook summarizes some best practices for data science, drawing from our experience at the Francis I. Proctor Foundation and from that of our close colleagues in the Division of Epidemiology and Biostatistics at the University of California, Berkeley (where Prof. Ben Arnold worked for many years before joining Proctor). 
 
-We do not intend this handbook to be a comprehensive guide to data science. Instead, it focuses more on practical, "how-to" guidance for conducting data science within epidemiologic research studies.  Although many of the ideas of environment-independent, the examples draw from the [R](https://cran.r-project.org/) programming language. For an excellent overview of data science in R, see the book [R for Data Science](https://r4ds.had.co.nz/).
+We do not intend this handbook to be a comprehensive guide to data science. Instead, it focuses more on practical, "how-to" guidance for conducting data science within epidemiologic research studies. Where possible, we reference existing materials and guides. 
+
+Although many of the ideas of environment-independent, the examples draw from the [R](https://cran.r-project.org/) programming language. For an excellent overview of data science in R, see the book [R for Data Science](https://r4ds.had.co.nz/).
 
 Much of the material in this handbook evolved from a version of Dr. Jade Benjamin-Chung's [lab manual](https://github.com/jadebc-berkeley/lab-manual) at the University of California, Berkeley. In addition to the Proctor team, many contributors include current and former students from UC Berkeley.
 

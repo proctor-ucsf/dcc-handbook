@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   
 
-<meta name="author" content="Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi" />
+<meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-10-14" />
+<meta name="date" content="2019-10-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -102,7 +102,12 @@
 <li class="chapter" data-level="4.6" data-path="codingpractices.html"><a href="codingpractices.html#tidyverse"><i class="fa fa-check"></i><b>4.6</b> Tidyverse</a></li>
 <li class="chapter" data-level="4.7" data-path="codingpractices.html"><a href="codingpractices.html#coding-with-r-and-python"><i class="fa fa-check"></i><b>4.7</b> Coding with R and Python</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>5</b> Coding Style</a></li>
+<li class="chapter" data-level="5" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>5</b> Coding Style</a><ul>
+<li class="chapter" data-level="5.1" data-path="codingstyle.html"><a href="codingstyle.html#line-breaks"><i class="fa fa-check"></i><b>5.1</b> Line breaks</a></li>
+<li class="chapter" data-level="5.2" data-path="codingstyle.html"><a href="codingstyle.html#automated-tools-for-style-and-project-workflow"><i class="fa fa-check"></i><b>5.2</b> Automated Tools for Style and Project Workflow</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="codingstyle.html"><a href="codingstyle.html#styling"><i class="fa fa-check"></i><b>5.2.1</b> Styling</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="datamanagement.html"><a href="datamanagement.html"><i class="fa fa-check"></i><b>6</b> Data Management</a><ul>
 <li class="chapter" data-level="6.1" data-path="datamanagement.html"><a href="datamanagement.html#data-inputoutput-io"><i class="fa fa-check"></i><b>6.1</b> Data input/output (I/O)</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="datamanagement.html"><a href="datamanagement.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>6.1.1</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
@@ -151,8 +156,117 @@
             <section class="normal" id="section-">
 <div id="codingstyle" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Coding Style</h1>
-<p>TBD</p>
+<p><em>Contributors: Kunal Mishra, Jade Benjamin-Chung, and Ben Arnold</em></p>
+<div id="line-breaks" class="section level2">
+<h2><span class="header-section-number">5.1</span> Line breaks</h2>
+<ul>
+<li><p>For <code>ggplot</code> calls and <code>dplyr</code> pipelines, do not crowd single lines. Here are some nontrivial examples of “beautiful” pipelines, where beauty is defined by coherence:</p>
+<pre><code># Example 1
+school_names &lt;- list(
+  OUSD_school_names = absentee_all %&gt;%
+    filter(dist.n == 1) %&gt;%
+    pull(school) %&gt;%
+    unique %&gt;%
+    sort,
 
+  WCCSD_school_names &lt;- absentee_all %&gt;%
+    filter(dist.n == 0) %&gt;%
+    pull(school) %&gt;%
+    unique %&gt;%
+    sort
+)</code></pre>
+<pre><code># Example 2
+absentee_all &lt;- fread(file = raw_data_path) %&gt;%
+  mutate(program = case_when(schoolyr %in% pre_program_schoolyrs ~ 0,
+                             schoolyr %in% program_schoolyrs ~ 1)) %&gt;%
+  mutate(period = case_when(schoolyr %in% pre_program_schoolyrs ~ 0,
+                            schoolyr %in% LAIV_schoolyrs ~ 1,
+                            schoolyr %in% IIV_schoolyrs ~ 2)) %&gt;%
+  filter(schoolyr != &quot;2017-18&quot;)</code></pre>
+<p>And of a complex <code>ggplot</code> call:</p>
+<pre><code># Example 3
+ggplot(data=data,
+       mapping=aes_string(x=&quot;year&quot;, y=&quot;rd&quot;, group=group)) +
+
+  geom_point(mapping=aes_string(col=group, shape=group),
+             position=position_dodge(width=0.2),
+             size=2.5) +
+
+  geom_errorbar(mapping=aes_string(ymin=&quot;lb&quot;, ymax=&quot;ub&quot;, col=group),
+                position=position_dodge(width=0.2),
+                width=0.2) +
+
+  geom_point(position=position_dodge(width=0.2),
+             size=2.5) +
+
+  geom_errorbar(mapping=aes(ymin=lb, ymax=ub),
+                position=position_dodge(width=0.2),
+                width=0.1) +
+
+  scale_y_continuous(limits=limits,
+                     breaks=breaks,
+                     labels=breaks) +
+
+  scale_color_manual(std_legend_title,values=cols,labels=legend_label) +
+  scale_shape_manual(std_legend_title,values=shapes, labels=legend_label) +
+  geom_hline(yintercept=0, linetype=&quot;dashed&quot;) +
+  xlab(&quot;Program year&quot;) +
+  ylab(yaxis_lab) +
+  theme_complete_bw() +
+  theme(strip.text.x = element_text(size = 14),
+        axis.text.x = element_text(size = 12)) +
+  ggtitle(title)</code></pre></li>
+</ul>
+<p>Imagine (or perhaps mournfully recall) the mess that can occur when you don’t strictly style a complicated <code>ggplot</code> call. Trying to fix bugs and ensure your code is working can be a nightmare. Now imagine trying to do it with the same code 6 months after you’ve written it. Invest the time now and reap the rewards as the code practically explains itself, line by line.</p>
+</div>
+<div id="automated-tools-for-style-and-project-workflow" class="section level2">
+<h2><span class="header-section-number">5.2</span> Automated Tools for Style and Project Workflow</h2>
+<div id="styling" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Styling</h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>Code Autoformatting</strong> - RStudio includes a fantastic built-in utility (keyboard shortcut: <code>CMD-Shift-A</code>) for autoformatting highlighted chunks of code to fit many of the best practices listed here. It generally makes code more readable and fixes a lot of the small things you may not feel like fixing yourself. Try it out as a “first pass” on some code of yours that <em>doesn’t</em> follow many of these best practices!</p></li>
+<li><strong>Assignment Aligner</strong> - A <a href="https://www.r-bloggers.com/align-assign-rstudio-addin-to-align-assignment-operators/">cool R package</a> allows you to very powerfully format large chunks of assignment code to be much cleaner and much more readable. Follow the linked instructions and create a keyboard shortcut of your choosing (recommendation: <code>CMD-Shift-Z</code>). Here is an example of how assignment aligning can dramatically improve code readability:</li>
+</ol>
+<pre><code># Before
+OUSD_not_found_aliases &lt;- list(
+  &quot;Brookfield Village Elementary&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Brookfield&quot;),
+  &quot;Carl Munck Elementary&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Munck&quot;),
+  &quot;Community United Elementary School&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Community United&quot;),
+  &quot;East Oakland PRIDE Elementary&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;East Oakland Pride&quot;),
+  &quot;EnCompass Academy&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;EnCompass&quot;),
+  &quot;Global Family School&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Global&quot;),
+  &quot;International Community School&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;International Community&quot;),
+  &quot;Madison Park Lower Campus&quot; = &quot;Madison Park Academy TK-5&quot;,
+  &quot;Manzanita Community School&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Manzanita Community&quot;),
+  &quot;Martin Luther King Jr Elementary&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;King&quot;),
+  &quot;PLACE @ Prescott&quot; = &quot;Preparatory Literary Academy of Cultural Excellence&quot;,
+  &quot;RISE Community School&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Rise Community&quot;)
+)</code></pre>
+<pre><code># After
+OUSD_not_found_aliases &lt;- list(
+  &quot;Brookfield Village Elementary&quot;      = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Brookfield&quot;),
+  &quot;Carl Munck Elementary&quot;              = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Munck&quot;),
+  &quot;Community United Elementary School&quot; = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Community United&quot;),
+  &quot;East Oakland PRIDE Elementary&quot;      = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;East Oakland Pride&quot;),
+  &quot;EnCompass Academy&quot;                  = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;EnCompass&quot;),
+  &quot;Global Family School&quot;               = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Global&quot;),
+  &quot;International Community School&quot;     = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;International Community&quot;),
+  &quot;Madison Park Lower Campus&quot;          = &quot;Madison Park Academy TK-5&quot;,
+  &quot;Manzanita Community School&quot;         = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Manzanita Community&quot;),
+  &quot;Martin Luther King Jr Elementary&quot;   = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;King&quot;),
+  &quot;PLACE @ Prescott&quot;                   = &quot;Preparatory Literary Academy of Cultural Excellence&quot;,
+  &quot;RISE Community School&quot;              = str_subset(string = OUSD_school_shapes$schnam, pattern = &quot;Rise Community&quot;)
+)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>StyleR</strong> - Another <a href="https://www.tidyverse.org/articles/2017/12/styler-1.0.0/">cool R package from the Tidyverse</a> that can be powerful and used as a first pass on entire projects that need refactoring. The most useful function of the package is the <code>style_dir</code> function, which will style all files within a given directory. See the <a href="https://www.rdocumentation.org/packages/styler/versions/1.1.0/topics/style_dir">function’s documentation</a> and the vignette linked above for more details.
+<ul>
+<li><strong>Note</strong>: The default Tidyverse styler is subtly different from some of the things we’ve advocated for in this document. Most notably we differ with regards to the number of spaces before/after “tokens” (i.e. Assignment Aligner add spaces before <code>=</code> signs to align them properly). For this reason, we’d recommend the following: <code>style_dir(path = ..., scope = &quot;line_breaks&quot;, strict = FALSE)</code>. You can also customize StyleR <a href="http://styler.r-lib.org/articles/customizing_styler.html">even more</a> if you’re really hardcore.</li>
+<li><strong>Note</strong>: As is mentioned in the package vignette linked above, StyleR modifies things <em>in-place</em>, meaning it overwrites your existing code and replaces it with the updated, properly styled code. This makes it a good fit on projects <em>with version control</em>, but if you don’t have backups or a good way to revert back to the intial code, I wouldn’t recommend going this route.</li>
+</ul></li>
+</ol>
+
+</div>
+</div>
 </div>
             </section>
 

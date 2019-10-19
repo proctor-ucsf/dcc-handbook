@@ -24,7 +24,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Proctor Foundation Data Science Handbook},
-            pdfauthor={Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi},
+            pdfauthor={Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -79,12 +79,12 @@
   \title{Proctor Foundation Data Science Handbook}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi}
+    \author{Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-14}
+    \date{2019-10-18}
 
 \usepackage{booktabs}
 
@@ -103,7 +103,9 @@ Welcome to the Francis I. Proctor Foundation at the University of California, Sa
 
 This handbook summarizes some best practices for data science, drawing from our experience at the Francis I. Proctor Foundation and from that of our close colleagues in the Division of Epidemiology and Biostatistics at the University of California, Berkeley (where Prof.~Ben Arnold worked for many years before joining Proctor).
 
-We do not intend this handbook to be a comprehensive guide to data science. Instead, it focuses more on practical, ``how-to'' guidance for conducting data science within epidemiologic research studies. Although many of the ideas of environment-independent, the examples draw from the \href{https://cran.r-project.org/}{R} programming language. For an excellent overview of data science in R, see the book \href{https://r4ds.had.co.nz/}{R for Data Science}.
+We do not intend this handbook to be a comprehensive guide to data science. Instead, it focuses more on practical, ``how-to'' guidance for conducting data science within epidemiologic research studies. Where possible, we reference existing materials and guides.
+
+Although many of the ideas of environment-independent, the examples draw from the \href{https://cran.r-project.org/}{R} programming language. For an excellent overview of data science in R, see the book \href{https://r4ds.had.co.nz/}{R for Data Science}.
 
 Much of the material in this handbook evolved from a version of Dr.~Jade Benjamin-Chung's \href{https://github.com/jadebc-berkeley/lab-manual}{lab manual} at the University of California, Berkeley. In addition to the Proctor team, many contributors include current and former students from UC Berkeley.
 
@@ -762,7 +764,148 @@ If you're using both R and Python, you may wish to check out the \href{https://w
 \hypertarget{codingstyle}{%
 \chapter{Coding Style}\label{codingstyle}}
 
-TBD
+\emph{Contributors: Kunal Mishra, Jade Benjamin-Chung, and Ben Arnold}
+
+\hypertarget{line-breaks}{%
+\section{Line breaks}\label{line-breaks}}
+
+\begin{itemize}
+\item
+  For \texttt{ggplot} calls and \texttt{dplyr} pipelines, do not crowd single lines. Here are some nontrivial examples of ``beautiful'' pipelines, where beauty is defined by coherence:
+
+\begin{verbatim}
+# Example 1
+school_names <- list(
+  OUSD_school_names = absentee_all %>%
+    filter(dist.n == 1) %>%
+    pull(school) %>%
+    unique %>%
+    sort,
+
+  WCCSD_school_names <- absentee_all %>%
+    filter(dist.n == 0) %>%
+    pull(school) %>%
+    unique %>%
+    sort
+)
+\end{verbatim}
+
+\begin{verbatim}
+# Example 2
+absentee_all <- fread(file = raw_data_path) %>%
+  mutate(program = case_when(schoolyr %in% pre_program_schoolyrs ~ 0,
+                             schoolyr %in% program_schoolyrs ~ 1)) %>%
+  mutate(period = case_when(schoolyr %in% pre_program_schoolyrs ~ 0,
+                            schoolyr %in% LAIV_schoolyrs ~ 1,
+                            schoolyr %in% IIV_schoolyrs ~ 2)) %>%
+  filter(schoolyr != "2017-18")
+\end{verbatim}
+
+  And of a complex \texttt{ggplot} call:
+
+\begin{verbatim}
+# Example 3
+ggplot(data=data,
+       mapping=aes_string(x="year", y="rd", group=group)) +
+
+  geom_point(mapping=aes_string(col=group, shape=group),
+             position=position_dodge(width=0.2),
+             size=2.5) +
+
+  geom_errorbar(mapping=aes_string(ymin="lb", ymax="ub", col=group),
+                position=position_dodge(width=0.2),
+                width=0.2) +
+
+  geom_point(position=position_dodge(width=0.2),
+             size=2.5) +
+
+  geom_errorbar(mapping=aes(ymin=lb, ymax=ub),
+                position=position_dodge(width=0.2),
+                width=0.1) +
+
+  scale_y_continuous(limits=limits,
+                     breaks=breaks,
+                     labels=breaks) +
+
+  scale_color_manual(std_legend_title,values=cols,labels=legend_label) +
+  scale_shape_manual(std_legend_title,values=shapes, labels=legend_label) +
+  geom_hline(yintercept=0, linetype="dashed") +
+  xlab("Program year") +
+  ylab(yaxis_lab) +
+  theme_complete_bw() +
+  theme(strip.text.x = element_text(size = 14),
+        axis.text.x = element_text(size = 12)) +
+  ggtitle(title)
+\end{verbatim}
+\end{itemize}
+
+Imagine (or perhaps mournfully recall) the mess that can occur when you don't strictly style a complicated \texttt{ggplot} call. Trying to fix bugs and ensure your code is working can be a nightmare. Now imagine trying to do it with the same code 6 months after you've written it. Invest the time now and reap the rewards as the code practically explains itself, line by line.
+
+\hypertarget{automated-tools-for-style-and-project-workflow}{%
+\section{Automated Tools for Style and Project Workflow}\label{automated-tools-for-style-and-project-workflow}}
+
+\hypertarget{styling}{%
+\subsection{Styling}\label{styling}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Code Autoformatting} - RStudio includes a fantastic built-in utility (keyboard shortcut: \texttt{CMD-Shift-A}) for autoformatting highlighted chunks of code to fit many of the best practices listed here. It generally makes code more readable and fixes a lot of the small things you may not feel like fixing yourself. Try it out as a ``first pass'' on some code of yours that \emph{doesn't} follow many of these best practices!
+\item
+  \textbf{Assignment Aligner} - A \href{https://www.r-bloggers.com/align-assign-rstudio-addin-to-align-assignment-operators/}{cool R package} allows you to very powerfully format large chunks of assignment code to be much cleaner and much more readable. Follow the linked instructions and create a keyboard shortcut of your choosing (recommendation: \texttt{CMD-Shift-Z}). Here is an example of how assignment aligning can dramatically improve code readability:
+\end{enumerate}
+
+\begin{verbatim}
+# Before
+OUSD_not_found_aliases <- list(
+  "Brookfield Village Elementary" = str_subset(string = OUSD_school_shapes$schnam, pattern = "Brookfield"),
+  "Carl Munck Elementary" = str_subset(string = OUSD_school_shapes$schnam, pattern = "Munck"),
+  "Community United Elementary School" = str_subset(string = OUSD_school_shapes$schnam, pattern = "Community United"),
+  "East Oakland PRIDE Elementary" = str_subset(string = OUSD_school_shapes$schnam, pattern = "East Oakland Pride"),
+  "EnCompass Academy" = str_subset(string = OUSD_school_shapes$schnam, pattern = "EnCompass"),
+  "Global Family School" = str_subset(string = OUSD_school_shapes$schnam, pattern = "Global"),
+  "International Community School" = str_subset(string = OUSD_school_shapes$schnam, pattern = "International Community"),
+  "Madison Park Lower Campus" = "Madison Park Academy TK-5",
+  "Manzanita Community School" = str_subset(string = OUSD_school_shapes$schnam, pattern = "Manzanita Community"),
+  "Martin Luther King Jr Elementary" = str_subset(string = OUSD_school_shapes$schnam, pattern = "King"),
+  "PLACE @ Prescott" = "Preparatory Literary Academy of Cultural Excellence",
+  "RISE Community School" = str_subset(string = OUSD_school_shapes$schnam, pattern = "Rise Community")
+)
+\end{verbatim}
+
+\begin{verbatim}
+# After
+OUSD_not_found_aliases <- list(
+  "Brookfield Village Elementary"      = str_subset(string = OUSD_school_shapes$schnam, pattern = "Brookfield"),
+  "Carl Munck Elementary"              = str_subset(string = OUSD_school_shapes$schnam, pattern = "Munck"),
+  "Community United Elementary School" = str_subset(string = OUSD_school_shapes$schnam, pattern = "Community United"),
+  "East Oakland PRIDE Elementary"      = str_subset(string = OUSD_school_shapes$schnam, pattern = "East Oakland Pride"),
+  "EnCompass Academy"                  = str_subset(string = OUSD_school_shapes$schnam, pattern = "EnCompass"),
+  "Global Family School"               = str_subset(string = OUSD_school_shapes$schnam, pattern = "Global"),
+  "International Community School"     = str_subset(string = OUSD_school_shapes$schnam, pattern = "International Community"),
+  "Madison Park Lower Campus"          = "Madison Park Academy TK-5",
+  "Manzanita Community School"         = str_subset(string = OUSD_school_shapes$schnam, pattern = "Manzanita Community"),
+  "Martin Luther King Jr Elementary"   = str_subset(string = OUSD_school_shapes$schnam, pattern = "King"),
+  "PLACE @ Prescott"                   = "Preparatory Literary Academy of Cultural Excellence",
+  "RISE Community School"              = str_subset(string = OUSD_school_shapes$schnam, pattern = "Rise Community")
+)
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{StyleR} - Another \href{https://www.tidyverse.org/articles/2017/12/styler-1.0.0/}{cool R package from the Tidyverse} that can be powerful and used as a first pass on entire projects that need refactoring. The most useful function of the package is the \texttt{style\_dir} function, which will style all files within a given directory. See the \href{https://www.rdocumentation.org/packages/styler/versions/1.1.0/topics/style_dir}{function's documentation} and the vignette linked above for more details.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Note}: The default Tidyverse styler is subtly different from some of the things we've advocated for in this document. Most notably we differ with regards to the number of spaces before/after ``tokens'' (i.e.~Assignment Aligner add spaces before \texttt{=} signs to align them properly). For this reason, we'd recommend the following: \texttt{style\_dir(path\ =\ ...,\ scope\ =\ "line\_breaks",\ strict\ =\ FALSE)}. You can also customize StyleR \href{http://styler.r-lib.org/articles/customizing_styler.html}{even more} if you're really hardcore.
+  \item
+    \textbf{Note}: As is mentioned in the package vignette linked above, StyleR modifies things \emph{in-place}, meaning it overwrites your existing code and replaces it with the updated, properly styled code. This makes it a good fit on projects \emph{with version control}, but if you don't have backups or a good way to revert back to the intial code, I wouldn't recommend going this route.
+  \end{itemize}
+\end{enumerate}
 
 \hypertarget{datamanagement}{%
 \chapter{Data Management}\label{datamanagement}}

@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   
 
-<meta name="author" content="Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi" />
+<meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-10-14" />
+<meta name="date" content="2019-10-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -102,7 +102,12 @@
 <li class="chapter" data-level="4.6" data-path="codingpractices.html"><a href="codingpractices.html#tidyverse"><i class="fa fa-check"></i><b>4.6</b> Tidyverse</a></li>
 <li class="chapter" data-level="4.7" data-path="codingpractices.html"><a href="codingpractices.html#coding-with-r-and-python"><i class="fa fa-check"></i><b>4.7</b> Coding with R and Python</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>5</b> Coding Style</a></li>
+<li class="chapter" data-level="5" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>5</b> Coding Style</a><ul>
+<li class="chapter" data-level="5.1" data-path="codingstyle.html"><a href="codingstyle.html#line-breaks"><i class="fa fa-check"></i><b>5.1</b> Line breaks</a></li>
+<li class="chapter" data-level="5.2" data-path="codingstyle.html"><a href="codingstyle.html#automated-tools-for-style-and-project-workflow"><i class="fa fa-check"></i><b>5.2</b> Automated Tools for Style and Project Workflow</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="codingstyle.html"><a href="codingstyle.html#styling"><i class="fa fa-check"></i><b>5.2.1</b> Styling</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="datamanagement.html"><a href="datamanagement.html"><i class="fa fa-check"></i><b>6</b> Data Management</a><ul>
 <li class="chapter" data-level="6.1" data-path="datamanagement.html"><a href="datamanagement.html#data-inputoutput-io"><i class="fa fa-check"></i><b>6.1</b> Data input/output (I/O)</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="datamanagement.html"><a href="datamanagement.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>6.1.1</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
@@ -151,14 +156,15 @@
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Proctor Foundation Data Science Handbook</h1>
-<p class="author"><em>Contributors (many from UC Berkeley in addition to Proctor): Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi</em></p>
-<p class="date"><em>2019-10-14</em></p>
+<p class="author"><em>Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)</em></p>
+<p class="date"><em>2019-10-18</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered">
 <h1>Welcome!</h1>
 <p>Welcome to the Francis I. Proctor Foundation at the University of California, San Francisco (<a href="https://proctor.ucsf.edu" class="uri">https://proctor.ucsf.edu</a>)!</p>
 <p>This handbook summarizes some best practices for data science, drawing from our experience at the Francis I. Proctor Foundation and from that of our close colleagues in the Division of Epidemiology and Biostatistics at the University of California, Berkeley (where Prof. Ben Arnold worked for many years before joining Proctor).</p>
-<p>We do not intend this handbook to be a comprehensive guide to data science. Instead, it focuses more on practical, “how-to” guidance for conducting data science within epidemiologic research studies. Although many of the ideas of environment-independent, the examples draw from the <a href="https://cran.r-project.org/">R</a> programming language. For an excellent overview of data science in R, see the book <a href="https://r4ds.had.co.nz/">R for Data Science</a>.</p>
+<p>We do not intend this handbook to be a comprehensive guide to data science. Instead, it focuses more on practical, “how-to” guidance for conducting data science within epidemiologic research studies. Where possible, we reference existing materials and guides.</p>
+<p>Although many of the ideas of environment-independent, the examples draw from the <a href="https://cran.r-project.org/">R</a> programming language. For an excellent overview of data science in R, see the book <a href="https://r4ds.had.co.nz/">R for Data Science</a>.</p>
 <p>Much of the material in this handbook evolved from a version of Dr. Jade Benjamin-Chung’s <a href="https://github.com/jadebc-berkeley/lab-manual">lab manual</a> at the University of California, Berkeley. In addition to the Proctor team, many contributors include current and former students from UC Berkeley.</p>
 <p>The last two chapters of the handbook cover our communication strategy and code of conduct for team members who work with Prof. Ben Arnold, who leads Proctor’s Data Coordinating Center. They summarize key pieces of a functional data science team. Although the last two chapters might be of interest to a broader circle, <em>they are mostly relevant for people working directly with Ben.</em> Just because they are at the end does not make them less important.</p>
 <p>It is a living document that we strive to update regularly. If you would like to contribute, please write Ben (<a href="mailto:ben.arnold@ucsf.edu" class="email">ben.arnold@ucsf.edu</a>) and/or submit a pull request.</p>
