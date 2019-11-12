@@ -12,14 +12,14 @@ _Contributors: Kunal Mishra, Jade Benjamin-Chung, and Ben Arnold_
     OUSD_school_names = absentee_all %>%
       filter(dist.n == 1) %>%
       pull(school) %>%
-      unique %>%
-      sort,
+      unique() %>%
+      sort(),
 
     WCCSD_school_names <- absentee_all %>%
       filter(dist.n == 0) %>%
       pull(school) %>%
-      unique %>%
-      sort
+      unique() %>%
+      sort()
   )
   ```
   ```
