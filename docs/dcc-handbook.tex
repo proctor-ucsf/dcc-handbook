@@ -963,7 +963,235 @@ For complex studies with multiple, relational data files, it is exceptionally he
 \hypertarget{github}{%
 \chapter{GitHub and Version Control}\label{github}}
 
-TBD
+\emph{Contributors: Stephanie Djajadi, Nolan Pokpongkiat, and Ben Arnold}
+
+\hypertarget{basics}{%
+\section{Basics}\label{basics}}
+
+Git is a version control system. It has very good documentation online: \url{https://git-scm.com/doc}
+
+If you get into trouble with Git, the docs will help a lot!
+
+Git is often used in conjunction with GitHub, which is an online platform to help teams collaborate while using Git for version control: \url{https://github.com}.
+
+\begin{itemize}
+\tightlist
+\item
+  A detailed tutorial of Git can be found \href{https://sp19.datastructur.es/materials/guides/using-git\#b-local-repositories-narrative-introduction}{here on UC Berkeley's CS61B website}.
+\item
+  If you are already familiar with Git, you can reference the summary at the end of \href{https://sp19.datastructur.es/materials/guides/using-git\#b-local-repositories-narrative-introduction}{Section B}.
+\item
+  If you have made a mistake in Git, you can refer to this \href{https://sethrobertson.github.io/GitFixUm/fixup.html}{article} to undo, fix, or remove commits in git.
+\end{itemize}
+
+\hypertarget{git-branching}{%
+\section{Git Branching}\label{git-branching}}
+
+Branches allow you to keep track of multiple versions of your work simultaneously, and you can easily switch between versions and merge branches together once you've finished working on a section and want it to join the rest of your code. Here are some cases when it may be a good idea to branch:
+
+\begin{itemize}
+\tightlist
+\item
+  You may want to make a dramatic change to your existing code (called refactoring) but it will break other parts of your project. But you want to be able to simultaneously work on other parts or you are collaborating with others, and you don't want to break the code for them.
+\item
+  You want to start working on a new part of the project, but you aren't sure yet if your changes will work and make it to the final product.
+\item
+  You are working with others and don't want to mix up your current work with theirs, even if you want to bring your work together later in the future.
+\end{itemize}
+
+A detailed tutorial on Git Branching can be found \href{https://sp19.datastructur.es/materials/guides/using-git\#e-git-branching-advanced-git-optional}{here}. You can also find instructions on how to handle merge conflicts when joining branches together.
+
+\hypertarget{example-workflow}{%
+\section{Example Workflow}\label{example-workflow}}
+
+A terrific overview of branching workflow is here: \url{https://guides.github.com/introduction/flow/}
+
+A standard workflow when starting on a new project and contributing code looks like this:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.34\columnwidth}\raggedright
+Command\strut
+\end{minipage} & \begin{minipage}[b]{0.60\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+SETUP: FIRST TIME ONLY: \texttt{git\ clone\ \textless{}url\textgreater{}\ \textless{}directory\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+Clone the repo. This copies of all the project files in its current state on Github to your local computer.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+1. \texttt{git\ pull\ origin\ master}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+update the state of your files to match the most current version on GitHub\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+2. \texttt{git\ checkout\ -b\ \textless{}new\_branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+create new branch that you'll be working on and go to it\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+3. Make some file changes\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+work on your feature/implementation\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+4. \texttt{git\ add\ \textless{}filename\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+add file to stage for commit\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+5. \texttt{git\ commit\ -m\ \textless{}commit\ message\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+commit file with a message\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+6. \texttt{git\ push\ -u\ origin\ \textless{}branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+push branch to remote and set to track (-u only works if this is first push)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+7. Repeat step 4-5.\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+work and commit often\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+8. \texttt{git\ push}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+push work to remote branch for others to view\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+9. Follow the link given from the \texttt{git\ push} command to submit a pull request (PR) on GitHub online\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+PR merges in work from your branch into master\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+(10.) Your changes and PR get approved, your reviewer deletes your remote branch upon merging\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+11. \texttt{git\ fetch\ -\/-all\ -\/-prune}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+clean up your local git by untracking deleted remote branches\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Other helpful commands are listed below.
+
+\hypertarget{commonly-used-git-commands}{%
+\section{Commonly Used Git Commands}\label{commonly-used-git-commands}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.34\columnwidth}\raggedright
+Command\strut
+\end{minipage} & \begin{minipage}[b]{0.60\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ clone\ \textless{}url\textgreater{}\ \textless{}directory\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+clone a repository, only needs to be done the first time\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ pull\ origin\ master}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+pull before making any changes\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ branch}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+check what branch you are on\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ branch\ -a}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+check what branch you are on + all remote branches\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ checkout\ -b\ \textless{}new\_branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+create new branch and go to it (only necessary when you create a new branch)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ checkout\ \textless{}branch\ name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+switch to branch\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ add\ \textless{}file\ name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+add file to stage for commit\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ commit\ -m\ \textless{}commit\ message\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+commit file with a message\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ push\ -u\ origin\ \textless{}branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+push branch to remote and set to track (-u only works if this is first push)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ branch\ -\/-set-upstream-to\ origin\ \textless{}branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+set upstream to origin/ (use if you forgot -u on first push)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ push\ origin\ \textless{}branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+push work to branch\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ checkout\ -\/-track\ origin/\textless{}branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+pulls a remote branch and creates a local branch to track it (use when trying to pull someone else's branch onto your local computer)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ push\ -\/-delete\ \textless{}remote\_name\textgreater{}\ \textless{}branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+delete remote branch\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ branch\ -d\ \textless{}branch\_name\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+deletes local branch, -D to force\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{git\ fetch\ -\/-all\ -\/-prune}\strut
+\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
+untrack deleted remote branches\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{how-often-should-i-commit}{%
+\section{How often should I commit?}\label{how-often-should-i-commit}}
+
+Stephanie and Nolan (trained in CS and Data Science) suggest it is good practice to commit every 15 minutes (a time-based guideline), or every time you make a significant change (progress-based guideline). Ben's perspective aligns with this view, but is weighted toward committing around completion of discrete chunks of work; for him, a discrete chunk of work will often take quite a bit longer than 15 minutes time. Take home message: \emph{It is better to commit more rather than less.}
+
+\hypertarget{what-should-be-pushed-to-github}{%
+\section{What should be pushed to Github?}\label{what-should-be-pushed-to-github}}
+
+In general, it is better to track text-based files (\texttt{.R}, \texttt{.Rmd}, \texttt{.md},\texttt{.txt},etc\ldots) compared with binary files (\texttt{.pdf},\texttt{.png},\texttt{.docx}, etc\ldots) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don't change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.
+
+Be careful before you push .Rout log files! If someone else runs an R script and creates an .Rout file at the same time and both of you try to push to github, it is incredibly difficult to reconcile these two logs. If you run logs, keep them on your own system or (preferably) set up a shared directory where all logs are name and date timestamped.
+
+There is a standardized \texttt{.gitignore} for \texttt{R} which you \href{https://github.com/github/gitignore/blob/master/R.gitignore}{can download} and add to your project. This ensures you're not committing log files or things that would otherwise best be left ignored to GitHub. This is a \href{https://www.tidyverse.org/articles/2017/12/workflow-vs-script/}{great discussion of project-oriented workflows}, extolling the virtues of a self-contained, portable projects, for your reference.
+
+\hypertarget{how-should-i-describe-my-commit}{%
+\section{How should I describe my commit?}\label{how-should-i-describe-my-commit}}
+
+When you commit, always include a short commit message that describes what the commit does. In the command line, you can achieve this after you have staged files to commit with the \texttt{commit\ -m\ \textless{}"your\ commit\ message\ here"\textgreater{}} syntax. This helps track-back through work flow. For example, if the commit message is \texttt{new}, that doesn't provide any information about what the commit includes. A more descriptive commit message would be \texttt{Create\ first\ draft\ of\ Fig\ 1\ distribution\ plot} or \texttt{Change\ color\ scheme\ for\ distribution\ plot}.
+
+For more lengthy and detailed commit messages, which go beyond the simple, single line \texttt{commit\ -m\ \textless{}your\ commit\ message\ here\textgreater{}} synatax, this \href{https://medium.com/@andrewhowdencom/anatomy-of-a-good-commit-message-acd9c4490437}{Medium post} on the anatomy of a good commit message includes additional discussion. (Note, we don't typically use commits that are this detailed!)
 
 \hypertarget{bigdata}{%
 \chapter{Working with Big Data}\label{bigdata}}

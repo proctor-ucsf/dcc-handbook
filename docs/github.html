@@ -116,7 +116,15 @@
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="datamanagement.html"><a href="datamanagement.html#documenting-datasets"><i class="fa fa-check"></i><b>6.2</b> Documenting datasets</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>7</b> GitHub and Version Control</a></li>
+<li class="chapter" data-level="7" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>7</b> GitHub and Version Control</a><ul>
+<li class="chapter" data-level="7.1" data-path="github.html"><a href="github.html#basics"><i class="fa fa-check"></i><b>7.1</b> Basics</a></li>
+<li class="chapter" data-level="7.2" data-path="github.html"><a href="github.html#git-branching"><i class="fa fa-check"></i><b>7.2</b> Git Branching</a></li>
+<li class="chapter" data-level="7.3" data-path="github.html"><a href="github.html#example-workflow"><i class="fa fa-check"></i><b>7.3</b> Example Workflow</a></li>
+<li class="chapter" data-level="7.4" data-path="github.html"><a href="github.html#commonly-used-git-commands"><i class="fa fa-check"></i><b>7.4</b> Commonly Used Git Commands</a></li>
+<li class="chapter" data-level="7.5" data-path="github.html"><a href="github.html#how-often-should-i-commit"><i class="fa fa-check"></i><b>7.5</b> How often should I commit?</a></li>
+<li class="chapter" data-level="7.6" data-path="github.html"><a href="github.html#what-should-be-pushed-to-github"><i class="fa fa-check"></i><b>7.6</b> What should be pushed to Github?</a></li>
+<li class="chapter" data-level="7.7" data-path="github.html"><a href="github.html#how-should-i-describe-my-commit"><i class="fa fa-check"></i><b>7.7</b> How should I describe my commit?</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a></li>
 <li class="chapter" data-level="9" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a></li>
 <li class="chapter" data-level="10" data-path="commcoord.html"><a href="commcoord.html"><i class="fa fa-check"></i><b>10</b> Communication and Coordination</a><ul>
@@ -156,8 +164,189 @@
             <section class="normal" id="section-">
 <div id="github" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> GitHub and Version Control</h1>
-<p>TBD</p>
+<p><em>Contributors: Stephanie Djajadi, Nolan Pokpongkiat, and Ben Arnold</em></p>
+<div id="basics" class="section level2">
+<h2><span class="header-section-number">7.1</span> Basics</h2>
+<p>Git is a version control system. It has very good documentation online: <a href="https://git-scm.com/doc" class="uri">https://git-scm.com/doc</a></p>
+<p>If you get into trouble with Git, the docs will help a lot!</p>
+<p>Git is often used in conjunction with GitHub, which is an online platform to help teams collaborate while using Git for version control: <a href="https://github.com" class="uri">https://github.com</a>.</p>
+<ul>
+<li>A detailed tutorial of Git can be found <a href="https://sp19.datastructur.es/materials/guides/using-git#b-local-repositories-narrative-introduction">here on UC Berkeley’s CS61B website</a>.</li>
+<li>If you are already familiar with Git, you can reference the summary at the end of <a href="https://sp19.datastructur.es/materials/guides/using-git#b-local-repositories-narrative-introduction">Section B</a>.</li>
+<li>If you have made a mistake in Git, you can refer to this <a href="https://sethrobertson.github.io/GitFixUm/fixup.html">article</a> to undo, fix, or remove commits in git.</li>
+</ul>
+</div>
+<div id="git-branching" class="section level2">
+<h2><span class="header-section-number">7.2</span> Git Branching</h2>
+<p>A terrific overview of branching workflow and its rationale is here: <a href="https://guides.github.com/introduction/flow/" class="uri">https://guides.github.com/introduction/flow/</a></p>
+<p>Branches allow you to keep track of multiple versions of your work simultaneously, and you can easily switch between versions and merge branches together once you’ve finished working on a section and want it to join the rest of your code. Here are some cases when it may be a good idea to branch:</p>
+<ul>
+<li>You may want to make a dramatic change to your existing code (called refactoring) but it will break other parts of your project. But you want to be able to simultaneously work on other parts or you are collaborating with others, and you don’t want to break the code for them.</li>
+<li>You want to start working on a new part of the project, but you aren’t sure yet if your changes will work and make it to the final product.</li>
+<li>You are working with others and don’t want to mix up your current work with theirs, even if you want to bring your work together later in the future.</li>
+</ul>
+<p>A detailed tutorial on Git Branching can be found <a href="https://sp19.datastructur.es/materials/guides/using-git#e-git-branching-advanced-git-optional">here</a>. You can also find instructions on how to handle merge conflicts when joining branches together.</p>
+</div>
+<div id="example-workflow" class="section level2">
+<h2><span class="header-section-number">7.3</span> Example Workflow</h2>
+<p>A standard workflow when starting on a new project and contributing code looks like this:</p>
+<table>
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SETUP: FIRST TIME ONLY: <code>git clone &lt;url&gt; &lt;directory_name&gt;</code></td>
+<td>Clone the repo. This copies of all the project files in its current state on Github to your local computer.</td>
+</tr>
+<tr class="even">
+<td>1. <code>git pull origin master</code></td>
+<td>update the state of your files to match the most current version on GitHub</td>
+</tr>
+<tr class="odd">
+<td>2. <code>git checkout -b &lt;new_branch_name&gt;</code></td>
+<td>create new branch that you’ll be working on and go to it</td>
+</tr>
+<tr class="even">
+<td>3. Make some file changes</td>
+<td>work on your feature/implementation</td>
+</tr>
+<tr class="odd">
+<td>4. <code>git add &lt;filename&gt;</code></td>
+<td>add file to stage for commit</td>
+</tr>
+<tr class="even">
+<td>5. <code>git commit -m &lt;commit message&gt;</code></td>
+<td>commit file with a message</td>
+</tr>
+<tr class="odd">
+<td>6. <code>git push -u origin &lt;branch_name&gt;</code></td>
+<td>push branch to remote and set to track (-u only works if this is first push)</td>
+</tr>
+<tr class="even">
+<td>7. Repeat step 4-5.</td>
+<td>work and commit often</td>
+</tr>
+<tr class="odd">
+<td>8. <code>git push</code></td>
+<td>push work to remote branch for others to view</td>
+</tr>
+<tr class="even">
+<td>9. Follow the link given from the <code>git push</code> command to submit a pull request (PR) on GitHub online</td>
+<td>PR merges in work from your branch into master</td>
+</tr>
+<tr class="odd">
+<td>(10.) Your changes and PR get approved, your reviewer deletes your remote branch upon merging</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>11. <code>git fetch --all --prune</code></td>
+<td>clean up your local git by untracking deleted remote branches</td>
+</tr>
+</tbody>
+</table>
+<p>Other helpful commands are listed below.</p>
+</div>
+<div id="commonly-used-git-commands" class="section level2">
+<h2><span class="header-section-number">7.4</span> Commonly Used Git Commands</h2>
+<table>
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git clone &lt;url&gt; &lt;directory_name&gt;</code></td>
+<td>clone a repository, only needs to be done the first time</td>
+</tr>
+<tr class="even">
+<td><code>git pull origin master</code></td>
+<td>pull before making any changes</td>
+</tr>
+<tr class="odd">
+<td><code>git branch</code></td>
+<td>check what branch you are on</td>
+</tr>
+<tr class="even">
+<td><code>git branch -a</code></td>
+<td>check what branch you are on + all remote branches</td>
+</tr>
+<tr class="odd">
+<td><code>git checkout -b &lt;new_branch_name&gt;</code></td>
+<td>create new branch and go to it (only necessary when you create a new branch)</td>
+</tr>
+<tr class="even">
+<td><code>git checkout &lt;branch name&gt;</code></td>
+<td>switch to branch</td>
+</tr>
+<tr class="odd">
+<td><code>git add &lt;file name&gt;</code></td>
+<td>add file to stage for commit</td>
+</tr>
+<tr class="even">
+<td><code>git commit -m &lt;commit message&gt;</code></td>
+<td>commit file with a message</td>
+</tr>
+<tr class="odd">
+<td><code>git push -u origin &lt;branch_name&gt;</code></td>
+<td>push branch to remote and set to track (-u only works if this is first push)</td>
+</tr>
+<tr class="even">
+<td><code>git branch --set-upstream-to origin &lt;branch_name&gt;</code></td>
+<td>set upstream to origin/<branch_name> (use if you forgot -u on first push)</td>
+</tr>
+<tr class="odd">
+<td><code>git push origin &lt;branch_name&gt;</code></td>
+<td>push work to branch</td>
+</tr>
+<tr class="even">
+<td><code>git checkout --track origin/&lt;branch_name&gt;</code></td>
+<td>pulls a remote branch and creates a local branch to track it (use when trying to pull someone else’s branch onto your local computer)</td>
+</tr>
+<tr class="odd">
+<td><code>git push --delete &lt;remote_name&gt; &lt;branch_name&gt;</code></td>
+<td>delete remote branch</td>
+</tr>
+<tr class="even">
+<td><code>git branch -d &lt;branch_name&gt;</code></td>
+<td>deletes local branch, -D to force</td>
+</tr>
+<tr class="odd">
+<td><code>git fetch --all --prune</code></td>
+<td>untrack deleted remote branches</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="how-often-should-i-commit" class="section level2">
+<h2><span class="header-section-number">7.5</span> How often should I commit?</h2>
+<p>Stephanie and Nolan (trained in CS and Data Science) suggest it is good practice to commit every 15 minutes (a time-based guideline), or every time you make a significant change (progress-based guideline). Ben’s perspective aligns with this view, but is weighted toward committing around completion of discrete chunks of work; for him, a discrete chunk of work will often take quite a bit longer than 15 minutes time. Take home message: <em>It is better to commit more rather than less.</em></p>
+</div>
+<div id="what-should-be-pushed-to-github" class="section level2">
+<h2><span class="header-section-number">7.6</span> What should be pushed to Github?</h2>
+<p>In general, it is better to track text-based files (<code>.R</code>, <code>.Rmd</code>, <code>.md</code>,<code>.txt</code>,etc…) compared with binary files (<code>.pdf</code>,<code>.png</code>,<code>.docx</code>, etc…) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don’t change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.</p>
+<p>Be careful before you push .Rout log files! If someone else runs an R script and creates an .Rout file at the same time and both of you try to push to github, it is incredibly difficult to reconcile these two logs. If you run logs, keep them on your own system or (preferably) set up a shared directory where all logs are name and date timestamped.</p>
+<p>There is a standardized <code>.gitignore</code> for <code>R</code> which you <a href="https://github.com/github/gitignore/blob/master/R.gitignore">can download</a> and add to your project. This ensures you’re not committing log files or things that would otherwise best be left ignored to GitHub. This is a <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">great discussion of project-oriented workflows</a>, extolling the virtues of a self-contained, portable projects, for your reference.</p>
+</div>
+<div id="how-should-i-describe-my-commit" class="section level2">
+<h2><span class="header-section-number">7.7</span> How should I describe my commit?</h2>
+<p>When you commit, always include a short commit message that describes what the commit does. In the command line, you can achieve this after you have staged files to commit with the <code>commit -m &lt;"your commit message here"&gt;</code> syntax. This helps track-back through work flow. For example, if the commit message is <code>new</code>, that doesn’t provide any information about what the commit includes. A more descriptive commit message would be <code>Create first draft of Fig 1 distribution plot</code> or <code>Change color scheme for distribution plot</code>.</p>
+<p>For more lengthy and detailed commit messages, which go beyond the simple, single line <code>commit -m &lt;your commit message here&gt;</code> synatax, this <a href="https://medium.com/@andrewhowdencom/anatomy-of-a-good-commit-message-acd9c4490437">Medium post</a> on the anatomy of a good commit message includes additional discussion. (Note, we don’t typically use commits that are this detailed!)</p>
 
+</div>
 </div>
             </section>
 
@@ -210,20 +399,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
