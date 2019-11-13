@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-11-12" />
+<meta name="date" content="2019-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -125,7 +125,11 @@
 <li class="chapter" data-level="7.6" data-path="github.html"><a href="github.html#what-should-be-pushed-to-github"><i class="fa fa-check"></i><b>7.6</b> What should be pushed to Github?</a></li>
 <li class="chapter" data-level="7.7" data-path="github.html"><a href="github.html#how-should-i-describe-my-commit"><i class="fa fa-check"></i><b>7.7</b> How should I describe my commit?</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a></li>
+<li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a><ul>
+<li class="chapter" data-level="8.1" data-path="bigdata.html"><a href="bigdata.html#the-data.table-package"><i class="fa fa-check"></i><b>8.1</b> The data.table package</a></li>
+<li class="chapter" data-level="8.2" data-path="bigdata.html"><a href="bigdata.html#using-downsampled-data"><i class="fa fa-check"></i><b>8.2</b> Using downsampled data</a></li>
+<li class="chapter" data-level="8.3" data-path="bigdata.html"><a href="bigdata.html#optimal-rstudio-set-up"><i class="fa fa-check"></i><b>8.3</b> Optimal RStudio set up</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a></li>
 <li class="chapter" data-level="10" data-path="commcoord.html"><a href="commcoord.html"><i class="fa fa-check"></i><b>10</b> Communication and Coordination</a><ul>
 <li class="chapter" data-level="10.1" data-path="commcoord.html"><a href="commcoord.html#slack"><i class="fa fa-check"></i><b>10.1</b> Slack</a></li>
@@ -164,8 +168,32 @@
             <section class="normal" id="section-">
 <div id="bigdata" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Working with Big Data</h1>
-<p>TBD</p>
+<p><em>Contributors: Kunal Mishra and Jade Benjamin-Chung</em></p>
+<div id="the-data.table-package" class="section level2">
+<h2><span class="header-section-number">8.1</span> The data.table package</h2>
+<p>It may also be the case that you’re working with very large datasets. Generally I would define this as 10+ million rows. As is outlined in this document, the 3 main players in the data analysis space are Base R, <code>Tidvyerse</code> (more specificially, <code>dplyr</code>), and <code>data.table</code>. For a majority of things, Base R is inferior to both <code>dplyr</code> and <code>data.table</code>, with concise but less clear syntax and less speed. <code>Dplyr</code> is architected for medium and smaller data, and while its very fast for everyday usage, it trades off maximum performance for ease of use and syntax compared to <code>data.table</code>. An overview of the <code>dplyr</code> vs <code>data.table</code> debate can be found in <a href="https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349#27840349">this stackoverflow post</a> and all 3 answers are worth a read.</p>
+<p>You can also achieve a performance boost by running <code>dplyr</code> commands on <code>data.table</code>s, which I find to be the best of both worlds, given that a <code>data.table</code> is a special type of <code>data.frame</code> and fairly easy to convert with the <code>as.data.table()</code> function. The speedup is due to <code>dplyr</code>’s use of the <code>data.table</code> backend and in the future this coupling should become even more natural.</p>
+<p>If you want to test whether using a certain coding approach increases speed, consider the <code>tictoc</code> package. Run <code>tic()</code> before a code chunk and <code>toc()</code> after to measure the amount of system time it takes to run the chunk. For example, you might use this to decide if you <em>really</em> need to switch a code chunk from <code>dplyr</code> to <code>data.table</code>.</p>
+</div>
+<div id="using-downsampled-data" class="section level2">
+<h2><span class="header-section-number">8.2</span> Using downsampled data</h2>
+<p>In our studies with very large datasets, we save “downsampled” data that usually includes a 1% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.</p>
+</div>
+<div id="optimal-rstudio-set-up" class="section level2">
+<h2><span class="header-section-number">8.3</span> Optimal RStudio set up</h2>
+<p>Using the following settings will help ensure a smooth experience when working with big data. In RStudio, go to the “Tools” menu, then select “Global Options”. Under “General”:</p>
+<p><strong>Workspace</strong></p>
+<ul>
+<li><strong>Uncheck</strong> Restore RData into workspace at startup</li>
+<li>Save workspace to RData on exit – choose <strong>never</strong></li>
+</ul>
+<p><strong>History</strong></p>
+<ul>
+<li><strong>Uncheck</strong> Always save history</li>
+</ul>
+<p>Unfortunately RStudio often gets slow and/or freezes after hours working with big datasets. Sometimes it is much more efficient to just use Terminal / gitbash to run code and make updates in git.</p>
 
+</div>
 </div>
             </section>
 

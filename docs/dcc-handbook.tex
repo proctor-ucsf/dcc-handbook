@@ -84,7 +84,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-11-12}
+    \date{2019-11-13}
 
 \usepackage{booktabs}
 
@@ -987,6 +987,8 @@ Git is often used in conjunction with GitHub, which is an online platform to hel
 \hypertarget{git-branching}{%
 \section{Git Branching}\label{git-branching}}
 
+A terrific overview of branching workflow and its rationale is here: \url{https://guides.github.com/introduction/flow/}
+
 Branches allow you to keep track of multiple versions of your work simultaneously, and you can easily switch between versions and merge branches together once you've finished working on a section and want it to join the rest of your code. Here are some cases when it may be a good idea to branch:
 
 \begin{itemize}
@@ -1003,8 +1005,6 @@ A detailed tutorial on Git Branching can be found \href{https://sp19.datastructu
 
 \hypertarget{example-workflow}{%
 \section{Example Workflow}\label{example-workflow}}
-
-A terrific overview of branching workflow is here: \url{https://guides.github.com/introduction/flow/}
 
 A standard workflow when starting on a new project and contributing code looks like this:
 
@@ -1196,7 +1196,46 @@ For more lengthy and detailed commit messages, which go beyond the simple, singl
 \hypertarget{bigdata}{%
 \chapter{Working with Big Data}\label{bigdata}}
 
-TBD
+\emph{Contributors: Kunal Mishra and Jade Benjamin-Chung}
+
+\hypertarget{the-data.table-package}{%
+\section{The data.table package}\label{the-data.table-package}}
+
+It may also be the case that you're working with very large datasets. Generally I would define this as 10+ million rows. As is outlined in this document, the 3 main players in the data analysis space are Base R, \texttt{Tidvyerse} (more specificially, \texttt{dplyr}), and \texttt{data.table}. For a majority of things, Base R is inferior to both \texttt{dplyr} and \texttt{data.table}, with concise but less clear syntax and less speed. \texttt{Dplyr} is architected for medium and smaller data, and while its very fast for everyday usage, it trades off maximum performance for ease of use and syntax compared to \texttt{data.table}. An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349\#27840349}{this stackoverflow post} and all 3 answers are worth a read.
+
+You can also achieve a performance boost by running \texttt{dplyr} commands on \texttt{data.table}s, which I find to be the best of both worlds, given that a \texttt{data.table} is a special type of \texttt{data.frame} and fairly easy to convert with the \texttt{as.data.table()} function. The speedup is due to \texttt{dplyr}'s use of the \texttt{data.table} backend and in the future this coupling should become even more natural.
+
+If you want to test whether using a certain coding approach increases speed, consider the \texttt{tictoc} package. Run \texttt{tic()} before a code chunk and \texttt{toc()} after to measure the amount of system time it takes to run the chunk. For example, you might use this to decide if you \emph{really} need to switch a code chunk from \texttt{dplyr} to \texttt{data.table}.
+
+\hypertarget{using-downsampled-data}{%
+\section{Using downsampled data}\label{using-downsampled-data}}
+
+In our studies with very large datasets, we save ``downsampled'' data that usually includes a 1\% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.
+
+\hypertarget{optimal-rstudio-set-up}{%
+\section{Optimal RStudio set up}\label{optimal-rstudio-set-up}}
+
+Using the following settings will help ensure a smooth experience when working with big data. In RStudio, go to the ``Tools'' menu, then select ``Global Options''. Under ``General'':
+
+\textbf{Workspace}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Uncheck} Restore RData into workspace at startup
+\item
+  Save workspace to RData on exit -- choose \textbf{never}
+\end{itemize}
+
+\textbf{History}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Uncheck} Always save history
+\end{itemize}
+
+Unfortunately RStudio often gets slow and/or freezes after hours working with big datasets. Sometimes it is much more efficient to just use Terminal / gitbash to run code and make updates in git.
 
 \hypertarget{unix}{%
 \chapter{UNIX Commands}\label{unix}}
