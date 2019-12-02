@@ -84,7 +84,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-11-13}
+    \date{2019-12-02}
 
 \usepackage{booktabs}
 
@@ -1240,7 +1240,310 @@ Unfortunately RStudio often gets slow and/or freezes after hours working with bi
 \hypertarget{unix}{%
 \chapter{UNIX Commands}\label{unix}}
 
-TBD
+\emph{Contributors: Stephanie Djajadi, Kunal Mishra, Anna Nguyen, Jade Benjamin-Chung, and Ben Arnold}
+
+We typically use Unix commands in Terminal (for Mac users) or Git Bash (for Windows users) to
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Run a series of scripts in parallel or in a specific order to reproduce our work
+\item
+  To check on the progress of a batch of jobs
+\item
+  To use git and push to github
+\end{enumerate}
+
+\hypertarget{environment}{%
+\section{Environment}\label{environment}}
+
+On Mac OS, there is an application named \texttt{Terminal} that provides a bash shell interface to Unix. In Windows, one option is to install the \texttt{git\ for\ Windows} package: \url{https://gitforwindows.org/}.
+
+The default coloring in a terminal window is pretty basic. If you want to make it more colorful in Mac OS, you can do that by saving a \texttt{.bash\_profile} file in your home directory (note the ``.'' prefix on the file name). This is one example of how you can add color to your terminal by including custom coloring in your bash profile (copied from Ben's profile):
+
+\begin{verbatim}
+# color terminal
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+\end{verbatim}
+
+The encoding is extremely cryptic, but there are decodings online (e.g., \href{http://www.marinamele.com/2014/05/customize-colors-of-your-terminal-in-mac-os-x.html}{link}).
+
+Another bash shell that provides a large array of colors for Mac OS is iTerm2 (\url{https://iterm2.com/}). There are over 200 color schemes to choose from: \url{https://github.com/mbadolato/iTerm2-Color-Schemes}.
+
+\hypertarget{basics-1}{%
+\section{Basics}\label{basics-1}}
+
+On the computer, there is a desktop with two folders, \texttt{folder1} and \texttt{folder2}, and a file called \texttt{file1.} Inside \texttt{folder1}, we have a file called \texttt{file2.} Mac users can run these commands on their terminal; we recommend that Windows users use Git Bash, not Windows PowerShell.
+
+\begin{figure}
+\centering
+\includegraphics{images/ex-desktop.jpg}
+\caption{Here is our example desktop.}
+\end{figure}
+
+\hypertarget{syntax-for-both-macwindows}{%
+\section{Syntax for both Mac/Windows}\label{syntax-for-both-macwindows}}
+
+When typing in directories or file names, quotes are necessary if the name includes spaces.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.41\columnwidth}\raggedright
+Command\strut
+\end{minipage} & \begin{minipage}[b]{0.53\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{cd\ desktop/folder1}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Change directory to \texttt{folder1}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{pwd}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Print working directory\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{ls}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+List files in the directory\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{cp\ "file2"\ "newfile2"}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Copy file (remember to include file extensions when typing in file names like \texttt{.pdf} or \texttt{.R})\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{mv\ “newfile2”\ “file3”}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Rename \texttt{newfile2} to \texttt{file3}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{cd\ ..}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Go to parent of the working directory (in this case, \texttt{desktop})\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{mv\ “file1”\ folder2}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Move \texttt{file1} to \texttt{folder2}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{mkdir\ folder3}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Make a new folder in \texttt{folder2}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{rm\ \textless{}filename\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Remove files\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{rm\ -rf\ folder3}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Remove directories (\texttt{-r} will attempt to remove the directory recursively, \texttt{-rf} will force removal of the directory)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{clear}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Clear terminal screen of all previous commands\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{figure}
+\centering
+\includegraphics{images/ex-terminal.PNG}
+\caption{Here is an example of what your terminal might look like after executing the commands in the order listed above.}
+\end{figure}
+
+\hypertarget{running-bash-scripts}{%
+\section{Running Bash Scripts}\label{running-bash-scripts}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.23\columnwidth}\raggedright
+Windows\strut
+\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
+Mac / Linux\strut
+\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\texttt{chmod\ +750\ \textless{}filename.sh\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{chmod\ +x\ \textless{}filename.sh\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Change access permissions for a file (only needs to be done once)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\texttt{./\textless{}filename.sh\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{./\textless{}filename.sh\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Run file (\texttt{./} to run any executable file)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\texttt{bash\ bash\_script\_name.sh\ \&}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{bash\ bash\_script\_name.sh\ \&}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Run shell script in the background\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{running-rscripts-in-windows}{%
+\section{Running Rscripts in Windows}\label{running-rscripts-in-windows}}
+
+\textbf{Note: This code seems to work only with Windows Command Prompt, not with Git Bash.}
+
+When R is installed, it comes with a utility called Rscript. This allows you to run R commands from the command line. If Rscript is in your \texttt{PATH,} then typing Rscript into the command line, and pressing enter, will not error. Otherwise, to use Rscript, you will either need to add it to your PATH (as an environment variable), or append the full directory of the location of Rscript on your machine. To find the full directory, search for where R is installed your computer. For instance, it may be something like below (this will vary depending on what version of R you have installed):
+
+\texttt{C:\textbackslash{}Program\ Files\textbackslash{}R\textbackslash{}R-3.6.0\textbackslash{}bin}
+
+For appending the \texttt{PATH} variable, please view \href{https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/}{this link}. I strongly recommend completing this option.
+
+If you add the PATH as an environment variable, then you can run this line of code to test:
+\texttt{Rscript\ -e\ “cat(‘this\ is\ a\ test’)"}, where the \texttt{-e} flag refers to the expression that will be executed.
+
+If you do not add the PATH as an environment variable, then you can run this line of code to replicate the results from above:
+\texttt{“C:\textbackslash{}Program\ Files\textbackslash{}R\textbackslash{}R-3.6.0\textbackslash{}bin”\ -e\ “cat(‘this\ is\ a\ test’)”}
+
+To run an R script from the command line, we can say:
+\texttt{Rscript\ -e\ “source(‘C:/path/to/script/some\_code.R’)”}
+
+\hypertarget{common-mistakes}{%
+\subsection{Common Mistakes}\label{common-mistakes}}
+
+\begin{itemize}
+\tightlist
+\item
+  Remember to include all of the quotation marks around file paths that have a spaces.
+\item
+  If you attempt to run an R script but run into \texttt{Error:\ \textquotesingle{}\textbackslash{}U\textquotesingle{}\ used\ without\ hex\ digits\ in\ character\ string\ starting\ "\textquotesingle{}C:\textbackslash{}U"}, try replacing all \texttt{\textbackslash{}} with \texttt{\textbackslash{}\textbackslash{}} or \texttt{/}.
+\end{itemize}
+
+\hypertarget{checking-tasks-and-killing-jobs}{%
+\section{Checking tasks and killing jobs}\label{checking-tasks-and-killing-jobs}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.23\columnwidth}\raggedright
+Windows\strut
+\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
+Mac / Linux\strut
+\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\texttt{tasklist}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{ps\ -v}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+List all processes on the command line\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{top\ -o\ {[}cpu/rsize{]}}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+List all running processes, sorted by CPU or memory usage\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\texttt{taskkill\ /F\ /PID\ pid\_number}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{kill\ \textless{}PID\_number\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Kill a process by its process ID\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\texttt{taskkill\ /IM\ "process\ name"\ /F}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Kill a process by its name\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\texttt{start\ /b\ program.exe}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Runs jobs in the background (exclude \texttt{/b} if you want the program to run in a new console)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{nohup}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Prevents jobs from stopping\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\texttt{disown}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Keeps jobs running in the background even if you close R\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.23\columnwidth}\raggedright
+\texttt{taskkill\ /?}\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+Help, lists out other commands\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+To kill a task in Windows, you can also go to Task Manager \textgreater{} More details \textgreater{} Select your desired app \textgreater{} Click on End Task.
+
+\hypertarget{running-big-jobs}{%
+\section{Running big jobs}\label{running-big-jobs}}
+
+For big data workflows, the concept of ``backgrounding'' a bash script allows you to start a ``job'' (i.e.~run the script) and leave it overnight to run. At the top level, a bash script (\texttt{0-run-project.sh}) that simply calls the directory-level bash scripts (i.e.~\texttt{0-prep-data.sh}, \texttt{0-run-analysis.sh}, \texttt{0-run-figures.sh}, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Running Bash Scripts in Background}: Running a long bash script is not trivial. Normally you would run a bash script by opening a terminal and typing something like \texttt{./run-project.sh}. But what if you leave your computer, log out of your server, or close the terminal? Normally, the bash script will exit and fail to complete. To run it in background, type \texttt{./run-project.sh\ \&;\ disown}. You can see the job running (and CPU utilization) with the command \texttt{top} or \texttt{ps\ -v} and check your memory with \texttt{free\ -h}.
+\end{itemize}
+
+Alternatively, to keep code running in the background even when an SSH connection is broken, you can use \texttt{tmux}. In terminal or gitbash follow the steps below. This \href{https://medium.com/@jeongwhanchoi/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e}{site} has useful tips on using \texttt{tmux}.
+
+\begin{verbatim}
+# create a new tmux session called session_name
+tmux new -ssession_name
+
+# run your job of interest
+R CMD BATCH myjob.R & 
+  
+# check that it is running
+ps -v
+
+# to exit the tmux session (Mac)
+ctrl + b 
+d
+
+# to reopen the tmux session to kill the job or 
+# start another job
+tmux attach -tsession_name 
+\end{verbatim}
+
+\begin{itemize}
+\item
+  \textbf{Deleting Previously Computed Results}: One helpful lesson we've learned is that your bash scripts should remove previous results (computed and saved by scripts run at a previous time) so that you never mix results from one run with a previous run. This can happen when an R script errors out before saving its result, and can be difficult to catch because your previously saved result exists (leading you to believe everything ran correctly).
+\item
+  \textbf{Ensuring Things Ran Correctly}: You should check the \texttt{.Rout} files generated by the R scripts run by your bash scripts for errors once things are run.
+\end{itemize}
 
 \hypertarget{commcoord}{%
 \chapter{Communication and Coordination}\label{commcoord}}
