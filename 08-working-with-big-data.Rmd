@@ -3,15 +3,70 @@
 
 _Contributors: Kunal Mishra and Jade Benjamin-Chung_
 
-## The data.table package
-It may also be the case that you're working with very large datasets. Generally I would define this as 10+ million rows. As is outlined in this document, the 3 main players in the data analysis space are Base R, `Tidvyerse` (more specificially, `dplyr`), and `data.table`. For a majority of things, Base R is inferior to both `dplyr` and `data.table`, with concise but less clear syntax and less speed. `Dplyr` is architected for medium and smaller data, and while its very fast for everyday usage, it trades off maximum performance for ease of use and syntax compared to `data.table`. An overview of the `dplyr` vs `data.table` debate can be found in [this stackoverflow post](https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349#27840349) and all 3 answers are worth a read.
+## Basics
+A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we'll explore some alternatives to working with big data in R, many of which avoid loading data into memory at all.
 
-You can also achieve a performance boost by running `dplyr` commands on `data.table`s, which I find to be the best of both worlds, given that a `data.table` is a special type of `data.frame` and fairly easy to convert with the `as.data.table()` function. The speedup is due to `dplyr`'s use of the `data.table` backend and in the future this coupling should become even more natural.
-
-If you want to test whether using a certain coding approach increases speed, consider the `tictoc` package. Run `tic()` before a code chunk and `toc()` after to measure the amount of system time it takes to run the chunk. For example, you might use this to decide if you *really* need to switch a code chunk from `dplyr` to `data.table`. 
+The Berkeley Statistical Computing Facility also has many good [training resources](http://statistics.berkeley.edu/computing/training).
 
 ## Using downsampled data
 In our studies with very large datasets, we save "downsampled" data that usually includes a 1% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly. 
+
+## Unix
+Though bash is very commonly used for management of your file system, it is also a very capable at doing basic data manipulation with big data. At the core, since the data is stored on disk, you avoid having to overload memory when using bash commands as it will work with the files directly. By default, these commands will print the results to standard output (probably your terminal screen) and you can then redirect the results to other files on disk. These commands can also be chained via pipes (represented as `|`, similar to `%>%` in tidyverse). All of these have a list of arguments that can be passed in via flags (check the `man` page for more details on each).
+
+| Command  | Description |
+|----------|-------------|
+| `head`/`tail` | Displays the first few or last few rows of a file |
+| `cat` | Concatenates files and prints them |
+| `sort` | Sorts the file |
+| `cut` | Cuts out portions of each line and prints it |
+| `grep` | Finds lines of a file that matches inputted patterns |
+| `sed` | Find and replace |
+| `awk` | Similar to `grep` and `sed` but with some extra programmatic functionality |
+| `uniq` | Unifies repeated lines (combine with `sort` to get unique rows) |
+| `wget` / `curl` | Downloads data/files from websites |
+
+## SQL and `dbplyr`
+SQL databases are relational databases that are a collection of _tables_ that consists of _fields_ or _attributes_, each containing a single _type_. If you use `dplyr` a lot, you will find that it is heavily inspired with a SQL flavor in mind. Formally, data gets loaded onto a database system and it is stored on disk. This alone makes working with data fast, but the real efficiency gain is the concept of indexing. If you are curious, most SQL databases implement their index with B trees or B+ trees, which allow for log time complexity for search operations in average and worst case scenarios while providing constant time complexity in best case scenario.
+
+The basic structure of a SQL query is as follows:
+```
+SELECT [DISTINCT] (attributes)
+FROM (table)
+[WHERE (conditions)]
+[GROUP BY (attributes) [HAVING (conditions)]]
+[ORDER BY (attributes) [DESC]]
+```
+
+The equivalent `dplyr` command would look as such:
+```
+table %>%
+  select(attributes) %>%     # distinct(attributes) for select distinct
+  group_by(attributes) %>%   # 
+  filter(conditions) %>%     # 
+  arrange(attributes)        # arrange(desc(attributes)) for descending
+```
+
+There is ample support for connection to databases in R, and, in particular, there is the [`dbplyr`](https://dbplyr.tidyverse.org) package, which allows you to interface with the data with `dplyr` code instead of SQL code.
+
+## `data.table` and `dtplyr`
+It is often possible to load large datasets into memory in R, however computations will probably be very slow. One way around this is to use `data.table`. You will find that operations on data are much faster than base R or `dplyr` even though data is loaded into memory - this is because of clever programming in C as well as internally creating a _key_ (the SQL equivalent of an index) by default when loading in the data. You can improve on this even more by setting extra keys for variables you know you will be doing filter or join operations on. 
+
+More recently from the tidyverse, is the implementation of [`dtplyr`](https://dtplyr.tidyverse.org), which allows for `dplyr` syntax on `data.table` objects.
+
+An overview of the `dplyr` vs `data.table` debate can be found in [this stackoverflow post](https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349#27840349) and all 3 answers are worth a read.
+
+## `ff`, `bigmemory`, `biglm`
+Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect around twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset. One way to work around this is to keep the data on disk and instead 
+
+
+## Parallel computing
+
+
+
+
+
+
 
 
 ## Optimal RStudio set up 
