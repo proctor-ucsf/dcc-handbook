@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-12-05" />
+<meta name="date" content="2019-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -131,15 +131,20 @@
 <li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a><ul>
 <li class="chapter" data-level="8.1" data-path="bigdata.html"><a href="bigdata.html#basics-1"><i class="fa fa-check"></i><b>8.1</b> Basics</a></li>
 <li class="chapter" data-level="8.2" data-path="bigdata.html"><a href="bigdata.html#using-downsampled-data"><i class="fa fa-check"></i><b>8.2</b> Using downsampled data</a></li>
-<li class="chapter" data-level="8.3" data-path="bigdata.html"><a href="bigdata.html#unix"><i class="fa fa-check"></i><b>8.3</b> Unix</a></li>
+<li class="chapter" data-level="8.3" data-path="bigdata.html"><a href="bigdata.html#big-data-unix"><i class="fa fa-check"></i><b>8.3</b> Unix</a></li>
 <li class="chapter" data-level="8.4" data-path="bigdata.html"><a href="bigdata.html#sql-and-dbplyr"><i class="fa fa-check"></i><b>8.4</b> SQL and <code>dbplyr</code></a></li>
 <li class="chapter" data-level="8.5" data-path="bigdata.html"><a href="bigdata.html#data.table-and-dtplyr"><i class="fa fa-check"></i><b>8.5</b> <code>data.table</code> and <code>dtplyr</code></a></li>
 <li class="chapter" data-level="8.6" data-path="bigdata.html"><a href="bigdata.html#ff-bigmemory-biglm"><i class="fa fa-check"></i><b>8.6</b> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></a></li>
-<li class="chapter" data-level="8.7" data-path="bigdata.html"><a href="bigdata.html#parallel-computing"><i class="fa fa-check"></i><b>8.7</b> Parallel computing</a></li>
+<li class="chapter" data-level="8.7" data-path="bigdata.html"><a href="bigdata.html#parallel-computing"><i class="fa fa-check"></i><b>8.7</b> Parallel computing</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="bigdata.html"><a href="bigdata.html#embarassingly-parallel-problems"><i class="fa fa-check"></i><b>8.7.1</b> Embarassingly Parallel Problems</a></li>
+<li class="chapter" data-level="8.7.2" data-path="bigdata.html"><a href="bigdata.html#packages"><i class="fa fa-check"></i><b>8.7.2</b> Packages</a></li>
+<li class="chapter" data-level="8.7.3" data-path="bigdata.html"><a href="bigdata.html#gpus"><i class="fa fa-check"></i><b>8.7.3</b> GPU’s</a></li>
+<li class="chapter" data-level="8.7.4" data-path="bigdata.html"><a href="bigdata.html#the-mapreduce-paradigm"><i class="fa fa-check"></i><b>8.7.4</b> The <em>MapReduce</em> paradigm</a></li>
+</ul></li>
 <li class="chapter" data-level="8.8" data-path="bigdata.html"><a href="bigdata.html#optimal-rstudio-set-up"><i class="fa fa-check"></i><b>8.8</b> Optimal RStudio set up</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="bigdata.html"><a href="bigdata.html#unix"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a><ul>
-<li class="chapter" data-level="9.1" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9.1</b> Environment</a></li>
+<li class="chapter" data-level="9" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a><ul>
+<li class="chapter" data-level="9.1" data-path="unix.html"><a href="unix.html#environment"><i class="fa fa-check"></i><b>9.1</b> Environment</a></li>
 <li class="chapter" data-level="9.2" data-path="unix.html"><a href="unix.html#basics-2"><i class="fa fa-check"></i><b>9.2</b> Basics</a></li>
 <li class="chapter" data-level="9.3" data-path="unix.html"><a href="unix.html#syntax-for-both-macwindows"><i class="fa fa-check"></i><b>9.3</b> Syntax for both Mac/Windows</a></li>
 <li class="chapter" data-level="9.4" data-path="unix.html"><a href="unix.html#running-bash-scripts"><i class="fa fa-check"></i><b>9.4</b> Running Bash Scripts</a></li>
@@ -186,19 +191,19 @@
             <section class="normal" id="section-">
 <div id="bigdata" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Working with Big Data</h1>
-<p><em>Contributors: Kunal Mishra and Jade Benjamin-Chung</em></p>
+<p><em>Contributors: Eric Kim, Kunal Mishra and Jade Benjamin-Chung</em></p>
 <div id="basics-1" class="section level2">
 <h2><span class="header-section-number">8.1</span> Basics</h2>
-<p>A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we’ll explore some alternatives to working with big data in R, many of which avoid loading data into memory at all.</p>
+<p>A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we’ll explore some alternatives to working with big data.</p>
 <p>The Berkeley Statistical Computing Facility also has many good <a href="http://statistics.berkeley.edu/computing/training">training resources</a>.</p>
 </div>
 <div id="using-downsampled-data" class="section level2">
 <h2><span class="header-section-number">8.2</span> Using downsampled data</h2>
-<p>In our studies with very large datasets, we save “downsampled” data that usually includes a 1% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.</p>
+<p>In studies with very large datasets, we save “downsampled” data that usually includes a 1% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.</p>
 </div>
-<div id="unix" class="section level2">
+<div id="big-data-unix" class="section level2">
 <h2><span class="header-section-number">8.3</span> Unix</h2>
-<p>Though bash is very commonly used for management of your file system, it is also a very capable at doing basic data manipulation with big data. At the core, since the data is stored on disk, you avoid having to overload memory when using bash commands as it will work with the files directly. By default, these commands will print the results to standard output (probably your terminal screen) and you can then redirect the results to other files on disk. These commands can also be chained via pipes (represented as <code>|</code>, similar to <code>%&gt;%</code> in tidyverse). All of these have a list of arguments that can be passed in via flags (check the <code>man</code> page for more details on each).</p>
+<p>Though bash is very commonly used for management of your file system (see Chapter <a href="unix.html#unix">9</a>), it is also a very capable at doing basic data manipulation with big data. At the core, since the data is stored on disk, you avoid having to overload memory when using bash commands as it will work with the files directly. By default, these commands will print the results to standard output (probably your terminal screen) and you can then redirect the results to other files on disk. These commands can also be chained via pipes (represented as <code>|</code>, similar to <code>%&gt;%</code> in tidyverse). All of these have a list of arguments that can be passed in via flags (check the <code>man</code> page for more details on each).</p>
 <table>
 <colgroup>
 <col width="43%" />
@@ -280,6 +285,29 @@ FROM (table)
 </div>
 <div id="parallel-computing" class="section level2">
 <h2><span class="header-section-number">8.7</span> Parallel computing</h2>
+<div id="embarassingly-parallel-problems" class="section level3">
+<h3><span class="header-section-number">8.7.1</span> Embarassingly Parallel Problems</h3>
+<p>Sometimes, we have to do something in a loop-like structure where each iteration may be independent of each other (think, simulations or bootstrap). These types of loops are referred to as <a href="https://www.google.com/search?client=safari&amp;rls=en&amp;q=embarassingly+parallel&amp;ie=UTF-8&amp;oe=UTF-8"><em>embarassingly parallel</em></a> problems (I did not make this up). Each iteration may take some time and every iteration thereafter must wait because the loop is essentially operation as a queue. This is where parallel computing comes into play: every computer these days come with at least 2 cores in the CPU. Each CPU core can operate independently so after some overhead, we can speed up our loop by the number of cores our computers have.</p>
+</div>
+<div id="packages" class="section level3">
+<h3><span class="header-section-number">8.7.2</span> Packages</h3>
+<p>In R, the popular packages are <code>parallel</code>, <code>foreach</code>, and <code>doParallel</code> (the backend that connects <code>foreach</code> and <code>parallel</code>). More modern parallel computing packages in R are <code>future</code> and <code>furrr</code> (inspired by <code>future purrr</code>, it allows for <code>purrr</code> like syntax using the <code>future</code> data structure from its namesake package). In Python, the <code>Dask</code> package has similar functionality to <code>future</code>. Note: the <code>parallel</code> package comes with a <code>detectCores</code> function, but I sometimes find that it is not accurate. On a mac, you can manually check the number of cores by going into About This Mac then System Report then checking the Total Number of Cores in the Hardware tab.</p>
+</div>
+<div id="gpus" class="section level3">
+<h3><span class="header-section-number">8.7.3</span> GPU’s</h3>
+<p>For most everyday tasks, CPU will be sufficient, but for large problems even an 8x speed boost (for a computer with 8 cores) might not be enough. This is where GPU’s come into play. While CPU cores are good at complex operations, GPU cores are good at many small operations (think matrix multiplication). As GPU cores come in the hundreds for cheaper graphics cards and thousands for top end graphics cards, they are ideal for training machine learning models, particularly neural networks. However, as these GPU cores were intended for the graphics on our computers, we cannot access their computing power out of R or Python without some translation in between. Graphics manufacturers have been catching up to this market, and one of the most popular platforms for parallel computing on GPU’s is Nvidia’s <a href="https://developer.nvidia.com/cuda-zone">CUDA</a> for use with Nvidia graphics cards.</p>
+</div>
+<div id="the-mapreduce-paradigm" class="section level3">
+<h3><span class="header-section-number">8.7.4</span> The <em>MapReduce</em> paradigm</h3>
+<p>The idea of the <em>MapReduce</em> paradigm is that we can distribute the data across many nodes and try to do the computation on each piece of the data in each node. One benefit of this is that if our data is too large to fit on disk for a single machine, we can instead spread it across many then do our operation on parallel and aggregate it back together. We can formalize this paradigm into three steps</p>
+<ul>
+<li>Map: Split the data into sub-datasets and perform an operation on each entry in each sub-dataset thereby creating key-value pairs.</li>
+<li>Shuffle: Merge the key-value pairs and sort them.</li>
+<li>Reduce: Apply an operation on the associated values for each key.</li>
+</ul>
+<p>An excellent example is included at the bottom of this <a href="https://www.journaldev.com/8848/mapreduce-algorithm-example">link</a>. A similar paradigm that is implemented in the tidyverse is the <a href="https://www.jstatsoft.org/article/view/v040i01"><em>split-apply-combine</em></a> strategy.</p>
+<p>The popular infrastructures for doing parallel computing with the MapReduce paradigm are Hadoop and Spark (think of Spark as an in-memory version of Hadoop). Spark can be interfaced with through Python via PySpark or R via SparkR (from Apache) or sparklyr (from RStudio), however note that Spark is natively implemented in Java and Scala so the overhead of serialization between R/Python to Java/Scala may be a time expensive operation.</p>
+</div>
 </div>
 <div id="optimal-rstudio-set-up" class="section level2">
 <h2><span class="header-section-number">8.8</span> Optimal RStudio set up</h2>
