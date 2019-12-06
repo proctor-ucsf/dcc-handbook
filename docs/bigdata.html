@@ -275,7 +275,8 @@ FROM (table)
 </div>
 <div id="ff-bigmemory-biglm" class="section level2">
 <h2><span class="header-section-number">8.6</span> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></h2>
-<p>Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect around twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset. One way to work around this is to keep the data on disk and instead</p>
+<p>Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect around twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset. One way to work around this is to keep the data on disk and instead create clever data structures that allow for natural interfacing with the data in an R session while mapping operations to the data on disk. Two packages that implement these ideas are <code>ff</code> and <code>bigmemory</code>.</p>
+<p>We can now interface with the data while avoiding loading it into memory but we run into issues when we try to fit models on it. For an <span class="math inline">\(n \times p\)</span> dataset, linear regression has a time complexity of <span class="math inline">\(O(np^2 + p^3)\)</span> and a space complexity of <span class="math inline">\(O(np + p^2)\)</span> (this just means it will take a while and take up a lot of space for large <span class="math inline">\(n\)</span> and even moreso for large <span class="math inline">\(p\)</span>). Clever solutions used in machine learning (think iterative algorithms stochastic gradient descent) can help us here. The idea is totake a smaller portion of our data, fit regression then update the coefficient based on another run of linear regression on another small portion of the data. For GLM models, this can be done with the <code>biglm</code> package which has integration with <code>ff</code> and <code>bigmemory</code>.</p>
 </div>
 <div id="parallel-computing" class="section level2">
 <h2><span class="header-section-number">8.7</span> Parallel computing</h2>
@@ -352,6 +353,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

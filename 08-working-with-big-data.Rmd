@@ -57,8 +57,9 @@ More recently from the tidyverse, is the implementation of [`dtplyr`](https://dt
 An overview of the `dplyr` vs `data.table` debate can be found in [this stackoverflow post](https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349#27840349) and all 3 answers are worth a read.
 
 ## `ff`, `bigmemory`, `biglm`
-Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect around twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset. One way to work around this is to keep the data on disk and instead 
+Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect around twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset. One way to work around this is to keep the data on disk and instead create clever data structures that allow for natural interfacing with the data in an R session while mapping operations to the data on disk. Two packages that implement these ideas are `ff` and `bigmemory`.
 
+We can now interface with the data while avoiding loading it into memory but we run into issues when we try to fit models on it. For an $n \times p$ dataset, linear regression has a time complexity of $O(np^2 + p^3)$ and a space complexity of $O(np + p^2)$ (this just means it will take a while and take up a lot of space for large $n$ and even moreso for large $p$). Clever solutions used in machine learning (think iterative algorithms stochastic gradient descent) can help us here. The idea is totake a smaller portion of our data, fit regression then update the coefficient based on another run of linear regression on another small portion of the data. For GLM models, this can be done with the `biglm` package which has integration with `ff` and `bigmemory`.
 
 ## Parallel computing
 
