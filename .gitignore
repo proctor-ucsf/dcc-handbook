@@ -38,3 +38,4 @@ rsconnect/
 # Mac data files
 *.DS_Store
 
+.Rproj.user

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-12-06" />
+<meta name="date" content="2019-12-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -133,7 +136,7 @@
 <li class="chapter" data-level="8.5" data-path="bigdata.html"><a href="bigdata.html#data.table-and-dtplyr"><i class="fa fa-check"></i><b>8.5</b> <code>data.table</code> and <code>dtplyr</code></a></li>
 <li class="chapter" data-level="8.6" data-path="bigdata.html"><a href="bigdata.html#ff-bigmemory-biglm"><i class="fa fa-check"></i><b>8.6</b> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></a></li>
 <li class="chapter" data-level="8.7" data-path="bigdata.html"><a href="bigdata.html#parallel-computing"><i class="fa fa-check"></i><b>8.7</b> Parallel computing</a><ul>
-<li class="chapter" data-level="8.7.1" data-path="bigdata.html"><a href="bigdata.html#embarassingly-parallel-problems"><i class="fa fa-check"></i><b>8.7.1</b> Embarassingly Parallel Problems</a></li>
+<li class="chapter" data-level="8.7.1" data-path="bigdata.html"><a href="bigdata.html#embarrassingly-parallel-problems"><i class="fa fa-check"></i><b>8.7.1</b> Embarrassingly Parallel Problems</a></li>
 <li class="chapter" data-level="8.7.2" data-path="bigdata.html"><a href="bigdata.html#packages"><i class="fa fa-check"></i><b>8.7.2</b> Packages</a></li>
 <li class="chapter" data-level="8.7.3" data-path="bigdata.html"><a href="bigdata.html#gpus"><i class="fa fa-check"></i><b>8.7.3</b> GPU’s</a></li>
 <li class="chapter" data-level="8.7.4" data-path="bigdata.html"><a href="bigdata.html#the-mapreduce-paradigm"><i class="fa fa-check"></i><b>8.7.4</b> The <em>MapReduce</em> paradigm</a></li>
@@ -189,7 +192,7 @@
 <div id="header">
 <h1 class="title">Proctor Foundation Data Science Handbook</h1>
 <p class="author"><em>Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)</em></p>
-<p class="date"><em>2019-12-06</em></p>
+<p class="date"><em>2019-12-07</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered">
 <h1>Welcome!</h1>
@@ -199,7 +202,7 @@
 <p>Although many of the ideas of environment-independent, the examples draw from the <a href="https://cran.r-project.org/">R</a> programming language. For an excellent overview of data science in R, see the book <a href="https://r4ds.had.co.nz/">R for Data Science</a>.</p>
 <p>Much of the material in this handbook evolved from a version of Dr. Jade Benjamin-Chung’s <a href="https://github.com/jadebc-berkeley/lab-manual">lab manual</a> at the University of California, Berkeley. In addition to the Proctor team, many contributors include current and former students from UC Berkeley.</p>
 <p>The last two chapters of the handbook cover our communication strategy and code of conduct for team members who work with Prof. Ben Arnold, who leads Proctor’s Data Coordinating Center. They summarize key pieces of a functional data science team. Although the last two chapters might be of interest to a broader circle, <em>they are mostly relevant for people working directly with Ben.</em> Just because they are at the end does not make them less important.</p>
-<p>It is a living document that we strive to update regularly. If you would like to contribute, please write Ben (<a href="mailto:ben.arnold@ucsf.edu" class="email">ben.arnold@ucsf.edu</a>) and/or submit a pull request.</p>
+<p>It is a living document that we strive to update regularly. If you would like to contribute, please write Ben (<a href="mailto:ben.arnold@ucsf.edu">ben.arnold@ucsf.edu</a>) and/or submit a pull request.</p>
 <p>The GitHub repository for this handbook is: <a href="https://github.com/proctor-ucsf/dcc-handbook" class="uri">https://github.com/proctor-ucsf/dcc-handbook</a></p>
 
 </div>
@@ -214,11 +217,13 @@
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -226,12 +231,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -246,6 +250,10 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"view": {
+"link": null,
+"text": null
+},
 "download": ["dcc-handbook.pdf", "dcc-handbook.epub"],
 "toc": {
 "collapse": "subsection"
@@ -254,20 +262,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
