@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation. The output format for this example is bookdown::gitbook." />
   
 
-<meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)" />
+<meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-12-02" />
+<meta name="date" content="2019-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -126,13 +126,23 @@
 <li class="chapter" data-level="7.7" data-path="github.html"><a href="github.html#how-should-i-describe-my-commit"><i class="fa fa-check"></i><b>7.7</b> How should I describe my commit?</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a><ul>
-<li class="chapter" data-level="8.1" data-path="bigdata.html"><a href="bigdata.html#the-data.table-package"><i class="fa fa-check"></i><b>8.1</b> The data.table package</a></li>
+<li class="chapter" data-level="8.1" data-path="bigdata.html"><a href="bigdata.html#basics-1"><i class="fa fa-check"></i><b>8.1</b> Basics</a></li>
 <li class="chapter" data-level="8.2" data-path="bigdata.html"><a href="bigdata.html#using-downsampled-data"><i class="fa fa-check"></i><b>8.2</b> Using downsampled data</a></li>
-<li class="chapter" data-level="8.3" data-path="bigdata.html"><a href="bigdata.html#optimal-rstudio-set-up"><i class="fa fa-check"></i><b>8.3</b> Optimal RStudio set up</a></li>
+<li class="chapter" data-level="8.3" data-path="bigdata.html"><a href="bigdata.html#big-data-unix"><i class="fa fa-check"></i><b>8.3</b> Unix</a></li>
+<li class="chapter" data-level="8.4" data-path="bigdata.html"><a href="bigdata.html#sql-and-dbplyr"><i class="fa fa-check"></i><b>8.4</b> SQL and <code>dbplyr</code></a></li>
+<li class="chapter" data-level="8.5" data-path="bigdata.html"><a href="bigdata.html#data.table-and-dtplyr"><i class="fa fa-check"></i><b>8.5</b> <code>data.table</code> and <code>dtplyr</code></a></li>
+<li class="chapter" data-level="8.6" data-path="bigdata.html"><a href="bigdata.html#ff-bigmemory-biglm"><i class="fa fa-check"></i><b>8.6</b> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></a></li>
+<li class="chapter" data-level="8.7" data-path="bigdata.html"><a href="bigdata.html#parallel-computing"><i class="fa fa-check"></i><b>8.7</b> Parallel computing</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="bigdata.html"><a href="bigdata.html#embarassingly-parallel-problems"><i class="fa fa-check"></i><b>8.7.1</b> Embarassingly Parallel Problems</a></li>
+<li class="chapter" data-level="8.7.2" data-path="bigdata.html"><a href="bigdata.html#packages"><i class="fa fa-check"></i><b>8.7.2</b> Packages</a></li>
+<li class="chapter" data-level="8.7.3" data-path="bigdata.html"><a href="bigdata.html#gpus"><i class="fa fa-check"></i><b>8.7.3</b> GPU’s</a></li>
+<li class="chapter" data-level="8.7.4" data-path="bigdata.html"><a href="bigdata.html#the-mapreduce-paradigm"><i class="fa fa-check"></i><b>8.7.4</b> The <em>MapReduce</em> paradigm</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="bigdata.html"><a href="bigdata.html#optimal-rstudio-set-up"><i class="fa fa-check"></i><b>8.8</b> Optimal RStudio set up</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a><ul>
 <li class="chapter" data-level="9.1" data-path="unix.html"><a href="unix.html#environment"><i class="fa fa-check"></i><b>9.1</b> Environment</a></li>
-<li class="chapter" data-level="9.2" data-path="unix.html"><a href="unix.html#basics-1"><i class="fa fa-check"></i><b>9.2</b> Basics</a></li>
+<li class="chapter" data-level="9.2" data-path="unix.html"><a href="unix.html#basics-2"><i class="fa fa-check"></i><b>9.2</b> Basics</a></li>
 <li class="chapter" data-level="9.3" data-path="unix.html"><a href="unix.html#syntax-for-both-macwindows"><i class="fa fa-check"></i><b>9.3</b> Syntax for both Mac/Windows</a></li>
 <li class="chapter" data-level="9.4" data-path="unix.html"><a href="unix.html#running-bash-scripts"><i class="fa fa-check"></i><b>9.4</b> Running Bash Scripts</a></li>
 <li class="chapter" data-level="9.5" data-path="unix.html"><a href="unix.html#running-rscripts-in-windows"><i class="fa fa-check"></i><b>9.5</b> Running Rscripts in Windows</a><ul>
@@ -357,7 +367,7 @@
 </div>
 <div id="how-should-i-describe-my-commit" class="section level2">
 <h2><span class="header-section-number">7.7</span> How should I describe my commit?</h2>
-<p>When you commit, always include a short commit message that describes what the commit does. In the command line, you can achieve this after you have staged files to commit with the <code>commit -m &lt;"your commit message here"&gt;</code> syntax. This helps track-back through work flow. For example, if the commit message is <code>new</code>, that doesn’t provide any information about what the commit includes. A more descriptive commit message would be <code>Create first draft of Fig 1 distribution plot</code> or <code>Change color scheme for distribution plot</code>.</p>
+<p>When you commit, always include a short commit message that describes what the commit does. In the command line, you can achieve this after you have staged files to commit with the <code>commit -m &lt;&quot;your commit message here&quot;&gt;</code> syntax. This helps track-back through work flow. For example, if the commit message is <code>new</code>, that doesn’t provide any information about what the commit includes. A more descriptive commit message would be <code>Create first draft of Fig 1 distribution plot</code> or <code>Change color scheme for distribution plot</code>.</p>
 <p>For more lengthy and detailed commit messages, which go beyond the simple, single line <code>commit -m &lt;your commit message here&gt;</code> synatax, this <a href="https://medium.com/@andrewhowdencom/anatomy-of-a-good-commit-message-acd9c4490437">Medium post</a> on the anatomy of a good commit message includes additional discussion. (Note, we don’t typically use commits that are this detailed!)</p>
 
 </div>

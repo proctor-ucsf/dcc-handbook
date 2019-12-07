@@ -24,7 +24,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Proctor Foundation Data Science Handbook},
-            pdfauthor={Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)},
+            pdfauthor={Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -79,12 +79,12 @@
   \title{Proctor Foundation Data Science Handbook}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi (many from UC Berkeley in addition to Proctor)}
+    \author{Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-12-02}
+    \date{2019-12-06}
 
 \usepackage{booktabs}
 
@@ -417,7 +417,7 @@ If you write a custom function for an analysis and need to use it repeatedly acr
 \hypertarget{order-files-and-subdirectories}{%
 \subsection{Order Files and Subdirectories}\label{order-files-and-subdirectories}}
 
-This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e.~\texttt{primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R} =\textgreater{} \texttt{primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS}). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.
+This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e. \texttt{primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R} =\textgreater{} \texttt{primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS}). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.
 
 In the \texttt{6-figures} subdirectory, each RMarkdown file (computational notebook) is linked to a specific figure in a hypothetical manuscript. This makes it easier to link specific notebooks in figure legends, and to see which file creates each figure.
 
@@ -572,7 +572,7 @@ We recommend you use \textbf{Snake\_Case}.
 
 \begin{itemize}
 \item
-  Base R allows \texttt{.} in variable names and functions (such as \texttt{read.csv()}), but this goes against best practices for variable naming in many other coding languages. For consistency's sake, \texttt{snake\_case} has been adopted across languages, and modern packages and functions typically use it (i.e.~\texttt{readr::read\_csv()}). As a very general rule of thumb, if a package you're using doesn't use \texttt{snake\_case}, there may be an updated version or more modern package that \emph{does}, bringing with it the variety of performance improvements and bug fixes inherent in more mature and modern software.
+  Base R allows \texttt{.} in variable names and functions (such as \texttt{read.csv()}), but this goes against best practices for variable naming in many other coding languages. For consistency's sake, \texttt{snake\_case} has been adopted across languages, and modern packages and functions typically use it (i.e. \texttt{readr::read\_csv()}). As a very general rule of thumb, if a package you're using doesn't use \texttt{snake\_case}, there may be an updated version or more modern package that \emph{does}, bringing with it the variety of performance improvements and bug fixes inherent in more mature and modern software.
 \item
   \textbf{Note}: you may also see \texttt{camelCase} throughout the R code you come across. This is \emph{okay} but not ideal -- try to stay consistent across all your code with \texttt{snake\_case}.
 \item
@@ -1180,7 +1180,7 @@ Stephanie and Nolan (trained in CS and Data Science) suggest it is good practice
 \hypertarget{what-should-be-pushed-to-github}{%
 \section{What should be pushed to Github?}\label{what-should-be-pushed-to-github}}
 
-In general, it is better to track text-based files (\texttt{.R}, \texttt{.Rmd}, \texttt{.md},\texttt{.txt},etc\ldots) compared with binary files (\texttt{.pdf},\texttt{.png},\texttt{.docx}, etc\ldots) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don't change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.
+In general, it is better to track text-based files (\texttt{.R}, \texttt{.Rmd}, \texttt{.md},\texttt{.txt},etc\ldots{}) compared with binary files (\texttt{.pdf},\texttt{.png},\texttt{.docx}, etc\ldots{}) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don't change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.
 
 Be careful before you push .Rout log files! If someone else runs an R script and creates an .Rout file at the same time and both of you try to push to github, it is incredibly difficult to reconcile these two logs. If you run logs, keep them on your own system or (preferably) set up a shared directory where all logs are name and date timestamped.
 
@@ -1196,21 +1196,161 @@ For more lengthy and detailed commit messages, which go beyond the simple, singl
 \hypertarget{bigdata}{%
 \chapter{Working with Big Data}\label{bigdata}}
 
-\emph{Contributors: Kunal Mishra and Jade Benjamin-Chung}
+\emph{Contributors: Eric Kim, Kunal Mishra and Jade Benjamin-Chung}
 
-\hypertarget{the-data.table-package}{%
-\section{The data.table package}\label{the-data.table-package}}
+\hypertarget{basics-1}{%
+\section{Basics}\label{basics-1}}
 
-It may also be the case that you're working with very large datasets. Generally I would define this as 10+ million rows. As is outlined in this document, the 3 main players in the data analysis space are Base R, \texttt{Tidvyerse} (more specificially, \texttt{dplyr}), and \texttt{data.table}. For a majority of things, Base R is inferior to both \texttt{dplyr} and \texttt{data.table}, with concise but less clear syntax and less speed. \texttt{Dplyr} is architected for medium and smaller data, and while its very fast for everyday usage, it trades off maximum performance for ease of use and syntax compared to \texttt{data.table}. An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349\#27840349}{this stackoverflow post} and all 3 answers are worth a read.
+A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we'll explore some alternatives to working with big data.
 
-You can also achieve a performance boost by running \texttt{dplyr} commands on \texttt{data.table}s, which I find to be the best of both worlds, given that a \texttt{data.table} is a special type of \texttt{data.frame} and fairly easy to convert with the \texttt{as.data.table()} function. The speedup is due to \texttt{dplyr}'s use of the \texttt{data.table} backend and in the future this coupling should become even more natural.
-
-If you want to test whether using a certain coding approach increases speed, consider the \texttt{tictoc} package. Run \texttt{tic()} before a code chunk and \texttt{toc()} after to measure the amount of system time it takes to run the chunk. For example, you might use this to decide if you \emph{really} need to switch a code chunk from \texttt{dplyr} to \texttt{data.table}.
+The Berkeley Statistical Computing Facility also has many good \href{http://statistics.berkeley.edu/computing/training}{training resources}.
 
 \hypertarget{using-downsampled-data}{%
 \section{Using downsampled data}\label{using-downsampled-data}}
 
-In our studies with very large datasets, we save ``downsampled'' data that usually includes a 1\% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.
+In studies with very large datasets, we save ``downsampled'' data that usually includes a 1\% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.
+
+\hypertarget{big-data-unix}{%
+\section{Unix}\label{big-data-unix}}
+
+Though bash is very commonly used for management of your file system (see Chapter \ref{unix}), it is also a very capable at doing basic data manipulation with big data. At the core, since the data is stored on disk, you avoid having to overload memory when using bash commands as it will work with the files directly. By default, these commands will print the results to standard output (probably your terminal screen) and you can then redirect the results to other files on disk. These commands can also be chained via pipes (represented as \texttt{\textbar{}}, similar to \texttt{\%\textgreater{}\%} in tidyverse). All of these have a list of arguments that can be passed in via flags (check the \texttt{man} page for more details on each).
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.41\columnwidth}\raggedright
+Command\strut
+\end{minipage} & \begin{minipage}[b]{0.53\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{head}/\texttt{tail}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Displays the first few or last few rows of a file\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{cat}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Concatenates files and prints them\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{sort}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Sorts the file\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{cut}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Cuts out portions of each line and prints it\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{grep}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Finds lines of a file that matches inputted patterns\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{sed}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Find and replace\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{awk}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Similar to \texttt{grep} and \texttt{sed} but with some extra programmatic functionality\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{uniq}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Unifies repeated lines (combine with \texttt{sort} to get unique rows)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{wget} / \texttt{curl}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Downloads data/files from websites\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{sql-and-dbplyr}{%
+\section{\texorpdfstring{SQL and \texttt{dbplyr}}{SQL and dbplyr}}\label{sql-and-dbplyr}}
+
+SQL databases are relational databases that are a collection of \emph{tables} that consists of \emph{fields} or \emph{attributes}, each containing a single \emph{type}. If you use \texttt{dplyr} a lot, you will find that it is heavily inspired with a SQL flavor in mind. Formally, data gets loaded onto a database system and it is stored on disk. This alone makes working with data fast, but the real efficiency gain is the concept of indexing. If you are curious, most SQL databases implement their index with B trees or B+ trees, which allow for log time complexity for search operations in average and worst case scenarios while providing constant time complexity in best case scenario.
+
+The basic structure of a SQL query is as follows:
+
+\begin{verbatim}
+SELECT [DISTINCT] (attributes)
+FROM (table)
+[WHERE (conditions)]
+[GROUP BY (attributes) [HAVING (conditions)]]
+[ORDER BY (attributes) [DESC]]
+\end{verbatim}
+
+The equivalent \texttt{dplyr} command would look as such:
+
+\begin{verbatim}
+table %>%
+  select(attributes) %>%     # distinct(attributes) for select distinct
+  group_by(attributes) %>%   # 
+  filter(conditions) %>%     # 
+  arrange(attributes)        # arrange(desc(attributes)) for descending
+\end{verbatim}
+
+There is ample support for connection to databases in R, and, in particular, there is the \href{https://dbplyr.tidyverse.org}{\texttt{dbplyr}} package, which allows you to interface with the data with \texttt{dplyr} code instead of SQL code.
+
+\hypertarget{data.table-and-dtplyr}{%
+\section{\texorpdfstring{\texttt{data.table} and \texttt{dtplyr}}{data.table and dtplyr}}\label{data.table-and-dtplyr}}
+
+It is often possible to load large datasets into memory in R, however computations will probably be very slow. One way around this is to use \texttt{data.table}. You will find that operations on data are much faster than base R or \texttt{dplyr} even though data is loaded into memory - this is because of clever programming in C as well as internally creating a \emph{key} (the SQL equivalent of an index) by default when loading in the data. You can improve on this even more by setting extra keys for variables you know you will be doing filter or join operations on.
+
+More recently from the tidyverse, is the implementation of \href{https://dtplyr.tidyverse.org}{\texttt{dtplyr}}, which allows for \texttt{dplyr} syntax on \texttt{data.table} objects.
+
+An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349\#27840349}{this stackoverflow post} and all 3 answers are worth a read.
+
+\hypertarget{ff-bigmemory-biglm}{%
+\section{\texorpdfstring{\texttt{ff}, \texttt{bigmemory}, \texttt{biglm}}{ff, bigmemory, biglm}}\label{ff-bigmemory-biglm}}
+
+Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect around twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset. One way to work around this is to keep the data on disk and instead create clever data structures that allow for natural interfacing with the data in an R session while mapping operations to the data on disk. Two packages that implement these ideas are \texttt{ff} and \texttt{bigmemory}.
+
+We can now interface with the data while avoiding loading it into memory but we run into issues when we try to fit models on it. For an \(n \times p\) dataset, linear regression has a time complexity of \(O(np^2 + p^3)\) and a space complexity of \(O(np + p^2)\) (this just means it will take a while and take up a lot of space for large \(n\) and even moreso for large \(p\)). Clever solutions used in machine learning (think iterative algorithms stochastic gradient descent) can help us here. The idea is totake a smaller portion of our data, fit regression then update the coefficient based on another run of linear regression on another small portion of the data. For GLM models, this can be done with the \texttt{biglm} package which has integration with \texttt{ff} and \texttt{bigmemory}.
+
+\hypertarget{parallel-computing}{%
+\section{Parallel computing}\label{parallel-computing}}
+
+\hypertarget{embarassingly-parallel-problems}{%
+\subsection{Embarassingly Parallel Problems}\label{embarassingly-parallel-problems}}
+
+Sometimes, we have to do something in a loop-like structure where each iteration may be independent of each other (think, simulations or bootstrap). These types of loops are referred to as \href{https://www.google.com/search?client=safari\&rls=en\&q=embarassingly+parallel\&ie=UTF-8\&oe=UTF-8}{\emph{embarassingly parallel}} problems (I did not make this up). Each iteration may take some time and every iteration thereafter must wait because the loop is essentially operation as a queue. This is where parallel computing comes into play: every computer these days come with at least 2 cores in the CPU. Each CPU core can operate independently so after some overhead, we can speed up our loop by the number of cores our computers have.
+
+\hypertarget{packages}{%
+\subsection{Packages}\label{packages}}
+
+In R, the popular packages are \texttt{parallel}, \texttt{foreach}, and \texttt{doParallel} (the backend that connects \texttt{foreach} and \texttt{parallel}). More modern parallel computing packages in R are \texttt{future} and \texttt{furrr} (inspired by \texttt{future\ purrr}, it allows for \texttt{purrr} like syntax using the \texttt{future} data structure from its namesake package). In Python, the \texttt{Dask} package has similar functionality to \texttt{future}. Note: the \texttt{parallel} package comes with a \texttt{detectCores} function, but I sometimes find that it is not accurate. On a mac, you can manually check the number of cores by going into About This Mac then System Report then checking the Total Number of Cores in the Hardware tab.
+
+\hypertarget{gpus}{%
+\subsection{GPU's}\label{gpus}}
+
+For most everyday tasks, CPU will be sufficient, but for large problems even an 8x speed boost (for a computer with 8 cores) might not be enough. This is where GPU's come into play. While CPU cores are good at complex operations, GPU cores are good at many small operations (think matrix multiplication). As GPU cores come in the hundreds for cheaper graphics cards and thousands for top end graphics cards, they are ideal for training machine learning models, particularly neural networks. However, as these GPU cores were intended for the graphics on our computers, we cannot access their computing power out of R or Python without some translation in between. Graphics manufacturers have been catching up to this market, and one of the most popular platforms for parallel computing on GPU's is Nvidia's \href{https://developer.nvidia.com/cuda-zone}{CUDA} for use with Nvidia graphics cards.
+
+\hypertarget{the-mapreduce-paradigm}{%
+\subsection{\texorpdfstring{The \emph{MapReduce} paradigm}{The MapReduce paradigm}}\label{the-mapreduce-paradigm}}
+
+The idea of the \emph{MapReduce} paradigm is that we can distribute the data across many nodes and try to do the computation on each piece of the data in each node. One benefit of this is that if our data is too large to fit on disk for a single machine, we can instead spread it across many then do our operation on parallel and aggregate it back together. We can formalize this paradigm into three steps
+
+\begin{itemize}
+\tightlist
+\item
+  Map: Split the data into sub-datasets and perform an operation on each entry in each sub-dataset thereby creating key-value pairs.
+\item
+  Shuffle: Merge the key-value pairs and sort them.
+\item
+  Reduce: Apply an operation on the associated values for each key.
+\end{itemize}
+
+An excellent example is included at the bottom of this \href{https://www.journaldev.com/8848/mapreduce-algorithm-example}{link}. A similar paradigm that is implemented in the tidyverse is the \href{https://www.jstatsoft.org/article/view/v040i01}{\emph{split-apply-combine}} strategy.
+
+The popular infrastructures for doing parallel computing with the MapReduce paradigm are Hadoop and Spark (think of Spark as an in-memory version of Hadoop). Spark can be interfaced with through Python via PySpark or R via SparkR (from Apache) or sparklyr (from RStudio), however note that Spark is natively implemented in Java and Scala so the overhead of serialization between R/Python to Java/Scala may be a time expensive operation.
 
 \hypertarget{optimal-rstudio-set-up}{%
 \section{Optimal RStudio set up}\label{optimal-rstudio-set-up}}
@@ -1273,8 +1413,8 @@ The encoding is extremely cryptic, but there are decodings online (e.g., \href{h
 
 Another bash shell that provides a large array of colors for Mac OS is iTerm2 (\url{https://iterm2.com/}). There are over 200 color schemes to choose from: \url{https://github.com/mbadolato/iTerm2-Color-Schemes}.
 
-\hypertarget{basics-1}{%
-\section{Basics}\label{basics-1}}
+\hypertarget{basics-2}{%
+\section{Basics}\label{basics-2}}
 
 On the computer, there is a desktop with two folders, \texttt{folder1} and \texttt{folder2}, and a file called \texttt{file1.} Inside \texttt{folder1}, we have a file called \texttt{file2.} Mac users can run these commands on their terminal; we recommend that Windows users use Git Bash, not Windows PowerShell.
 
@@ -1509,7 +1649,7 @@ To kill a task in Windows, you can also go to Task Manager \textgreater{} More d
 \hypertarget{running-big-jobs}{%
 \section{Running big jobs}\label{running-big-jobs}}
 
-For big data workflows, the concept of ``backgrounding'' a bash script allows you to start a ``job'' (i.e.~run the script) and leave it overnight to run. At the top level, a bash script (\texttt{0-run-project.sh}) that simply calls the directory-level bash scripts (i.e.~\texttt{0-prep-data.sh}, \texttt{0-run-analysis.sh}, \texttt{0-run-figures.sh}, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.
+For big data workflows, the concept of ``backgrounding'' a bash script allows you to start a ``job'' (i.e.~run the script) and leave it overnight to run. At the top level, a bash script (\texttt{0-run-project.sh}) that simply calls the directory-level bash scripts (i.e. \texttt{0-prep-data.sh}, \texttt{0-run-analysis.sh}, \texttt{0-run-figures.sh}, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.
 
 \begin{itemize}
 \tightlist
@@ -1578,7 +1718,7 @@ tmux attach -tsession_name
 \begin{itemize}
 \tightlist
 \item
-  Use email for longer messages (\textgreater200 words) or messages that merit preservation.
+  Use email for longer messages (\textgreater{}200 words) or messages that merit preservation.
 \item
   Generally, strive to respond within 24 hours. If you are unusually busy or on vacation please alert the team in advance so we can expect you not to respond at all / as quickly as usual.
 \end{itemize}
@@ -1644,7 +1784,7 @@ We strive to work in an environment that is collaborative, supportive, open, and
 
 We encourage students / staff of all experience levels to respectfully share their honest opinions and ideas on any topic. Our group has thrived upon such respectful honest input from team members over the years, and this document is a product of years of student and staff input (and even debate) that has gradually improved our productivity and overall quality of our work.
 
-If Ben is your PI, be forewarned that he tends to batch his email communication (\textasciitilde30 mins in the morning and afternoon, 15 mins mid-day), and doesn't tend to answer Slack or email during evenings or weekends. If you need to reach him urgently then give him a call or text on his mobile.
+If Ben is your PI, be forewarned that he tends to batch his email communication (\textasciitilde{}30 mins in the morning and afternoon, 15 mins mid-day), and doesn't tend to answer Slack or email during evenings or weekends. If you need to reach him urgently then give him a call or text on his mobile.
 
 \hypertarget{protecting-human-subjects}{%
 \section{Protecting human subjects}\label{protecting-human-subjects}}
