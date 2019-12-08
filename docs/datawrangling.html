@@ -120,9 +120,9 @@
 <li class="chapter" data-level="6.4" data-path="datawrangling.html"><a href="datawrangling.html#documenting-datasets"><i class="fa fa-check"></i><b>6.4</b> Documenting datasets</a></li>
 <li class="chapter" data-level="6.5" data-path="datawrangling.html"><a href="datawrangling.html#mapping-data-from-untouched---final"><i class="fa fa-check"></i><b>6.5</b> Mapping data from untouched -&gt; final</a></li>
 <li class="chapter" data-level="6.6" data-path="datawrangling.html"><a href="datawrangling.html#relational-data"><i class="fa fa-check"></i><b>6.6</b> Relational data</a></li>
-<li class="chapter" data-level="6.7" data-path="datawrangling.html"><a href="datawrangling.html#reshaping-data"><i class="fa fa-check"></i><b>6.7</b> Reshaping data</a></li>
-<li class="chapter" data-level="6.8" data-path="datawrangling.html"><a href="datawrangling.html#data-cleaning"><i class="fa fa-check"></i><b>6.8</b> Data cleaning</a></li>
-<li class="chapter" data-level="6.9" data-path="datawrangling.html"><a href="datawrangling.html#be-careful-with-joins-merges"><i class="fa fa-check"></i><b>6.9</b> Be careful with joins / merges</a></li>
+<li class="chapter" data-level="6.7" data-path="datawrangling.html"><a href="datawrangling.html#be-careful-with-joins-merges"><i class="fa fa-check"></i><b>6.7</b> Be careful with joins / merges</a></li>
+<li class="chapter" data-level="6.8" data-path="datawrangling.html"><a href="datawrangling.html#reshaping-data"><i class="fa fa-check"></i><b>6.8</b> Reshaping data</a></li>
+<li class="chapter" data-level="6.9" data-path="datawrangling.html"><a href="datawrangling.html#data-cleaning"><i class="fa fa-check"></i><b>6.9</b> Data cleaning</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>7</b> Working with Big Data</a><ul>
 <li class="chapter" data-level="7.1" data-path="bigdata.html"><a href="bigdata.html#basics"><i class="fa fa-check"></i><b>7.1</b> Basics</a></li>
@@ -280,22 +280,16 @@ analysis_data_public_codebook.txt</code></pre>
 </div>
 <div id="relational-data" class="section level2">
 <h2><span class="header-section-number">6.6</span> Relational data</h2>
-<p>Again, please refer to <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a> in R for Data Science for a good example of what this can look like.</p>
+<p>Refer to <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a> in <em>R for Data Science</em> for a good example of what a good relational database can look like.</p>
 <p><strong>Important</strong>: For a set of relational tables to work, you must ensure that each table relates to another with a unique <code>Key</code>. For example, a child-level dataset must also include IDs for household- or cluster to be merged to household or cluster level data.</p>
 <p>Practical advice on <code>Key</code> variables / IDs used to link datasets. Numeric IDs can occasionally cause problems with merges due to machine rounding errors so character values can sometimes be a good alternative. Whatever format you use, ensure that they do not in some way encode identifying information (e.g., using a social security number or medical record number would be a poor choice of ID for a final dataset).</p>
 </div>
-<div id="reshaping-data" class="section level2">
-<h2><span class="header-section-number">6.7</span> Reshaping data</h2>
-<p>The <code>dplyr</code> package introduced the <code>pivot_wider</code> and <code>pivot_longer</code> functions in 2019. They make reshaping data dramatically easier than any previous functions, including <code>reshape()</code> (base R) or <code>gather</code>/<code>spread</code> (Tidyverse). This excellent article includes details:</p>
-<p><a href="https://tidyr.tidyverse.org/dev/articles/pivot.html" class="uri">https://tidyr.tidyverse.org/dev/articles/pivot.html</a></p>
-</div>
-<div id="data-cleaning" class="section level2">
-<h2><span class="header-section-number">6.8</span> Data cleaning</h2>
-<p>Data cleaning is typically an iterative process that you should conduct on a variable-by-variable basis. Occasionally it is useful to clean an entire questionnaire module at the same time since variables in the same module can be related to one another, and since it can help to proceed through the cleaning process in well-defined chunks. I find it helpful to have a copy of the survey questionnaire (if relevant) handy while cleaning specific variables. This enables you to check skip patterns and codes in the survey against the dataset. We don’t have a lot of general advice for data cleaning except the following. First, there is something to be said for “trolling” (in the fishing sense) through parts of the dataset to see what the data look like and to make sure you have a feel for how information is stored in different variables (e.g., are missing values coded or simply recored as “<code>.</code>” or <code>NA</code>). Second, it can be helpful to consolidate all data cleaning into a single program for each dataset. The data cleaning program corrects entry errors, labels variables, formats variables, and outputs either a temporary or final dataset (but does not, ever, overwrite the untouched data).</p>
-</div>
 <div id="be-careful-with-joins-merges" class="section level2">
-<h2><span class="header-section-number">6.9</span> Be careful with joins / merges</h2>
+<h2><span class="header-section-number">6.7</span> Be careful with joins / merges</h2>
 <p>Experience shows that merging datasets is one of the most error prone steps in data wrangling. Merges can be particularly tricky for less experienced programmers. Errors are likely early in the data processing work flow, and less likely when merging final datasets with clean key variables (IDs) and clear relationships between datasets. Carefully check each merge to ensure it is working as you expect.</p>
+<blockquote>
+<p><strong>ESSENTIAL READING:</strong> <a href="https://r4ds.had.co.nz/relational-data.html#join-problems">Join Problems</a> in <em>R for Data Science</em></p>
+</blockquote>
 <p>In the Stata software there is a really nice feature with <code>merge</code> that allows you to specify the type of merge/join and then examine the diagnostics of that merge.</p>
 <p>Although R does not have a similarly nice feature at this time, the different <code>join</code> functions in the <code>dplyr</code> package provide all of the tools you need to correctly join your data.</p>
 <p>In our experience, the two most common types of joins in our work are mutating joins and filtering joints. (from the <em>R for Data Science</em> book):</p>
@@ -306,12 +300,16 @@ analysis_data_public_codebook.txt</code></pre>
 <p><strong>Filtering joins</strong>: filter observations from one data frame based on whether or not they match an observation in the other table.</p>
 </blockquote>
 <p>Familiarize yourself with these types of operations. The <a href="https://r4ds.had.co.nz/relational-data.html">Relational data</a> chapter of <em>R for Data Science</em> includes details.</p>
-<p>These operations can be tricky if the datasets include different resolutions of data and it is not necessarily a 1:1 merge. Two tips:</p>
-<ol style="list-style-type: decimal">
-<li><p>Always check the dimensions of your data.frames before and after a join to ensure the join is working as you expect.</p></li>
-<li><p>If working in <a href="https://rstudio.com/">RStudio</a> (recommended), always inpect the joined/merged data with <code>View()</code> to ensure that the joined data look as you expect.</p></li>
-</ol>
-<p>These are by no means fool-proof, but they can help diagnose problems with joins.</p>
+</div>
+<div id="reshaping-data" class="section level2">
+<h2><span class="header-section-number">6.8</span> Reshaping data</h2>
+<p>The <code>dplyr</code> package introduced the <code>pivot_wider</code> and <code>pivot_longer</code> functions in 2019. They make reshaping data dramatically easier than any previous functions, including <code>reshape()</code> (base R) or <code>gather</code>/<code>spread</code> (Tidyverse). This excellent article includes details:</p>
+<p><a href="https://tidyr.tidyverse.org/dev/articles/pivot.html" class="uri">https://tidyr.tidyverse.org/dev/articles/pivot.html</a></p>
+</div>
+<div id="data-cleaning" class="section level2">
+<h2><span class="header-section-number">6.9</span> Data cleaning</h2>
+<p>Data cleaning is typically an iterative process that you should conduct on a variable-by-variable basis. Occasionally it is useful to clean an entire questionnaire module at the same time since variables in the same module can be related to one another, and since it can help to proceed through the cleaning process in well-defined chunks. I find it helpful to have a copy of the survey questionnaire (if relevant) handy while cleaning specific variables. This enables you to check skip patterns and codes in the survey against the dataset.</p>
+<p>We don’t have a lot of general advice for data cleaning except the following. First, there is something to be said for “trolling” (in the fishing sense) or visually scrolling through parts of the dataset to see what the data look like and to make sure you have a feel for how information is stored in different variables (e.g., are missing values coded or simply recored as “<code>.</code>” or <code>NA</code>). Use the <code>View()</code> utility in <code>RStudio</code> to look at your data often during the cleaning process. Second, it can be helpful to consolidate all data cleaning into a single program for each dataset. The data cleaning program corrects entry errors, labels variables, formats variables, and outputs either a temporary or final dataset (but does not, ever, overwrite the untouched data). As noted in the <a href="workflows.html#workflows">Workflows</a> chapter, <em>key data processing should be done once, at the earliest possible place in the workflow</em>.</p>
 
 </div>
 </div>
