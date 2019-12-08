@@ -1082,13 +1082,197 @@ These operations can be tricky if the datasets include different resolutions of 
 
 These are by no means fool-proof, but they can help diagnose problems with joins.
 
+\hypertarget{bigdata}{%
+\chapter{Working with Big Data}\label{bigdata}}
+
+\emph{Contributors: Eric Kim, Kunal Mishra and Jade Benjamin-Chung}
+
+\hypertarget{basics}{%
+\section{Basics}\label{basics}}
+
+A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we'll explore some alternatives to working with big data.
+
+The Berkeley Statistical Computing Facility also has many good \href{http://statistics.berkeley.edu/computing/training}{training resources}.
+
+\hypertarget{using-downsampled-data}{%
+\section{Using downsampled data}\label{using-downsampled-data}}
+
+In studies with very large datasets, we save ``downsampled'' data that usually includes a 1\% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.
+
+\hypertarget{big-data-unix}{%
+\section{Unix}\label{big-data-unix}}
+
+Though bash is very commonly used for management of your file system (see Chapter \ref{unix}), it is also a very capable at doing basic data manipulation with big data. At the core, since the data is stored on disk, you avoid having to overload memory when using bash commands as it will work with the files directly. By default, these commands will print the results to standard output (probably your terminal screen), but you can then redirect the results to other files on disk to save your results. These commands can also be chained via pipes (represented as \texttt{\textbar{}}, similar to \texttt{\%\textgreater{}\%} in tidyverse). All of these have a list of arguments that can be passed in via flags (check the \texttt{man} page for more details on each).
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.41\columnwidth}\raggedright
+Command\strut
+\end{minipage} & \begin{minipage}[b]{0.53\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{head}/\texttt{tail}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Displays the first few or last few rows of a file\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{cat}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Concatenates files and prints them\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{sort}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Sorts the file\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{cut}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Cuts out portions of each line and prints it\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{grep}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Finds lines of a file that matches inputted patterns\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{sed}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Find and replace\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{awk}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Similar to \texttt{grep} and \texttt{sed} but with some extra programmatic functionality\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{uniq}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Unifies repeated lines (combine with \texttt{sort} to get unique rows)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.41\columnwidth}\raggedright
+\texttt{wget} / \texttt{curl}\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
+Downloads data/files from websites\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{sql-and-dbplyr}{%
+\section{\texorpdfstring{SQL and \texttt{dbplyr}}{SQL and dbplyr}}\label{sql-and-dbplyr}}
+
+SQL databases are relational databases that are a collection of \emph{tables} that consists of \emph{fields} or \emph{attributes}, each containing a single \emph{type}. If you use \texttt{dplyr} a lot, you will find that it is heavily inspired with a SQL flavor in mind. Formally, data gets loaded onto a database system and it is stored on disk. This alone makes working with data fast, but the real efficiency gain is in the concept of indexing. If you are curious, most SQL databases implement their index with B trees or B+ trees, which allow for log time complexity for search operations in average and worst case scenarios while providing constant time complexity in best case scenario.
+
+The basic structure of a SQL query is as follows:
+
+\begin{verbatim}
+SELECT [DISTINCT] (attributes)
+FROM (table)
+[WHERE (conditions)]
+[GROUP BY (attributes) [HAVING (conditions)]]
+[ORDER BY (attributes) [DESC]]
+\end{verbatim}
+
+The equivalent \texttt{dplyr} command would look as such:
+
+\begin{verbatim}
+table %>%
+  select(attributes) %>%     # distinct(attributes) for select distinct
+  group_by(attributes) %>%   # 
+  filter(conditions) %>%     # 
+  arrange(attributes)        # arrange(desc(attributes)) for descending
+\end{verbatim}
+
+There is ample support for connection to databases in R, and, in particular, there is the \href{https://dbplyr.tidyverse.org}{\texttt{dbplyr}} package, which allows you to interface with the data with \texttt{dplyr} code instead of SQL code.
+
+\hypertarget{data.table-and-dtplyr}{%
+\section{\texorpdfstring{\texttt{data.table} and \texttt{dtplyr}}{data.table and dtplyr}}\label{data.table-and-dtplyr}}
+
+It is often possible to load large datasets into memory in R, but computations will require more consumption of memory and will probably be very slow. One way around this is to use \texttt{data.table}. You will find that operations on the data are much faster than base R or \texttt{dplyr} even though data is loaded into memory - this is because of clever programming in C as well as internally creating a \emph{key} (the SQL equivalent of an index) by default when loading in the data. You can improve on this even more by setting extra keys for variables you know you will be doing filter or join operations on.
+
+More recently from the tidyverse, is the implementation of \href{https://dtplyr.tidyverse.org}{\texttt{dtplyr}}, which allows for \texttt{dplyr} syntax on \texttt{data.table} objects.
+
+An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349\#27840349}{this stackoverflow post} and all 3 answers are worth a read.
+
+\hypertarget{ff-bigmemory-biglm}{%
+\section{\texorpdfstring{\texttt{ff}, \texttt{bigmemory}, \texttt{biglm}}{ff, bigmemory, biglm}}\label{ff-bigmemory-biglm}}
+
+Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect at least twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset and with all the other things that your computer needs to put on RAM in order to just run, you'll run out of space. One way to work around this is to keep the data on disk and instead create clever data structures that allow for natural interfacing with the data by mapping operations to the data on disk. Two R packages that implement these ideas are \texttt{ff} and \texttt{bigmemory}.
+
+We can interface with the data while avoiding loading it into memory with these packages, but we run into issues when we try to fit models on it. For an \(n \times p\) dataset, linear regression has a time complexity of \(O(np^2 + p^3)\) and a space complexity of \(O(np + p^2)\) (this just means it will take a while and take up a lot of space for large \(n\) and even moreso for large \(p\)). So even if we \emph{could} load the data on disk, fitting these models would be out of question. This is where standard solutions used in machine learning (iterative algorithms like stochastic gradient descent) can help us. The idea is to take a smaller portion of our data (which will fit in memory), fit the regression (which will take a reasonable amount of time), then update the coefficient based on another run of linear regression on another small portion of the data until convergence. For GLM models, this can be done with the \texttt{biglm} package which has integration with \texttt{ff} and \texttt{bigmemory}.
+
+\hypertarget{parallel-computing}{%
+\section{Parallel computing}\label{parallel-computing}}
+
+\hypertarget{embarrassingly-parallel-problems}{%
+\subsection{Embarrassingly Parallel Problems}\label{embarrassingly-parallel-problems}}
+
+Sometimes, we have to do something in a loop-like structure where each iteration may be independent of each other, such as simulations or bootstrap. These types of loops are referred to as \href{https://en.wikipedia.org/wiki/Embarrassingly_parallel}{\emph{embarrassingly parallel}} problems. Each iteration takes some time and every iteration thereafter must wait because the loop is operating as a queue, which gives a very obvious way to parallelize (hence ``embarrassingly''). Every computer these days come with at least 2 cores in the CPU and each CPU core can operate independently, so after some overhead, we can speed up our loop by about a factor of the number of cores our computers have.
+
+\hypertarget{packages}{%
+\subsection{Packages}\label{packages}}
+
+In R, the popular packages to do this are \texttt{parallel}, \texttt{foreach}, and \texttt{doParallel} (the backend that connects \texttt{foreach} and \texttt{parallel}). More modern parallel computing packages in R are \texttt{future} and \texttt{furrr} (inspired by \texttt{future\ purrr}, it allows for \texttt{purrr} like syntax using the \texttt{future} data structure from its namesake package). In Python, the \texttt{Dask} library has similar functionality to R's \texttt{future}. Note: the \texttt{parallel} package comes with a \texttt{detectCores} function, but I sometimes find that it is not accurate. On a Mac, you can manually check the number of cores by going into About This Mac then System Report then checking the Total Number of Cores in the Hardware tab.
+
+\hypertarget{gpus}{%
+\subsection{GPU's}\label{gpus}}
+
+For most everyday tasks, CPU will be sufficient, but for large problems even an 8x speed boost from a computer with 8 cores might not be enough. This is where GPU's come into play. While CPU cores are good at complex operations, GPU cores are good at many small operations like matrix multiplication. GPU cores come in the hundreds for cheaper graphics cards and thousands for top end graphics cards, so they are ideal for training machine learning models, particularly neural networks. However, as these GPU cores were intended for the rendering of graphics on our computers, we cannot easily access their computing power out of R or Python without some translation in between. Graphics manufacturers have been catching up to this market, with one of the most popular platforms for parallel computing on GPU's being Nvidia's \href{https://developer.nvidia.com/cuda-zone}{CUDA} for use with Nvidia graphics cards.
+
+\hypertarget{the-mapreduce-paradigm}{%
+\subsection{\texorpdfstring{The \emph{MapReduce} paradigm}{The MapReduce paradigm}}\label{the-mapreduce-paradigm}}
+
+The idea of the \emph{MapReduce} paradigm is that we can distribute the data across many nodes and try to do the computation on each piece of the data in each node. One benefit of this is that if our data is too large to fit on disk for a single machine, we can instead spread it across many then do our operations in parallel and aggregate the results back together. We can formalize this paradigm into three steps
+
+\begin{itemize}
+\tightlist
+\item
+  Map: Split the data into sub-datasets and perform an operation on each entry in each sub-dataset thereby creating key-value pairs.
+\item
+  Shuffle: Merge the key-value pairs and sort them.
+\item
+  Reduce: Apply an operation on the associated values for each key.
+\end{itemize}
+
+An excellent example is included at the bottom of this \href{https://www.journaldev.com/8848/mapreduce-algorithm-example}{link}. A similar paradigm that is implemented in the tidyverse is the \href{https://www.jstatsoft.org/article/view/v040i01}{\emph{split-apply-combine}} strategy.
+
+The popular infrastructures for doing parallel computing with the MapReduce paradigm are Hadoop and Spark (think of Spark as an in-memory version of Hadoop). Spark can be more easily interfaced with than Hadoop through Python via \texttt{PySpark} and through R via \texttt{SparkR} (from Apache) or \texttt{sparklyr} (from RStudio). However, note that because Spark is natively implemented in Java and Scala, the overhead of serialization between R/Python to Java/Scala may be a time expensive operation.
+
+\hypertarget{optimal-rstudio-set-up}{%
+\section{Optimal RStudio set up}\label{optimal-rstudio-set-up}}
+
+Using the following settings will help ensure a smooth experience when working with big data. In RStudio, go to the ``Tools'' menu, then select ``Global Options''. Under ``General'':
+
+\textbf{Workspace}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Uncheck} Restore RData into workspace at startup
+\item
+  Save workspace to RData on exit -- choose \textbf{never}
+\end{itemize}
+
+\textbf{History}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Uncheck} Always save history
+\end{itemize}
+
+Unfortunately RStudio often gets slow and/or freezes after hours working with big datasets. Sometimes it is much more efficient to just use Terminal / gitbash to run code and make updates in git.
+
 \hypertarget{github}{%
 \chapter{GitHub and Version Control}\label{github}}
 
 \emph{Contributors: Stephanie Djajadi, Nolan Pokpongkiat, and Ben Arnold}
 
-\hypertarget{basics}{%
-\section{Basics}\label{basics}}
+\hypertarget{basics-1}{%
+\section{Basics}\label{basics-1}}
 
 Git is a version control system. It has very good documentation online: \url{https://git-scm.com/doc}
 
@@ -1314,190 +1498,6 @@ There is a standardized \texttt{.gitignore} for \texttt{R} which you \href{https
 When you commit, always include a short commit message that describes what the commit does. In the command line, you can achieve this after you have staged files to commit with the \texttt{commit\ -m\ \textless{}"your\ commit\ message\ here"\textgreater{}} syntax. This helps track-back through work flow. For example, if the commit message is \texttt{new}, that doesn't provide any information about what the commit includes. A more descriptive commit message would be \texttt{Create\ first\ draft\ of\ Fig\ 1\ distribution\ plot} or \texttt{Change\ color\ scheme\ for\ distribution\ plot}.
 
 For more lengthy and detailed commit messages, which go beyond the simple, single line \texttt{commit\ -m\ \textless{}your\ commit\ message\ here\textgreater{}} synatax, this \href{https://medium.com/@andrewhowdencom/anatomy-of-a-good-commit-message-acd9c4490437}{Medium post} on the anatomy of a good commit message includes additional discussion. (Note, we don't typically use commits that are this detailed!)
-
-\hypertarget{bigdata}{%
-\chapter{Working with Big Data}\label{bigdata}}
-
-\emph{Contributors: Eric Kim, Kunal Mishra and Jade Benjamin-Chung}
-
-\hypertarget{basics-1}{%
-\section{Basics}\label{basics-1}}
-
-A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we'll explore some alternatives to working with big data.
-
-The Berkeley Statistical Computing Facility also has many good \href{http://statistics.berkeley.edu/computing/training}{training resources}.
-
-\hypertarget{using-downsampled-data}{%
-\section{Using downsampled data}\label{using-downsampled-data}}
-
-In studies with very large datasets, we save ``downsampled'' data that usually includes a 1\% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.
-
-\hypertarget{big-data-unix}{%
-\section{Unix}\label{big-data-unix}}
-
-Though bash is very commonly used for management of your file system (see Chapter \ref{unix}), it is also a very capable at doing basic data manipulation with big data. At the core, since the data is stored on disk, you avoid having to overload memory when using bash commands as it will work with the files directly. By default, these commands will print the results to standard output (probably your terminal screen) and you can then redirect the results to other files on disk. These commands can also be chained via pipes (represented as \texttt{\textbar{}}, similar to \texttt{\%\textgreater{}\%} in tidyverse). All of these have a list of arguments that can be passed in via flags (check the \texttt{man} page for more details on each).
-
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.41\columnwidth}\raggedright
-Command\strut
-\end{minipage} & \begin{minipage}[b]{0.53\columnwidth}\raggedright
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{head}/\texttt{tail}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Displays the first few or last few rows of a file\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{cat}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Concatenates files and prints them\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{sort}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Sorts the file\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{cut}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Cuts out portions of each line and prints it\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{grep}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Finds lines of a file that matches inputted patterns\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{sed}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Find and replace\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{awk}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Similar to \texttt{grep} and \texttt{sed} but with some extra programmatic functionality\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{uniq}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Unifies repeated lines (combine with \texttt{sort} to get unique rows)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{wget} / \texttt{curl}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Downloads data/files from websites\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
-
-\hypertarget{sql-and-dbplyr}{%
-\section{\texorpdfstring{SQL and \texttt{dbplyr}}{SQL and dbplyr}}\label{sql-and-dbplyr}}
-
-SQL databases are relational databases that are a collection of \emph{tables} that consists of \emph{fields} or \emph{attributes}, each containing a single \emph{type}. If you use \texttt{dplyr} a lot, you will find that it is heavily inspired with a SQL flavor in mind. Formally, data gets loaded onto a database system and it is stored on disk. This alone makes working with data fast, but the real efficiency gain is the concept of indexing. If you are curious, most SQL databases implement their index with B trees or B+ trees, which allow for log time complexity for search operations in average and worst case scenarios while providing constant time complexity in best case scenario.
-
-The basic structure of a SQL query is as follows:
-
-\begin{verbatim}
-SELECT [DISTINCT] (attributes)
-FROM (table)
-[WHERE (conditions)]
-[GROUP BY (attributes) [HAVING (conditions)]]
-[ORDER BY (attributes) [DESC]]
-\end{verbatim}
-
-The equivalent \texttt{dplyr} command would look as such:
-
-\begin{verbatim}
-table %>%
-  select(attributes) %>%     # distinct(attributes) for select distinct
-  group_by(attributes) %>%   # 
-  filter(conditions) %>%     # 
-  arrange(attributes)        # arrange(desc(attributes)) for descending
-\end{verbatim}
-
-There is ample support for connection to databases in R, and, in particular, there is the \href{https://dbplyr.tidyverse.org}{\texttt{dbplyr}} package, which allows you to interface with the data with \texttt{dplyr} code instead of SQL code.
-
-\hypertarget{data.table-and-dtplyr}{%
-\section{\texorpdfstring{\texttt{data.table} and \texttt{dtplyr}}{data.table and dtplyr}}\label{data.table-and-dtplyr}}
-
-It is often possible to load large datasets into memory in R, however computations will probably be very slow. One way around this is to use \texttt{data.table}. You will find that operations on data are much faster than base R or \texttt{dplyr} even though data is loaded into memory - this is because of clever programming in C as well as internally creating a \emph{key} (the SQL equivalent of an index) by default when loading in the data. You can improve on this even more by setting extra keys for variables you know you will be doing filter or join operations on.
-
-More recently from the tidyverse, is the implementation of \href{https://dtplyr.tidyverse.org}{\texttt{dtplyr}}, which allows for \texttt{dplyr} syntax on \texttt{data.table} objects.
-
-An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349\#27840349}{this stackoverflow post} and all 3 answers are worth a read.
-
-\hypertarget{ff-bigmemory-biglm}{%
-\section{\texorpdfstring{\texttt{ff}, \texttt{bigmemory}, \texttt{biglm}}{ff, bigmemory, biglm}}\label{ff-bigmemory-biglm}}
-
-Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect around twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset. One way to work around this is to keep the data on disk and instead create clever data structures that allow for natural interfacing with the data in an R session while mapping operations to the data on disk. Two packages that implement these ideas are \texttt{ff} and \texttt{bigmemory}.
-
-We can now interface with the data while avoiding loading it into memory but we run into issues when we try to fit models on it. For an \(n \times p\) dataset, linear regression has a time complexity of \(O(np^2 + p^3)\) and a space complexity of \(O(np + p^2)\) (this just means it will take a while and take up a lot of space for large \(n\) and even moreso for large \(p\)). Clever solutions used in machine learning (think iterative algorithms stochastic gradient descent) can help us here. The idea is totake a smaller portion of our data, fit regression then update the coefficient based on another run of linear regression on another small portion of the data. For GLM models, this can be done with the \texttt{biglm} package which has integration with \texttt{ff} and \texttt{bigmemory}.
-
-\hypertarget{parallel-computing}{%
-\section{Parallel computing}\label{parallel-computing}}
-
-\hypertarget{embarassingly-parallel-problems}{%
-\subsection{Embarassingly Parallel Problems}\label{embarassingly-parallel-problems}}
-
-Sometimes, we have to do something in a loop-like structure where each iteration may be independent of each other (think, simulations or bootstrap). These types of loops are referred to as \href{https://www.google.com/search?client=safari\&rls=en\&q=embarassingly+parallel\&ie=UTF-8\&oe=UTF-8}{\emph{embarassingly parallel}} problems (I did not make this up). Each iteration may take some time and every iteration thereafter must wait because the loop is essentially operation as a queue. This is where parallel computing comes into play: every computer these days come with at least 2 cores in the CPU. Each CPU core can operate independently so after some overhead, we can speed up our loop by the number of cores our computers have.
-
-\hypertarget{packages}{%
-\subsection{Packages}\label{packages}}
-
-In R, the popular packages are \texttt{parallel}, \texttt{foreach}, and \texttt{doParallel} (the backend that connects \texttt{foreach} and \texttt{parallel}). More modern parallel computing packages in R are \texttt{future} and \texttt{furrr} (inspired by \texttt{future\ purrr}, it allows for \texttt{purrr} like syntax using the \texttt{future} data structure from its namesake package). In Python, the \texttt{Dask} package has similar functionality to \texttt{future}. Note: the \texttt{parallel} package comes with a \texttt{detectCores} function, but I sometimes find that it is not accurate. On a mac, you can manually check the number of cores by going into About This Mac then System Report then checking the Total Number of Cores in the Hardware tab.
-
-\hypertarget{gpus}{%
-\subsection{GPU's}\label{gpus}}
-
-For most everyday tasks, CPU will be sufficient, but for large problems even an 8x speed boost (for a computer with 8 cores) might not be enough. This is where GPU's come into play. While CPU cores are good at complex operations, GPU cores are good at many small operations (think matrix multiplication). As GPU cores come in the hundreds for cheaper graphics cards and thousands for top end graphics cards, they are ideal for training machine learning models, particularly neural networks. However, as these GPU cores were intended for the graphics on our computers, we cannot access their computing power out of R or Python without some translation in between. Graphics manufacturers have been catching up to this market, and one of the most popular platforms for parallel computing on GPU's is Nvidia's \href{https://developer.nvidia.com/cuda-zone}{CUDA} for use with Nvidia graphics cards.
-
-\hypertarget{the-mapreduce-paradigm}{%
-\subsection{\texorpdfstring{The \emph{MapReduce} paradigm}{The MapReduce paradigm}}\label{the-mapreduce-paradigm}}
-
-The idea of the \emph{MapReduce} paradigm is that we can distribute the data across many nodes and try to do the computation on each piece of the data in each node. One benefit of this is that if our data is too large to fit on disk for a single machine, we can instead spread it across many then do our operation on parallel and aggregate it back together. We can formalize this paradigm into three steps
-
-\begin{itemize}
-\tightlist
-\item
-  Map: Split the data into sub-datasets and perform an operation on each entry in each sub-dataset thereby creating key-value pairs.
-\item
-  Shuffle: Merge the key-value pairs and sort them.
-\item
-  Reduce: Apply an operation on the associated values for each key.
-\end{itemize}
-
-An excellent example is included at the bottom of this \href{https://www.journaldev.com/8848/mapreduce-algorithm-example}{link}. A similar paradigm that is implemented in the tidyverse is the \href{https://www.jstatsoft.org/article/view/v040i01}{\emph{split-apply-combine}} strategy.
-
-The popular infrastructures for doing parallel computing with the MapReduce paradigm are Hadoop and Spark (think of Spark as an in-memory version of Hadoop). Spark can be interfaced with through Python via PySpark or R via SparkR (from Apache) or sparklyr (from RStudio), however note that Spark is natively implemented in Java and Scala so the overhead of serialization between R/Python to Java/Scala may be a time expensive operation.
-
-\hypertarget{optimal-rstudio-set-up}{%
-\section{Optimal RStudio set up}\label{optimal-rstudio-set-up}}
-
-Using the following settings will help ensure a smooth experience when working with big data. In RStudio, go to the ``Tools'' menu, then select ``Global Options''. Under ``General'':
-
-\textbf{Workspace}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Uncheck} Restore RData into workspace at startup
-\item
-  Save workspace to RData on exit -- choose \textbf{never}
-\end{itemize}
-
-\textbf{History}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Uncheck} Always save history
-\end{itemize}
-
-Unfortunately RStudio often gets slow and/or freezes after hours working with big datasets. Sometimes it is much more efficient to just use Terminal / gitbash to run code and make updates in git.
 
 \hypertarget{unix}{%
 \chapter{UNIX Commands}\label{unix}}

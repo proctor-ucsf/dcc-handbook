@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Working with Big Data | Proctor Foundation Data Science Handbook</title>
+  <title>Chapter 7 Working with Big Data | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Working with Big Data | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Chapter 7 Working with Big Data | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Working with Big Data | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Chapter 7 Working with Big Data | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
@@ -26,14 +26,13 @@
 
 <meta name="date" content="2019-12-08" />
 
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="github.html"/>
-<link rel="next" href="unix.html"/>
+<link rel="prev" href="datawrangling.html"/>
+<link rel="next" href="github.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,9 +40,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
 
 
 
@@ -128,29 +124,29 @@
 <li class="chapter" data-level="6.8" data-path="datawrangling.html"><a href="datawrangling.html#data-cleaning"><i class="fa fa-check"></i><b>6.8</b> Data cleaning</a></li>
 <li class="chapter" data-level="6.9" data-path="datawrangling.html"><a href="datawrangling.html#be-careful-with-joins-merges"><i class="fa fa-check"></i><b>6.9</b> Be careful with joins / merges</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>7</b> GitHub and Version Control</a><ul>
-<li class="chapter" data-level="7.1" data-path="github.html"><a href="github.html#basics"><i class="fa fa-check"></i><b>7.1</b> Basics</a></li>
-<li class="chapter" data-level="7.2" data-path="github.html"><a href="github.html#git-branching"><i class="fa fa-check"></i><b>7.2</b> Git Branching</a></li>
-<li class="chapter" data-level="7.3" data-path="github.html"><a href="github.html#example-workflow"><i class="fa fa-check"></i><b>7.3</b> Example Workflow</a></li>
-<li class="chapter" data-level="7.4" data-path="github.html"><a href="github.html#commonly-used-git-commands"><i class="fa fa-check"></i><b>7.4</b> Commonly Used Git Commands</a></li>
-<li class="chapter" data-level="7.5" data-path="github.html"><a href="github.html#how-often-should-i-commit"><i class="fa fa-check"></i><b>7.5</b> How often should I commit?</a></li>
-<li class="chapter" data-level="7.6" data-path="github.html"><a href="github.html#what-should-be-pushed-to-github"><i class="fa fa-check"></i><b>7.6</b> What should be pushed to Github?</a></li>
-<li class="chapter" data-level="7.7" data-path="github.html"><a href="github.html#how-should-i-describe-my-commit"><i class="fa fa-check"></i><b>7.7</b> How should I describe my commit?</a></li>
+<li class="chapter" data-level="7" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>7</b> Working with Big Data</a><ul>
+<li class="chapter" data-level="7.1" data-path="bigdata.html"><a href="bigdata.html#basics"><i class="fa fa-check"></i><b>7.1</b> Basics</a></li>
+<li class="chapter" data-level="7.2" data-path="bigdata.html"><a href="bigdata.html#using-downsampled-data"><i class="fa fa-check"></i><b>7.2</b> Using downsampled data</a></li>
+<li class="chapter" data-level="7.3" data-path="bigdata.html"><a href="bigdata.html#big-data-unix"><i class="fa fa-check"></i><b>7.3</b> Unix</a></li>
+<li class="chapter" data-level="7.4" data-path="bigdata.html"><a href="bigdata.html#sql-and-dbplyr"><i class="fa fa-check"></i><b>7.4</b> SQL and <code>dbplyr</code></a></li>
+<li class="chapter" data-level="7.5" data-path="bigdata.html"><a href="bigdata.html#data.table-and-dtplyr"><i class="fa fa-check"></i><b>7.5</b> <code>data.table</code> and <code>dtplyr</code></a></li>
+<li class="chapter" data-level="7.6" data-path="bigdata.html"><a href="bigdata.html#ff-bigmemory-biglm"><i class="fa fa-check"></i><b>7.6</b> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></a></li>
+<li class="chapter" data-level="7.7" data-path="bigdata.html"><a href="bigdata.html#parallel-computing"><i class="fa fa-check"></i><b>7.7</b> Parallel computing</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="bigdata.html"><a href="bigdata.html#embarrassingly-parallel-problems"><i class="fa fa-check"></i><b>7.7.1</b> Embarrassingly Parallel Problems</a></li>
+<li class="chapter" data-level="7.7.2" data-path="bigdata.html"><a href="bigdata.html#packages"><i class="fa fa-check"></i><b>7.7.2</b> Packages</a></li>
+<li class="chapter" data-level="7.7.3" data-path="bigdata.html"><a href="bigdata.html#gpus"><i class="fa fa-check"></i><b>7.7.3</b> GPU’s</a></li>
+<li class="chapter" data-level="7.7.4" data-path="bigdata.html"><a href="bigdata.html#the-mapreduce-paradigm"><i class="fa fa-check"></i><b>7.7.4</b> The <em>MapReduce</em> paradigm</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a><ul>
-<li class="chapter" data-level="8.1" data-path="bigdata.html"><a href="bigdata.html#basics-1"><i class="fa fa-check"></i><b>8.1</b> Basics</a></li>
-<li class="chapter" data-level="8.2" data-path="bigdata.html"><a href="bigdata.html#using-downsampled-data"><i class="fa fa-check"></i><b>8.2</b> Using downsampled data</a></li>
-<li class="chapter" data-level="8.3" data-path="bigdata.html"><a href="bigdata.html#big-data-unix"><i class="fa fa-check"></i><b>8.3</b> Unix</a></li>
-<li class="chapter" data-level="8.4" data-path="bigdata.html"><a href="bigdata.html#sql-and-dbplyr"><i class="fa fa-check"></i><b>8.4</b> SQL and <code>dbplyr</code></a></li>
-<li class="chapter" data-level="8.5" data-path="bigdata.html"><a href="bigdata.html#data.table-and-dtplyr"><i class="fa fa-check"></i><b>8.5</b> <code>data.table</code> and <code>dtplyr</code></a></li>
-<li class="chapter" data-level="8.6" data-path="bigdata.html"><a href="bigdata.html#ff-bigmemory-biglm"><i class="fa fa-check"></i><b>8.6</b> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></a></li>
-<li class="chapter" data-level="8.7" data-path="bigdata.html"><a href="bigdata.html#parallel-computing"><i class="fa fa-check"></i><b>8.7</b> Parallel computing</a><ul>
-<li class="chapter" data-level="8.7.1" data-path="bigdata.html"><a href="bigdata.html#embarrassingly-parallel-problems"><i class="fa fa-check"></i><b>8.7.1</b> Embarrassingly Parallel Problems</a></li>
-<li class="chapter" data-level="8.7.2" data-path="bigdata.html"><a href="bigdata.html#packages"><i class="fa fa-check"></i><b>8.7.2</b> Packages</a></li>
-<li class="chapter" data-level="8.7.3" data-path="bigdata.html"><a href="bigdata.html#gpus"><i class="fa fa-check"></i><b>8.7.3</b> GPU’s</a></li>
-<li class="chapter" data-level="8.7.4" data-path="bigdata.html"><a href="bigdata.html#the-mapreduce-paradigm"><i class="fa fa-check"></i><b>8.7.4</b> The <em>MapReduce</em> paradigm</a></li>
+<li class="chapter" data-level="7.8" data-path="bigdata.html"><a href="bigdata.html#optimal-rstudio-set-up"><i class="fa fa-check"></i><b>7.8</b> Optimal RStudio set up</a></li>
 </ul></li>
-<li class="chapter" data-level="8.8" data-path="bigdata.html"><a href="bigdata.html#optimal-rstudio-set-up"><i class="fa fa-check"></i><b>8.8</b> Optimal RStudio set up</a></li>
+<li class="chapter" data-level="8" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>8</b> GitHub and Version Control</a><ul>
+<li class="chapter" data-level="8.1" data-path="github.html"><a href="github.html#basics-1"><i class="fa fa-check"></i><b>8.1</b> Basics</a></li>
+<li class="chapter" data-level="8.2" data-path="github.html"><a href="github.html#git-branching"><i class="fa fa-check"></i><b>8.2</b> Git Branching</a></li>
+<li class="chapter" data-level="8.3" data-path="github.html"><a href="github.html#example-workflow"><i class="fa fa-check"></i><b>8.3</b> Example Workflow</a></li>
+<li class="chapter" data-level="8.4" data-path="github.html"><a href="github.html#commonly-used-git-commands"><i class="fa fa-check"></i><b>8.4</b> Commonly Used Git Commands</a></li>
+<li class="chapter" data-level="8.5" data-path="github.html"><a href="github.html#how-often-should-i-commit"><i class="fa fa-check"></i><b>8.5</b> How often should I commit?</a></li>
+<li class="chapter" data-level="8.6" data-path="github.html"><a href="github.html#what-should-be-pushed-to-github"><i class="fa fa-check"></i><b>8.6</b> What should be pushed to Github?</a></li>
+<li class="chapter" data-level="8.7" data-path="github.html"><a href="github.html#how-should-i-describe-my-commit"><i class="fa fa-check"></i><b>8.7</b> How should I describe my commit?</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a><ul>
 <li class="chapter" data-level="9.1" data-path="unix.html"><a href="unix.html#environment"><i class="fa fa-check"></i><b>9.1</b> Environment</a></li>
@@ -199,19 +195,19 @@
 
             <section class="normal" id="section-">
 <div id="bigdata" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Working with Big Data</h1>
+<h1><span class="header-section-number">Chapter 7</span> Working with Big Data</h1>
 <p><em>Contributors: Eric Kim, Kunal Mishra and Jade Benjamin-Chung</em></p>
-<div id="basics-1" class="section level2">
-<h2><span class="header-section-number">8.1</span> Basics</h2>
+<div id="basics" class="section level2">
+<h2><span class="header-section-number">7.1</span> Basics</h2>
 <p>A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we’ll explore some alternatives to working with big data.</p>
 <p>The Berkeley Statistical Computing Facility also has many good <a href="http://statistics.berkeley.edu/computing/training">training resources</a>.</p>
 </div>
 <div id="using-downsampled-data" class="section level2">
-<h2><span class="header-section-number">8.2</span> Using downsampled data</h2>
+<h2><span class="header-section-number">7.2</span> Using downsampled data</h2>
 <p>In studies with very large datasets, we save “downsampled” data that usually includes a 1% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.</p>
 </div>
 <div id="big-data-unix" class="section level2">
-<h2><span class="header-section-number">8.3</span> Unix</h2>
+<h2><span class="header-section-number">7.3</span> Unix</h2>
 <p>Though bash is very commonly used for management of your file system (see Chapter <a href="unix.html#unix">9</a>), it is also a very capable at doing basic data manipulation with big data. At the core, since the data is stored on disk, you avoid having to overload memory when using bash commands as it will work with the files directly. By default, these commands will print the results to standard output (probably your terminal screen), but you can then redirect the results to other files on disk to save your results. These commands can also be chained via pipes (represented as <code>|</code>, similar to <code>%&gt;%</code> in tidyverse). All of these have a list of arguments that can be passed in via flags (check the <code>man</code> page for more details on each).</p>
 <table>
 <colgroup>
@@ -265,7 +261,7 @@
 </table>
 </div>
 <div id="sql-and-dbplyr" class="section level2">
-<h2><span class="header-section-number">8.4</span> SQL and <code>dbplyr</code></h2>
+<h2><span class="header-section-number">7.4</span> SQL and <code>dbplyr</code></h2>
 <p>SQL databases are relational databases that are a collection of <em>tables</em> that consists of <em>fields</em> or <em>attributes</em>, each containing a single <em>type</em>. If you use <code>dplyr</code> a lot, you will find that it is heavily inspired with a SQL flavor in mind. Formally, data gets loaded onto a database system and it is stored on disk. This alone makes working with data fast, but the real efficiency gain is in the concept of indexing. If you are curious, most SQL databases implement their index with B trees or B+ trees, which allow for log time complexity for search operations in average and worst case scenarios while providing constant time complexity in best case scenario.</p>
 <p>The basic structure of a SQL query is as follows:</p>
 <pre><code>SELECT [DISTINCT] (attributes)
@@ -282,32 +278,32 @@ FROM (table)
 <p>There is ample support for connection to databases in R, and, in particular, there is the <a href="https://dbplyr.tidyverse.org"><code>dbplyr</code></a> package, which allows you to interface with the data with <code>dplyr</code> code instead of SQL code.</p>
 </div>
 <div id="data.table-and-dtplyr" class="section level2">
-<h2><span class="header-section-number">8.5</span> <code>data.table</code> and <code>dtplyr</code></h2>
+<h2><span class="header-section-number">7.5</span> <code>data.table</code> and <code>dtplyr</code></h2>
 <p>It is often possible to load large datasets into memory in R, but computations will require more consumption of memory and will probably be very slow. One way around this is to use <code>data.table</code>. You will find that operations on the data are much faster than base R or <code>dplyr</code> even though data is loaded into memory - this is because of clever programming in C as well as internally creating a <em>key</em> (the SQL equivalent of an index) by default when loading in the data. You can improve on this even more by setting extra keys for variables you know you will be doing filter or join operations on.</p>
 <p>More recently from the tidyverse, is the implementation of <a href="https://dtplyr.tidyverse.org"><code>dtplyr</code></a>, which allows for <code>dplyr</code> syntax on <code>data.table</code> objects.</p>
 <p>An overview of the <code>dplyr</code> vs <code>data.table</code> debate can be found in <a href="https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349#27840349">this stackoverflow post</a> and all 3 answers are worth a read.</p>
 </div>
 <div id="ff-bigmemory-biglm" class="section level2">
-<h2><span class="header-section-number">8.6</span> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></h2>
+<h2><span class="header-section-number">7.6</span> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></h2>
 <p>Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect at least twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset and with all the other things that your computer needs to put on RAM in order to just run, you’ll run out of space. One way to work around this is to keep the data on disk and instead create clever data structures that allow for natural interfacing with the data by mapping operations to the data on disk. Two R packages that implement these ideas are <code>ff</code> and <code>bigmemory</code>.</p>
 <p>We can interface with the data while avoiding loading it into memory with these packages, but we run into issues when we try to fit models on it. For an <span class="math inline">\(n \times p\)</span> dataset, linear regression has a time complexity of <span class="math inline">\(O(np^2 + p^3)\)</span> and a space complexity of <span class="math inline">\(O(np + p^2)\)</span> (this just means it will take a while and take up a lot of space for large <span class="math inline">\(n\)</span> and even moreso for large <span class="math inline">\(p\)</span>). So even if we <em>could</em> load the data on disk, fitting these models would be out of question. This is where standard solutions used in machine learning (iterative algorithms like stochastic gradient descent) can help us. The idea is to take a smaller portion of our data (which will fit in memory), fit the regression (which will take a reasonable amount of time), then update the coefficient based on another run of linear regression on another small portion of the data until convergence. For GLM models, this can be done with the <code>biglm</code> package which has integration with <code>ff</code> and <code>bigmemory</code>.</p>
 </div>
 <div id="parallel-computing" class="section level2">
-<h2><span class="header-section-number">8.7</span> Parallel computing</h2>
+<h2><span class="header-section-number">7.7</span> Parallel computing</h2>
 <div id="embarrassingly-parallel-problems" class="section level3">
-<h3><span class="header-section-number">8.7.1</span> Embarrassingly Parallel Problems</h3>
+<h3><span class="header-section-number">7.7.1</span> Embarrassingly Parallel Problems</h3>
 <p>Sometimes, we have to do something in a loop-like structure where each iteration may be independent of each other, such as simulations or bootstrap. These types of loops are referred to as <a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel"><em>embarrassingly parallel</em></a> problems. Each iteration takes some time and every iteration thereafter must wait because the loop is operating as a queue, which gives a very obvious way to parallelize (hence “embarrassingly”). Every computer these days come with at least 2 cores in the CPU and each CPU core can operate independently, so after some overhead, we can speed up our loop by about a factor of the number of cores our computers have.</p>
 </div>
 <div id="packages" class="section level3">
-<h3><span class="header-section-number">8.7.2</span> Packages</h3>
+<h3><span class="header-section-number">7.7.2</span> Packages</h3>
 <p>In R, the popular packages to do this are <code>parallel</code>, <code>foreach</code>, and <code>doParallel</code> (the backend that connects <code>foreach</code> and <code>parallel</code>). More modern parallel computing packages in R are <code>future</code> and <code>furrr</code> (inspired by <code>future purrr</code>, it allows for <code>purrr</code> like syntax using the <code>future</code> data structure from its namesake package). In Python, the <code>Dask</code> library has similar functionality to R’s <code>future</code>. Note: the <code>parallel</code> package comes with a <code>detectCores</code> function, but I sometimes find that it is not accurate. On a Mac, you can manually check the number of cores by going into About This Mac then System Report then checking the Total Number of Cores in the Hardware tab.</p>
 </div>
 <div id="gpus" class="section level3">
-<h3><span class="header-section-number">8.7.3</span> GPU’s</h3>
+<h3><span class="header-section-number">7.7.3</span> GPU’s</h3>
 <p>For most everyday tasks, CPU will be sufficient, but for large problems even an 8x speed boost from a computer with 8 cores might not be enough. This is where GPU’s come into play. While CPU cores are good at complex operations, GPU cores are good at many small operations like matrix multiplication. GPU cores come in the hundreds for cheaper graphics cards and thousands for top end graphics cards, so they are ideal for training machine learning models, particularly neural networks. However, as these GPU cores were intended for the rendering of graphics on our computers, we cannot easily access their computing power out of R or Python without some translation in between. Graphics manufacturers have been catching up to this market, with one of the most popular platforms for parallel computing on GPU’s being Nvidia’s <a href="https://developer.nvidia.com/cuda-zone">CUDA</a> for use with Nvidia graphics cards.</p>
 </div>
 <div id="the-mapreduce-paradigm" class="section level3">
-<h3><span class="header-section-number">8.7.4</span> The <em>MapReduce</em> paradigm</h3>
+<h3><span class="header-section-number">7.7.4</span> The <em>MapReduce</em> paradigm</h3>
 <p>The idea of the <em>MapReduce</em> paradigm is that we can distribute the data across many nodes and try to do the computation on each piece of the data in each node. One benefit of this is that if our data is too large to fit on disk for a single machine, we can instead spread it across many then do our operations in parallel and aggregate the results back together. We can formalize this paradigm into three steps</p>
 <ul>
 <li>Map: Split the data into sub-datasets and perform an operation on each entry in each sub-dataset thereby creating key-value pairs.</li>
@@ -319,7 +315,7 @@ FROM (table)
 </div>
 </div>
 <div id="optimal-rstudio-set-up" class="section level2">
-<h2><span class="header-section-number">8.8</span> Optimal RStudio set up</h2>
+<h2><span class="header-section-number">7.8</span> Optimal RStudio set up</h2>
 <p>Using the following settings will help ensure a smooth experience when working with big data. In RStudio, go to the “Tools” menu, then select “Global Options”. Under “General”:</p>
 <p><strong>Workspace</strong></p>
 <ul>
@@ -339,19 +335,17 @@ FROM (table)
           </div>
         </div>
       </div>
-<a href="github.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="unix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="datawrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="github.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -359,11 +353,12 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
+"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -375,10 +370,6 @@ gitbook.start({
 "text": null
 },
 "history": {
-"link": null,
-"text": null
-},
-"view": {
 "link": null,
 "text": null
 },
