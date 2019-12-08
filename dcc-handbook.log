@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.5.23)  8 DEC 2019 07:02
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.5.23)  8 DEC 2019 07:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1210,13 +1210,13 @@ Chapter 6.
 [33
 
 ] [34]
-Underfull \hbox (badness 3088) in paragraph at lines 987--988
+Underfull \hbox (badness 3088) in paragraph at lines 985--986
 []\TU/lmr/m/n/10 As of this time, we recommend cross-linking public files in Gi
 tHub
  []
 
 [35]
-Overfull \hbox (9.18002pt too wide) in paragraph at lines 1005--1006
+Overfull \hbox (9.18002pt too wide) in paragraph at lines 1003--1004
 []\TU/lmr/m/n/10 Best pracice is to scope out the flow of data from the origina
 l forms/modules/tables
  []
@@ -1226,13 +1226,13 @@ l forms/modules/tables
 ]
 Chapter 7.
 [41] [42]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1187--1187
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1185--1185
 []  \TU/lmtt/m/n/10 select(attributes) %>%     # distinct(attributes) for selec
 t distinct[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1187--1187
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1185--1185
 []  \TU/lmtt/m/n/10 arrange(attributes)        # arrange(desc(attributes)) for 
 descending[] 
  []
@@ -1249,7 +1249,7 @@ Underfull \vbox (badness 2005) has occurred while \output is active []
 ]
 Chapter 9.
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1532--1532
+Overfull \hbox (64.5pt too wide) in paragraph at lines 1530--1530
 []\TU/lmtt/m/n/10 export PS1=[]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]
 \w\[\033[00m\]\$ [][] 
  []
@@ -1260,15 +1260,15 @@ File: images/ex-desktop.jpg Graphic file (type QTm)
 File: images/ex-terminal.PNG Graphic file (type QTm)
 <use  "images/ex-terminal.PNG" >
 
-LaTeX Warning: Float too large for page by 36.06166pt on input line 1625.
+LaTeX Warning: Float too large for page by 36.06166pt on input line 1623.
 
 
-Overfull \hbox (20.40147pt too wide) in paragraph at lines 1656--1657
+Overfull \hbox (20.40147pt too wide) in paragraph at lines 1654--1655
 \TU/lmtt/m/n/10 bash_script_name.sh 
  []
 
 [55] [56]
-Underfull \hbox (badness 10000) in paragraph at lines 1693--1694
+Underfull \hbox (badness 10000) in paragraph at lines 1691--1692
 \TU/lmtt/m/n/10 without hex digits in character string starting "[]C:\U"\TU/lmr
 /m/n/10 , try
  []
@@ -1284,14 +1284,14 @@ Chapter 11.
 [65] [66]
 Chapter 12.
 No file dcc-handbook.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1948.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1946.
 [67
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1948.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1946.
 (./dcc-handbook.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1948.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1948.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1946.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1946.
  ) 
 Here is how much of TeX's memory you used:
  20984 strings out of 493005
