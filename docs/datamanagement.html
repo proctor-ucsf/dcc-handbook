@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-12-06" />
+<meta name="date" content="2019-12-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -109,12 +109,19 @@
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="datamanagement.html"><a href="datamanagement.html"><i class="fa fa-check"></i><b>6</b> Data Management</a><ul>
-<li class="chapter" data-level="6.1" data-path="datamanagement.html"><a href="datamanagement.html#data-inputoutput-io"><i class="fa fa-check"></i><b>6.1</b> Data input/output (I/O)</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="datamanagement.html"><a href="datamanagement.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>6.1.1</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
-<li class="chapter" data-level="6.1.2" data-path="datamanagement.html"><a href="datamanagement.html#csv-files"><i class="fa fa-check"></i><b>6.1.2</b> <code>.CSV</code> Files</a></li>
-<li class="chapter" data-level="6.1.3" data-path="datamanagement.html"><a href="datamanagement.html#publishing-public-data"><i class="fa fa-check"></i><b>6.1.3</b> Publishing public data</a></li>
+<li class="chapter" data-level="6.1" data-path="datamanagement.html"><a href="datamanagement.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="datamanagement.html"><a href="datamanagement.html#cardinal-rule"><i class="fa fa-check"></i><b>6.2</b> Cardinal rule</a></li>
+<li class="chapter" data-level="6.3" data-path="datamanagement.html"><a href="datamanagement.html#data-inputoutput-io"><i class="fa fa-check"></i><b>6.3</b> Data input/output (I/O)</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="datamanagement.html"><a href="datamanagement.html#excel-files"><i class="fa fa-check"></i><b>6.3.1</b> Excel files</a></li>
+<li class="chapter" data-level="6.3.2" data-path="datamanagement.html"><a href="datamanagement.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>6.3.2</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
+<li class="chapter" data-level="6.3.3" data-path="datamanagement.html"><a href="datamanagement.html#csv-files"><i class="fa fa-check"></i><b>6.3.3</b> <code>.CSV</code> Files</a></li>
+<li class="chapter" data-level="6.3.4" data-path="datamanagement.html"><a href="datamanagement.html#publishing-public-data"><i class="fa fa-check"></i><b>6.3.4</b> Publishing public data</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="datamanagement.html"><a href="datamanagement.html#documenting-datasets"><i class="fa fa-check"></i><b>6.2</b> Documenting datasets</a></li>
+<li class="chapter" data-level="6.4" data-path="datamanagement.html"><a href="datamanagement.html#documenting-datasets"><i class="fa fa-check"></i><b>6.4</b> Documenting datasets</a></li>
+<li class="chapter" data-level="6.5" data-path="datamanagement.html"><a href="datamanagement.html#data-management-workflow"><i class="fa fa-check"></i><b>6.5</b> Data management workflow</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="datamanagement.html"><a href="datamanagement.html#mapping-workflow-untouched---final"><i class="fa fa-check"></i><b>6.5.1</b> Mapping workflow: untouched -&gt; final</a></li>
+<li class="chapter" data-level="6.5.2" data-path="datamanagement.html"><a href="datamanagement.html#data-cleaning"><i class="fa fa-check"></i><b>6.5.2</b> Data cleaning</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>7</b> GitHub and Version Control</a><ul>
 <li class="chapter" data-level="7.1" data-path="github.html"><a href="github.html#basics"><i class="fa fa-check"></i><b>7.1</b> Basics</a></li>
@@ -190,10 +197,31 @@
 <h1><span class="header-section-number">Chapter 6</span> Data Management</h1>
 <p><em>Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold</em></p>
 <p>2019-10-10: THIS CHAPTER IS A WORK IN PROGRESS (INCOMPLETE)</p>
+<div id="overview" class="section level2">
+<h2><span class="header-section-number">6.1</span> Overview</h2>
+<p>Data management (also called “wrangling”, “munging”) is the foundation of the data science <a href="workflows.html#workflows">workflow</a> (step 1), taking raw data as input and creating final data for analysis.</p>
+<p>It is by far the most tedious and time consuming step in the data analysis workflow. Data processing is also the most error prone. Errors are likely because data processing usually requires hundreds or thousands of lines of code. Generating final datasets often requires programmers to merge and append multiple different raw datasets; often, the process requires them to re-shape the data from wide format to long format.</p>
+<p>Please read chapters on data wrangling in the book <a href="https://r4ds.had.co.nz/">R for Data Science</a>. That covers the foundational skills and know-how.</p>
+<p>Here, we provide some additional recommendations for best practices related to data management and highlight a few topics not covered in the excellent R for Data Science book.</p>
+</div>
+<div id="cardinal-rule" class="section level2">
+<h2><span class="header-section-number">6.2</span> Cardinal rule</h2>
+<hr />
+<blockquote>
+<p><em><strong>Cardinal rule of data management:</strong> NEVER alter untouched datasets</em></p>
+</blockquote>
+<hr />
+<p>Untouched datasets include data output from data collection software, distributed by the data management team, outside collaborators, or downloaded from a data repository. They should be left untouched. All data cleaning and processing activities should read in untouched data and output either temporary files or final datasets. Never, ever overwrite an untouched dataset.</p>
+</div>
 <div id="data-inputoutput-io" class="section level2">
-<h2><span class="header-section-number">6.1</span> Data input/output (I/O)</h2>
+<h2><span class="header-section-number">6.3</span> Data input/output (I/O)</h2>
+<div id="excel-files" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Excel files</h3>
+<p>Often collaborators share data as Excel files (<code>.xlsx</code>). In this case, we recommend making a copy of the file in the untouched repository and converting it into a <code>.csv</code> file (one per tab) to input into the data management workflow.</p>
+<p>This step should mark the end of your use of Excel in your data analysis, aside from inspecting <code>.csv</code> files. Excel is extremely error prone because it does not have good fidelity with variable types (e.g., dates, leading zeros), and has no real programmatic interface (VBA?). Avoid it. We can find no compelling case for its use in data science.</p>
+</div>
 <div id="rds-vs-.rdata-files" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> <code>.RDS</code> vs <code>.RData</code> Files</h3>
+<h3><span class="header-section-number">6.3.2</span> <code>.RDS</code> vs <code>.RData</code> Files</h3>
 <p>One of the most common ways to load and save data in Base R is with the <code>load()</code> and <code>save()</code> functions to serialize multiple objects in a single <code>.RData</code> file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using <code>saveRDS()</code> and its complement <code>readRDS()</code>.</p>
 <ul>
 <li><p><strong>Note</strong>: if you have many related R objects you would have otherwise saved all together using the <code>save</code> function, the functional equivalent with <code>RDS</code> would be to create a (named) list containing each of these objects, and saving it.</p></li>
@@ -201,26 +229,55 @@
 </ul>
 </div>
 <div id="csv-files" class="section level3">
-<h3><span class="header-section-number">6.1.2</span> <code>.CSV</code> Files</h3>
+<h3><span class="header-section-number">6.3.3</span> <code>.CSV</code> Files</h3>
 <p>Once again, the <code>readr</code> package as part of the Tidvyerse is great, with a much faster <code>read_csv()</code> than Base R’s <code>read.csv()</code>. For massive CSVs (&gt; 5 GB), you’ll find <code>data.table::fread()</code> to be the fastest CSV reader in any data science language out there. For writing CSVs, <code>readr::write_csv()</code> and <code>data.table::fwrite()</code> outclass Base R’s <code>write.csv()</code> by a significant margin as well.</p>
 </div>
 <div id="publishing-public-data" class="section level3">
-<h3><span class="header-section-number">6.1.3</span> Publishing public data</h3>
+<h3><span class="header-section-number">6.3.4</span> Publishing public data</h3>
 <p><strong>NEVER</strong> push a dataset into the public domain (e.g., GitHub, OSF) without first checking with Ben to ensure that it is appropriately de-identified and we have approval from the sponsor and/or human subjects review board to do so.</p>
 <p>If you are releasing data into the public domain, then consider making available <em>at minimum</em> a <code>.csv</code> file and a codebook of the same name (note: you should have a codebook for internal data as well). We often also make available <code>.rds</code> files as well. For example, your <code>mystudy/data/public</code> directory could include three files for a single dataset, two with the actual data in <code>.rds</code> and <code>.csv</code> formats, and a third that describes their contents:</p>
 <pre><code>analysis_data_public.csv
 analysis_data_public.rds
 analysis_data_public_codebook.txt</code></pre>
 <p>In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: <a href="https://github.com/ben-arnold/enterics-seroepi/tree/master/data" class="uri">https://github.com/ben-arnold/enterics-seroepi/tree/master/data</a> .</p>
-<p>If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (<a href="https://osf.io">osf.io</a>). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: <a href="https://osf.io/tprw2/" class="uri">https://osf.io/tprw2/</a>.</p>
+<p>If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (<a href="https://osf.io">osf.io</a>). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: <a href="https://osf.io/tprw2/" class="uri">https://osf.io/tprw2/</a>. Another good option is Dryad (<a href="https://datadryad.org/">datadryad.org</a>), which normally costs a nominal fee to archive data but is free to investigators in the University of California system.</p>
+<p>As of this time, we recommend cross-linking public files in GitHub (scripts/notebooks only), OSF, and Dryad.</p>
 </div>
 </div>
 <div id="documenting-datasets" class="section level2">
-<h2><span class="header-section-number">6.2</span> Documenting datasets</h2>
+<h2><span class="header-section-number">6.4</span> Documenting datasets</h2>
 <p>Datasets need to have metadata (documentation) associated with them to help people understand them. Well documented datasets save an enormous amount of time because it helps avoid lots of back-and-forth with new people orienting themselves with the data. This applies to both private and public data used in your work flow.</p>
 <p>Each final dataset should include a codebook. The file <a href="https://github.com/ben-arnold/enterics-seroepi/blob/master/data/asembo_analysis_codebook.txt">asembo_analysis_codebook.txt</a> provides one example of what a codebook for a simple dataset could contain.</p>
 <p>For complex studies with multiple, relational data files, it is exceptionally helpful to also include a README overview in plain text or markdown that explains the relationships between the datasets. Here is an example from the WASH Benefits Bangladesh trial primary outcomes analysis: <a href="https://osf.io/v3nfs/">README-WBB-primary-outcomes-datasets.md</a>.</p>
+</div>
+<div id="data-management-workflow" class="section level2">
+<h2><span class="header-section-number">6.5</span> Data management workflow</h2>
+<div id="mapping-workflow-untouched---final" class="section level3">
+<h3><span class="header-section-number">6.5.1</span> Mapping workflow: untouched -&gt; final</h3>
+<p>An important step for the data processing is to come up with a plan for which final datasets you want to create. These are probably the two most common models for the end product:</p>
+<table>
+<colgroup>
+<col width="19%" />
+<col width="80%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">Single Massive Dataset</td>
+<td align="left">A single, large, final dataset for the whole project with potentially multiple levels of data (e.g., household, individual) and hundreds or thousands of variables.</td>
+</tr>
+<tr class="even">
+<td align="left">Multiple Relational datasets</td>
+<td align="left">Multiple relational datasets, each tailored to a specific type of data collected in the study. Smaller, relational datasets can be recombined as needed for analyses.</td>
+</tr>
+</tbody>
+</table>
+<p>We strongly recommend using the second model in almost every case. The chapter on <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a> in R for Data Science explains details.</p>
+</div>
+<div id="data-cleaning" class="section level3">
+<h3><span class="header-section-number">6.5.2</span> Data cleaning</h3>
+<p>Data cleaning is typically an iterative process that you should conduct on a variable-by-variable basis. Occasionally it is useful to clean an entire questionnaire module at the same time since variables in the same module can be related to one another, and since it can help to proceed through the cleaning process in well-defined chunks. I find it helpful to have a copy of the survey questionnaire (if relevant) handy while cleaning specific variables. This enables you to check skip patterns and codes in the survey against the dataset. We don’t have a lot of general advice for data cleaning except the following. First, there is something to be said for “trolling” (in the fishing sense) through parts of the dataset to see what the data look like and to make sure you have a feel for how information is stored in different variables (e.g., are missing values coded or simply recored as “<code>.</code>” or <code>NA</code>). Second, it can be helpful to consolidate all data cleaning into a single program for each dataset. The data cleaning program corrects entry errors, labels variables, formats variables, and outputs either a temporary or final dataset (but does not, ever, overwrite the untouched data).</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -274,20 +331,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

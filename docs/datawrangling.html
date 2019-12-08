@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 GitHub and Version Control | Proctor Foundation Data Science Handbook</title>
+  <title>Chapter 6 Data Wrangling | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 GitHub and Version Control | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Chapter 6 Data Wrangling | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 GitHub and Version Control | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Chapter 6 Data Wrangling | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="datawrangling.html"/>
-<link rel="next" href="bigdata.html"/>
+<link rel="prev" href="codingstyle.html"/>
+<link rel="next" href="github.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -194,189 +194,125 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="github" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> GitHub and Version Control</h1>
-<p><em>Contributors: Stephanie Djajadi, Nolan Pokpongkiat, and Ben Arnold</em></p>
-<div id="basics" class="section level2">
-<h2><span class="header-section-number">7.1</span> Basics</h2>
-<p>Git is a version control system. It has very good documentation online: <a href="https://git-scm.com/doc" class="uri">https://git-scm.com/doc</a></p>
-<p>If you get into trouble with Git, the docs will help a lot!</p>
-<p>Git is often used in conjunction with GitHub, which is an online platform to help teams collaborate while using Git for version control: <a href="https://github.com" class="uri">https://github.com</a>.</p>
+<div id="datawrangling" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Data Wrangling</h1>
+<p><em>Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold</em></p>
+<p>2019-10-10: THIS CHAPTER IS A WORK IN PROGRESS (INCOMPLETE)</p>
+<div id="overview" class="section level2">
+<h2><span class="header-section-number">6.1</span> Overview</h2>
+<p>Processing data from raw inputs to final data for analysis is the foundation of the data science <a href="workflows.html#workflows">workflow</a>. “Management” is a bad word in both academia and hip parts of the private sector, so what used to be called “data management” is now called “data wrangling” or “data munging”.</p>
+<p>By any name, it is by far the most tedious and time consuming step in the data analysis workflow. Data wrangling is also the most error prone. Errors are likely because data processing usually requires hundreds or thousands of lines of code. Generating final datasets often requires programmers to merge and append multiple different raw datasets; often, the process requires them to re-shape the data from wide format to long format.</p>
+<p>Read the chapters on <a href="https://r4ds.had.co.nz/">Data Wrangling</a> in <em>R for Data Science</em>. That book covers the foundational skills and know-how.</p>
+<p>Here, we provide some additional recommendations for best practices related to data wrangling and highlight a few topics not covered in the excellent R for Data Science book.</p>
+</div>
+<div id="cardinal-rule" class="section level2">
+<h2><span class="header-section-number">6.2</span> Cardinal rule</h2>
+<hr />
+<blockquote>
+<p><em><strong>Cardinal rule of data wrangling:</strong> NEVER alter untouched datasets</em></p>
+</blockquote>
+<hr />
+<p>Untouched datasets include data output from data collection software, distributed by the data team, outside collaborators, or downloaded from a data repository. They should be left untouched. All data cleaning and processing activities should read in untouched data and output either temporary files or final datasets. Never, ever overwrite an untouched dataset.</p>
+</div>
+<div id="data-inputoutput-io" class="section level2">
+<h2><span class="header-section-number">6.3</span> Data input/output (I/O)</h2>
+<p>Read the <a href="https://r4ds.had.co.nz/data-import.html">Data Import</a> section of <em>R for Data Science</em>.</p>
+<div id="excel-files" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Excel files</h3>
+<p>Often collaborators share data as Excel files (<code>.xlsx</code>). In this case, we recommend making a copy of the file in the untouched repository and converting it into a <code>.csv</code> file (one per tab) to input into the data processing workflow.</p>
+<p>This step should mark the end of your use of Excel in your data analysis, aside from inspecting <code>.csv</code> files. Excel is extremely error prone because it does not have good fidelity with variable types (e.g., dates, leading zeros), and has no real programmatic interface (VBA?). Avoid it. We can find no compelling case for its use in data science.</p>
+</div>
+<div id="rds-vs-.rdata-files" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> <code>.RDS</code> vs <code>.RData</code> Files</h3>
+<p>One of the most common ways to load and save data in Base R is with the <code>load()</code> and <code>save()</code> functions to serialize multiple objects in a single <code>.RData</code> file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using <code>saveRDS()</code> and its complement <code>readRDS()</code>.</p>
 <ul>
-<li>A detailed tutorial of Git can be found <a href="https://sp19.datastructur.es/materials/guides/using-git#b-local-repositories-narrative-introduction">here on UC Berkeley’s CS61B website</a>.</li>
-<li>If you are already familiar with Git, you can reference the summary at the end of <a href="https://sp19.datastructur.es/materials/guides/using-git#b-local-repositories-narrative-introduction">Section B</a>.</li>
-<li>If you have made a mistake in Git, you can refer to this <a href="https://sethrobertson.github.io/GitFixUm/fixup.html">article</a> to undo, fix, or remove commits in git.</li>
+<li><p><strong>Note</strong>: if you have many related R objects you would have otherwise saved all together using the <code>save</code> function, the functional equivalent with <code>RDS</code> would be to create a (named) list containing each of these objects, and saving it.</p></li>
+<li><p><strong>Note</strong>: there is an important caveat for <code>.rds</code> files: they are not automatically backward compatible across different versions of R! So, while they are very useful in general, beware. See, for example, this thread on <a href="https://stackoverflow.com/questions/56704638/write-a-file-using-saverds-so-that-it-is-backwards-compatible-with-old-versi">StackExchange</a>. <code>.csv</code> files embed slightly less information (typically), but are more stable across different versions of R.</p></li>
 </ul>
 </div>
-<div id="git-branching" class="section level2">
-<h2><span class="header-section-number">7.2</span> Git Branching</h2>
-<p>A terrific overview of branching workflow and its rationale is here: <a href="https://guides.github.com/introduction/flow/" class="uri">https://guides.github.com/introduction/flow/</a></p>
-<p>Branches allow you to keep track of multiple versions of your work simultaneously, and you can easily switch between versions and merge branches together once you’ve finished working on a section and want it to join the rest of your code. Here are some cases when it may be a good idea to branch:</p>
-<ul>
-<li>You may want to make a dramatic change to your existing code (called refactoring) but it will break other parts of your project. But you want to be able to simultaneously work on other parts or you are collaborating with others, and you don’t want to break the code for them.</li>
-<li>You want to start working on a new part of the project, but you aren’t sure yet if your changes will work and make it to the final product.</li>
-<li>You are working with others and don’t want to mix up your current work with theirs, even if you want to bring your work together later in the future.</li>
-</ul>
-<p>A detailed tutorial on Git Branching can be found <a href="https://sp19.datastructur.es/materials/guides/using-git#e-git-branching-advanced-git-optional">here</a>. You can also find instructions on how to handle merge conflicts when joining branches together.</p>
+<div id="csv-files" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> <code>.CSV</code> Files</h3>
+<p>Once again, the <code>readr</code> package as part of the Tidvyerse is great, with a much faster <code>read_csv()</code> than Base R’s <code>read.csv()</code>. For massive CSVs (&gt; 5 GB), you’ll find <code>data.table::fread()</code> to be the fastest CSV reader in any data science language out there. For writing CSVs, <code>readr::write_csv()</code> and <code>data.table::fwrite()</code> outclass Base R’s <code>write.csv()</code> by a significant margin as well.</p>
 </div>
-<div id="example-workflow" class="section level2">
-<h2><span class="header-section-number">7.3</span> Example Workflow</h2>
-<p>A standard workflow when starting on a new project and contributing code looks like this:</p>
+<div id="publishing-public-data" class="section level3">
+<h3><span class="header-section-number">6.3.4</span> Publishing public data</h3>
+<p><strong>NEVER</strong> push a dataset into the public domain (e.g., GitHub, OSF) without first checking with Ben to ensure that it is appropriately de-identified and we have approval from the sponsor and/or human subjects review board to do so. For example, we will need to re-code participant IDs (even if they contain no identifying information) before making data public to completely break the link between IDs and identifiable information stored on our servers.</p>
+<p>If you are releasing data into the public domain, then consider making available <em>at minimum</em> a <code>.csv</code> file and a codebook of the same name (note: you should have a codebook for internal data as well). We often also make available <code>.rds</code> files as well. For example, your <code>mystudy/data/public</code> directory could include three files for a single dataset, two with the actual data in <code>.rds</code> and <code>.csv</code> formats, and a third that describes their contents:</p>
+<pre><code>analysis_data_public.csv
+analysis_data_public.rds
+analysis_data_public_codebook.txt</code></pre>
+<p>In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: <a href="https://github.com/ben-arnold/enterics-seroepi/tree/master/data" class="uri">https://github.com/ben-arnold/enterics-seroepi/tree/master/data</a> .</p>
+<p>If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (<a href="https://osf.io">osf.io</a>). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: <a href="https://osf.io/tprw2/" class="uri">https://osf.io/tprw2/</a>. Another good option is Dryad (<a href="https://datadryad.org/">datadryad.org</a>), which normally costs a nominal fee to archive data but is free to investigators in the University of California system.</p>
+<p>As of this time, we recommend cross-linking public files in GitHub (scripts/notebooks only), OSF, and Dryad.</p>
+</div>
+</div>
+<div id="documenting-datasets" class="section level2">
+<h2><span class="header-section-number">6.4</span> Documenting datasets</h2>
+<p>Datasets need to have metadata (documentation) associated with them to help people understand them. Well documented datasets save an enormous amount of time because it helps avoid lots of back-and-forth with new people orienting themselves with the data. This applies to both private and public data used in your work flow.</p>
+<p>Each raw and final dataset should include a codebook. Sometimes survey instruments or electronic data capture schematics can stand-in for raw dataset codebooks, as long as that information is stored alongside the raw data!</p>
+<p>The file <a href="https://github.com/ben-arnold/enterics-seroepi/blob/master/data/asembo_analysis_codebook.txt">asembo_analysis_codebook.txt</a> provides one example of what a codebook for a simple, final dataset could contain.</p>
+<p>For complex studies with multiple, relational data files, it is exceptionally helpful to also include a README overview in plain text or markdown that explains the relationships between the datasets. Here is an example from the WASH Benefits Bangladesh trial primary outcomes analysis: <a href="https://osf.io/v3nfs/">README-WBB-primary-outcomes-datasets.md</a>.</p>
+</div>
+<div id="mapping-data-from-untouched---final" class="section level2">
+<h2><span class="header-section-number">6.5</span> Mapping data from untouched -&gt; final</h2>
+<p>An important step for the data processing is to come up with a plan for which final datasets you want to create.</p>
+<p>Best pracice is to scope out the flow of data from the original forms/modules/tables at the time of data capture to the final datasets planned for the analysis, and ensure that there is a <code>Key</code> linking each table needed to create the final analysis datasets.</p>
+<p>These are probably the two most common models for the end product:</p>
 <table>
 <colgroup>
-<col width="36%" />
-<col width="64%" />
+<col width="19%" />
+<col width="80%" />
 </colgroup>
-<thead>
-<tr class="header">
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
 <tbody>
 <tr class="odd">
-<td>SETUP: FIRST TIME ONLY: <code>git clone &lt;url&gt; &lt;directory_name&gt;</code></td>
-<td>Clone the repo. This copies of all the project files in its current state on Github to your local computer.</td>
+<td align="left">Single Massive Dataset</td>
+<td align="left">A single, large, final dataset for the whole project with potentially multiple levels of data (e.g., household, individual) and hundreds or thousands of variables.</td>
 </tr>
 <tr class="even">
-<td>1. <code>git pull origin master</code></td>
-<td>update the state of your files to match the most current version on GitHub</td>
-</tr>
-<tr class="odd">
-<td>2. <code>git checkout -b &lt;new_branch_name&gt;</code></td>
-<td>create new branch that you’ll be working on and go to it</td>
-</tr>
-<tr class="even">
-<td>3. Make some file changes</td>
-<td>work on your feature/implementation</td>
-</tr>
-<tr class="odd">
-<td>4. <code>git add &lt;filename&gt;</code></td>
-<td>add file to stage for commit</td>
-</tr>
-<tr class="even">
-<td>5. <code>git commit -m &lt;commit message&gt;</code></td>
-<td>commit file with a message</td>
-</tr>
-<tr class="odd">
-<td>6. <code>git push -u origin &lt;branch_name&gt;</code></td>
-<td>push branch to remote and set to track (-u only works if this is first push)</td>
-</tr>
-<tr class="even">
-<td>7. Repeat step 4-5.</td>
-<td>work and commit often</td>
-</tr>
-<tr class="odd">
-<td>8. <code>git push</code></td>
-<td>push work to remote branch for others to view</td>
-</tr>
-<tr class="even">
-<td>9. Follow the link given from the <code>git push</code> command to submit a pull request (PR) on GitHub online</td>
-<td>PR merges in work from your branch into master</td>
-</tr>
-<tr class="odd">
-<td>(10.) Your changes and PR get approved, your reviewer deletes your remote branch upon merging</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>11. <code>git fetch --all --prune</code></td>
-<td>clean up your local git by untracking deleted remote branches</td>
+<td align="left">Multiple Relational datasets</td>
+<td align="left">Multiple relational datasets, each tailored to a specific type of data collected in the study. Smaller, relational datasets can be recombined as needed for analyses.</td>
 </tr>
 </tbody>
 </table>
-<p>Other helpful commands are listed below.</p>
+<p>We strongly recommend using the second model, relational data tables, in almost every case. The chapter on <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a> in R for Data Science explains details.</p>
+<blockquote>
+<p>Rationale: If you create a single massive dataset that includes information at multiple levels, then it can create challenges. First, the datasets are unwieldy, often consisting of hundreds or thousands of variables; this makes it difficult to find variables, difficult to view the data through a software browser, and easy to forget about variables. <em>But there are bigger problems</em>. Datasets with an exceptionally large number of variables or multiple levels of data in the same file make it difficult to visually detect pathological problems in the data (e.g., unexpected missing values). For studies that include data from multiple levels (e.g., communities, households, individuals) the inclusion of multiple types of data in the same file makes analyses error prone because it requires the programmer to keep track of when variables include duplicated observations. For example, the inclusion of household characteristics in an individual-level data file means that if there are multiple individuals per household, that simple means of household characteristics cannot be calculated without first restricting the file to unique observations at the household level.</p>
+</blockquote>
 </div>
-<div id="commonly-used-git-commands" class="section level2">
-<h2><span class="header-section-number">7.4</span> Commonly Used Git Commands</h2>
-<table>
-<colgroup>
-<col width="36%" />
-<col width="64%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>git clone &lt;url&gt; &lt;directory_name&gt;</code></td>
-<td>clone a repository, only needs to be done the first time</td>
-</tr>
-<tr class="even">
-<td><code>git pull origin master</code></td>
-<td>pull before making any changes</td>
-</tr>
-<tr class="odd">
-<td><code>git branch</code></td>
-<td>check what branch you are on</td>
-</tr>
-<tr class="even">
-<td><code>git branch -a</code></td>
-<td>check what branch you are on + all remote branches</td>
-</tr>
-<tr class="odd">
-<td><code>git checkout -b &lt;new_branch_name&gt;</code></td>
-<td>create new branch and go to it (only necessary when you create a new branch)</td>
-</tr>
-<tr class="even">
-<td><code>git checkout &lt;branch name&gt;</code></td>
-<td>switch to branch</td>
-</tr>
-<tr class="odd">
-<td><code>git add &lt;file name&gt;</code></td>
-<td>add file to stage for commit</td>
-</tr>
-<tr class="even">
-<td><code>git commit -m &lt;commit message&gt;</code></td>
-<td>commit file with a message</td>
-</tr>
-<tr class="odd">
-<td><code>git push -u origin &lt;branch_name&gt;</code></td>
-<td>push branch to remote and set to track (-u only works if this is first push)</td>
-</tr>
-<tr class="even">
-<td><code>git branch --set-upstream-to origin &lt;branch_name&gt;</code></td>
-<td>set upstream to origin/<branch_name> (use if you forgot -u on first push)</td>
-</tr>
-<tr class="odd">
-<td><code>git push origin &lt;branch_name&gt;</code></td>
-<td>push work to branch</td>
-</tr>
-<tr class="even">
-<td><code>git checkout --track origin/&lt;branch_name&gt;</code></td>
-<td>pulls a remote branch and creates a local branch to track it (use when trying to pull someone else’s branch onto your local computer)</td>
-</tr>
-<tr class="odd">
-<td><code>git push --delete &lt;remote_name&gt; &lt;branch_name&gt;</code></td>
-<td>delete remote branch</td>
-</tr>
-<tr class="even">
-<td><code>git branch -d &lt;branch_name&gt;</code></td>
-<td>deletes local branch, -D to force</td>
-</tr>
-<tr class="odd">
-<td><code>git fetch --all --prune</code></td>
-<td>untrack deleted remote branches</td>
-</tr>
-</tbody>
-</table>
+<div id="relational-data" class="section level2">
+<h2><span class="header-section-number">6.6</span> Relational data</h2>
+<p>Again, please refer to <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a> in R for Data Science for a good example of what this can look like.</p>
+<p><strong>Important</strong>: For a set of relational tables to work, you must ensure that each table relates to another with a unique <code>Key</code>. For example, a child-level dataset must also include IDs for household- or cluster to be merged to household or cluster level data.</p>
+<p>Practical advice on <code>Key</code> variables / IDs used to link datasets. Numeric IDs can occasionally cause problems with merges due to machine rounding errors so character values can sometimes be a good alternative. Whatever format you use, ensure that they do not in some way encode identifying information (e.g., using a social security number or medical record number would be a poor choice of ID for a final dataset).</p>
 </div>
-<div id="how-often-should-i-commit" class="section level2">
-<h2><span class="header-section-number">7.5</span> How often should I commit?</h2>
-<p>Stephanie and Nolan (trained in CS and Data Science) suggest it is good practice to commit every 15 minutes (a time-based guideline), or every time you make a significant change (progress-based guideline). Ben’s perspective aligns with this view, but is weighted toward committing around completion of discrete chunks of work; for him, a discrete chunk of work will often take quite a bit longer than 15 minutes time. Take home message: <em>It is better to commit more rather than less.</em></p>
+<div id="reshaping-data" class="section level2">
+<h2><span class="header-section-number">6.7</span> Reshaping data</h2>
+<p>The <code>dplyr</code> package introduced the <code>pivot_wider</code> and <code>pivot_longer</code> functions in 2019. They make reshaping data dramatically easier than any previous functions, including <code>reshape()</code> (base R) or <code>gather</code>/<code>spread</code> (Tidyverse). This excellent article includes details:</p>
+<p><a href="https://tidyr.tidyverse.org/dev/articles/pivot.html" class="uri">https://tidyr.tidyverse.org/dev/articles/pivot.html</a></p>
 </div>
-<div id="what-should-be-pushed-to-github" class="section level2">
-<h2><span class="header-section-number">7.6</span> What should be pushed to Github?</h2>
-<p>In general, it is better to track text-based files (<code>.R</code>, <code>.Rmd</code>, <code>.md</code>,<code>.txt</code>,etc…) compared with binary files (<code>.pdf</code>,<code>.png</code>,<code>.docx</code>, etc…) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don’t change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.</p>
-<p>Be careful before you push .Rout log files! If someone else runs an R script and creates an .Rout file at the same time and both of you try to push to github, it is incredibly difficult to reconcile these two logs. If you run logs, keep them on your own system or (preferably) set up a shared directory where all logs are name and date timestamped.</p>
-<p>There is a standardized <code>.gitignore</code> for <code>R</code> which you <a href="https://github.com/github/gitignore/blob/master/R.gitignore">can download</a> and add to your project. This ensures you’re not committing log files or things that would otherwise best be left ignored to GitHub. This is a <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">great discussion of project-oriented workflows</a>, extolling the virtues of a self-contained, portable projects, for your reference.</p>
+<div id="data-cleaning" class="section level2">
+<h2><span class="header-section-number">6.8</span> Data cleaning</h2>
+<p>Data cleaning is typically an iterative process that you should conduct on a variable-by-variable basis. Occasionally it is useful to clean an entire questionnaire module at the same time since variables in the same module can be related to one another, and since it can help to proceed through the cleaning process in well-defined chunks. I find it helpful to have a copy of the survey questionnaire (if relevant) handy while cleaning specific variables. This enables you to check skip patterns and codes in the survey against the dataset. We don’t have a lot of general advice for data cleaning except the following. First, there is something to be said for “trolling” (in the fishing sense) through parts of the dataset to see what the data look like and to make sure you have a feel for how information is stored in different variables (e.g., are missing values coded or simply recored as “<code>.</code>” or <code>NA</code>). Second, it can be helpful to consolidate all data cleaning into a single program for each dataset. The data cleaning program corrects entry errors, labels variables, formats variables, and outputs either a temporary or final dataset (but does not, ever, overwrite the untouched data).</p>
 </div>
-<div id="how-should-i-describe-my-commit" class="section level2">
-<h2><span class="header-section-number">7.7</span> How should I describe my commit?</h2>
-<p>When you commit, always include a short commit message that describes what the commit does. In the command line, you can achieve this after you have staged files to commit with the <code>commit -m &lt;&quot;your commit message here&quot;&gt;</code> syntax. This helps track-back through work flow. For example, if the commit message is <code>new</code>, that doesn’t provide any information about what the commit includes. A more descriptive commit message would be <code>Create first draft of Fig 1 distribution plot</code> or <code>Change color scheme for distribution plot</code>.</p>
-<p>For more lengthy and detailed commit messages, which go beyond the simple, single line <code>commit -m &lt;your commit message here&gt;</code> synatax, this <a href="https://medium.com/@andrewhowdencom/anatomy-of-a-good-commit-message-acd9c4490437">Medium post</a> on the anatomy of a good commit message includes additional discussion. (Note, we don’t typically use commits that are this detailed!)</p>
+<div id="be-careful-with-joins-merges" class="section level2">
+<h2><span class="header-section-number">6.9</span> Be careful with joins / merges</h2>
+<p>Experience shows that merging datasets is one of the most error prone steps in data wrangling. Merges can be particularly tricky for less experienced programmers. Errors are likely early in the data processing work flow, and less likely when merging final datasets with clean key variables (IDs) and clear relationships between datasets. Carefully check each merge to ensure it is working as you expect.</p>
+<p>In the Stata software there is a really nice feature with <code>merge</code> that allows you to specify the type of merge/join and then examine the diagnostics of that merge.</p>
+<p>Although R does not have a similarly nice feature at this time, the different <code>join</code> functions in the <code>dplyr</code> package provide all of the tools you need to correctly join your data.</p>
+<p>In our experience, the two most common types of joins in our work are mutating joins and filtering joints. (from the <em>R for Data Science</em> book):</p>
+<blockquote>
+<p><strong>Mutating joins</strong>: add new variables to one data frame from matching observations in another.</p>
+</blockquote>
+<blockquote>
+<p><strong>Filtering joins</strong>: filter observations from one data frame based on whether or not they match an observation in the other table.</p>
+</blockquote>
+<p>Familiarize yourself with these types of operations. The <a href="https://r4ds.had.co.nz/relational-data.html">Relational data</a> chapter of <em>R for Data Science</em> includes details.</p>
+<p>These operations can be tricky if the datasets include different resolutions of data and it is not necessarily a 1:1 merge. Two tips:</p>
+<ol style="list-style-type: decimal">
+<li><p>Always check the dimensions of your data.frames before and after a join to ensure the join is working as you expect.</p></li>
+<li><p>If working in <a href="https://rstudio.com/">RStudio</a> (recommended), always inpect the joined/merged data with <code>View()</code> to ensure that the joined data look as you expect.</p></li>
+</ol>
+<p>These are by no means fool-proof, but they can help diagnose problems with joins.</p>
 
 </div>
 </div>
@@ -385,8 +321,8 @@
           </div>
         </div>
       </div>
-<a href="datawrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bigdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="codingstyle.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="github.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
