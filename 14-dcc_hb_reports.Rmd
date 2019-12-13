@@ -1,10 +1,10 @@
 # Building Automated Markdown Reports
 
-*"Always remember Murphy's Law and Murphy's Law Extended: Anything that can't go wrong, will go wrong" -T. Porco
+"Never forget Murphy's Law 2.0: Anything that can't go wrong, will go wrong." -T. Porco
 
 _Contributors: Will Godwin, Ying Lin, Ben Arnold_
 
-Many teams at Proctor conduct trials that utilize electronic data collection, with data flowing in daily. In order to identify potential errors in the field, we have found it very valuable to download, process, and visualize the data on a weekly and daily basis. On numerous occassions, Thanks to monitoring reports, we have been able to identify and rectify impossibly tall 3-month olds or a toddler with different birthdates on separate interviews. Proactively identifying preventable error saves hassle when processing the final data and ultimately makes trials more accurate and efficient. We visualize the data using reports of tables and figures generated in R markdown. This document provides a template for building your own R markdown report, whether for DSMC meeting or internal use. I've also included an [example script](url to example) to show how a report can look in practice.
+Many teams at Proctor conduct trials that utilize electronic data collection, with data flowing in daily. In order to identify potential errors in the field, we have found it very valuable to download, process, and visualize the data on a weekly and daily basis. On numerous occassions, Thanks to monitoring reports, we have been able to identify and rectify impossibly tall 3-month olds or a toddler with different birthdates on separate interviews. Proactively identifying preventable error saves hassle when processing the final data and ultimately makes trials more accurate and efficient. We visualize the data using reports of tables and figures generated in R markdown. This document provides a template for building your own R markdown report, whether for DSMC meeting or internal use. I've also included an [example script](templates/example_report.Rmd) to show how a report can look in practice.
 
 $~$
 
@@ -29,23 +29,25 @@ output:
 $~$
 
 ### Directory structure
-Your report may begin as a couple files in a folder but as it grows in size and complexity, I highly recommend systematizing and standardizing the process for posterity and your own sanity. Refer to [chapter 3](https://proctor-ucsf.github.io/dcc-handbook/directory-structure-and-code-repositories.html) for guidance on building a standardized directory structure and [chapter 4](https://proctor-ucsf.github.io/dcc-handbook/codingpractices.html) for information on coding practices and utilizing the *here* package, which I use throughout the process.
+Your report may begin as a couple files in a folder but as it grows in size and complexity, I highly recommend systematizing and standardizing the process for posterity and your own sanity. Refer to [chapter 3](directory-structure-and-code-repositories.html) for guidance on building a standardized directory structure and [chapter 4](codingpractices.html) for information on coding practices and utilizing the *here* package, which I use throughout the process.
 
 $~$
 
 ## Automating the data export process
-Creating a system that enables you to run some code and download new data in a systematic manner, as opposed to manually downloading the data, is critical to saving time and headaches down the road. This is especially important if you're building a report that will be run weekly or daily. It may require a little more work on the front end but programmatically downloading data rather than manually will likely be faster, better documented, and standardized. If you work on a team that uses the World Bank's *Survey Solutions* for data collection and storage, there is a great API tool that allows you to export data directly from the project's server, find some code that does this [here](url to code I add to the repo). Salesforce likely has a similar functionality (Ask Jason?).
+Creating a system that enables you to run some code and download new data in a systematic manner, as opposed to manually downloading the data, is critical to saving time and headaches down the road. This is especially important if you're building a report that will be run weekly or daily. It may require a little more work on the front end but programmatically downloading data rather than manually will likely be faster, better documented, and standardized. If you work on a team that uses the World Bank's *Survey Solutions* for data collection and storage, there is a great API tool that allows you to export data directly from the project's server. Example code for that process can be found [here](templates/api_example.R). Salesforce, REDCap, and other electronic data capture systems likely have a similar functionality that other Proctor researchers may be more familiar with.
 
 $~$
 
 ## Loading the data
-Depending on the nature of the trial, there may be multiple files to load after exporting the data. I would suggest using a table (ie simple .csv file) to track all necessary files for the report, as shown below. Refer to the [example script](url to example) for how this looks in a setting that utilizes *Survey Solutions*.
+Depending on the nature of the trial, there may be multiple files to load after exporting the data. I would suggest using a table (ie simple .csv file) to track all necessary files for the report, as shown below. Refer to the [example script](templates/read_clean_data_example.R) for how this looks in a setting that utilizes *Survey Solutions*.
 
-```{r dir-fig1, echo=FALSE, message=F, out.width='60%', out.height='40%'}
+<center>
+```{r rep-fig1, echo=FALSE, message=F, out.width='60%', out.height='40%'}
 library(here)
 #setwd("/Users/williamgodwin/Box Sync/Burkina Faso/Will/dcc_chap")
-knitr::include_graphics(here("images", "api_meta.png"))
+knitr::include_graphics(here("images/report-images", "api_meta.png"))
 ```
+</center>
 
 $~$
 
@@ -112,12 +114,13 @@ dt.anthro %>%
     xlab("Age (weeks)") +
     ylab("Count")
 ```
-
-```{r dir-fig2, echo=FALSE, out.width='60%', out.height='40%'}
-knitr::include_graphics(here("images","birthweight.png"))
+<center>
+```{r rep-fig2, echo=FALSE, out.width='60%', out.height='40%', align="center"}
+knitr::include_graphics(here("images/report-images","birthweight.png"))
 ```
 
 Distribution of participant birthweights in grams
+</center>
 
 $~$
 
@@ -128,26 +131,27 @@ The ultimate arbiter of whether a trial remains running is often the Data and Sa
 Any study investigator cares a lot about enrollment, since it determines the length and cost of the trial, among other things. Therefore, any report needs tables/figures showing enrollment trends and trajectory. Below are a couple examples of what they can look like.
 <!-- ![](images/report-images/enrollment1.png) -->
 
-
-```{r dir-fig3, echo=FALSE, out.width='40%', out.height='20%'}
+<center>
+```{r rep-fig3, echo=FALSE, out.width='50%', out.height='30%'}
 knitr::include_graphics(here("images/report-images","enrollment1.png"))
 ```
 
-```{r dir-fig4, echo=FALSE, out.width='60%', out.height='40%'}
+```{r rep-fig4, echo=FALSE, out.width='70%', out.height='50%'}
 knitr::include_graphics(here("images/report-images","enrollment2.png"))
 ```
 
 Enrollment counts across the length of the study period.
+</center>
 
 $~$
 
 #### Baseline characteristics
-Demographic characteristics of the enrolled participants at baseline are also a must-have.
-
-```{r dir-fig5, echo=FALSE, out.width='60%', out.height='40%'}
+Demographic characteristics of the enrolled participants at baseline are often necessary.
+<center>
+```{r rep-fig5, echo=FALSE, out.width='60%', out.height='40%'}
 knitr::include_graphics(here("images/report-images","baseline.png"))
 ```
-
+</center>
 $~$
 
 #### Treatment
@@ -162,53 +166,64 @@ wrong_random <- dt.treatment %>%
 
 Number of IDs where treatment letter given does not match database: 0
 ```
-
-```{r dir-fig7, echo=FALSE, out.width='40%', out.height='20%'}
+<center>
+```{r rep-fig7, echo=FALSE, out.width='40%', out.height='20%'}
 knitr::include_graphics(here("images/report-images","treatment.png"))
 ```
 
 Counts of number treated and number eligible, along with percent treated (coverage), by region.
+</center>
 
 $~$
 
 #### Primary/secondary outcomes (***masked!***)
 This is probably the most exciting section for an investigator to see since these metrics are the motivation of the trial itself. Be especially vigilient to make sure that the figures remain masked when sending to trial investigators and coordinators. This means making sure that you send no information regarding the treatment assignments while the trial is still active.
 
-```{r dir-fig8, echo=FALSE, out.width='40%', out.height='20%'}
+<center>
+```{r rep-fig8, echo=FALSE, out.width='50%', out.height='35%'}
 knitr::include_graphics(here("images/report-images","primary_outcome.png"))
 ```
 
-Table illustrates the preliminary mortality rate and total person-years by region.
+Preliminary mortality rate and total person-years by region.
 
-```{r dir-fig9, echo=FALSE, out.width='50%', out.height='40%'}
+$~$
+
+```{r rep-fig9, echo=FALSE, out.width='50%', out.height='40%'}
 knitr::include_graphics(here("images/report-images","growth_curves.png"))
 ```
 
-Shows the height growth curves of participants at Baseline and 6-month timepoints. 
+Height growth curves of participants at Baseline and 6-month timepoints. 
+</center>
 
 $~$
 
 #### Follow-up/Adverse events
 This report can serve as guard against loss to follow-up, an issue that plagues many trials. By actively monitoring the number of participants that have, and have not, been followed-up on, we can communicate where participants or clusters need to more attention to workers in the field. Below is an example showing follow-up percentages by region.
 
-```{r dir-fig10, echo=FALSE, out.width='30%', out.height='20%'}
+<center>
+```{r rep-fig10, echo=FALSE, out.width='50%', out.height='35%'}
 knitr::include_graphics(here("images/report-images","followup.png"))
 ```
+</center>
 
 As mentioned above, adverse events should be tabulated and closely watched throughout the study to monitor if the intervention may be causing increased harm.
 
-```{r dir-fig11, echo=FALSE, out.width='60%', out.height='40%'}
+<center>
+```{r rep-fig11, echo=FALSE, out.width='65%', out.height='45%'}
 knitr::include_graphics(here("images/report-images","adverse_events.png"))
 ```
+</center>
 
 $~$
 
 ### Appendix (if necessary)
 Sometimes an appendix can be helpful to display long lists or addendums to tables shown earlier in the report. Below is an example of a list enumerating all adverse events that were not included in the AE table within the main report.
 
-```{r dir-fig12, echo=FALSE, out.width='50%', out.height='30%'}
+<center>
+```{r rep-fig12, echo=FALSE, out.width='70%', out.height='50%'}
 knitr::include_graphics(here("images/report-images","appendix.png"))
 ```
+</center>
 
 $~$
 

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Additional Resources | Proctor Foundation Data Science Handbook</title>
+  <title>Chapter 14 Data monitoring | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   <meta name="generator" content="bookdown 0.15 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 Additional Resources | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Chapter 14 Data monitoring | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Additional Resources | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Chapter 14 Data monitoring | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="code-of-conduct.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="building-automated-markdown-reports.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -185,12 +185,12 @@
 <li class="chapter" data-level="13.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#automating-the-data-export-process"><i class="fa fa-check"></i><b>13.2</b> Automating the data export process</a></li>
 <li class="chapter" data-level="13.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#loading-the-data"><i class="fa fa-check"></i><b>13.3</b> Loading the data</a></li>
 <li class="chapter" data-level="13.4" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-cleaningprocessing"><i class="fa fa-check"></i><b>13.4</b> Data cleaning/processing</a></li>
-<li class="chapter" data-level="13.5" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-monitoring"><i class="fa fa-check"></i><b>13.5</b> Data monitoring</a><ul>
-<li class="chapter" data-level="13.5.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-validation"><i class="fa fa-check"></i><b>13.5.1</b> Data validation</a></li>
-<li class="chapter" data-level="13.5.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-presentation-dsmc-style"><i class="fa fa-check"></i><b>13.5.2</b> Data presentation (DSMC-style)</a></li>
-<li class="chapter" data-level="13.5.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#appendix-if-necessary"><i class="fa fa-check"></i><b>13.5.3</b> Appendix (if necessary)</a></li>
 </ul></li>
-<li class="chapter" data-level="13.6" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#summary"><i class="fa fa-check"></i><b>13.6</b> Summary</a></li>
+<li class="chapter" data-level="14" data-path="data-monitoring.html"><a href="data-monitoring.html"><i class="fa fa-check"></i><b>14</b> Data monitoring</a><ul>
+<li class="chapter" data-level="14.0.1" data-path="data-monitoring.html"><a href="data-monitoring.html#data-validation"><i class="fa fa-check"></i><b>14.0.1</b> Data validation</a></li>
+<li class="chapter" data-level="14.0.2" data-path="data-monitoring.html"><a href="data-monitoring.html#data-presentation-dsmc-style"><i class="fa fa-check"></i><b>14.0.2</b> Data presentation (DSMC-style)</a></li>
+<li class="chapter" data-level="14.0.3" data-path="data-monitoring.html"><a href="data-monitoring.html#appendix-if-necessary"><i class="fa fa-check"></i><b>14.0.3</b> Appendix (if necessary)</a></li>
+<li class="chapter" data-level="14.1" data-path="data-monitoring.html"><a href="data-monitoring.html#summary"><i class="fa fa-check"></i><b>14.1</b> Summary</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -212,18 +212,133 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="resources" class="section level1">
-<h1><span class="header-section-number">Chapter 12</span> Additional Resources</h1>
-<p>TBD</p>
+<div id="data-monitoring" class="section level1">
+<h1><span class="header-section-number">Chapter 14</span> Data monitoring</h1>
+<p>Now that we have data read into R and structured appropriately, we can focus on the (2) primary aims of the report: data validation to be used internally and DSMC-style presentation of the data. Of course the aims of your report may vary but the monitoring examples below represent evaluations critical to almost any RCT.</p>
+<div id="data-validation" class="section level3">
+<h3><span class="header-section-number">14.0.1</span> Data validation</h3>
+<div id="missinginappropriately-structured-data" class="section level4">
+<h4><span class="header-section-number">14.0.1.1</span> Missing/inappropriately structured data</h4>
+<p>While not the most glamorous component of the report, checking for missing data is critical. It’s helpful once all the data have been read in, to conduct some important checks of the data integrity. Did R (or python, etc) correctly interpret and load the data files? Are there any participant IDs missing? Are there participant’s with reported birthdates in the future? This is an important stage to think about the plethora of maladies that could befall the data in between when it was recorded and when it got to you. Below are examples of how you could check for some common issues.</p>
+<pre><code>#check for missing values across all columns
+map(dt.anthro, ~sum(is.na(.)))
 
+#check for missing values in childsex
+na_childSex &lt;- sum(is.na(dt.anthro$childSex))
+
+There are 4 rows with missing values for child sex.</code></pre>
+<p><span class="math inline">\(~\)</span></p>
+</div>
+<div id="reporting-inconsistencies" class="section level4">
+<h4><span class="header-section-number">14.0.1.2</span> Reporting inconsistencies</h4>
+<p>Many studies may use multiple independent questionnaires to gather information at different timepoints and ask the same demographic information. For example, in an individually randomized trial, each participant receives an ID that links the participant responses across all timepoints of the study. Below is an example showing how to check that the responses are consistent across all questionnaires.</p>
+<pre><code>#join anthro and swabs data by childID to check where childSex is different
+dt.anthro %&gt;%
+  select(childSex, childID) %&gt;%
+  inner_join(
+    dt.swabs %&gt;% select(childSex, childID),
+    by=&quot;childID&quot;
+  ) %&gt;%
+  filter(childSex.x!=childSex.y)</code></pre>
+<p>Another component of data validation is checking for overt errors and outliers, many of which can often be fixed in the field. One example is when interviewers may accidentally record a study participant’s weight in kilograms instead of grams, resulting in an error 3 magnitudes in size. This error is easily identified (red circle) from plotting the distribution of the birthweights in a histogram.</p>
+<pre><code>#age histogram
+dt.anthro %&gt;%
+  mutate(weeks = difftime(startTime, date_of_birth, units = &quot;weeks&quot;)) %&gt;%
+  ggplot(dt.anthro, aes(weeks)) +
+    geom_histogram(binwidth = .2) +
+    theme_bw() +
+    xlab(&quot;Age (weeks)&quot;) +
+    ylab(&quot;Count&quot;)</code></pre>
+<center>
+<p><img src="images/report-images/birthweight.png" width="60%" height="40%" /></p>
+Distribution of participant birthweights in grams
+</center>
+<p><span class="math inline">\(~\)</span></p>
+</div>
+</div>
+<div id="data-presentation-dsmc-style" class="section level3">
+<h3><span class="header-section-number">14.0.2</span> Data presentation (DSMC-style)</h3>
+<p>The ultimate arbiter of whether a trial remains running is often the Data and Safety Monitoring Committee (DSMC) and these reports can be used to present preliminary findings/analyses as well as detail all relevant safety metrics.</p>
+<div id="enrollment" class="section level4">
+<h4><span class="header-section-number">14.0.2.1</span> Enrollment</h4>
+<p>Any study investigator cares a lot about enrollment, since it determines the length and cost of the trial, among other things. Therefore, any report needs tables/figures showing enrollment trends and trajectory. Below are a couple examples of what they can look like.
+<!-- ![](images/report-images/enrollment1.png) --></p>
+<center>
+<p><img src="images/report-images/enrollment1.png" width="40%" height="20%" /></p>
+<p><img src="images/report-images/enrollment2.png" width="60%" height="40%" /></p>
+Enrollment counts across the length of the study period.
+</center>
+<p><span class="math inline">\(~\)</span></p>
+</div>
+<div id="baseline-characteristics" class="section level4">
+<h4><span class="header-section-number">14.0.2.2</span> Baseline characteristics</h4>
+Demographic characteristics of the enrolled participants at baseline are often necessary.
+<center>
+<img src="images/report-images/baseline.png" width="60%" height="40%" />
+</center>
+<p><span class="math inline">\(~\)</span></p>
+</div>
+<div id="treatment" class="section level4">
+<h4><span class="header-section-number">14.0.2.3</span> Treatment</h4>
+<p>There is usually a treatment component to an RCT, where participants are treated according to their assigned arm (i.e. treatment or placebo). The report should include checks that confirm particpants actually received the treatment that they were randomized to. Otherwise, the results of the study lack interpretability and are likely null.</p>
+<pre><code>#merge with treatment letters
+wrong_random &lt;- dt.treatment %&gt;%
+  left_join(dt_letters, by=&quot;childID&quot;) %&gt;%
+  #the treatment letter does not match what&#39;s in database
+  tally(TL != assignment) %&gt;% as.numeric()
+
+Number of IDs where treatment letter given does not match database: 0</code></pre>
+<center>
+<p><img src="images/report-images/treatment.png" width="40%" height="20%" /></p>
+Counts of number treated and number eligible, along with percent treated (coverage), by region.
+</center>
+<p><span class="math inline">\(~\)</span></p>
+</div>
+<div id="primarysecondary-outcomes-masked" class="section level4">
+<h4><span class="header-section-number">14.0.2.4</span> Primary/secondary outcomes (<strong><em>masked!</em></strong>)</h4>
+<p>This is probably the most exciting section for an investigator to see since these metrics are the motivation of the trial itself. Be especially vigilient to make sure that the figures remain masked when sending to trial investigators and coordinators. This means making sure that you send no information regarding the treatment assignments while the trial is still active.</p>
+<center>
+<p><img src="images/report-images/primary_outcome.png" width="40%" height="20%" /></p>
+<p>Preliminary mortality rate and total person-years by region.</p>
+<p><img src="images/report-images/growth_curves.png" width="50%" height="40%" /></p>
+Height growth curves of participants at Baseline and 6-month timepoints.
+</center>
+<p><span class="math inline">\(~\)</span></p>
+</div>
+<div id="follow-upadverse-events" class="section level4">
+<h4><span class="header-section-number">14.0.2.5</span> Follow-up/Adverse events</h4>
+<p>This report can serve as guard against loss to follow-up, an issue that plagues many trials. By actively monitoring the number of participants that have, and have not, been followed-up on, we can communicate where participants or clusters need to more attention to workers in the field. Below is an example showing follow-up percentages by region.</p>
+<center>
+<img src="images/report-images/followup.png" width="50%" height="35%" />
+</center>
+<p>As mentioned above, adverse events should be tabulated and closely watched throughout the study to monitor if the intervention may be causing increased harm.</p>
+<center>
+<img src="images/report-images/adverse_events.png" width="60%" height="40%" />
+</center>
+<p><span class="math inline">\(~\)</span></p>
+</div>
+</div>
+<div id="appendix-if-necessary" class="section level3">
+<h3><span class="header-section-number">14.0.3</span> Appendix (if necessary)</h3>
+<p>Sometimes an appendix can be helpful to display long lists or addendums to tables shown earlier in the report. Below is an example of a list enumerating all adverse events that were not included in the AE table within the main report.</p>
+<center>
+<img src="images/report-images/appendix.png" width="50%" height="30%" />
+</center>
+<p><span class="math inline">\(~\)</span></p>
+</div>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">14.1</span> Summary</h2>
+<p>This chapter described and illustrated an example of a data monitoring report using R markdown. This is, by no means, an exhaustive list of what to include in a monitoring report but meant to serve as a template as you create your own report. It is specifically geared towards continuous monitoring of randomized-controlled trials but the overarching concepts apply to other types of trials or even retrospective analyses.</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="code-of-conduct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="building-automated-markdown-reports.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

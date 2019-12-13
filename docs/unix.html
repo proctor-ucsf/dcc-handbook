@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 UNIX Commands | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 UNIX Commands | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-12-08" />
+<meta name="date" content="2019-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -174,6 +177,21 @@
 </ul></li>
 <li class="chapter" data-level="12" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>12</b> Additional Resources</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="13" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html"><i class="fa fa-check"></i><b>13</b> Building Automated Markdown Reports</a><ul>
+<li class="chapter" data-level="13.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#setting-up-the-markdown"><i class="fa fa-check"></i><b>13.1</b> Setting up the markdown</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#yaml"><i class="fa fa-check"></i><b>13.1.1</b> YAML</a></li>
+<li class="chapter" data-level="13.1.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#directory-structure-1"><i class="fa fa-check"></i><b>13.1.2</b> Directory structure</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#automating-the-data-export-process"><i class="fa fa-check"></i><b>13.2</b> Automating the data export process</a></li>
+<li class="chapter" data-level="13.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#loading-the-data"><i class="fa fa-check"></i><b>13.3</b> Loading the data</a></li>
+<li class="chapter" data-level="13.4" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-cleaningprocessing"><i class="fa fa-check"></i><b>13.4</b> Data cleaning/processing</a></li>
+<li class="chapter" data-level="13.5" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-monitoring"><i class="fa fa-check"></i><b>13.5</b> Data monitoring</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-validation"><i class="fa fa-check"></i><b>13.5.1</b> Data validation</a></li>
+<li class="chapter" data-level="13.5.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-presentation-dsmc-style"><i class="fa fa-check"></i><b>13.5.2</b> Data presentation (DSMC-style)</a></li>
+<li class="chapter" data-level="13.5.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#appendix-if-necessary"><i class="fa fa-check"></i><b>13.5.3</b> Appendix (if necessary)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#summary"><i class="fa fa-check"></i><b>13.6</b> Summary</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -250,7 +268,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <td>List files in the directory</td>
 </tr>
 <tr class="even">
-<td><code>cp &quot;file2&quot; &quot;newfile2&quot;</code></td>
+<td><code>cp "file2" "newfile2"</code></td>
 <td>Copy file (remember to include file extensions when typing in file names like <code>.pdf</code> or <code>.R</code>)</td>
 </tr>
 <tr class="odd">
@@ -329,7 +347,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <p><code>C:\Program Files\R\R-3.6.0\bin</code></p>
 <p>For appending the <code>PATH</code> variable, please view <a href="https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/">this link</a>. I strongly recommend completing this option.</p>
 <p>If you add the PATH as an environment variable, then you can run this line of code to test:
-<code>Rscript -e “cat(‘this is a test’)&quot;</code>, where the <code>-e</code> flag refers to the expression that will be executed.</p>
+<code>Rscript -e “cat(‘this is a test’)"</code>, where the <code>-e</code> flag refers to the expression that will be executed.</p>
 <p>If you do not add the PATH as an environment variable, then you can run this line of code to replicate the results from above:
 <code>“C:\Program Files\R\R-3.6.0\bin” -e “cat(‘this is a test’)”</code></p>
 <p>To run an R script from the command line, we can say:
@@ -338,7 +356,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <h3><span class="header-section-number">9.5.1</span> Common Mistakes</h3>
 <ul>
 <li>Remember to include all of the quotation marks around file paths that have a spaces.</li>
-<li>If you attempt to run an R script but run into <code>Error: '\U' used without hex digits in character string starting &quot;'C:\U&quot;</code>, try replacing all <code>\</code> with <code>\\</code> or <code>/</code>.</li>
+<li>If you attempt to run an R script but run into <code>Error: '\U' used without hex digits in character string starting "'C:\U"</code>, try replacing all <code>\</code> with <code>\\</code> or <code>/</code>.</li>
 </ul>
 </div>
 </div>
@@ -374,7 +392,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <td>Kill a process by its process ID</td>
 </tr>
 <tr class="even">
-<td><code>taskkill /IM &quot;process name&quot; /F</code></td>
+<td><code>taskkill /IM "process name" /F</code></td>
 <td></td>
 <td>Kill a process by its name</td>
 </tr>
@@ -404,7 +422,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 </div>
 <div id="running-big-jobs" class="section level2">
 <h2><span class="header-section-number">9.7</span> Running big jobs</h2>
-<p>For big data workflows, the concept of “backgrounding” a bash script allows you to start a “job” (i.e. run the script) and leave it overnight to run. At the top level, a bash script (<code>0-run-project.sh</code>) that simply calls the directory-level bash scripts (i.e. <code>0-prep-data.sh</code>, <code>0-run-analysis.sh</code>, <code>0-run-figures.sh</code>, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.</p>
+<p>For big data workflows, the concept of “backgrounding” a bash script allows you to start a “job” (i.e. run the script) and leave it overnight to run. At the top level, a bash script (<code>0-run-project.sh</code>) that simply calls the directory-level bash scripts (i.e. <code>0-prep-data.sh</code>, <code>0-run-analysis.sh</code>, <code>0-run-figures.sh</code>, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.</p>
 <ul>
 <li><strong>Running Bash Scripts in Background</strong>: Running a long bash script is not trivial. Normally you would run a bash script by opening a terminal and typing something like <code>./run-project.sh</code>. But what if you leave your computer, log out of your server, or close the terminal? Normally, the bash script will exit and fail to complete. To run it in background, type <code>./run-project.sh &amp;; disown</code>. You can see the job running (and CPU utilization) with the command <code>top</code> or <code>ps -v</code> and check your memory with <code>free -h</code>.</li>
 </ul>
@@ -443,24 +461,24 @@ tmux attach -tsession_name </code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
