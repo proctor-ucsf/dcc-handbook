@@ -84,7 +84,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-12-08}
+    \date{2019-12-12}
 
 \usepackage{booktabs}
 
@@ -137,7 +137,7 @@ Start with two organizing concepts:
 Broadly speaking, a typical scientific data science work flow involves four steps to transform raw data (e.g., from the field) into summaries that communicate results to the scientific community.
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow}
+\includegraphics[width=0.75\linewidth]{/Users/williamgodwin/Documents/dcc-handbook/images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow}
 \end{figure}
 
 When starting a new project, the work flow tends to evolve gradually and by iteration. Data cleaning, data processing, exploratory analyses, back to data cleaning, and so forth. If the work takes place in an unstructured environment with no system to organize files and work flow, it rapidly devolves into into a disorganized mess; analyses become difficult or impossible to replicate and they are anything but scientific. Projects with short deadlines (e.g., proposals, conference abstract submissions, article revisions) are particularly vulnerable to this type of organizational entropy. Putting together a directory and workflow plan from the start helps keep files organized and prevent disorder. Modifications are inevitable -- as long as the system is organized, modifications are usually no problem.
@@ -166,7 +166,7 @@ At Proctor, we mostly use R. With the development of \href{https://rstudio.com/}
 A data science work flow typically progresses through 4 steps that rarely evolve in a purely linear fashion, but in the end should flow in this direction:
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow2}
+\includegraphics[width=0.75\linewidth]{/Users/williamgodwin/Documents/dcc-handbook/images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow2}
 \end{figure}
 
 \begin{longtable}[]{@{}clcc@{}}
@@ -316,7 +316,7 @@ For example, Ben completed a study in Tamil Nadu, India during his dissertation 
 \subsection{First level: data and analyses}\label{first-level-data-and-analyses}}
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/mystudy-dir-fig1} \caption{Example directory for `mystudy`}\label{fig:dir-fig1}
+\includegraphics[width=0.75\linewidth]{/Users/williamgodwin/Documents/dcc-handbook/images/mystudy-dir-fig1} \caption{Example directory for `mystudy`}\label{fig:dir-fig1}
 \end{figure}
 
 Start by dividing a project into major activities. In the example abpve, the project is named \texttt{mystudy}. There is a \texttt{data} subdirectory (more in a sec), and then three major activities, each corresponding to a separate analysis: \texttt{primary-analysis},\texttt{secondary-analysis-1}, and \texttt{secondary-analysis-2}. In a real project, the names could be more informative, such as ``trachoma-qpcr''. Also, a real project might also include many additional subdirectories related to administrative and logistics activities that do not relate to data science, such as irb, travel, contracts, budget, survey forms, etc.).
@@ -326,7 +326,7 @@ Dividing files into major activities helps keep things organized for really big 
 \hypertarget{second-level-data}{%
 \subsection{Second level: data}\label{second-level-data}}
 
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/mystudy-dir-fig2}
+\includegraphics[width=0.75\linewidth]{/Users/williamgodwin/Documents/dcc-handbook/images/mystudy-dir-fig2}
 
 Each project will include a \texttt{data} directory. We recommend organizing it into 3 parts: \texttt{untouched}, \texttt{temp}, and \texttt{final}. Often, it is useful to include a fourth subdirectory called \texttt{public} for sharing public versions of datasets.
 
@@ -343,7 +343,7 @@ We recommend maintaining a separate subdirectory for each major analysis in a pr
 
 Think of each analysis as the scope of all of the work for a single, published paper. We recommend dividing the analysis project into a space for computational notebooks / scripts (i.e., a \texttt{code\ repository}), and a second for their output. The reason for the split is to make it easier to use version control (should you choose) for the code. Version control like \texttt{git} and \texttt{GitHub} (see the \protect\hyperlink{GitHub}{Chapter on GitHub}) works well for text files but isn't really designed for binary files such as images (.png), datasets (.rds), or PDF files (.pdf). It is certainly possible to use git with those file types, but since git makes a new copy of the file every time it is changed the git repo can get horribly bloated and takes up too much space on disk. Consolidating the output into a separate directory makes it more obvious that it isn't under version control. In this example, there are separate parts for code (\texttt{R}) and output (\texttt{output}). Output could include figures, tables, or saved analysis results stored as data files (.rds or .csv). Another conventional name for the code repository is \texttt{src} as an alternative to \texttt{R} if you use other languages.
 
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/mystudy-dir-fig3}
+\includegraphics[width=0.75\linewidth]{/Users/williamgodwin/Documents/dcc-handbook/images/mystudy-dir-fig3}
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
@@ -358,7 +358,7 @@ Maintain a separate code repository for each major analysis activity (last secti
 
 We recommend the following structure for a code repository:
 
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/mystudy-dir-fig4}
+\includegraphics[width=0.75\linewidth]{/Users/williamgodwin/Documents/dcc-handbook/images/mystudy-dir-fig4}
 
 With subdirectories that generally look like this:
 
@@ -417,7 +417,7 @@ If you write a custom function for an analysis and need to use it repeatedly acr
 \hypertarget{order-files-and-subdirectories}{%
 \subsection{Order Files and Subdirectories}\label{order-files-and-subdirectories}}
 
-This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e. \texttt{primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R} =\textgreater{} \texttt{primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS}). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.
+This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e.~\texttt{primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R} =\textgreater{} \texttt{primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS}). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.
 
 In the \texttt{6-figures} subdirectory, each RMarkdown file (computational notebook) is linked to a specific figure in a hypothetical manuscript. This makes it easier to link specific notebooks in figure legends, and to see which file creates each figure.
 
@@ -572,7 +572,7 @@ We recommend you use \textbf{Snake\_Case}.
 
 \begin{itemize}
 \item
-  Base R allows \texttt{.} in variable names and functions (such as \texttt{read.csv()}), but this goes against best practices for variable naming in many other coding languages. For consistency's sake, \texttt{snake\_case} has been adopted across languages, and modern packages and functions typically use it (i.e. \texttt{readr::read\_csv()}). As a very general rule of thumb, if a package you're using doesn't use \texttt{snake\_case}, there may be an updated version or more modern package that \emph{does}, bringing with it the variety of performance improvements and bug fixes inherent in more mature and modern software.
+  Base R allows \texttt{.} in variable names and functions (such as \texttt{read.csv()}), but this goes against best practices for variable naming in many other coding languages. For consistency's sake, \texttt{snake\_case} has been adopted across languages, and modern packages and functions typically use it (i.e.~\texttt{readr::read\_csv()}). As a very general rule of thumb, if a package you're using doesn't use \texttt{snake\_case}, there may be an updated version or more modern package that \emph{does}, bringing with it the variety of performance improvements and bug fixes inherent in more mature and modern software.
 \item
   \textbf{Note}: you may also see \texttt{camelCase} throughout the R code you come across. This is \emph{okay} but not ideal -- try to stay consistent across all your code with \texttt{snake\_case}.
 \item
@@ -1478,7 +1478,7 @@ Stephanie and Nolan (trained in CS and Data Science) suggest it is good practice
 \hypertarget{what-should-be-pushed-to-github}{%
 \section{What should be pushed to Github?}\label{what-should-be-pushed-to-github}}
 
-In general, it is better to track text-based files (\texttt{.R}, \texttt{.Rmd}, \texttt{.md},\texttt{.txt},etc\ldots{}) compared with binary files (\texttt{.pdf},\texttt{.png},\texttt{.docx}, etc\ldots{}) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don't change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.
+In general, it is better to track text-based files (\texttt{.R}, \texttt{.Rmd}, \texttt{.md},\texttt{.txt},etc\ldots) compared with binary files (\texttt{.pdf},\texttt{.png},\texttt{.docx}, etc\ldots) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don't change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.
 
 Be careful before you push .Rout log files! If someone else runs an R script and creates an .Rout file at the same time and both of you try to push to github, it is incredibly difficult to reconcile these two logs. If you run logs, keep them on your own system or (preferably) set up a shared directory where all logs are name and date timestamped.
 
@@ -1763,7 +1763,7 @@ To kill a task in Windows, you can also go to Task Manager \textgreater{} More d
 \hypertarget{running-big-jobs}{%
 \section{Running big jobs}\label{running-big-jobs}}
 
-For big data workflows, the concept of ``backgrounding'' a bash script allows you to start a ``job'' (i.e.~run the script) and leave it overnight to run. At the top level, a bash script (\texttt{0-run-project.sh}) that simply calls the directory-level bash scripts (i.e. \texttt{0-prep-data.sh}, \texttt{0-run-analysis.sh}, \texttt{0-run-figures.sh}, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.
+For big data workflows, the concept of ``backgrounding'' a bash script allows you to start a ``job'' (i.e.~run the script) and leave it overnight to run. At the top level, a bash script (\texttt{0-run-project.sh}) that simply calls the directory-level bash scripts (i.e.~\texttt{0-prep-data.sh}, \texttt{0-run-analysis.sh}, \texttt{0-run-figures.sh}, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.
 
 \begin{itemize}
 \tightlist
@@ -1832,7 +1832,7 @@ tmux attach -tsession_name
 \begin{itemize}
 \tightlist
 \item
-  Use email for longer messages (\textgreater{}200 words) or messages that merit preservation.
+  Use email for longer messages (\textgreater200 words) or messages that merit preservation.
 \item
   Generally, strive to respond within 24 hours. If you are unusually busy or on vacation please alert the team in advance so we can expect you not to respond at all / as quickly as usual.
 \end{itemize}
@@ -1898,7 +1898,7 @@ We strive to work in an environment that is collaborative, supportive, open, and
 
 We encourage students / staff of all experience levels to respectfully share their honest opinions and ideas on any topic. Our group has thrived upon such respectful honest input from team members over the years, and this document is a product of years of student and staff input (and even debate) that has gradually improved our productivity and overall quality of our work.
 
-If Ben is your PI, be forewarned that he tends to batch his email communication (\textasciitilde{}30 mins in the morning and afternoon, 15 mins mid-day), and doesn't tend to answer Slack or email during evenings or weekends. If you need to reach him urgently then give him a call or text on his mobile.
+If Ben is your PI, be forewarned that he tends to batch his email communication (\textasciitilde30 mins in the morning and afternoon, 15 mins mid-day), and doesn't tend to answer Slack or email during evenings or weekends. If you need to reach him urgently then give him a call or text on his mobile.
 
 \hypertarget{protecting-human-subjects}{%
 \section{Protecting human subjects}\label{protecting-human-subjects}}
@@ -1933,6 +1933,231 @@ Please follow the Proctor Foundation's employee guidelines for work hours, and d
 \chapter{Additional Resources}\label{resources}}
 
 TBD
+
+\hypertarget{building-automated-markdown-reports}{%
+\chapter{Building Automated Markdown Reports}\label{building-automated-markdown-reports}}
+
+``Remember Murphy's Law 2.0: Anything that can't go wrong, will go wrong.'' -T. Porco
+
+\emph{Contributors: Will Godwin, Ying Lin, Ben Arnold}
+
+Many teams at Proctor conduct trials that utilize electronic data collection, with data flowing in daily. In order to identify potential errors in the field, we have found it very valuable to download, process, and visualize the data on a weekly and daily basis. On numerous occassions, Thanks to monitoring reports, we have been able to identify and rectify impossibly tall 3-month olds or a toddler with different birthdates on separate interviews. Proactively identifying preventable error saves hassle when processing the final data and ultimately makes trials more accurate and efficient. We visualize the data using reports of tables and figures generated in R markdown. This document provides a template for building your own R markdown report, whether for DSMC meeting or internal use. I've also included an \href{templates/example_report.Rmd}{example script} to show how a report can look in practice.
+
+\(~\)
+
+\hypertarget{setting-up-the-markdown}{%
+\section{Setting up the markdown}\label{setting-up-the-markdown}}
+
+\hypertarget{yaml}{%
+\subsection{YAML}\label{yaml}}
+
+The YAML is the opening header to most R markdown documents and allows the user to specify parameters regarding the layout and output of the document. Among other things, here is where you can add a table of contents, a subtitle, or specify the default output to be pdf file. For a monitoring report, the YAML might look as follows:
+
+\begin{verbatim}
+---
+title: "EXAMPLE Weekly Report"
+subtitle:
+- <h1><u>CONFIDENTIAL-DO NOT DISSEMINATE</u></h1>
+author: "Will Godwin"
+date: "12 December 2019"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+---
+\end{verbatim}
+
+\(~\)
+
+\hypertarget{directory-structure-1}{%
+\subsection{Directory structure}\label{directory-structure-1}}
+
+Your report may begin as a couple files in a folder but as it grows in size and complexity, I highly recommend systematizing and standardizing the process for posterity and your own sanity. Refer to \href{directory-structure-and-code-repositories.html}{chapter 3} for guidance on building a standardized directory structure and \href{codingpractices.html}{chapter 4} for information on coding practices and utilizing the \emph{here} package, which I use throughout the process.
+
+\(~\)
+
+\hypertarget{automating-the-data-export-process}{%
+\section{Automating the data export process}\label{automating-the-data-export-process}}
+
+Creating a system that enables you to run some code and download new data in a systematic manner, as opposed to manually downloading the data, is critical to saving time and headaches down the road. This is especially important if you're building a report that will be run weekly or daily. It may require a little more work on the front end but programmatically downloading data rather than manually will likely be faster, better documented, and standardized. If you work on a team that uses the World Bank's \emph{Survey Solutions} for data collection and storage, there is a great API tool that allows you to export data directly from the project's server. Example code for that process can be found \href{templates/api_example.R}{here}. Salesforce, REDCap, and other electronic data capture systems likely have a similar functionality that other Proctor researchers may be more familiar with.
+
+\(~\)
+
+\hypertarget{loading-the-data}{%
+\section{Loading the data}\label{loading-the-data}}
+
+Depending on the nature of the trial, there may be multiple files to load after exporting the data. I would suggest using a table (ie simple .csv file) to track all necessary files for the report, as shown below. Refer to the \href{templates/read_clean_data_example.R}{example script} for how this looks in a setting that utilizes \emph{Survey Solutions}.
+
+\includegraphics[width=0.6\linewidth,height=0.4\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/api_meta}
+
+\(~\)
+
+\hypertarget{data-cleaningprocessing}{%
+\section{Data cleaning/processing}\label{data-cleaningprocessing}}
+
+I won't focus explicitly on data cleaning and processing since this process is usually fairly project specific. Briefly, after reading data into R, spend some time making sure all relevant variables (columns) were loaded and checking that variable classes are encoded as expected. Below is an example that checks the structure of the data and converts all variables that should be ``Date'' class to be so.
+
+\begin{verbatim}
+#convert all variables with "date" within the name to date class
+dt.anthro %<>% mutate_at(vars(matches("date")), as.Date)
+
+#convert all values within "childID" variable to lowercase
+dt.anthro %<>% mutate_at(vars(matches("childID")), tolower)
+\end{verbatim}
+
+\(~\)
+
+\hypertarget{data-monitoring}{%
+\section{Data monitoring}\label{data-monitoring}}
+
+Now that we have data read into R and structured appropriately, we can focus on the (2) primary aims of the report: data validation to be used internally and DSMC-style presentation of the data. Of course the aims of your report may vary but the monitoring examples below represent evaluations critical to almost any RCT.
+
+\hypertarget{data-validation}{%
+\subsection{Data validation}\label{data-validation}}
+
+\hypertarget{missinginappropriately-structured-data}{%
+\subsubsection{Missing/inappropriately structured data}\label{missinginappropriately-structured-data}}
+
+While not the most glamorous component of the report, checking for missing data is critical. It's helpful once all the data have been read in, to conduct some important checks of the data integrity. Did R (or python, etc) correctly interpret and load the data files? Are there any participant IDs missing? Are there participant's with reported birthdates in the future? This is an important stage to think about the plethora of maladies that could befall the data in between when it was recorded and when it got to you. Below are examples of how you could check for some common issues.
+
+\begin{verbatim}
+#check for missing values across all columns
+map(dt.anthro, ~sum(is.na(.)))
+
+#check for missing values in childsex
+na_childSex <- sum(is.na(dt.anthro$childSex))
+
+There are 4 rows with missing values for child sex.
+\end{verbatim}
+
+\(~\)
+
+\hypertarget{reporting-inconsistencies}{%
+\subsubsection{Reporting inconsistencies}\label{reporting-inconsistencies}}
+
+Many studies may use multiple independent questionnaires to gather information at different timepoints and ask the same demographic information. For example, in an individually randomized trial, each participant receives an ID that links the participant responses across all timepoints of the study. Below is an example showing how to check that the responses are consistent across all questionnaires.
+
+\begin{verbatim}
+#join anthro and swabs data by childID to check where childSex is different
+dt.anthro %>%
+  select(childSex, childID) %>%
+  inner_join(
+    dt.swabs %>% select(childSex, childID),
+    by="childID"
+  ) %>%
+  filter(childSex.x!=childSex.y)
+\end{verbatim}
+
+Another component of data validation is checking for overt errors and outliers, many of which can often be fixed in the field. One example is when interviewers may accidentally record a study participant's weight in kilograms instead of grams, resulting in an error 3 magnitudes in size. This error is easily identified (red circle) from plotting the distribution of the birthweights in a histogram.
+
+\begin{verbatim}
+#age histogram
+dt.anthro %>%
+  mutate(weeks = difftime(startTime, date_of_birth, units = "weeks")) %>%
+  ggplot(dt.anthro, aes(weeks)) +
+    geom_histogram(binwidth = .2) +
+    theme_bw() +
+    xlab("Age (weeks)") +
+    ylab("Count")
+\end{verbatim}
+
+\includegraphics[width=0.6\linewidth,height=0.4\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/birthweight}
+
+Distribution of participant birthweights in grams
+
+\(~\)
+
+\hypertarget{data-presentation-dsmc-style}{%
+\subsection{Data presentation (DSMC-style)}\label{data-presentation-dsmc-style}}
+
+The ultimate arbiter of whether a trial remains running is often the Data and Safety Monitoring Committee (DSMC) and these reports can be used to present preliminary findings/analyses as well as detail all relevant safety metrics.
+
+\hypertarget{enrollment}{%
+\subsubsection{Enrollment}\label{enrollment}}
+
+Any study investigator cares a lot about enrollment, since it determines the length and cost of the trial, among other things. Therefore, any report needs tables/figures showing enrollment trends and trajectory. Below are a couple examples of what they can look like.
+
+\includegraphics[width=0.5\linewidth,height=0.3\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/enrollment1}
+
+\includegraphics[width=0.7\linewidth,height=0.5\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/enrollment2}
+
+Enrollment counts across the length of the study period.
+
+\(~\)
+
+\hypertarget{baseline-characteristics}{%
+\subsubsection{Baseline characteristics}\label{baseline-characteristics}}
+
+Demographic characteristics of the enrolled participants at baseline are often necessary.
+
+\includegraphics[width=0.6\linewidth,height=0.4\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/baseline}
+
+\(~\)
+
+\hypertarget{treatment}{%
+\subsubsection{Treatment}\label{treatment}}
+
+There is usually a treatment component to an RCT, where participants are treated according to their assigned arm (i.e.~treatment or placebo). The report should include checks that confirm particpants actually received the treatment that they were randomized to. Otherwise, the results of the study lack interpretability and are likely null.
+
+\begin{verbatim}
+#merge with treatment letters
+wrong_random <- dt.treatment %>%
+  left_join(dt_letters, by="childID") %>%
+  #the treatment letter does not match what's in database
+  tally(TL != assignment) %>% as.numeric()
+
+Number of IDs where treatment letter given does not match database: 0
+\end{verbatim}
+
+\includegraphics[width=0.4\linewidth,height=0.2\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/treatment}
+
+Counts of number treated and number eligible, along with percent treated (coverage), by region.
+
+\(~\)
+
+\hypertarget{primarysecondary-outcomes-masked}{%
+\subsubsection{\texorpdfstring{Primary/secondary outcomes (\textbf{\emph{masked!}})}{Primary/secondary outcomes (masked!)}}\label{primarysecondary-outcomes-masked}}
+
+This is probably the most exciting section for an investigator to see since these metrics are the motivation of the trial itself. Be especially vigilient to make sure that the figures remain masked when sending to trial investigators and coordinators. This means making sure that you send no information regarding the treatment assignments while the trial is still active.
+
+\includegraphics[width=0.5\linewidth,height=0.35\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/primary_outcome}
+
+Preliminary mortality rate and total person-years by region.
+
+\(~\)
+
+\includegraphics[width=0.5\linewidth,height=0.4\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/growth_curves}
+
+Height growth curves of participants at Baseline and 6-month timepoints.
+
+\(~\)
+
+\hypertarget{follow-upadverse-events}{%
+\subsubsection{Follow-up/Adverse events}\label{follow-upadverse-events}}
+
+This report can serve as guard against loss to follow-up, an issue that plagues many trials. By actively monitoring the number of participants that have, and have not, been followed-up on, we can communicate where participants or clusters need to more attention to workers in the field. Below is an example showing follow-up percentages by region.
+
+\includegraphics[width=0.5\linewidth,height=0.35\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/followup}
+
+As mentioned above, adverse events should be tabulated and closely watched throughout the study to monitor if the intervention may be causing increased harm.
+
+\includegraphics[width=0.65\linewidth,height=0.45\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/adverse_events}
+
+\(~\)
+
+\hypertarget{appendix-if-necessary}{%
+\subsection{Appendix (if necessary)}\label{appendix-if-necessary}}
+
+Sometimes an appendix can be helpful to display long lists or addendums to tables shown earlier in the report. Below is an example of a list enumerating all adverse events that were not included in the AE table within the main report.
+
+\includegraphics[width=0.7\linewidth,height=0.5\textheight]{/Users/williamgodwin/Documents/dcc-handbook/images/report-images/appendix}
+
+\(~\)
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+This chapter described and illustrated an example of a data monitoring report using R markdown. This is, by no means, an exhaustive list of what to include in a monitoring report but meant to serve as a template as you create your own report. It is specifically geared towards continuous monitoring of randomized-controlled trials but the overarching concepts apply to other types of trials or even retrospective analyses.
 
 \bibliography{book.bib,packages.bib}
 

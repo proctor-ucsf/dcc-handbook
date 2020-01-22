@@ -1,0 +1,319 @@
+---
+title: "Example Weekly Report"
+subtitle:
+- <h1><u>CONFIDENTIAL-DO NOT DISSEMINATE</u></h1>
+author: "Sam Hamilton"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+---
+
+
+```{r, echo=FALSE}
+# Purpose: validate incoming data collected for XXX study
+
+# Additions to make:
+  # Add table of birthweights
+  # Estimate the study finish date by extrapolating the enrollment rate
+```
+
+## Automating the data export process
+```{r setup, include=FALSE}
+# set date
+date <- format(Sys.Date(), "%d%b%Y")
+
+# configure directories, load libraries and base functions
+source(paste0(here::here(), "/monitoring/example_report/code/functions/config_example.R"))
+
+# source in functions-refer to these scripts for automated data export
+source(paste0(code_dir, "export_data_example.R"))
+source(paste0(code_dir, "api_example.R"))
+
+#read in metadata for each api call
+api_meta <- fread(paste0(tab_dir, "api_meta.csv"))
+
+#Function arguments that won't change
+download_folder <- paste0(data_dir)
+data_loc <- paste0(data_dir, "export_", date)
+headquarters_address <- "https://gamin.mysurvey.solutions"
+
+#Run api--This will take some time...
+if(!dir.exists(data_loc)){
+  export.data(download_folder, data_loc, headquarters_address, api_meta)
+}
+```
+
+## Data cleaning/processing
+```{r clean and read data, include=F}
+source(paste0(code_dir, "read_clean_data_example.R"), local = T)
+```
+
+## Data monitoring
+### Data validation
+#### Missing/inappropriately structured data
+```{r, include=F}
+#check for missing values across all columns
+map(dt.anthro, ~sum(is.na(.)))
+
+#check for missing values in childsex
+na_childSex <- sum(is.na(dt.anthro$childSex))
+```
+
+There are `r na_childSex` rows missing child sex value.
+
+#### Reporting inconsistencies
+```{r, include=F}
+
+```
+
+
+
+### Data presentation (DSMC-style)
+#### Enrollment and baseline characteristics
+```{r enrollment counts, include=F}
+#create screened indicator
+dt.eligibility %<>%
+  mutate(screened = if_else(!duplicated(childID) | is.na(childID), 1, 0))
+
+#create eligible indicator-based on eligibility criteria(age, oral feeding, not moving away, no allergy, lives in area)
+dt.eligibility %<>%
+  mutate(eligible = if_else(ageInDays>7 &
+         ageInDays<1826 &
+         feedOrally == 1 &
+         available6months == 1 & 
+         allergy == 2 &
+         otherStudy == 2 &
+         primaryResidence==1 &
+         screened == 1, 1, 0))
+
+#create enrolled indicator
+dt.eligibility %<>%
+  mutate(enrolled = if_else(eligible == 1 & consent == 1 & !is.na(childID), 1, 0))
+         
+#create refused indicator
+dt.eligibility %<>%
+  mutate(refused = if_else(consent == 2 | (is.na(consent) & eligible == 1), 1, 0))
+
+#tabulate the indicators
+temp <- dt.eligibility %>%
+  summarise(Screened = sum(screened),
+            Eligible = sum(eligible),
+            Refused = sum(refused),
+            Enrolled = sum(enrolled))
+
+#tabulate the indicators for past 7 days
+temp2 <- dt.eligibility %>%
+  filter(Sys.Date() - startTime < 7) %>%
+  summarise(Screened = sum(screened),
+            Eligible = sum(eligible),
+            Refused = sum(refused),
+            Enrolled = sum(enrolled))
+
+
+#create tables for overall and past 7 days
+temp.table <- kable(temp, "latex", align = "c", linesep = '') %>%
+  row_spec(0,bold=TRUE)
+temp.table2 <- kable(temp2, "latex", align = "c", linesep = '') %>%
+  row_spec(0,bold=TRUE)
+```
+
+```{r Cumulative enrollment}
+#daily enrollments over time
+total_perday <- dt.eligibility %>%
+  group_by(startTime) %>%
+  summarise(Screened = sum(screened), 
+            Eligible = sum(eligible),
+            Enrolled = sum(enrolled))
+  
+#Melt to long for ggplot
+total_perday %<>%
+  gather(key = "Key", value = "Value", Screened, Eligible, Enrolled) %>%
+  group_by(Key) %>%
+  mutate(total=cumsum(Value)) %>%
+  arrange(Key, startTime)
+
+#plot
+total_perday$Step <- factor(total_perday$Key, levels=c("Screened", "Eligible", "Enrolled"))
+ggplot(total_perday, aes(x = startTime, y = as.integer(total), color = Step)) +  
+  scale_color_brewer(palette="Set1", name="") +
+  geom_line(alpha=.5) +
+  geom_point() +
+  xlab("Date") +
+  ylab("Total participants") +
+  scale_y_continuous(breaks= pretty_breaks()) +
+  scale_x_date(labels = date_format("%m/%d"), breaks = date_breaks("1 day")) +
+  theme(legend.title = element_blank()) +
+  #scale_color_discrete(name="") +
+  theme_bw()
+```
+
+#### Treatment
+```{r treatment letter validation, include=F}
+#read in table that links each ID with respective treatment letter (randomized)
+dt_letters <- read_csv(paste0(tab_dir, "treatment_letters.csv"))
+
+#merge with treatment letters
+wrong_random <- dt.treatment %>%
+  left_join(dt_letters, by="childID") %>%
+  #the treatment letter does not match what's in database
+  tally(TL != assignment) %>% as.numeric()
+```
+
+```{r treatment coverage table, include=F}
+#treatment coverage
+enrolled <- dt.eligibility %>%
+  summarise(Enrolled = sum(enrolled))
+
+#how many kids treated
+treat_cov <- dt.treatment %>%
+  filter(isAdministered==1) %>%
+  summarise(Treated = length(unique(childID))) %>%
+  bind_cols(enrolled)
+
+#calculate coverage percent
+treat_cov %<>%
+  mutate(Coverage = percent(Treated/Enrolled, 1))
+
+#table
+kable(treat_cov, "latex", booktabs = T, align = "c", linesep = '') %>%
+  row_spec(c(0, bold_rows),bold=TRUE)
+
+```
+
+#### Primary/secondary outcomes (***masked!***)
+```{r primary outcome, echo=FALSE}
+#number of deaths by city and overall
+n_died6mo <- dt.followup[vitalStatus == 2 & timepoint<=180, .(Deaths = .N), by=region_name]
+if(nrow(n_died6mo) == 1) n_died6mo <- rbind(n_died6mo, 
+                                            data.table(region_name="Boucle du Mouhoun",
+                                                       Deaths = 0))
+n_died6mo.tot <- dt.followup[vitalStatus == 2 & timepoint<=180, 
+                             .(Deaths = .N, region_name="Overall")]
+n_died6mo <- rbind(n_died6mo, n_died6mo.tot)
+
+#person time by city and overall
+dt.persont.tab <- dt.persont[,.(person_time = round(sum(person_days, na.rm = T)/365,2)),
+                             by="region_name"]
+dt.persont.tot <- dt.persont[,.(person_time = round(sum(person_days, na.rm = T)/365,2),
+                                region_name="Overall")]
+dt.persont.tab <- rbind(dt.persont.tab, dt.persont.tot)
+
+#merge together deaths and person time to calculate rate
+death6rate <- merge(n_died6mo, dt.persont.tab, by="region_name", all.y = T)
+death6rate[is.na(Deaths), Deaths := 0]
+death6rate[,mortality_rate := round((Deaths/person_time)*1000, 2)]
+bold_rows <- which(death6rate[,region_name]=="Overall")
+kable(death6rate, col.names = c("Region", "Deaths", "Person-years", 
+                                "Mortality (per 1000 py)")) %>%
+    row_spec(c(0, bold_rows),bold=TRUE)
+```
+
+```{r growth curves, echo=FALSE}
+#labels for SD in plot
+sd_labels <- factor(c("-3 SD", "-2 SD", "-1 SD", "Mean", "+1 SD", "+2 SD", "+3 SD"),
+                    levels = c("-3 SD", "-2 SD", "-1 SD", "Mean", "+1 SD", "+2 SD", "+3 SD"))
+p_frmSD <- c(.2, 2.3, 15.9, 50, 84.1, 97.7, 99.8)
+
+#height-require growthstandards package
+chartdat_w <- data.frame(SD = rep(sd_labels, each = 21),
+                       Day = rep(8:28, times = 7),
+                       weight_male= unlist(map(p_frmSD, 
+                                               function(p) 
+                                                 who_centile2htcm(8:28, p, sex="Male"))),
+                       weight_female = unlist(map(p_frmSD, 
+                                                  function(p) 
+                                                    who_centile2htcm(8:28, p, sex="Female"))))
+
+#format baseline and follow-up form for binding to each other
+temp <- dt.baseline[,.(childID, childBirthdate, weight, childSex=q_2_1_1,
+                       length, days, startDate)]
+temp[, form := "Baseline"]
+temp2 <- dt.followup[timepoint==180, .(childID, childSex, length, weight,
+                                       form, startDate = as.Date(startTime))]
+temp2[, form := "6-month"]
+
+#merge on birthdate from baseline b/c it's likely more accurate than follow-up
+temp2 <- merge(temp2, dt.baseline[,.(childID, childBirthdate)], by="childID")
+temp2[, days := difftime(startDate, childBirthdate, units = "days")]
+dt.plot <- rbind(temp, temp2)
+dt.plot$form <- factor(dt.plot$form, levels=c("Baseline", "6-month"))
+
+#plot males
+oldest <- dt.plot[,as.numeric(max(days))]
+p.male.hfa6 <- ggplot(dt.plot[childID %in% unique(temp2$childID) & childSex==1],aes(days, length)) +
+  geom_point(aes(shape=form)) +
+  geom_line(data=table.hfa.boys[Day<=oldest], aes(Day, length, color=SD)) +
+  theme_bw() +
+  ggtitle("Males") +
+  xlab("Age (days)") +
+  ylab("Height (cm)") +
+  scale_color_discrete(name="WHO Standard") +
+  scale_shape_discrete(name="Timepoint") +
+  #ylim(min(dt.plot[length>0, length]), max(dt.plot[,length])) +
+  guides(color = guide_legend(reverse = TRUE))
+```
+
+#### Follow-up/Adverse events
+
+```{r followup verification, echo=FALSE}
+#IDs of kids that are at least 7 days post treatment and have 7, 14, or 21 day follow-up
+died <- dt.followup[vitalStatus==2, unique(childID)]
+dt.eligibles <- dt.treatment[startDate + 21 <= Sys.Date() & 
+                               childID %in% setdiff(childID, died), .(childID, region_name)]
+followupID <- dt.followup[timepoint %in% c(7,14,21), unique(childID)]
+
+#create variable that indicates if ID has had 7, 14, or 21 day followup
+dt.eligibles[childID %in% followupID, follow_21 := 1]
+dt.eligibles[is.na(follow_21), follow_21 := 0]
+
+#collapse for table
+tab <- dt.eligibles[,.(followup = percent(mean(follow_21))), by="region_name"]
+tot <- dt.eligibles[,.(followup = percent(mean(follow_21)), region_name = "Overall")]
+tab <- rbind(tab, tot)
+bold_rows <- which(tab[,region_name]=="Overall")
+kable(tab, col.names = c("Region", "Follow-up")) %>%
+  row_spec(c(0, bold_rows),bold=TRUE)
+```
+
+```{r adverse events, echo=F}
+#adverse event counts by region
+dt.adverse <- dt.followup %>%
+select(childID, region_name, timepoint, q_5_6__1, q_5_6__2, q_5_6__3, 
+       q_5_6__4, q_5_6__5, q_5_6__6) %>%
+gather(key="key", value = "value",
+       q_5_6__1, q_5_6__2, q_5_6__3, q_5_6__4, q_5_6__5, q_5_6__6) %>%
+filter(value==1 | value==0) %>%
+group_by(key, region_name) %>%
+summarise(total=sum(value)) %>%
+spread(key = "key", value = "total") %>%
+rename(Region=region_name, Fever=q_5_6__1, Diarrhea=q_5_6__2, Vomiting=q_5_6__3, 
+       Abdominal=q_5_6__4, Rash=q_5_6__5, Constipation=q_5_6__6)
+
+#add on overall row
+dt.adverse <- bind_rows(dt.adverse,
+          dt.adverse %>%
+            summarise(Region="Overall", Fever=sum(Fever), 
+                      Diarrhea=sum(Diarrhea), Vomiting=sum(Vomiting),
+                      Abdominal=sum(Abdominal), Rash=sum(Rash),
+                      Constipation=sum(Constipation))) %>%
+  rename("Abdominal Pain"=Abdominal) %>% as.data.table()
+
+#make kable
+bold_rows <- which(dt.adverse[,Region]=="Overall")
+kable(dt.adverse, "latex", align = "c") %>%
+  row_spec(c(0, bold_rows),bold=TRUE) %>%
+  collapse_rows(1, row_group_label_position = 'identity')
+```
+
+### Appendix
+```{r other ae list, echo=FALSE}
+#restrict data to hospital visits for reasons "other"
+otherhos_visits <- dt.followup[reasonHosVisit__5 == 1, 
+                               as.character(unique(specifyHosVisit))]
+other_visits <- dt.followup[reasonVisit__5 == 1, 
+                            as.character(unique(specifyVisit))]
+other_visits <- c(other_visits, otherhos_visits)
+sort(unique(other_visits))
+```

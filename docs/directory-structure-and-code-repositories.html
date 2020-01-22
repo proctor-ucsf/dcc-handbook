@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Directory Structure and Code Repositories | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Directory Structure and Code Repositories | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2019-12-08" />
+<meta name="date" content="2019-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -174,6 +177,21 @@
 </ul></li>
 <li class="chapter" data-level="12" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>12</b> Additional Resources</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="13" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html"><i class="fa fa-check"></i><b>13</b> Building Automated Markdown Reports</a><ul>
+<li class="chapter" data-level="13.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#setting-up-the-markdown"><i class="fa fa-check"></i><b>13.1</b> Setting up the markdown</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#yaml"><i class="fa fa-check"></i><b>13.1.1</b> YAML</a></li>
+<li class="chapter" data-level="13.1.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#directory-structure-1"><i class="fa fa-check"></i><b>13.1.2</b> Directory structure</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#automating-the-data-export-process"><i class="fa fa-check"></i><b>13.2</b> Automating the data export process</a></li>
+<li class="chapter" data-level="13.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#loading-the-data"><i class="fa fa-check"></i><b>13.3</b> Loading the data</a></li>
+<li class="chapter" data-level="13.4" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-cleaningprocessing"><i class="fa fa-check"></i><b>13.4</b> Data cleaning/processing</a></li>
+<li class="chapter" data-level="13.5" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-monitoring"><i class="fa fa-check"></i><b>13.5</b> Data monitoring</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-validation"><i class="fa fa-check"></i><b>13.5.1</b> Data validation</a></li>
+<li class="chapter" data-level="13.5.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-presentation-dsmc-style"><i class="fa fa-check"></i><b>13.5.2</b> Data presentation (DSMC-style)</a></li>
+<li class="chapter" data-level="13.5.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#appendix-if-necessary"><i class="fa fa-check"></i><b>13.5.3</b> Appendix (if necessary)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#summary"><i class="fa fa-check"></i><b>13.6</b> Summary</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -291,7 +309,7 @@ primary-analysis.Rproj
 </div>
 <div id="configuration-config-file" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> Configuration (‘config’) File</h3>
-<p>This is the single most important file for your project. It will be responsible for a variety of common tasks, declare global variables, load functions, declare paths, and more. <em>Every other file in the project</em> will begin with <code>source(&quot;0-config&quot;)</code>, and its role is to reduce redundancy and create an abstraction layer that allows you to make changes in one place (<code>0-config.R</code>) rather than 5 different files. To this end, paths that will be referenced in multiple scripts (e.g., a <code>clean_data_path</code>) can be declared in <code>0-config.R</code> and simply referred to by its variable name in scripts. If you ever want to change things, rename them, or even switch from a downsample to the full data, all you would then to need to do is modify the path in one place and the change will automatically update throughout your project. See the example config file for more details. The paths defined in the <code>0-config.R</code> file assume that users have opened the <code>.Rproj</code> file, which sets the directory to the top level of the project.</p>
+<p>This is the single most important file for your project. It will be responsible for a variety of common tasks, declare global variables, load functions, declare paths, and more. <em>Every other file in the project</em> will begin with <code>source("0-config")</code>, and its role is to reduce redundancy and create an abstraction layer that allows you to make changes in one place (<code>0-config.R</code>) rather than 5 different files. To this end, paths that will be referenced in multiple scripts (e.g., a <code>clean_data_path</code>) can be declared in <code>0-config.R</code> and simply referred to by its variable name in scripts. If you ever want to change things, rename them, or even switch from a downsample to the full data, all you would then to need to do is modify the path in one place and the change will automatically update throughout your project. See the example config file for more details. The paths defined in the <code>0-config.R</code> file assume that users have opened the <code>.Rproj</code> file, which sets the directory to the top level of the project.</p>
 <p>This <a href="https://github.com/jadebc-berkeley/WBB-STH-Kato-Katz">GitHub repository</a> that has replication files for <a href="https://www.biorxiv.org/content/10.1101/629501v1">this study</a> includes an example of a streamlined <code>config.R</code> file, with all packages loaded and directory references defined.</p>
 </div>
 <div id="shared-functions-file" class="section level3">
@@ -300,7 +318,7 @@ primary-analysis.Rproj
 </div>
 <div id="order-files-and-subdirectories" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> Order Files and Subdirectories</h3>
-<p>This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e. <code>primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R</code> =&gt; <code>primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS</code>). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.</p>
+<p>This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e. <code>primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R</code> =&gt; <code>primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS</code>). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.</p>
 <p>In the <code>6-figures</code> subdirectory, each RMarkdown file (computational notebook) is linked to a specific figure in a hypothetical manuscript. This makes it easier to link specific notebooks in figure legends, and to see which file creates each figure.</p>
 </div>
 <div id="use-bash-scripts-to-ensure-reproducibility" class="section level3">
@@ -342,24 +360,24 @@ Fig3-2-laz-make-figure.Rmd</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
