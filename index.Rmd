@@ -1,6 +1,6 @@
 --- 
 title: "Proctor Foundation Data Science Handbook"
-author: "Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim (many from UC Berkeley in addition to Proctor)"
+author: "Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin (many from UC Berkeley in addition to Proctor)"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
