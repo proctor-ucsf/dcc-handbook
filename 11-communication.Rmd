@@ -6,7 +6,10 @@ _Contributors: Jade Benjamin-Chung, Ben Arnold_
 
 ## Slack
 
-- If you work with Ben but are not a member of Ben's Slack workspace then ask him to invite you!
+- If you work with Ben but are not a member of Proctor's Slack workspace then ask him to invite you!
+
+- We do not recommend using Slack for messages you'd like to save and find again in 6 months -- for messages with important information and documentation that you will need in the future, use email!
+
 - Use Slack for scheduling, coding related questions, quick check ins, etc. If your Slack message exceeds 200 words, it might be time to use email. 
 
 - Use channels instead of direct messages unless you need to discuss something private.
@@ -16,6 +19,7 @@ _Contributors: Jade Benjamin-Chung, Ben Arnold_
 - Please make an effort to respond to messages that message you (e.g., `@Ben`) as quickly as possible and always within 24 hours, unless of course you are on vacation!
 
 - If you are unusually busy (e.g., taking MCAT/GRE, taking many exams) or on vacation please alert the team in advance so we can expect you not to respond at all / as quickly as usual and also [set your status in Slack](https://get.slack.help/hc/en-us/articles/201864558-Set-your-Slack-status-and-availability) (e.g., it could say "On vacation") so we know not to expect to see you online. 
+
 - Please thread messages in Slack as much as possible. 
 
 ## Email
