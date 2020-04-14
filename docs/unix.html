@@ -24,7 +24,7 @@
 <meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2020-01-22" />
+<meta name="date" content="2020-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -233,7 +233,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <h2><span class="header-section-number">9.2</span> Basics</h2>
 <p>On the computer, there is a desktop with two folders, <code>folder1</code> and <code>folder2</code>, and a file called <code>file1.</code> Inside <code>folder1</code>, we have a file called <code>file2.</code> Mac users can run these commands on their terminal; we recommend that Windows users use Git Bash, not Windows PowerShell.</p>
 <div class="figure">
-<img src="images/ex-desktop.jpg" alt="" />
+<img src="images/ex-desktop.jpg" alt="Here is our example desktop." />
 <p class="caption">Here is our example desktop.</p>
 </div>
 </div>
@@ -265,7 +265,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <td>List files in the directory</td>
 </tr>
 <tr class="even">
-<td><code>cp "file2" "newfile2"</code></td>
+<td><code>cp &quot;file2&quot; &quot;newfile2&quot;</code></td>
 <td>Copy file (remember to include file extensions when typing in file names like <code>.pdf</code> or <code>.R</code>)</td>
 </tr>
 <tr class="odd">
@@ -299,7 +299,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 </tbody>
 </table>
 <div class="figure">
-<img src="images/ex-terminal.PNG" alt="" />
+<img src="images/ex-terminal.PNG" alt="Here is an example of what your terminal might look like after executing the commands in the order listed above." />
 <p class="caption">Here is an example of what your terminal might look like after executing the commands in the order listed above.</p>
 </div>
 </div>
@@ -344,7 +344,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <p><code>C:\Program Files\R\R-3.6.0\bin</code></p>
 <p>For appending the <code>PATH</code> variable, please view <a href="https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/">this link</a>. I strongly recommend completing this option.</p>
 <p>If you add the PATH as an environment variable, then you can run this line of code to test:
-<code>Rscript -e “cat(‘this is a test’)"</code>, where the <code>-e</code> flag refers to the expression that will be executed.</p>
+<code>Rscript -e “cat(‘this is a test’)&quot;</code>, where the <code>-e</code> flag refers to the expression that will be executed.</p>
 <p>If you do not add the PATH as an environment variable, then you can run this line of code to replicate the results from above:
 <code>“C:\Program Files\R\R-3.6.0\bin” -e “cat(‘this is a test’)”</code></p>
 <p>To run an R script from the command line, we can say:
@@ -353,7 +353,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <h3><span class="header-section-number">9.5.1</span> Common Mistakes</h3>
 <ul>
 <li>Remember to include all of the quotation marks around file paths that have a spaces.</li>
-<li>If you attempt to run an R script but run into <code>Error: '\U' used without hex digits in character string starting "'C:\U"</code>, try replacing all <code>\</code> with <code>\\</code> or <code>/</code>.</li>
+<li>If you attempt to run an R script but run into <code>Error: '\U' used without hex digits in character string starting &quot;'C:\U&quot;</code>, try replacing all <code>\</code> with <code>\\</code> or <code>/</code>.</li>
 </ul>
 </div>
 </div>
@@ -389,7 +389,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <td>Kill a process by its process ID</td>
 </tr>
 <tr class="even">
-<td><code>taskkill /IM "process name" /F</code></td>
+<td><code>taskkill /IM &quot;process name&quot; /F</code></td>
 <td></td>
 <td>Kill a process by its name</td>
 </tr>
@@ -419,7 +419,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 </div>
 <div id="running-big-jobs" class="section level2">
 <h2><span class="header-section-number">9.7</span> Running big jobs</h2>
-<p>For big data workflows, the concept of “backgrounding” a bash script allows you to start a “job” (i.e. run the script) and leave it overnight to run. At the top level, a bash script (<code>0-run-project.sh</code>) that simply calls the directory-level bash scripts (i.e. <code>0-prep-data.sh</code>, <code>0-run-analysis.sh</code>, <code>0-run-figures.sh</code>, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.</p>
+<p>For big data workflows, the concept of “backgrounding” a bash script allows you to start a “job” (i.e. run the script) and leave it overnight to run. At the top level, a bash script (<code>0-run-project.sh</code>) that simply calls the directory-level bash scripts (i.e. <code>0-prep-data.sh</code>, <code>0-run-analysis.sh</code>, <code>0-run-figures.sh</code>, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.</p>
 <ul>
 <li><strong>Running Bash Scripts in Background</strong>: Running a long bash script is not trivial. Normally you would run a bash script by opening a terminal and typing something like <code>./run-project.sh</code>. But what if you leave your computer, log out of your server, or close the terminal? Normally, the bash script will exit and fail to complete. To run it in background, type <code>./run-project.sh &amp;; disown</code>. You can see the job running (and CPU utilization) with the command <code>top</code> or <code>ps -v</code> and check your memory with <code>free -h</code>.</li>
 </ul>
