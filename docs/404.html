@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Data Wrangling | Proctor Foundation Data Science Handbook</title>
+  <title>Page not found | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Data Wrangling | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Page not found | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Data Wrangling | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Page not found | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="codingstyle.html"/>
-<link rel="next" href="publicdata.html"/>
+
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -153,11 +153,15 @@
 <li class="chapter" data-level="7.3.1" data-path="publicdata.html"><a href="publicdata.html#rationale"><i class="fa fa-check"></i><b>7.3.1</b> Rationale</a></li>
 <li class="chapter" data-level="7.3.2" data-path="publicdata.html"><a href="publicdata.html#a-single-set-of-public-ids-for-each-study"><i class="fa fa-check"></i><b>7.3.2</b> A single set of public IDs for each study</a></li>
 <li class="chapter" data-level="7.3.3" data-path="publicdata.html"><a href="publicdata.html#example-scripts"><i class="fa fa-check"></i><b>7.3.3</b> Example scripts</a></li>
-<li class="chapter" data-level="7.3.4" data-path="publicdata.html"><a href="publicdata.html#create-a-data-repository"><i class="fa fa-check"></i><b>7.3.4</b> Create a data repository</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="publicdata.html"><a href="publicdata.html#edit-and-test-analysis-scripts"><i class="fa fa-check"></i><b>7.4</b> Edit and test analysis scripts</a></li>
-<li class="chapter" data-level="7.5" data-path="publicdata.html"><a href="publicdata.html#create-a-public-github-page-for-public-scripts"><i class="fa fa-check"></i><b>7.5</b> Create a public GitHub page for public scripts</a></li>
-<li class="chapter" data-level="7.6" data-path="publicdata.html"><a href="publicdata.html#go-live"><i class="fa fa-check"></i><b>7.6</b> Go live</a></li>
+<li class="chapter" data-level="7.4" data-path="publicdata.html"><a href="publicdata.html#create-a-data-repository"><i class="fa fa-check"></i><b>7.4</b> Create a data repository</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="publicdata.html"><a href="publicdata.html#steps-for-creating-an-open-science-framework-osf-repository"><i class="fa fa-check"></i><b>7.4.1</b> Steps for creating an Open Science Framework (OSF) repository:</a></li>
+<li class="chapter" data-level="7.4.2" data-path="publicdata.html"><a href="publicdata.html#steps-for-creating-a-dryad-data-repository"><i class="fa fa-check"></i><b>7.4.2</b> Steps for creating a Dryad data repository:</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="publicdata.html"><a href="publicdata.html#edit-and-test-analysis-scripts"><i class="fa fa-check"></i><b>7.5</b> Edit and test analysis scripts</a></li>
+<li class="chapter" data-level="7.6" data-path="publicdata.html"><a href="publicdata.html#create-a-public-github-page-for-public-scripts"><i class="fa fa-check"></i><b>7.6</b> Create a public GitHub page for public scripts</a></li>
+<li class="chapter" data-level="7.7" data-path="publicdata.html"><a href="publicdata.html#go-live"><i class="fa fa-check"></i><b>7.7</b> Go live</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a>
 <ul>
@@ -254,121 +258,19 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="datawrangling" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Data Wrangling<a href="datawrangling.html#datawrangling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><em>Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold</em></p>
-<div id="overview" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Overview<a href="datawrangling.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Processing data from raw inputs to final data for analysis is the foundation of the data science <a href="workflows.html#workflows">workflow</a>. “Management” is a bad word in both academia and hip parts of the private sector, so what used to be called “data management” is now called “data wrangling” or “data munging.”</p>
-<p>By any name, it is by far the most tedious and time consuming step in the data analysis workflow. Data wrangling is also the most error prone. Errors are likely because data processing usually requires hundreds or thousands of lines of code. Generating final datasets often requires programmers to merge and append multiple different raw datasets; often, the process requires them to re-shape the data from wide format to long format.</p>
-<p>Read the chapters on <a href="https://r4ds.had.co.nz/">Data Wrangling</a> in <em>R for Data Science</em>. That book covers the foundational skills and know-how.</p>
-<p>Here, we provide some additional recommendations for best practices related to data wrangling and highlight a few topics not covered in the excellent R for Data Science book.</p>
-</div>
-<div id="cardinal-rule" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Cardinal rule<a href="datawrangling.html#cardinal-rule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<hr />
-<blockquote>
-<p><em><strong>Cardinal rule of data wrangling:</strong> NEVER alter untouched datasets</em></p>
-</blockquote>
-<hr />
-<p>Untouched datasets include data output from data collection software, distributed by the data team, outside collaborators, or downloaded from a data repository. They should be left untouched. All data cleaning and processing activities should read in untouched data and output either temporary files or final datasets. Never, ever overwrite an untouched dataset.</p>
-</div>
-<div id="data-inputoutput-io" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Data input/output (I/O)<a href="datawrangling.html#data-inputoutput-io" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Read the <a href="https://r4ds.had.co.nz/data-import.html">Data Import</a> section of <em>R for Data Science</em>.</p>
-<div id="excel-files" class="section level3 hasAnchor" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Excel files<a href="datawrangling.html#excel-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Often collaborators share data as Excel files (<code>.xlsx</code>). In this case, we recommend making a copy of the file in the untouched repository and converting it into a <code>.csv</code> file (one per tab) to input into the data processing workflow.</p>
-<p>This step should mark the end of your use of Excel in your data analysis, aside from inspecting <code>.csv</code> files. Excel is extremely error prone because it does not have good fidelity with variable types (e.g., dates, leading zeros), and has no real programmatic interface (VBA?). Avoid it. We can find no compelling case for its use in data science.</p>
-</div>
-<div id="rds-vs-.rdata-files" class="section level3 hasAnchor" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> <code>.RDS</code> vs <code>.RData</code> Files<a href="datawrangling.html#rds-vs-.rdata-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>One of the most common ways to load and save data in Base R is with the <code>load()</code> and <code>save()</code> functions to serialize multiple objects in a single <code>.RData</code> file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using <code>saveRDS()</code> and its complement <code>readRDS()</code>.</p>
-<ul>
-<li><p><strong>Note</strong>: if you have many related R objects you would have otherwise saved all together using the <code>save</code> function, the functional equivalent with <code>RDS</code> would be to create a (named) list containing each of these objects, and saving it.</p></li>
-<li><p><strong>Note</strong>: there is an important caveat for <code>.rds</code> files: they are not automatically backward compatible across different versions of R! So, while they are very useful in general, beware. See, for example, this thread on <a href="https://stackoverflow.com/questions/56704638/write-a-file-using-saverds-so-that-it-is-backwards-compatible-with-old-versi">StackExchange</a>. <code>.csv</code> files embed slightly less information (typically), but are more stable across different versions of R.</p></li>
-</ul>
-</div>
-<div id="csv-files" class="section level3 hasAnchor" number="6.3.3">
-<h3><span class="header-section-number">6.3.3</span> <code>.CSV</code> Files<a href="datawrangling.html#csv-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Once again, the <code>readr</code> package as part of the Tidvyerse is great, with a much faster <code>read_csv()</code> than Base R’s <code>read.csv()</code>. For massive CSVs (&gt; 5 GB), you’ll find <code>data.table::fread()</code> to be the fastest CSV reader in any data science language out there. For writing CSVs, <code>readr::write_csv()</code> and <code>data.table::fwrite()</code> outclass Base R’s <code>write.csv()</code> by a significant margin as well.</p>
-</div>
-</div>
-<div id="documenting-datasets" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Documenting datasets<a href="datawrangling.html#documenting-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Datasets need to have metadata (documentation) associated with them to help people understand them. Well documented datasets save an enormous amount of time because it helps avoid lots of back-and-forth with new people orienting themselves with the data. This applies to both private and public data used in your work flow.</p>
-<p>Each raw and final dataset should include a codebook. Sometimes survey instruments or electronic data capture schematics can stand-in for raw dataset codebooks, as long as that information is stored alongside the raw data!</p>
-<p>The file <a href="https://github.com/ben-arnold/enterics-seroepi/blob/master/data/asembo_analysis_codebook.txt">asembo_analysis_codebook.txt</a> provides one example of what a codebook for a simple, final dataset could contain.</p>
-<p>For complex studies with multiple, relational data files, it is exceptionally helpful to also include a README overview in plain text or markdown that explains the relationships between the datasets. Here is an example from the WASH Benefits Bangladesh trial primary outcomes analysis: <a href="https://osf.io/v3nfs/">README-WBB-primary-outcomes-datasets.md</a>.</p>
-</div>
-<div id="mapping-data-from-untouched---final" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Mapping data from untouched -&gt; final<a href="datawrangling.html#mapping-data-from-untouched---final" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>An important step for the data processing is to come up with a plan for which final datasets you want to create.</p>
-<p>Best pracice is to scope out the flow of data from the original forms/modules/tables at the time of data capture to the final datasets planned for the analysis, and ensure that there is a <code>Key</code> linking each table needed to create the final analysis datasets.</p>
-<p>These are probably the two most common models for the end product:</p>
-<table>
-<colgroup>
-<col width="19%" />
-<col width="80%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Single Massive Dataset</td>
-<td align="left">A single, large, final dataset for the whole project with potentially multiple levels of data (e.g., household, individual) and hundreds or thousands of variables.</td>
-</tr>
-<tr class="even">
-<td align="left">Multiple Relational datasets</td>
-<td align="left">Multiple relational datasets, each tailored to a specific type of data collected in the study. Smaller, relational datasets can be recombined as needed for analyses.</td>
-</tr>
-</tbody>
-</table>
-<p>We strongly recommend using the second model, relational data tables, in almost every case. The chapter on <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a> in R for Data Science explains details.</p>
-<blockquote>
-<p>Rationale: If you create a single massive dataset that includes information at multiple levels, then it can create challenges. First, the datasets are unwieldy, often consisting of hundreds or thousands of variables; this makes it difficult to find variables, difficult to view the data through a software browser, and easy to forget about variables. <em>But there are bigger problems</em>. Datasets with an exceptionally large number of variables or multiple levels of data in the same file make it difficult to visually detect pathological problems in the data (e.g., unexpected missing values). For studies that include data from multiple levels (e.g., communities, households, individuals) the inclusion of multiple types of data in the same file makes analyses error prone because it requires the programmer to keep track of when variables include duplicated observations. For example, the inclusion of household characteristics in an individual-level data file means that if there are multiple individuals per household, that simple means of household characteristics cannot be calculated without first restricting the file to unique observations at the household level.</p>
-</blockquote>
-</div>
-<div id="relational-data" class="section level2 hasAnchor" number="6.6">
-<h2><span class="header-section-number">6.6</span> Relational data<a href="datawrangling.html#relational-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Refer to <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a> in <em>R for Data Science</em> for a good example of what a good relational database can look like.</p>
-<p><strong>Important</strong>: For a set of relational tables to work, you must ensure that each table relates to another with a unique <code>Key</code>. For example, a child-level dataset must also include IDs for household- or cluster to be merged to household or cluster level data.</p>
-<p>Practical advice on <code>Key</code> variables / IDs used to link datasets. Numeric IDs can occasionally cause problems with merges due to machine rounding errors so character values can sometimes be a good alternative. Whatever format you use, ensure that they do not in some way encode identifying information (e.g., using a social security number or medical record number would be a poor choice of ID for a final dataset).</p>
-</div>
-<div id="be-careful-with-joins-merges" class="section level2 hasAnchor" number="6.7">
-<h2><span class="header-section-number">6.7</span> Be careful with joins / merges<a href="datawrangling.html#be-careful-with-joins-merges" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Experience shows that merging datasets is one of the most error prone steps in data wrangling. Merges can be particularly tricky for less experienced programmers. Errors are likely early in the data processing work flow, and less likely when merging final datasets with clean key variables (IDs) and clear relationships between datasets. Carefully check each merge to ensure it is working as you expect.</p>
-<blockquote>
-<p><strong>ESSENTIAL READING:</strong> <a href="https://r4ds.had.co.nz/relational-data.html#join-problems">Join Problems</a> in <em>R for Data Science</em></p>
-</blockquote>
-<p>In the Stata software there is a really nice feature with <code>merge</code> that allows you to specify the type of merge/join and then examine the diagnostics of that merge.</p>
-<p>Although R does not have a similarly nice feature at this time, the different <code>join</code> functions in the <code>dplyr</code> package provide all of the tools you need to correctly join your data.</p>
-<p>In our experience, the two most common types of joins in our work are mutating joins and filtering joints. (from the <em>R for Data Science</em> book):</p>
-<blockquote>
-<p><strong>Mutating joins</strong>: add new variables to one data frame from matching observations in another.</p>
-</blockquote>
-<blockquote>
-<p><strong>Filtering joins</strong>: filter observations from one data frame based on whether or not they match an observation in the other table.</p>
-</blockquote>
-<p>Familiarize yourself with these types of operations. The <a href="https://r4ds.had.co.nz/relational-data.html">Relational data</a> chapter of <em>R for Data Science</em> includes details.</p>
-</div>
-<div id="reshaping-data" class="section level2 hasAnchor" number="6.8">
-<h2><span class="header-section-number">6.8</span> Reshaping data<a href="datawrangling.html#reshaping-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <code>dplyr</code> package introduced the <code>pivot_wider</code> and <code>pivot_longer</code> functions in 2019. They make reshaping data dramatically easier than any previous functions, including <code>reshape()</code> (base R) or <code>gather</code>/<code>spread</code> (Tidyverse). This excellent article includes details:</p>
-<p><a href="https://tidyr.tidyverse.org/dev/articles/pivot.html" class="uri">https://tidyr.tidyverse.org/dev/articles/pivot.html</a></p>
-</div>
-<div id="data-cleaning" class="section level2 hasAnchor" number="6.9">
-<h2><span class="header-section-number">6.9</span> Data cleaning<a href="datawrangling.html#data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Data cleaning is typically an iterative process that you should conduct on a variable-by-variable basis. Occasionally it is useful to clean an entire questionnaire module at the same time since variables in the same module can be related to one another, and since it can help to proceed through the cleaning process in well-defined chunks. I find it helpful to have a copy of the survey questionnaire (if relevant) handy while cleaning specific variables. This enables you to check skip patterns and codes in the survey against the dataset.</p>
-<p>We don’t have a lot of general advice for data cleaning except the following. First, there is something to be said for “trolling” (in the fishing sense) or visually scrolling through parts of the dataset to see what the data look like and to make sure you have a feel for how information is stored in different variables (e.g., are missing values coded or simply recored as “<code>.</code>” or <code>NA</code>). Use the <code>View()</code> utility in <code>RStudio</code> to look at your data often during the cleaning process. Second, it can be helpful to consolidate all data cleaning into a single program for each dataset. The data cleaning program corrects entry errors, labels variables, formats variables, and outputs either a temporary or final dataset (but does not, ever, overwrite the untouched data). As noted in the <a href="workflows.html#workflows">Workflows</a> chapter, <em>key data processing should be done once, at the earliest possible place in the workflow</em>.</p>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="codingstyle.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="publicdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
