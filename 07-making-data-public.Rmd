@@ -89,17 +89,23 @@ Create a public ID that can be used to uniquely identify participants and that c
 ---
 
 ### Example scripts
-See the example scripts here: https://github.com/proctor-ucsf/ACTION/tree/master/code/make_public (need access):    
-1. ACTION_generate_public_IDs.R- creates randomly generated public IDs that can be matched to the trial's assigned patient IDs. The output is a dataset with two variables- the new public ID and the patient's assigned ID.    
-2. ACTION_create_public_datasets.R- joins the public IDs to the trial's full dataset, and strips it of the assigned patient ID. The output is a de-identified public dataset with uniquely identifying public IDs that cannot be easily linked back to the patient's ID.   
 
+We have created a self-contained and reproducible example that you can run and replicate when making data public for your projects. It contains the following files and folders:
 
-### Create a data repository
+1. `data/final/`- folder containing the projects final data in both csv and rds formats              
+2. `code/DEMO_generate_public_IDs.R`- creates randomly generated public IDs that can be matched to the trial's assigned patient IDs.              
+3. `data/make_public/DEMO_internal_to_publicID.csv`- the output from step #2, a bridge dataset with two variables- the new public ID and the patient's assigned ID.   
+3. `code/DEMO_create_public_datasets.R`- joins the public IDs to the trial's full dataset, and strips it of the assigned patient ID. 
+4. `data/public/`- folder containing the output from step #3- de-identified public dataset, in csv and rds formats, with uniquely identifying public IDs that cannot be easily linked back to the patient's ID.
+
+The example workflow is accessible via GitHub: https://github.com/proctor-ucsf/dcc-handbook/tree/master/templates/making-data-public 
+
+## Create a data repository
 
 
 First, ensure that you create a codebook and metadata file for each public dataset [See the DCC guide on Documenting datasets](https://proctor-ucsf.github.io/dcc-handbook/datawrangling.html#documenting-datasets). Use the same name as the datasets, but with "-codebook.txt” /  “-codebook.html” / “-codebook.csv” at the end (depending on the file format for the codebook).  One nice option is the R codebook package, which also generates JSON output that is machine-readable.  
 
-#### Steps for creating an Open Science Framework (OSF) repository:
+### Steps for creating an Open Science Framework (OSF) repository:
 1. Create a new OSF project per these instructions: https://help.osf.io/article/252-create-a-project 
 2. Create a data component and upload the datasets in .csv and .rds format along with the codebooks.  The primary format for public dissemination is .csv but we make the .rds files available too as auxiliary files for convenience.
 3. reate a notebook component and upload the final .html files (which will not be on github... but see optional item below)
@@ -107,7 +113,7 @@ First, ensure that you create a codebook and metadata file for each public datas
 5. Create a Digital Object Identifier (DOI) for the repository. A DOI is a unique identifier that provides a persistent link to content, such as a dataset in this case. [Learn more about DOIs](https://researchdata.princeton.edu/research-lifecycle-guide/whats-doi-and-what-should-i-know-about-citing-datasets)
 6. Optional: Complete the software checklist and system requirement guide for the analysis to guide others. Include it on the GitHub README for the project: https://github.com/proctor-ucsf/mordor-antibody
 
-#### Steps for creating a Dryad data repository:
+### Steps for creating a Dryad data repository:
 TBD
 https://datadryad.org/stash/submission_process 
 
