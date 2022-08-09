@@ -275,7 +275,7 @@ analysis_data_public_codebook.txt</code></pre>
 <p>In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: <a href="https://github.com/ben-arnold/enterics-seroepi/tree/master/data" class="uri">https://github.com/ben-arnold/enterics-seroepi/tree/master/data</a> .</p>
 <p>If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (<a href="https://osf.io">osf.io</a>). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: <a href="https://osf.io/tprw2/" class="uri">https://osf.io/tprw2/</a>. Another good option is Dryad (<a href="https://datadryad.org/">datadryad.org</a>), which normally costs a nominal fee to archive data but is free to investigators in the University of California system.</p>
 <p>As of this time, we recommend cross-linking public files in GitHub (scripts/notebooks only), OSF, and Dryad.</p>
-<p>Here are the main steps to making data public, after finalizing the analysis datasets and scripts:<br />
+<p>Below are the main steps to making data public, after finalizing the analysis datasets and scripts:<br />
 1. Remove Protected Health Information (PHI)<br />
 2. Create public IDs or join already created public IDs to the data<br />
 3. Create an OSF repository and/or Dryad repository<br />
@@ -285,18 +285,17 @@ analysis_data_public_codebook.txt</code></pre>
 </div>
 <div id="removing-phi" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Removing PHI<a href="publicdata.html#removing-phi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For more examples of what constitutes PHI, please refer to this link: <a href="https://cphs.berkeley.edu/hipaa/hipaa18.html" class="uri">https://cphs.berkeley.edu/hipaa/hipaa18.html</a></p>
 <p>Once the data is finalized for analysis, the first step is to strip it of Protected Health Information (PHI), or any other data that could be used to link back to specific participants, such as names, birth dates, or GPS coordinates at the village/neighborhood level or below. PHI includes, but is not limited to:</p>
 <div id="personal-information" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Personal information<a href="publicdata.html#personal-information" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>These are identifiers that directly point to specific individuals, such as:
+<p>These are identifiers that directly point to specific individuals, such as:<br />
 - Names, addresses, photographs, date of birth<br />
 - A combination of age, sex, and geographic location (below population 20,000) is considered identifiable</p>
 </div>
 <div id="dates" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Dates<a href="publicdata.html#dates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Any specific dates (e.g., study visit dates, birth dates, treatment dates) are usually problematic.
-- If a dataset requires high resolution temporal information, coarsen visit or measurement dates to be two variables: year and week of the year (1-52).
+<p>Any specific dates (e.g., study visit dates, birth dates, treatment dates) are usually problematic.<br />
+- If a dataset requires high resolution temporal information, coarsen visit or measurement dates to be two variables: year and week of the year (1-52).<br />
 - If a dataset requires age, provide that information without a birth date (typically month resolution is sufficient)</p>
 <hr />
 <blockquote>
@@ -309,6 +308,7 @@ analysis_data_public_codebook.txt</code></pre>
 <p>Do not include GPS coordinates (longitude, latitude) except in special circumstances where they have been obfuscated/shifted. Reach out to your PI and the study’s biostatistician before doing this because it can be complicated.</p>
 <p>Do not include place names or codes (e.g., US Zip Codes) if the place contains &lt;20,000 people. For villages or neighborhoods, code them with uninformative IDs. For sub-districts or districts, names are fine.</p>
 <p>If an analysis requires GPS locations (e.g., to make a map), then typically we include a disclaimer in the article’s data availability statement that explains we cannot make GPS locations public to protect participant confidentiality. As a middle ground, we typically make our <em>code</em> public that runs on the geo-located data for transparency, even if independent researchers can’t actually run that code (although please be careful to ensure the code itself does not in any way include geographic identifiers).</p>
+<p>For more examples of what constitutes PHI, please refer to this link: <a href="https://cphs.berkeley.edu/hipaa/hipaa18.html" class="uri">https://cphs.berkeley.edu/hipaa/hipaa18.html</a></p>
 </div>
 </div>
 <div id="create-public-ids" class="section level2 hasAnchor" number="7.3">
@@ -352,7 +352,7 @@ analysis_data_public_codebook.txt</code></pre>
 <ol style="list-style-type: decimal">
 <li>Create a new OSF project per these instructions: <a href="https://help.osf.io/article/252-create-a-project" class="uri">https://help.osf.io/article/252-create-a-project</a></li>
 <li>Create a data component and upload the datasets in .csv and .rds format along with the codebooks. The primary format for public dissemination is .csv but we make the .rds files available too as auxiliary files for convenience.</li>
-<li>reate a notebook component and upload the final .html files (which will not be on github… but see optional item below)</li>
+<li>Create a notebook component and upload the final .html files (which will not be on github… but see optional item below)</li>
 <li>On the OSF landing Wiki, provide some context. Here is a recent example: <a href="https://osf.io/954bt/" class="uri">https://osf.io/954bt/</a></li>
 <li>Create a Digital Object Identifier (DOI) for the repository. A DOI is a unique identifier that provides a persistent link to content, such as a dataset in this case. <a href="https://researchdata.princeton.edu/research-lifecycle-guide/whats-doi-and-what-should-i-know-about-citing-datasets">Learn more about DOIs</a></li>
 <li>Optional: Complete the software checklist and system requirement guide for the analysis to guide others. Include it on the GitHub README for the project: <a href="https://github.com/proctor-ucsf/mordor-antibody" class="uri">https://github.com/proctor-ucsf/mordor-antibody</a></li>
@@ -374,13 +374,11 @@ analysis_data_public_codebook.txt</code></pre>
 <p>See examples:<br />
 - ACTION - <a href="https://github.com/proctor-ucsf/ACTION-public" class="uri">https://github.com/proctor-ucsf/ACTION-public</a><br />
 - NAITRE - <a href="https://github.com/proctor-ucsf/NAITRE-primary" class="uri">https://github.com/proctor-ucsf/NAITRE-primary</a></p>
-<table>
-<tbody>
-<tr class="odd">
-<td>&gt; <em><strong>Caution!</strong> Read through the scripts carefully to ensure there is no PHI in the code itself </em></td>
-</tr>
-</tbody>
-</table>
+<hr />
+<blockquote>
+<p><em><strong>Caution!</strong> Read through the scripts carefully to ensure there is no PHI in the code itself </em></p>
+</blockquote>
+<hr />
 <p>Once a public GitHub page exists, you can create a new component on an OSF project (step 3, above) and link it to the public version of the GitHub repo.</p>
 </div>
 <div id="go-live" class="section level2 hasAnchor" number="7.7">
