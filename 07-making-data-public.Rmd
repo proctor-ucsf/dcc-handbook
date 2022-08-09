@@ -27,7 +27,7 @@ If the data are bigger, then maintaining them under version control in your git 
 
 As of this time, we recommend cross-linking public files in GitHub (scripts/notebooks only), OSF, and Dryad.
 
-Here are the main steps to making data public, after finalizing the analysis datasets and scripts:   
+Below are the main steps to making data public, after finalizing the analysis datasets and scripts:   
 1. Remove Protected Health Information (PHI)   
 2. Create public IDs or join already created public IDs to the data   
 3. Create an OSF repository and/or Dryad repository   
@@ -37,19 +37,17 @@ Here are the main steps to making data public, after finalizing the analysis dat
 
 ## Removing PHI
 
-For more examples of what constitutes PHI, please refer to this link: https://cphs.berkeley.edu/hipaa/hipaa18.html 
-
 Once the data is finalized for analysis, the first step is to strip it of Protected Health Information (PHI), or any other data that could be used to link back to specific participants, such as names, birth dates, or GPS coordinates at the village/neighborhood level or below. PHI includes, but is not limited to:
 
 ### Personal information
-These are identifiers that directly point to specific individuals, such as:
-- Names, addresses, photographs, date of birth    
-- A combination of age, sex, and geographic location (below population 20,000) is considered identifiable    
+These are identifiers that directly point to specific individuals, such as:             
+- Names, addresses, photographs, date of birth             
+- A combination of age, sex, and geographic location (below population 20,000) is considered identifiable                 
 
 ### Dates
-Any specific dates (e.g., study visit dates, birth dates, treatment dates) are usually problematic. 
-- If a dataset requires high resolution temporal information, coarsen visit or measurement dates to be two variables: year and week of the year (1-52). 
-- If a dataset requires age, provide that information without a birth date (typically month resolution is sufficient)
+Any specific dates (e.g., study visit dates, birth dates, treatment dates) are usually problematic.              
+- If a dataset requires high resolution temporal information, coarsen visit or measurement dates to be two variables: year and week of the year (1-52).                 
+- If a dataset requires age, provide that information without a birth date (typically month resolution is sufficient)           
 
 ---
 
@@ -66,9 +64,7 @@ Do not include place names or codes (e.g., US Zip Codes)  if the place contains 
 
 If an analysis requires GPS locations (e.g., to make a map), then typically we include a disclaimer in the article’s data availability statement that explains we cannot make GPS locations public to protect participant confidentiality. As a middle ground, we typically make our _code_ public that runs on the geo-located data for transparency, even if independent researchers can’t actually run that code (although please be careful to ensure the code itself does not in any way include geographic identifiers).
 
-
-
-
+For more examples of what constitutes PHI, please refer to this link: https://cphs.berkeley.edu/hipaa/hipaa18.html 
 
 ## Create public IDs
 
@@ -108,7 +104,7 @@ First, ensure that you create a codebook and metadata file for each public datas
 ### Steps for creating an Open Science Framework (OSF) repository:
 1. Create a new OSF project per these instructions: https://help.osf.io/article/252-create-a-project 
 2. Create a data component and upload the datasets in .csv and .rds format along with the codebooks.  The primary format for public dissemination is .csv but we make the .rds files available too as auxiliary files for convenience.
-3. reate a notebook component and upload the final .html files (which will not be on github... but see optional item below)
+3. Create a notebook component and upload the final .html files (which will not be on github... but see optional item below)
 4. On the OSF landing Wiki,  provide some context.  Here is a recent example: https://osf.io/954bt/
 5. Create a Digital Object Identifier (DOI) for the repository. A DOI is a unique identifier that provides a persistent link to content, such as a dataset in this case. [Learn more about DOIs](https://researchdata.princeton.edu/research-lifecycle-guide/whats-doi-and-what-should-i-know-about-citing-datasets)
 6. Optional: Complete the software checklist and system requirement guide for the analysis to guide others. Include it on the GitHub README for the project: https://github.com/proctor-ucsf/mordor-antibody
@@ -131,7 +127,9 @@ See examples:
 - NAITRE - https://github.com/proctor-ucsf/NAITRE-primary    
 
 ---
+
 > _**Caution!** Read through the scripts carefully to ensure there is no PHI in the code itself _
+
 ---
 
 Once a public GitHub page exists, you can create a new component on an OSF project (step 3, above) and link it to the public version of the GitHub repo.
