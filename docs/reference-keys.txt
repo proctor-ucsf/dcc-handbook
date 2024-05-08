@@ -122,3 +122,6 @@ authorship
 work-hours
 resources
 fig:fig-workflow
+fig:dir-fig1
+second-level-projects
+use-bash-scripts-or-r-scripts-to-ensure-reproducibility
