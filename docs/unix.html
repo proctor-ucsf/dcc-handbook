@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 UNIX Commands | Proctor Foundation Data Science Handbook</title>
+  <title>Chapter 10 UNIX Commands | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 UNIX Commands | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Chapter 10 UNIX Commands | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 UNIX Commands | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Chapter 10 UNIX Commands | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
 
-<meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin (many from UC Berkeley in addition to Proctor)" />
+<meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin, Fanice Nyatigo (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2020-04-14" />
+<meta name="date" content="2024-05-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,13 +32,15 @@
   
 <link rel="prev" href="github.html"/>
 <link rel="next" href="building-automated-markdown-reports.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,7 +49,16 @@
 
 
 
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -67,31 +77,37 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction: Work Flow and Reproducible Analyses</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction: Work Flow and Reproducible Analyses</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#workflow"><i class="fa fa-check"></i><b>1.1</b> Workflow</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#reproducibility"><i class="fa fa-check"></i><b>1.2</b> Reproducibility</a></li>
 <li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#automation"><i class="fa fa-check"></i><b>1.3</b> Automation</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="workflows.html"><a href="workflows.html"><i class="fa fa-check"></i><b>2</b> Workflows</a></li>
-<li class="chapter" data-level="3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html"><i class="fa fa-check"></i><b>3</b> Directory Structure and Code Repositories</a><ul>
+<li class="chapter" data-level="3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html"><i class="fa fa-check"></i><b>3</b> Directory Structure and Code Repositories</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#small-and-large-projects"><i class="fa fa-check"></i><b>3.1</b> Small and large projects</a></li>
-<li class="chapter" data-level="3.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#directory-structure"><i class="fa fa-check"></i><b>3.2</b> Directory Structure</a><ul>
+<li class="chapter" data-level="3.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#directory-structure"><i class="fa fa-check"></i><b>3.2</b> Directory Structure</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#first-level-data-and-analyses"><i class="fa fa-check"></i><b>3.2.1</b> First level: data and analyses</a></li>
 <li class="chapter" data-level="3.2.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#second-level-data"><i class="fa fa-check"></i><b>3.2.2</b> Second level: data</a></li>
-<li class="chapter" data-level="3.2.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#second-level-analysis"><i class="fa fa-check"></i><b>3.2.3</b> Second level: analysis</a></li>
+<li class="chapter" data-level="3.2.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#second-level-projects"><i class="fa fa-check"></i><b>3.2.3</b> Second level: projects</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#code-repositories"><i class="fa fa-check"></i><b>3.3</b> Code Repositories</a><ul>
+<li class="chapter" data-level="3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#code-repositories"><i class="fa fa-check"></i><b>3.3</b> Code Repositories</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#rproj-files"><i class="fa fa-check"></i><b>3.3.1</b> <code>.Rproj</code> files</a></li>
 <li class="chapter" data-level="3.3.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#configuration-config-file"><i class="fa fa-check"></i><b>3.3.2</b> Configuration (‘config’) File</a></li>
 <li class="chapter" data-level="3.3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#shared-functions-file"><i class="fa fa-check"></i><b>3.3.3</b> Shared Functions File</a></li>
 <li class="chapter" data-level="3.3.4" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#order-files-and-subdirectories"><i class="fa fa-check"></i><b>3.3.4</b> Order Files and Subdirectories</a></li>
-<li class="chapter" data-level="3.3.5" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#use-bash-scripts-to-ensure-reproducibility"><i class="fa fa-check"></i><b>3.3.5</b> Use Bash scripts to ensure reproducibility</a></li>
+<li class="chapter" data-level="3.3.5" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#use-bash-scripts-or-r-scripts-to-ensure-reproducibility"><i class="fa fa-check"></i><b>3.3.5</b> Use Bash scripts or R scripts to ensure reproducibility</a></li>
 <li class="chapter" data-level="3.3.6" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#alternative-approach-for-code-repos"><i class="fa fa-check"></i><b>3.3.6</b> Alternative approach for code repos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="codingpractices.html"><a href="codingpractices.html"><i class="fa fa-check"></i><b>4</b> Coding Practices</a><ul>
+<li class="chapter" data-level="4" data-path="codingpractices.html"><a href="codingpractices.html"><i class="fa fa-check"></i><b>4</b> Coding Practices</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="codingpractices.html"><a href="codingpractices.html#organizing-scripts"><i class="fa fa-check"></i><b>4.1</b> Organizing scripts</a></li>
-<li class="chapter" data-level="4.2" data-path="codingpractices.html"><a href="codingpractices.html#documenting-your-code"><i class="fa fa-check"></i><b>4.2</b> Documenting your code</a><ul>
+<li class="chapter" data-level="4.2" data-path="codingpractices.html"><a href="codingpractices.html#documenting-your-code"><i class="fa fa-check"></i><b>4.2</b> Documenting your code</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="codingpractices.html"><a href="codingpractices.html#file-headers"><i class="fa fa-check"></i><b>4.2.1</b> File headers</a></li>
 <li class="chapter" data-level="4.2.2" data-path="codingpractices.html"><a href="codingpractices.html#comments-in-the-body-of-your-script"><i class="fa fa-check"></i><b>4.2.2</b> Comments in the body of your script</a></li>
 <li class="chapter" data-level="4.2.3" data-path="codingpractices.html"><a href="codingpractices.html#function-documentation"><i class="fa fa-check"></i><b>4.2.3</b> Function documentation</a></li>
@@ -102,20 +118,23 @@
 <li class="chapter" data-level="4.6" data-path="codingpractices.html"><a href="codingpractices.html#tidyverse"><i class="fa fa-check"></i><b>4.6</b> Tidyverse</a></li>
 <li class="chapter" data-level="4.7" data-path="codingpractices.html"><a href="codingpractices.html#coding-with-r-and-python"><i class="fa fa-check"></i><b>4.7</b> Coding with R and Python</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>5</b> Coding Style</a><ul>
+<li class="chapter" data-level="5" data-path="codingstyle.html"><a href="codingstyle.html"><i class="fa fa-check"></i><b>5</b> Coding Style</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="codingstyle.html"><a href="codingstyle.html#line-breaks"><i class="fa fa-check"></i><b>5.1</b> Line breaks</a></li>
-<li class="chapter" data-level="5.2" data-path="codingstyle.html"><a href="codingstyle.html#automated-tools-for-style-and-project-workflow"><i class="fa fa-check"></i><b>5.2</b> Automated Tools for Style and Project Workflow</a><ul>
+<li class="chapter" data-level="5.2" data-path="codingstyle.html"><a href="codingstyle.html#automated-tools-for-style-and-project-workflow"><i class="fa fa-check"></i><b>5.2</b> Automated Tools for Style and Project Workflow</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="codingstyle.html"><a href="codingstyle.html#styling"><i class="fa fa-check"></i><b>5.2.1</b> Styling</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="datawrangling.html"><a href="datawrangling.html"><i class="fa fa-check"></i><b>6</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="6" data-path="datawrangling.html"><a href="datawrangling.html"><i class="fa fa-check"></i><b>6</b> Data Wrangling</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="datawrangling.html"><a href="datawrangling.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
 <li class="chapter" data-level="6.2" data-path="datawrangling.html"><a href="datawrangling.html#cardinal-rule"><i class="fa fa-check"></i><b>6.2</b> Cardinal rule</a></li>
-<li class="chapter" data-level="6.3" data-path="datawrangling.html"><a href="datawrangling.html#data-inputoutput-io"><i class="fa fa-check"></i><b>6.3</b> Data input/output (I/O)</a><ul>
+<li class="chapter" data-level="6.3" data-path="datawrangling.html"><a href="datawrangling.html#data-inputoutput-io"><i class="fa fa-check"></i><b>6.3</b> Data input/output (I/O)</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="datawrangling.html"><a href="datawrangling.html#excel-files"><i class="fa fa-check"></i><b>6.3.1</b> Excel files</a></li>
 <li class="chapter" data-level="6.3.2" data-path="datawrangling.html"><a href="datawrangling.html#rds-vs-.rdata-files"><i class="fa fa-check"></i><b>6.3.2</b> <code>.RDS</code> vs <code>.RData</code> Files</a></li>
 <li class="chapter" data-level="6.3.3" data-path="datawrangling.html"><a href="datawrangling.html#csv-files"><i class="fa fa-check"></i><b>6.3.3</b> <code>.CSV</code> Files</a></li>
-<li class="chapter" data-level="6.3.4" data-path="datawrangling.html"><a href="datawrangling.html#publishing-public-data"><i class="fa fa-check"></i><b>6.3.4</b> Publishing public data</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="datawrangling.html"><a href="datawrangling.html#documenting-datasets"><i class="fa fa-check"></i><b>6.4</b> Documenting datasets</a></li>
 <li class="chapter" data-level="6.5" data-path="datawrangling.html"><a href="datawrangling.html#mapping-data-from-untouched---final"><i class="fa fa-check"></i><b>6.5</b> Mapping data from untouched -&gt; final</a></li>
@@ -124,70 +143,104 @@
 <li class="chapter" data-level="6.8" data-path="datawrangling.html"><a href="datawrangling.html#reshaping-data"><i class="fa fa-check"></i><b>6.8</b> Reshaping data</a></li>
 <li class="chapter" data-level="6.9" data-path="datawrangling.html"><a href="datawrangling.html#data-cleaning"><i class="fa fa-check"></i><b>6.9</b> Data cleaning</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>7</b> Working with Big Data</a><ul>
-<li class="chapter" data-level="7.1" data-path="bigdata.html"><a href="bigdata.html#basics"><i class="fa fa-check"></i><b>7.1</b> Basics</a></li>
-<li class="chapter" data-level="7.2" data-path="bigdata.html"><a href="bigdata.html#using-downsampled-data"><i class="fa fa-check"></i><b>7.2</b> Using downsampled data</a></li>
-<li class="chapter" data-level="7.3" data-path="bigdata.html"><a href="bigdata.html#big-data-unix"><i class="fa fa-check"></i><b>7.3</b> Unix</a></li>
-<li class="chapter" data-level="7.4" data-path="bigdata.html"><a href="bigdata.html#sql-and-dbplyr"><i class="fa fa-check"></i><b>7.4</b> SQL and <code>dbplyr</code></a></li>
-<li class="chapter" data-level="7.5" data-path="bigdata.html"><a href="bigdata.html#data.table-and-dtplyr"><i class="fa fa-check"></i><b>7.5</b> <code>data.table</code> and <code>dtplyr</code></a></li>
-<li class="chapter" data-level="7.6" data-path="bigdata.html"><a href="bigdata.html#ff-bigmemory-biglm"><i class="fa fa-check"></i><b>7.6</b> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></a></li>
-<li class="chapter" data-level="7.7" data-path="bigdata.html"><a href="bigdata.html#parallel-computing"><i class="fa fa-check"></i><b>7.7</b> Parallel computing</a><ul>
-<li class="chapter" data-level="7.7.1" data-path="bigdata.html"><a href="bigdata.html#embarrassingly-parallel-problems"><i class="fa fa-check"></i><b>7.7.1</b> Embarrassingly Parallel Problems</a></li>
-<li class="chapter" data-level="7.7.2" data-path="bigdata.html"><a href="bigdata.html#packages"><i class="fa fa-check"></i><b>7.7.2</b> Packages</a></li>
-<li class="chapter" data-level="7.7.3" data-path="bigdata.html"><a href="bigdata.html#gpus"><i class="fa fa-check"></i><b>7.7.3</b> GPU’s</a></li>
-<li class="chapter" data-level="7.7.4" data-path="bigdata.html"><a href="bigdata.html#the-mapreduce-paradigm"><i class="fa fa-check"></i><b>7.7.4</b> The <em>MapReduce</em> paradigm</a></li>
+<li class="chapter" data-level="7" data-path="publicdata.html"><a href="publicdata.html"><i class="fa fa-check"></i><b>7</b> Making Data Public</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="publicdata.html"><a href="publicdata.html#overview-1"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="publicdata.html"><a href="publicdata.html#removing-phi"><i class="fa fa-check"></i><b>7.2</b> Removing PHI</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="publicdata.html"><a href="publicdata.html#personal-information"><i class="fa fa-check"></i><b>7.2.1</b> Personal information</a></li>
+<li class="chapter" data-level="7.2.2" data-path="publicdata.html"><a href="publicdata.html#dates"><i class="fa fa-check"></i><b>7.2.2</b> Dates</a></li>
+<li class="chapter" data-level="7.2.3" data-path="publicdata.html"><a href="publicdata.html#geographic-information"><i class="fa fa-check"></i><b>7.2.3</b> Geographic information</a></li>
 </ul></li>
-<li class="chapter" data-level="7.8" data-path="bigdata.html"><a href="bigdata.html#optimal-rstudio-set-up"><i class="fa fa-check"></i><b>7.8</b> Optimal RStudio set up</a></li>
+<li class="chapter" data-level="7.3" data-path="publicdata.html"><a href="publicdata.html#create-public-ids"><i class="fa fa-check"></i><b>7.3</b> Create public IDs</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="publicdata.html"><a href="publicdata.html#rationale"><i class="fa fa-check"></i><b>7.3.1</b> Rationale</a></li>
+<li class="chapter" data-level="7.3.2" data-path="publicdata.html"><a href="publicdata.html#a-single-set-of-public-ids-for-each-study"><i class="fa fa-check"></i><b>7.3.2</b> A single set of public IDs for each study</a></li>
+<li class="chapter" data-level="7.3.3" data-path="publicdata.html"><a href="publicdata.html#example-scripts"><i class="fa fa-check"></i><b>7.3.3</b> Example scripts</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>8</b> GitHub and Version Control</a><ul>
-<li class="chapter" data-level="8.1" data-path="github.html"><a href="github.html#basics-1"><i class="fa fa-check"></i><b>8.1</b> Basics</a></li>
-<li class="chapter" data-level="8.2" data-path="github.html"><a href="github.html#git-branching"><i class="fa fa-check"></i><b>8.2</b> Git Branching</a></li>
-<li class="chapter" data-level="8.3" data-path="github.html"><a href="github.html#example-workflow"><i class="fa fa-check"></i><b>8.3</b> Example Workflow</a></li>
-<li class="chapter" data-level="8.4" data-path="github.html"><a href="github.html#commonly-used-git-commands"><i class="fa fa-check"></i><b>8.4</b> Commonly Used Git Commands</a></li>
-<li class="chapter" data-level="8.5" data-path="github.html"><a href="github.html#how-often-should-i-commit"><i class="fa fa-check"></i><b>8.5</b> How often should I commit?</a></li>
-<li class="chapter" data-level="8.6" data-path="github.html"><a href="github.html#what-should-be-pushed-to-github"><i class="fa fa-check"></i><b>8.6</b> What should be pushed to Github?</a></li>
-<li class="chapter" data-level="8.7" data-path="github.html"><a href="github.html#how-should-i-describe-my-commit"><i class="fa fa-check"></i><b>8.7</b> How should I describe my commit?</a></li>
+<li class="chapter" data-level="7.4" data-path="publicdata.html"><a href="publicdata.html#create-a-data-repository"><i class="fa fa-check"></i><b>7.4</b> Create a data repository</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="publicdata.html"><a href="publicdata.html#steps-for-creating-an-open-science-framework-osf-repository"><i class="fa fa-check"></i><b>7.4.1</b> Steps for creating an Open Science Framework (OSF) repository:</a></li>
+<li class="chapter" data-level="7.4.2" data-path="publicdata.html"><a href="publicdata.html#steps-for-creating-a-dryad-data-repository"><i class="fa fa-check"></i><b>7.4.2</b> Steps for creating a Dryad data repository:</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>9</b> UNIX Commands</a><ul>
-<li class="chapter" data-level="9.1" data-path="unix.html"><a href="unix.html#environment"><i class="fa fa-check"></i><b>9.1</b> Environment</a></li>
-<li class="chapter" data-level="9.2" data-path="unix.html"><a href="unix.html#basics-2"><i class="fa fa-check"></i><b>9.2</b> Basics</a></li>
-<li class="chapter" data-level="9.3" data-path="unix.html"><a href="unix.html#syntax-for-both-macwindows"><i class="fa fa-check"></i><b>9.3</b> Syntax for both Mac/Windows</a></li>
-<li class="chapter" data-level="9.4" data-path="unix.html"><a href="unix.html#running-bash-scripts"><i class="fa fa-check"></i><b>9.4</b> Running Bash Scripts</a></li>
-<li class="chapter" data-level="9.5" data-path="unix.html"><a href="unix.html#running-rscripts-in-windows"><i class="fa fa-check"></i><b>9.5</b> Running Rscripts in Windows</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="unix.html"><a href="unix.html#common-mistakes"><i class="fa fa-check"></i><b>9.5.1</b> Common Mistakes</a></li>
+<li class="chapter" data-level="7.5" data-path="publicdata.html"><a href="publicdata.html#edit-and-test-analysis-scripts"><i class="fa fa-check"></i><b>7.5</b> Edit and test analysis scripts</a></li>
+<li class="chapter" data-level="7.6" data-path="publicdata.html"><a href="publicdata.html#create-a-public-github-page-for-public-scripts"><i class="fa fa-check"></i><b>7.6</b> Create a public GitHub page for public scripts</a></li>
+<li class="chapter" data-level="7.7" data-path="publicdata.html"><a href="publicdata.html#go-live"><i class="fa fa-check"></i><b>7.7</b> Go live</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="unix.html"><a href="unix.html#checking-tasks-and-killing-jobs"><i class="fa fa-check"></i><b>9.6</b> Checking tasks and killing jobs</a></li>
-<li class="chapter" data-level="9.7" data-path="unix.html"><a href="unix.html#running-big-jobs"><i class="fa fa-check"></i><b>9.7</b> Running big jobs</a></li>
+<li class="chapter" data-level="8" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>8</b> Working with Big Data</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="bigdata.html"><a href="bigdata.html#basics"><i class="fa fa-check"></i><b>8.1</b> Basics</a></li>
+<li class="chapter" data-level="8.2" data-path="bigdata.html"><a href="bigdata.html#using-downsampled-data"><i class="fa fa-check"></i><b>8.2</b> Using downsampled data</a></li>
+<li class="chapter" data-level="8.3" data-path="bigdata.html"><a href="bigdata.html#big-data-unix"><i class="fa fa-check"></i><b>8.3</b> Unix</a></li>
+<li class="chapter" data-level="8.4" data-path="bigdata.html"><a href="bigdata.html#sql-and-dbplyr"><i class="fa fa-check"></i><b>8.4</b> SQL and <code>dbplyr</code></a></li>
+<li class="chapter" data-level="8.5" data-path="bigdata.html"><a href="bigdata.html#data.table-and-dtplyr"><i class="fa fa-check"></i><b>8.5</b> <code>data.table</code> and <code>dtplyr</code></a></li>
+<li class="chapter" data-level="8.6" data-path="bigdata.html"><a href="bigdata.html#ff-bigmemory-biglm"><i class="fa fa-check"></i><b>8.6</b> <code>ff</code>, <code>bigmemory</code>, <code>biglm</code></a></li>
+<li class="chapter" data-level="8.7" data-path="bigdata.html"><a href="bigdata.html#parallel-computing"><i class="fa fa-check"></i><b>8.7</b> Parallel computing</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="bigdata.html"><a href="bigdata.html#embarrassingly-parallel-problems"><i class="fa fa-check"></i><b>8.7.1</b> Embarrassingly Parallel Problems</a></li>
+<li class="chapter" data-level="8.7.2" data-path="bigdata.html"><a href="bigdata.html#packages"><i class="fa fa-check"></i><b>8.7.2</b> Packages</a></li>
+<li class="chapter" data-level="8.7.3" data-path="bigdata.html"><a href="bigdata.html#gpus"><i class="fa fa-check"></i><b>8.7.3</b> GPU’s</a></li>
+<li class="chapter" data-level="8.7.4" data-path="bigdata.html"><a href="bigdata.html#the-mapreduce-paradigm"><i class="fa fa-check"></i><b>8.7.4</b> The <em>MapReduce</em> paradigm</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html"><i class="fa fa-check"></i><b>10</b> Building Automated Markdown Reports</a><ul>
-<li class="chapter" data-level="10.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#setting-up-the-markdown"><i class="fa fa-check"></i><b>10.1</b> Setting up the markdown</a><ul>
-<li class="chapter" data-level="10.1.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#yaml"><i class="fa fa-check"></i><b>10.1.1</b> YAML</a></li>
-<li class="chapter" data-level="10.1.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#directory-structure-1"><i class="fa fa-check"></i><b>10.1.2</b> Directory structure</a></li>
+<li class="chapter" data-level="8.8" data-path="bigdata.html"><a href="bigdata.html#optimal-rstudio-set-up"><i class="fa fa-check"></i><b>8.8</b> Optimal RStudio set up</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#automating-the-data-export-process"><i class="fa fa-check"></i><b>10.2</b> Automating the data export process</a></li>
-<li class="chapter" data-level="10.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#loading-the-data"><i class="fa fa-check"></i><b>10.3</b> Loading the data</a></li>
-<li class="chapter" data-level="10.4" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-cleaningprocessing"><i class="fa fa-check"></i><b>10.4</b> Data cleaning/processing</a></li>
-<li class="chapter" data-level="10.5" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-monitoring"><i class="fa fa-check"></i><b>10.5</b> Data monitoring</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-validation"><i class="fa fa-check"></i><b>10.5.1</b> Data validation</a></li>
-<li class="chapter" data-level="10.5.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-presentation-dsmc-style"><i class="fa fa-check"></i><b>10.5.2</b> Data presentation (DSMC-style)</a></li>
-<li class="chapter" data-level="10.5.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#appendix-if-necessary"><i class="fa fa-check"></i><b>10.5.3</b> Appendix (if necessary)</a></li>
+<li class="chapter" data-level="9" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>9</b> GitHub and Version Control</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="github.html"><a href="github.html#basics-1"><i class="fa fa-check"></i><b>9.1</b> Basics</a></li>
+<li class="chapter" data-level="9.2" data-path="github.html"><a href="github.html#git-branching"><i class="fa fa-check"></i><b>9.2</b> Git Branching</a></li>
+<li class="chapter" data-level="9.3" data-path="github.html"><a href="github.html#example-workflow"><i class="fa fa-check"></i><b>9.3</b> Example Workflow</a></li>
+<li class="chapter" data-level="9.4" data-path="github.html"><a href="github.html#commonly-used-git-commands"><i class="fa fa-check"></i><b>9.4</b> Commonly Used Git Commands</a></li>
+<li class="chapter" data-level="9.5" data-path="github.html"><a href="github.html#how-often-should-i-commit"><i class="fa fa-check"></i><b>9.5</b> How often should I commit?</a></li>
+<li class="chapter" data-level="9.6" data-path="github.html"><a href="github.html#what-should-be-pushed-to-github"><i class="fa fa-check"></i><b>9.6</b> What should be pushed to Github?</a></li>
+<li class="chapter" data-level="9.7" data-path="github.html"><a href="github.html#how-should-i-describe-my-commit"><i class="fa fa-check"></i><b>9.7</b> How should I describe my commit?</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#summary"><i class="fa fa-check"></i><b>10.6</b> Summary</a></li>
+<li class="chapter" data-level="10" data-path="unix.html"><a href="unix.html"><i class="fa fa-check"></i><b>10</b> UNIX Commands</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="unix.html"><a href="unix.html#environment"><i class="fa fa-check"></i><b>10.1</b> Environment</a></li>
+<li class="chapter" data-level="10.2" data-path="unix.html"><a href="unix.html#basics-2"><i class="fa fa-check"></i><b>10.2</b> Basics</a></li>
+<li class="chapter" data-level="10.3" data-path="unix.html"><a href="unix.html#syntax-for-both-macwindows"><i class="fa fa-check"></i><b>10.3</b> Syntax for both Mac/Windows</a></li>
+<li class="chapter" data-level="10.4" data-path="unix.html"><a href="unix.html#running-bash-scripts"><i class="fa fa-check"></i><b>10.4</b> Running Bash Scripts</a></li>
+<li class="chapter" data-level="10.5" data-path="unix.html"><a href="unix.html#running-rscripts-in-windows"><i class="fa fa-check"></i><b>10.5</b> Running Rscripts in Windows</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="unix.html"><a href="unix.html#common-mistakes"><i class="fa fa-check"></i><b>10.5.1</b> Common Mistakes</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="commcoord.html"><a href="commcoord.html"><i class="fa fa-check"></i><b>11</b> Communication and Coordination</a><ul>
-<li class="chapter" data-level="11.1" data-path="commcoord.html"><a href="commcoord.html#slack"><i class="fa fa-check"></i><b>11.1</b> Slack</a></li>
-<li class="chapter" data-level="11.2" data-path="commcoord.html"><a href="commcoord.html#email"><i class="fa fa-check"></i><b>11.2</b> Email</a></li>
-<li class="chapter" data-level="11.3" data-path="commcoord.html"><a href="commcoord.html#trello"><i class="fa fa-check"></i><b>11.3</b> Trello</a></li>
-<li class="chapter" data-level="11.4" data-path="commcoord.html"><a href="commcoord.html#google-drive"><i class="fa fa-check"></i><b>11.4</b> Google Drive</a></li>
-<li class="chapter" data-level="11.5" data-path="commcoord.html"><a href="commcoord.html#calendar-meetings"><i class="fa fa-check"></i><b>11.5</b> Calendar / Meetings</a></li>
+<li class="chapter" data-level="10.6" data-path="unix.html"><a href="unix.html#checking-tasks-and-killing-jobs"><i class="fa fa-check"></i><b>10.6</b> Checking tasks and killing jobs</a></li>
+<li class="chapter" data-level="10.7" data-path="unix.html"><a href="unix.html#running-big-jobs"><i class="fa fa-check"></i><b>10.7</b> Running big jobs</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="code-of-conduct.html"><a href="code-of-conduct.html"><i class="fa fa-check"></i><b>12</b> Code of conduct</a><ul>
-<li class="chapter" data-level="12.1" data-path="code-of-conduct.html"><a href="code-of-conduct.html#group-culture"><i class="fa fa-check"></i><b>12.1</b> Group culture</a></li>
-<li class="chapter" data-level="12.2" data-path="code-of-conduct.html"><a href="code-of-conduct.html#protecting-human-subjects"><i class="fa fa-check"></i><b>12.2</b> Protecting human subjects</a></li>
-<li class="chapter" data-level="12.3" data-path="code-of-conduct.html"><a href="code-of-conduct.html#authorship"><i class="fa fa-check"></i><b>12.3</b> Authorship</a></li>
-<li class="chapter" data-level="12.4" data-path="code-of-conduct.html"><a href="code-of-conduct.html#work-hours"><i class="fa fa-check"></i><b>12.4</b> Work hours</a></li>
+<li class="chapter" data-level="11" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html"><i class="fa fa-check"></i><b>11</b> Building Automated Markdown Reports</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#setting-up-the-markdown"><i class="fa fa-check"></i><b>11.1</b> Setting up the markdown</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#yaml"><i class="fa fa-check"></i><b>11.1.1</b> YAML</a></li>
+<li class="chapter" data-level="11.1.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#directory-structure-1"><i class="fa fa-check"></i><b>11.1.2</b> Directory structure</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>13</b> Additional Resources</a></li>
+<li class="chapter" data-level="11.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#automating-the-data-export-process"><i class="fa fa-check"></i><b>11.2</b> Automating the data export process</a></li>
+<li class="chapter" data-level="11.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#loading-the-data"><i class="fa fa-check"></i><b>11.3</b> Loading the data</a></li>
+<li class="chapter" data-level="11.4" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-cleaningprocessing"><i class="fa fa-check"></i><b>11.4</b> Data cleaning/processing</a></li>
+<li class="chapter" data-level="11.5" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-monitoring"><i class="fa fa-check"></i><b>11.5</b> Data monitoring</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-validation"><i class="fa fa-check"></i><b>11.5.1</b> Data validation</a></li>
+<li class="chapter" data-level="11.5.2" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#data-presentation-dsmc-style"><i class="fa fa-check"></i><b>11.5.2</b> Data presentation (DSMC-style)</a></li>
+<li class="chapter" data-level="11.5.3" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#appendix-if-necessary"><i class="fa fa-check"></i><b>11.5.3</b> Appendix (if necessary)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="building-automated-markdown-reports.html"><a href="building-automated-markdown-reports.html#summary"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="commcoord.html"><a href="commcoord.html"><i class="fa fa-check"></i><b>12</b> Communication and Coordination</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="commcoord.html"><a href="commcoord.html#slack"><i class="fa fa-check"></i><b>12.1</b> Slack</a></li>
+<li class="chapter" data-level="12.2" data-path="commcoord.html"><a href="commcoord.html#email"><i class="fa fa-check"></i><b>12.2</b> Email</a></li>
+<li class="chapter" data-level="12.3" data-path="commcoord.html"><a href="commcoord.html#trello"><i class="fa fa-check"></i><b>12.3</b> Trello</a></li>
+<li class="chapter" data-level="12.4" data-path="commcoord.html"><a href="commcoord.html#google-drive"><i class="fa fa-check"></i><b>12.4</b> Google Drive</a></li>
+<li class="chapter" data-level="12.5" data-path="commcoord.html"><a href="commcoord.html#calendar-meetings"><i class="fa fa-check"></i><b>12.5</b> Calendar / Meetings</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="code-of-conduct.html"><a href="code-of-conduct.html"><i class="fa fa-check"></i><b>13</b> Code of conduct</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="code-of-conduct.html"><a href="code-of-conduct.html#group-culture"><i class="fa fa-check"></i><b>13.1</b> Group culture</a></li>
+<li class="chapter" data-level="13.2" data-path="code-of-conduct.html"><a href="code-of-conduct.html#protecting-human-subjects"><i class="fa fa-check"></i><b>13.2</b> Protecting human subjects</a></li>
+<li class="chapter" data-level="13.3" data-path="code-of-conduct.html"><a href="code-of-conduct.html#authorship"><i class="fa fa-check"></i><b>13.3</b> Authorship</a></li>
+<li class="chapter" data-level="13.4" data-path="code-of-conduct.html"><a href="code-of-conduct.html#work-hours"><i class="fa fa-check"></i><b>13.4</b> Work hours</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>14</b> Additional Resources</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -209,8 +262,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="unix" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> UNIX Commands</h1>
+<div id="unix" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> UNIX Commands<a href="unix.html#unix" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><em>Contributors: Stephanie Djajadi, Kunal Mishra, Anna Nguyen, Jade Benjamin-Chung, and Ben Arnold</em></p>
 <p>We typically use Unix commands in Terminal (for Mac users) or Git Bash (for Windows users) to</p>
 <ol style="list-style-type: decimal">
@@ -218,8 +271,8 @@
 <li>To check on the progress of a batch of jobs</li>
 <li>To use git and push to github</li>
 </ol>
-<div id="environment" class="section level2">
-<h2><span class="header-section-number">9.1</span> Environment</h2>
+<div id="environment" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Environment<a href="unix.html#environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On Mac OS, there is an application named <code>Terminal</code> that provides a bash shell interface to Unix. In Windows, one option is to install the <code>git for Windows</code> package: <a href="https://gitforwindows.org/" class="uri">https://gitforwindows.org/</a>.</p>
 <p>The default coloring in a terminal window is pretty basic. If you want to make it more colorful in Mac OS, you can do that by saving a <code>.bash_profile</code> file in your home directory (note the “.” prefix on the file name). This is one example of how you can add color to your terminal by including custom coloring in your bash profile (copied from Ben’s profile):</p>
 <pre class="unix"><code># color terminal
@@ -229,16 +282,16 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <p>The encoding is extremely cryptic, but there are decodings online (e.g., <a href="http://www.marinamele.com/2014/05/customize-colors-of-your-terminal-in-mac-os-x.html">link</a>).</p>
 <p>Another bash shell that provides a large array of colors for Mac OS is iTerm2 (<a href="https://iterm2.com/" class="uri">https://iterm2.com/</a>). There are over 200 color schemes to choose from: <a href="https://github.com/mbadolato/iTerm2-Color-Schemes" class="uri">https://github.com/mbadolato/iTerm2-Color-Schemes</a>.</p>
 </div>
-<div id="basics-2" class="section level2">
-<h2><span class="header-section-number">9.2</span> Basics</h2>
+<div id="basics-2" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Basics<a href="unix.html#basics-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>On the computer, there is a desktop with two folders, <code>folder1</code> and <code>folder2</code>, and a file called <code>file1.</code> Inside <code>folder1</code>, we have a file called <code>file2.</code> Mac users can run these commands on their terminal; we recommend that Windows users use Git Bash, not Windows PowerShell.</p>
-<div class="figure">
+<div class="float">
 <img src="images/ex-desktop.jpg" alt="Here is our example desktop." />
-<p class="caption">Here is our example desktop.</p>
+<div class="figcaption">Here is our example desktop.</div>
 </div>
 </div>
-<div id="syntax-for-both-macwindows" class="section level2">
-<h2><span class="header-section-number">9.3</span> Syntax for both Mac/Windows</h2>
+<div id="syntax-for-both-macwindows" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Syntax for both Mac/Windows<a href="unix.html#syntax-for-both-macwindows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When typing in directories or file names, quotes are necessary if the name includes spaces.</p>
 <table>
 <colgroup>
@@ -265,7 +318,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <td>List files in the directory</td>
 </tr>
 <tr class="even">
-<td><code>cp &quot;file2&quot; &quot;newfile2&quot;</code></td>
+<td><code>cp "file2" "newfile2"</code></td>
 <td>Copy file (remember to include file extensions when typing in file names like <code>.pdf</code> or <code>.R</code>)</td>
 </tr>
 <tr class="odd">
@@ -298,13 +351,13 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 </tr>
 </tbody>
 </table>
-<div class="figure">
+<div class="float">
 <img src="images/ex-terminal.PNG" alt="Here is an example of what your terminal might look like after executing the commands in the order listed above." />
-<p class="caption">Here is an example of what your terminal might look like after executing the commands in the order listed above.</p>
+<div class="figcaption">Here is an example of what your terminal might look like after executing the commands in the order listed above.</div>
 </div>
 </div>
-<div id="running-bash-scripts" class="section level2">
-<h2><span class="header-section-number">9.4</span> Running Bash Scripts</h2>
+<div id="running-bash-scripts" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Running Bash Scripts<a href="unix.html#running-bash-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
 <col width="25%" />
@@ -337,28 +390,28 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 </tbody>
 </table>
 </div>
-<div id="running-rscripts-in-windows" class="section level2">
-<h2><span class="header-section-number">9.5</span> Running Rscripts in Windows</h2>
+<div id="running-rscripts-in-windows" class="section level2 hasAnchor" number="10.5">
+<h2><span class="header-section-number">10.5</span> Running Rscripts in Windows<a href="unix.html#running-rscripts-in-windows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Note: This code seems to work only with Windows Command Prompt, not with Git Bash.</strong></p>
 <p>When R is installed, it comes with a utility called Rscript. This allows you to run R commands from the command line. If Rscript is in your <code>PATH,</code> then typing Rscript into the command line, and pressing enter, will not error. Otherwise, to use Rscript, you will either need to add it to your PATH (as an environment variable), or append the full directory of the location of Rscript on your machine. To find the full directory, search for where R is installed your computer. For instance, it may be something like below (this will vary depending on what version of R you have installed):</p>
 <p><code>C:\Program Files\R\R-3.6.0\bin</code></p>
 <p>For appending the <code>PATH</code> variable, please view <a href="https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/">this link</a>. I strongly recommend completing this option.</p>
 <p>If you add the PATH as an environment variable, then you can run this line of code to test:
-<code>Rscript -e “cat(‘this is a test’)&quot;</code>, where the <code>-e</code> flag refers to the expression that will be executed.</p>
+<code>Rscript -e “cat(‘this is a test’)"</code>, where the <code>-e</code> flag refers to the expression that will be executed.</p>
 <p>If you do not add the PATH as an environment variable, then you can run this line of code to replicate the results from above:
 <code>“C:\Program Files\R\R-3.6.0\bin” -e “cat(‘this is a test’)”</code></p>
 <p>To run an R script from the command line, we can say:
 <code>Rscript -e “source(‘C:/path/to/script/some_code.R’)”</code></p>
-<div id="common-mistakes" class="section level3">
-<h3><span class="header-section-number">9.5.1</span> Common Mistakes</h3>
+<div id="common-mistakes" class="section level3 hasAnchor" number="10.5.1">
+<h3><span class="header-section-number">10.5.1</span> Common Mistakes<a href="unix.html#common-mistakes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Remember to include all of the quotation marks around file paths that have a spaces.</li>
-<li>If you attempt to run an R script but run into <code>Error: '\U' used without hex digits in character string starting &quot;'C:\U&quot;</code>, try replacing all <code>\</code> with <code>\\</code> or <code>/</code>.</li>
+<li>If you attempt to run an R script but run into <code>Error: '\U' used without hex digits in character string starting "'C:\U"</code>, try replacing all <code>\</code> with <code>\\</code> or <code>/</code>.</li>
 </ul>
 </div>
 </div>
-<div id="checking-tasks-and-killing-jobs" class="section level2">
-<h2><span class="header-section-number">9.6</span> Checking tasks and killing jobs</h2>
+<div id="checking-tasks-and-killing-jobs" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> Checking tasks and killing jobs<a href="unix.html#checking-tasks-and-killing-jobs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
 <col width="25%" />
@@ -389,7 +442,7 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 <td>Kill a process by its process ID</td>
 </tr>
 <tr class="even">
-<td><code>taskkill /IM &quot;process name&quot; /F</code></td>
+<td><code>taskkill /IM "process name" /F</code></td>
 <td></td>
 <td>Kill a process by its name</td>
 </tr>
@@ -417,9 +470,9 @@ export PS1=&#39;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
 </table>
 <p>To kill a task in Windows, you can also go to Task Manager &gt; More details &gt; Select your desired app &gt; Click on End Task.</p>
 </div>
-<div id="running-big-jobs" class="section level2">
-<h2><span class="header-section-number">9.7</span> Running big jobs</h2>
-<p>For big data workflows, the concept of “backgrounding” a bash script allows you to start a “job” (i.e. run the script) and leave it overnight to run. At the top level, a bash script (<code>0-run-project.sh</code>) that simply calls the directory-level bash scripts (i.e. <code>0-prep-data.sh</code>, <code>0-run-analysis.sh</code>, <code>0-run-figures.sh</code>, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.</p>
+<div id="running-big-jobs" class="section level2 hasAnchor" number="10.7">
+<h2><span class="header-section-number">10.7</span> Running big jobs<a href="unix.html#running-big-jobs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For big data workflows, the concept of “backgrounding” a bash script allows you to start a “job” (i.e. run the script) and leave it overnight to run. At the top level, a bash script (<code>0-run-project.sh</code>) that simply calls the directory-level bash scripts (i.e. <code>0-prep-data.sh</code>, <code>0-run-analysis.sh</code>, <code>0-run-figures.sh</code>, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.</p>
 <ul>
 <li><strong>Running Bash Scripts in Background</strong>: Running a long bash script is not trivial. Normally you would run a bash script by opening a terminal and typing something like <code>./run-project.sh</code>. But what if you leave your computer, log out of your server, or close the terminal? Normally, the bash script will exit and fail to complete. To run it in background, type <code>./run-project.sh &amp;; disown</code>. You can see the job running (and CPU utilization) with the command <code>top</code> or <code>ps -v</code> and check your memory with <code>free -h</code>.</li>
 </ul>
@@ -457,12 +510,13 @@ tmux attach -tsession_name </code></pre>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -470,12 +524,12 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -490,7 +544,15 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"view": {
+"link": null,
+"text": null
+},
 "download": ["dcc-handbook.pdf", "dcc-handbook.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
@@ -504,7 +566,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -1,43 +1,92 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[]{book}
-\usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
-\hypersetup{
-            pdftitle={Proctor Foundation Data Science Handbook},
-            pdfauthor={Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin (many from UC Berkeley in addition to Proctor)},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
-\usepackage{graphicx,grffile}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -46,32 +95,32 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
 \usepackage{booktabs}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Proctor Foundation Data Science Handbook},
+  pdfauthor={Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin, Fanice Nyatigo (many from UC Berkeley in addition to Proctor)},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Proctor Foundation Data Science Handbook}
-\author{Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin (many from UC Berkeley in addition to Proctor)}
-\date{2020-04-14}
+\author{Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin, Fanice Nyatigo (many from UC Berkeley in addition to Proctor)}
+\date{2024-05-08}
 
 \begin{document}
 \maketitle
@@ -80,8 +129,7 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{welcome}{%
-\chapter*{Welcome!}\label{welcome}}
+\chapter*{Welcome!}\label{welcome}
 \addcontentsline{toc}{chapter}{Welcome!}
 
 Welcome to the Francis I. Proctor Foundation at the University of California, San Francisco (\url{https://proctor.ucsf.edu})!
@@ -100,8 +148,7 @@ It is a living document that we strive to update regularly. If you would like to
 
 The GitHub repository for this handbook is: \url{https://github.com/proctor-ucsf/dcc-handbook}
 
-\hypertarget{intro}{%
-\chapter{Introduction: Work Flow and Reproducible Analyses}\label{intro}}
+\chapter{Introduction: Work Flow and Reproducible Analyses}\label{intro}
 
 \emph{Contributors: Ben Arnold}
 
@@ -116,26 +163,23 @@ Start with two organizing concepts:
   \textbf{Reproducible research}. A fundamental characteristic of the scientific method is that study findings can be reproduced beyond the original investigators. Data analyses that contribute to scientific research should be described and organized in a way that they could be reproduced by an independent person or research group. A data analysis that is not reproducible violates a core principle of the scientific method.
 \end{itemize}
 
-\hypertarget{workflow}{%
-\section{Workflow}\label{workflow}}
+\section{Workflow}\label{workflow}
 
 Broadly speaking, a typical scientific data science work flow involves four steps to transform raw data (e.g., from the field) into summaries that communicate results to the scientific community.
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow}
+\includegraphics[width=0.75\linewidth]{images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow}
 \end{figure}
 
 When starting a new project, the work flow tends to evolve gradually and by iteration. Data cleaning, data processing, exploratory analyses, back to data cleaning, and so forth. If the work takes place in an unstructured environment with no system to organize files and work flow, it rapidly devolves into into a disorganized mess; analyses become difficult or impossible to replicate and they are anything but scientific. Projects with short deadlines (e.g., proposals, conference abstract submissions, article revisions) are particularly vulnerable to this type of organizational entropy. Putting together a directory and workflow plan from the start helps keep files organized and prevent disorder. Modifications are inevitable -- as long as the system is organized, modifications are usually no problem.
 
-Depending on the project, each step involves a different amount of work. Step 1 is by far the most time consuming, and often the most error-prone. We devote an entire chapter to it below (\protect\hyperlink{datacleaning}{Data cleaning and processing})
+Depending on the project, each step involves a different amount of work. Step 1 is by far the most time consuming, and often the most error-prone. We devote an entire chapter to it below (\hyperref[datacleaning]{Data cleaning and processing})
 
-\hypertarget{reproducibility}{%
-\section{Reproducibility}\label{reproducibility}}
+\section{Reproducibility}\label{reproducibility}
 
 As a guiding directive, this process should be reproducible. If you are not familiar with the concept of reproducible research, start with this manifesto (\href{https://www.nature.com/articles/s41562-016-0021}{Munafo et al.~2017}). For a deeper dive, we highly recommend the recent book from Christensen, Freese, and Miguel (\href{https://www.ucpress.edu/book/9780520296954/transparent-and-reproducible-social-science-research}{2019}). Although it is framed around social science, the ideas apply generally.
 
-\hypertarget{automation}{%
-\section{Automation}\label{automation}}
+\section{Automation}\label{automation}
 
 We recommend that the workflow be as automated as possible using a programming language. Automating the workflow in a programming language, and essentially reducing it to text, is advantageous because it makes the process transparent, well documented, easily modified, and amenable to version control; these characteristics lend themselves to reproducible research.
 
@@ -143,98 +187,54 @@ At Proctor, we mostly use R. With the development of \href{https://rstudio.com/}
 
 \textbf{If you have a step in your analysis workflow that involves point-and-click or copy/paste, then STOP, and ask yourself (and your team): } \textbf{\emph{How can I automate this?}}
 
-\hypertarget{workflows}{%
-\chapter{Workflows}\label{workflows}}
+\chapter{Workflows}\label{workflows}
 
 \emph{Contributors: Ben Arnold}
 
 A data science work flow typically progresses through 4 steps that rarely evolve in a purely linear fashion, but in the end should flow in this direction:
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow2}
+\includegraphics[width=0.75\linewidth]{images/workflow} \caption{Overview of the four main steps in a typical data science workflow}\label{fig:fig-workflow2}
 \end{figure}
 
-\begin{longtable}[]{@{}clcc@{}}
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0811}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2838}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3108}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3243}}@{}}
 \caption{\label{tab:workflow} Workflow basics}\tabularnewline
-\toprule
-\begin{minipage}[b]{0.07\columnwidth}\centering
-Steps\strut
-\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
-Example activities\strut
-\end{minipage} & \begin{minipage}[b]{0.28\columnwidth}\centering
-\(\Rightarrow\) Inputs\strut
-\end{minipage} & \begin{minipage}[b]{0.29\columnwidth}\centering
-\(\Rightarrow\) Outputs\strut
-\end{minipage}\tabularnewline
-\midrule
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Steps
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example activities
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\Rightarrow\) Inputs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\Rightarrow\) Outputs
+\end{minipage} \\
+\midrule\noalign{}
 \endfirsthead
-\toprule
-\begin{minipage}[b]{0.07\columnwidth}\centering
-Steps\strut
-\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
-Example activities\strut
-\end{minipage} & \begin{minipage}[b]{0.28\columnwidth}\centering
-\(\Rightarrow\) Inputs\strut
-\end{minipage} & \begin{minipage}[b]{0.29\columnwidth}\centering
-\(\Rightarrow\) Outputs\strut
-\end{minipage}\tabularnewline
-\midrule
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Steps
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example activities
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\Rightarrow\) Inputs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\Rightarrow\) Outputs
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
-\begin{minipage}[t]{0.07\columnwidth}\centering
-1\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-\textbf{Data cleaning and processing}\strut
-\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
-\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
-\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\centering
-.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-make a plan for final datasets, fix data entry errors, create derived variables, plan for public replication files\strut
-\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
-untouched datasets\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
-final datasets\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\centering
-2-3\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-\textbf{Analyses}\strut
-\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
-\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
-\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\centering
-.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-exploratory data analysis, study monitoring, summary statistics, statistical analyses, independent replication of analyses, make figures and tables\strut
-\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
-final datasets\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
-saved results (.rds/.csv), tables (.html,.pdf), figures (.html/.png)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\centering
-4\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-\textbf{Communication}\strut
-\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
-\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
-\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\centering
-.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-results synthesis\strut
-\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\centering
-saved results, figures, tables\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\centering
-monitoring reports, presentations, scientific articles\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+1 & \textbf{Data cleaning and processing} & & \\
+. & make a plan for final datasets, fix data entry errors, create derived variables, plan for public replication files & untouched datasets & final datasets \\
+2-3 & \textbf{Analyses} & & \\
+. & exploratory data analysis, study monitoring, summary statistics, statistical analyses, independent replication of analyses, make figures and tables & final datasets & saved results (.rds/.csv), tables (.html,.pdf), figures (.html/.png) \\
+4 & \textbf{Communication} & & \\
+. & results synthesis & saved results, figures, tables & monitoring reports, presentations, scientific articles \\
 \end{longtable}
 
 In many modern data science workflows, steps 2-4 can be accomplished in a single R notebook or Jupyter notebook: the statistical analysis, creation of figures and tables, and creation of reports.
@@ -244,14 +244,14 @@ However, it is still useful to think of the distinct stages in many cases. For e
 It would be more error prone to replicate the same statistical analysis in three parallel downstream work flows. This illustrates a key idea that holds more generally:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule
+\toprule\noalign{}
 \endhead
-\textbf{Key idea for workflows:} Whenever possible, avoid repeating the same data processing or statistical analysis in separate streams. \emph{Key data processing and analyses should be done once}.\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Key idea for workflows:} Whenever possible, avoid repeating the same data processing or statistical analysis in separate streams. \emph{Key data processing and analyses should be done once}. \\
 \end{longtable}
 
-\hypertarget{directory-structure-and-code-repositories}{%
-\chapter{Directory Structure and Code Repositories}\label{directory-structure-and-code-repositories}}
+\chapter{Directory Structure and Code Repositories}\label{directory-structure-and-code-repositories}
 
 \emph{Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold}
 
@@ -261,12 +261,11 @@ Another huge advantage of maintaining a regular/predictable directory structure 
 
 Nested within your directory will be a \texttt{code\ repository}. Sometimes we find it useful to manage the code repository using version control, such as git/GitHub.
 
-Other chapters will discuss \protect\hyperlink{codingpractices}{coding practices}, \protect\hyperlink{datamanagement}{data management}, and \protect\hyperlink{github}{GitHub/version control} that will build from the material here.
+Other chapters will discuss \hyperref[codingpractices]{coding practices}, \hyperref[datamanagement]{data management}, and \hyperref[github]{GitHub/version control} that will build from the material here.
 
 Carrying the kitchen analogy further: here, we are designing the kitchen. Then, we'll discuss approaches for how to cook in the kitchen that we designed/built.
 
-\hypertarget{small-and-large-projects}{%
-\section{Small and large projects}\label{small-and-large-projects}}
+\section{Small and large projects}\label{small-and-large-projects}
 
 Our experience is that the overwhelming majority of projects come in two sizes: small and large. We recommend setting up your directory structure depending on how large you expect the project to be. Sometimes, small projects evolve into large projects, but only occasionally. A small project is something like a single data analysis with a single published article in mind. A large project is an epidemiologic field study, where there are multiple different types of data and different types of analyses (e.g., sample size calculations, survey data, biospecimens, substudies, etc.).
 
@@ -280,8 +279,7 @@ Our experience is that the overwhelming majority of projects come in two sizes: 
 
 Large projects are more common and more complicated. Most of this chapter focuses on large project organization (small projects can be thought of as essentially one piece of a large project).
 
-\hypertarget{directory-structure}{%
-\section{Directory Structure}\label{directory-structure}}
+\section{Directory Structure}\label{directory-structure}
 
 In the example below, we follow a basic directory naming convention that makes working in UNIX and typing directory statements in programs much easier:
 
@@ -297,21 +295,19 @@ In the example below, we follow a basic directory naming convention that makes w
 
 For example, Ben completed a study in Tamil Nadu, India during his dissertation to study the effect of improvements in water supply and sanitation on child health. Instead of naming the directory \texttt{Tamil\ Nadu} or \texttt{Tamil\ Nadu\ WASH\ Study}, he used \texttt{trichy} instead (a colloquial name for the city near the study, Tiruchirappalli), which was much easier to type in the terminal and in directory statements. A short name helps make directory references easier while programming.
 
-\hypertarget{first-level-data-and-analyses}{%
-\subsection{First level: data and analyses}\label{first-level-data-and-analyses}}
+\subsection{First level: data and analyses}\label{first-level-data-and-analyses}
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/mystudy-dir-fig1} \caption{Example directory for `mystudy`}\label{fig:dir-fig1}
+\includegraphics[width=0.75\linewidth]{images/mystudy-dir-fig1} \caption{Example directory for `mystudy`}\label{fig:dir-fig1}
 \end{figure}
 
 Start by dividing a project into major activities. In the example abpve, the project is named \texttt{mystudy}. There is a \texttt{data} subdirectory (more in a sec), and then three major activities, each corresponding to a separate analysis: \texttt{primary-analysis},\texttt{secondary-analysis-1}, and \texttt{secondary-analysis-2}. In a real project, the names could be more informative, such as ``trachoma-qpcr''. Also, a real project might also include many additional subdirectories related to administrative and logistics activities that do not relate to data science, such as irb, travel, contracts, budget, survey forms, etc.).
 
 Dividing files into major activities helps keep things organized for really big projects. In a multi-site study, consider including a directory for each site before splitting files into major activities. Ideally, analyses will not span major activity subdirectories in a project folder, but sometimes you can't predict/avoid that from happening.
 
-\hypertarget{second-level-data}{%
-\subsection{Second level: data}\label{second-level-data}}
+\subsection{Second level: data}\label{second-level-data}
 
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/mystudy-dir-fig2}
+\includegraphics[width=0.75\linewidth]{images/mystudy-dir-fig2}
 
 Each project will include a \texttt{data} directory. We recommend organizing it into 3 parts: \texttt{untouched}, \texttt{temp}, and \texttt{final}. Often, it is useful to include a fourth subdirectory called \texttt{public} for sharing public versions of datasets.
 
@@ -321,98 +317,67 @@ The \texttt{temp} directory (optional, not essential) includes temporary files t
 
 The \texttt{final} directory includes final datasets for the activity. Final datasets are de-identified and require no further processing; they are clean and ready for analysis. They should be accompanied by meta-data, which at minimum includes the data's provenance (i.e., how it was created) and what it includes (i.e., level of the data, plus variable coding/labels/descriptions). Clean/final datasets generated by one analysis might be reused in another.
 
-\hypertarget{second-level-analysis}{%
-\subsection{Second level: analysis}\label{second-level-analysis}}
+\textbf{NOTE:} In very large projects, we occasionally need to further stratify the \texttt{data} directory into different subdirectories, according to data type. For example, in the AVENIR trial we had child mortality data measurements, and completely separate data from antimicrobial resistance (AMR) monitoring. These data were so myriad and different, that they needed to be curated in separate directories.
 
-We recommend maintaining a separate subdirectory for each major analysis in a project. In this example, there are three with not-very-creative names from the view of trial: \texttt{primary-analysis}, \texttt{secondary-analysis-1}, \texttt{secondary-analysis-2}.
+\subsection{Second level: projects}\label{second-level-projects}
 
-Think of each analysis as the scope of all of the work for a single, published paper. We recommend dividing the analysis project into a space for computational notebooks / scripts (i.e., a \texttt{code\ repository}), and a second for their output. The reason for the split is to make it easier to use version control (should you choose) for the code. Version control like \texttt{git} and \texttt{GitHub} (see the \protect\hyperlink{GitHub}{Chapter on GitHub}) works well for text files but isn't really designed for binary files such as images (.png), datasets (.rds), or PDF files (.pdf). It is certainly possible to use git with those file types, but since git makes a new copy of the file every time it is changed the git repo can get horribly bloated and takes up too much space on disk. Consolidating the output into a separate directory makes it more obvious that it isn't under version control. In this example, there are separate parts for code (\texttt{R}) and output (\texttt{output}). Output could include figures, tables, or saved analysis results stored as data files (.rds or .csv). Another conventional name for the code repository is \texttt{src} as an alternative to \texttt{R} if you use other languages.
+We recommend maintaining a separate project subdirectory to hold each major analysis in a project. In this example, there are four workflows with generic names from the view of trial: \texttt{core-data-processing}, \texttt{primary-analysis}, \texttt{secondary-analysis-1}, \texttt{secondary-analysis-2}.
 
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/mystudy-dir-fig3}
+\textbf{IMPORTANT:} We recommend consolidating the core data processing for the study in its own project. \textbf{Core data processing} is data processing that creates a shared asset across multiple, downstream analyses. It includes the scripts for the data processing workflow that take data from \texttt{untouched} to \texttt{final} in the previous section.
+
+\includegraphics[width=0.75\linewidth]{images/mystudy-dir-fig3}
+
+Think of each analysis as the scope of all of the work for a single, published paper. We recommend dividing the analysis project into a space for computational notebooks / scripts (i.e., a \texttt{code\ repository}), and a second for their output. The reason for the split is to make it easier to use version control (should you choose) for the code. Version control like \texttt{git} and \texttt{GitHub} (see the \hyperref[GitHub]{Chapter on GitHub}) works well for text files but isn't really designed for binary files such as images (.png), datasets (.rds), or PDF files (.pdf). It is certainly possible to use git with those file types, but since git makes a new copy of the file every time it is changed the git repo can get horribly bloated and takes up too much space on disk. Consolidating the output into a separate directory makes it more obvious that it isn't under version control. In this example, there are separate parts for code (\texttt{R}) and output (\texttt{output}). Output could include figures, tables, or saved analysis results stored as data files (.rds or .csv). Another conventional name for the code repository is \texttt{src} as an alternative to \texttt{R} if you use other languages.
+
+If a project creates unique datasets or relies on new data that is unique to the project and not a shared asset for the study (e.g., publicly available data), then the project itself might include a \texttt{data} subdirectory. HOWEVER, it should not include a direct copy of shared datasets stored in the \texttt{mystudy/data} repository -- be sure to keep only one copy of each shared dataset in the project.
+
+\includegraphics[width=0.75\linewidth]{images/mystudy-dir-fig4}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\emph{Interdependence between analyses}: Sometimes a result from an analysis might be a cleaned dataset that could feed into future, distinct analyses. This is quite common, for example, in large trials where a set of baseline characteristics might be used in multiple separate papers for different endpoints, either for assessing balance of the trial population or subgroups, or used as adjustment covariates in additional analyses of the trial. In this case, the cleaned dataset would be written to the \texttt{data/final} directory and is thus available for future use.
+\textbf{Interdependence between analyses:} Sometimes a result from an analysis might be a cleaned dataset that could feed into future, distinct analyses. This is quite common, for example, in large trials where a set of baseline characteristics might be used in multiple separate papers for different endpoints, either for assessing balance of the trial population or subgroups, or used as adjustment covariates in additional analyses of the trial. In this case, the analysis-specific data processing should be \emph{moved upstream} into the \texttt{projects/core-data-processing} workflow, and should generate a shared, final dataset in the \texttt{data/final} directory.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{code-repositories}{%
-\section{Code Repositories}\label{code-repositories}}
+\section{Code Repositories}\label{code-repositories}
 
 Maintain a separate code repository for each major analysis activity (last section).
 
-We recommend the following structure for a code repository:
+We recommend the following structure for a code repository. This is the actual repository for the \href{https://github.com/proctor-ucsf/AVENIR-primary}{AVENIR trial primary analysis}.
 
-\includegraphics[width=0.75\linewidth]{/Users/benarnold/dcc-handbook/images/mystudy-dir-fig4}
+\includegraphics[width=0.75\linewidth]{images/mystudy-dir-fig5}
 
-With subdirectories that generally look like this:
+Note that in this example, there is no actual data processing in the project. All of the data processing was consolidated upstream in a separate \texttt{core-data-processing} project for the trial. Sometimes, an analysis/project will include limited project-specific data processing that is not shared across the trial. If project-specific data processing is required, it would be one of the first scripts in the workflow. This helps ensure work conducted in step 1 of your workflow stays upstream from all analyses (see \hyperref[workflows]{Chapter on workflows}).
 
-\begin{verbatim}
-.gitignore
-primary-analysis.Rproj
-0-config.R
-0-shared-functions.R
-0-primary-analysis-run-all.sh
-1-dm /
-    0-dm-run-all.sh
-    1-format-enrollment-data.R
-    2-format-adherence-data.R
-    3-format-LAZ-measurements.R
-2-baseline-balance /
-    0-baseline-balance-run-all.sh
-    ...
-3-consort /
-    0-consort-run-all.sh
-    ...
-4-adherence /
-    0-adherence-run-all.sh
-    ...
-5-laz /
-    0-laz-run-all.sh
-    1-laz-unadjusted-analysis.R
-    2-laz-adjusted-analysis.R
-6-figures / 
-    0-figures-run-all.sh
-    Fig1-consort.Rmd
-    Fig2-adherence.Rmd
-    Fig3-laz.Rmd
-\end{verbatim}
+In this example, there is a script that downloads public datasets into a local repository instead. Also note that in this example, all of the scripts are \texttt{.Rmd} files. R scripts \texttt{.R} are equally useful.
 
-Note \texttt{dm} is shorthand for ``data management.'' You can call the data management directory anything you want, but just ensure that you have one. This helps ensure work conducted in step 1 of your workflow stays upstream from all analyses (see \protect\hyperlink{workflows}{Chapter on workflows}). Also note that in this example, all of the scripts are \texttt{.R} files. Increasingly, we use R Markdown notebooks \texttt{.Rmd} instead of / in addition to R files.
+You can glean some important takeaways from what you \emph{do} see.
 
-For brevity, we haven't expanded every directory, but you can glean some important takeaways from what you \emph{do} see.
-
-\hypertarget{rproj-files}{%
-\subsection{\texorpdfstring{\texttt{.Rproj} files}{.Rproj files}}\label{rproj-files}}
+\subsection{\texorpdfstring{\texttt{.Rproj} files}{.Rproj files}}\label{rproj-files}
 
 An ``R Project'' can be created within RStudio by going to \texttt{File\ \textgreater{}\textgreater{}\ New\ Project}. Depending on where you are with your research, choose the most appropriate option. This will save preferences, working directories, and even the results of running code/data (though we recommend starting from scratch each time you open your project, in general). Then, ensure that whenever you are working on that specific research project, you open your created project to enable the full utility of \texttt{.Rproj} files. This also automatically sets the directory to the top level of the project.
 
-\hypertarget{configuration-config-file}{%
-\subsection{Configuration (`config') File}\label{configuration-config-file}}
+\subsection{Configuration (`config') File}\label{configuration-config-file}
 
 This is the single most important file for your project. It will be responsible for a variety of common tasks, declare global variables, load functions, declare paths, and more. \emph{Every other file in the project} will begin with \texttt{source("0-config")}, and its role is to reduce redundancy and create an abstraction layer that allows you to make changes in one place (\texttt{0-config.R}) rather than 5 different files. To this end, paths that will be referenced in multiple scripts (e.g., a \texttt{clean\_data\_path}) can be declared in \texttt{0-config.R} and simply referred to by its variable name in scripts. If you ever want to change things, rename them, or even switch from a downsample to the full data, all you would then to need to do is modify the path in one place and the change will automatically update throughout your project. See the example config file for more details. The paths defined in the \texttt{0-config.R} file assume that users have opened the \texttt{.Rproj} file, which sets the directory to the top level of the project.
 
 This \href{https://github.com/jadebc-berkeley/WBB-STH-Kato-Katz}{GitHub repository} that has replication files for \href{https://www.biorxiv.org/content/10.1101/629501v1}{this study} includes an example of a streamlined \texttt{config.R} file, with all packages loaded and directory references defined.
 
-\hypertarget{shared-functions-file}{%
-\subsection{Shared Functions File}\label{shared-functions-file}}
+\subsection{Shared Functions File}\label{shared-functions-file}
 
-If you write a custom function for an analysis and need to use it repeatedly across multiple analysis scripts, then it is better to consolidate it into a single shared functions script and source that file into the analysis scripts. The reason for this is that it enables you to edit the function in a single place and ensure that the changes are implemented across your entire workflow. In extreme cases, you might have so many shared functions that you need an entire subdirectory with separate scripts. \href{https://github.com/HBGD-UCB/ki-longitudinal-manuscripts/}{This repository} includes an example (\texttt{0-project-functions}) of a large analysis (currently still a work in progress).
+If you write a custom function for an analysis and need to use it repeatedly across multiple analysis scripts, then it is better to consolidate it into a single shared functions script and source that file into the analysis scripts. The reason for this is that it enables you to edit the function in a single place and ensure that the changes are implemented across your entire workflow. In extreme cases, you might have so many shared functions that you need an entire subdirectory with separate scripts. \href{https://github.com/HBGD-UCB/ki-longitudinal-manuscripts/}{This repository} includes a very complex example (\texttt{0-project-functions}) of a large analysis published in a \emph{Nature} series (one of three articles: \url{https://www.nature.com/articles/s41586-023-06501-x})
 
-\hypertarget{order-files-and-subdirectories}{%
-\subsection{Order Files and Subdirectories}\label{order-files-and-subdirectories}}
+\subsection{Order Files and Subdirectories}\label{order-files-and-subdirectories}
 
-This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish and allows us to easily map a script to its output (i.e. \texttt{primary-analysis/R/5-laz/1-laz-unadjusted-analysis.R} =\textgreater{} \texttt{primary-analysis/output/5-laz/1-laz-unadjusted-analysis.RDS}). That is, the code repository and the output are approximately mirrored. If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent. Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.
+This makes the jumble of alphabetized filenames much more coherent and places similar code and files next to one another. Although sometimes there is not a linear progression from 1 to 2 to 3, in general the structure helps reflect how data flows from start to finish.
 
-In the \texttt{6-figures} subdirectory, each RMarkdown file (computational notebook) is linked to a specific figure in a hypothetical manuscript. This makes it easier to link specific notebooks in figure legends, and to see which file creates each figure.
+\textbf{If you take nothing else away from this guide, this is the single most helpful suggestion to make your workflow more coherent.} Often the particular order of files will be in flux until an analysis is close to completion. At that time it is important to review file order and naming and reproduce everything prior to drafting a manuscript.
 
-\hypertarget{use-bash-scripts-to-ensure-reproducibility}{%
-\subsection{Use Bash scripts to ensure reproducibility}\label{use-bash-scripts-to-ensure-reproducibility}}
+\subsection{Use Bash scripts or R scripts to ensure reproducibility}\label{use-bash-scripts-or-r-scripts-to-ensure-reproducibility}
 
-Bash scripts are useful components of a reproducible workflow. At many of the directory levels (i.e.~in \texttt{5-laz}), there is a bash script that runs each of the analysis scripts. This is exceptionally useful when data ``upstream'' changes -- you simply run the bash script. See the \protect\hyperlink{unix}{UNIX Chapter} for further details.
+Bash scripts are useful components of a reproducible workflow. If your workflow is in R scripts, bash (\texttt{.sh}) can be useful to run the entire workflow in order. See the \hyperref[unix]{UNIX Chapter} for further details. If your workflow is mainly R markdown or a mix of \texttt{.R} and \texttt{.Rmd} files, sometimes it is easier to simply make a single R script to run the workflow. In the AVENIR example (above), that is what we used \href{https://github.com/proctor-ucsf/AVENIR-primary/blob/main/R/AVENIR-primary-run-all.R}{AVENIR-primary-run-all.R}.
 
-\hypertarget{alternative-approach-for-code-repos}{%
-\subsection{Alternative approach for code repos}\label{alternative-approach-for-code-repos}}
+\subsection{Alternative approach for code repos}\label{alternative-approach-for-code-repos}
 
 Another approach for organizing your code repository is to name all of your scripts according to the final figure or table that they generate for a particular article. In our experience, this \emph{only} works for small projects, with a single set of coherent analyses. Here, you might have an alternative structure such as:
 
@@ -433,18 +398,16 @@ Fig3-1-laz-analysis.Rmd
 Fig3-2-laz-make-figure.Rmd
 \end{verbatim}
 
-There is still a need for a separate data management directory (e.g., \texttt{dm}) to ensure that workflow is upstream from the analysis (more below in \protect\hyperlink{unix}{chapter on UNIX}), but then scripts are all together with clear labels. If a figure requires two stages to the analysis, then you can name them sequentially, such as \texttt{Fig3-1-laz-analysis.Rmd}, \texttt{Fig3-2-laz-make-figure.Rmd}. There is no way to divine how all of the analyses will neatly fit into files that correspond to separate figures. Instead, they will converge on these file names through the writing process, often through comsolidation or recombination.
+There is still a need for a separate data management directory (e.g., \texttt{dm}) to ensure that workflow is upstream from the analysis (more below in \hyperref[unix]{chapter on UNIX}), but then scripts are all together with clear labels. If a figure requires two stages to the analysis, then you can name them sequentially, such as \texttt{Fig3-1-laz-analysis.Rmd}, \texttt{Fig3-2-laz-make-figure.Rmd}. There is no way to divine how all of the analyses will neatly fit into files that correspond to separate figures. Instead, they will converge on these file names through the writing process, often through comsolidation or recombination.
 
 One example of a small repo is here:
 \url{https://github.com/ben-arnold/enterics-seroepi}
 
-\hypertarget{codingpractices}{%
-\chapter{Coding Practices}\label{codingpractices}}
+\chapter{Coding Practices}\label{codingpractices}
 
 \emph{Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold}
 
-\hypertarget{organizing-scripts}{%
-\section{Organizing scripts}\label{organizing-scripts}}
+\section{Organizing scripts}\label{organizing-scripts}
 
 Just as your data ``flows'' through your project, data should flow naturally through a script. Very generally, you want to:
 
@@ -463,13 +426,11 @@ Just as your data ``flows'' through your project, data should flow naturally thr
   save your results
 \end{enumerate}
 
-Each section should be ``chunked together'' using comments, often with many chunks in a single section. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's\%20Thesis\%20-\%20Spatial\%20Epidemiology\%20of\%20Influenza/2a\%20-\%20Statistical-Inputs.R}{this file} for a good example of how to cleanly organize a file in a way that follows this ``flow'' and functionally separate pieces of code that are doing different things. \href{https://github.com/ben-arnold/enterics-seroepi/blob/master/R/Fig1-haiti-ab-distributions.Rmd}{This is another example} in a \texttt{.Rmd} format, where chunking is made even more obvious by the interleaving of markdown text and R code in the same notebook file.
+Each section should be ``chunked together'' using comments, often with many chunks in a single section. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's%20Thesis%20-%20Spatial%20Epidemiology%20of%20Influenza/2a%20-%20Statistical-Inputs.R}{this file} for a good example of how to cleanly organize a file in a way that follows this ``flow'' and functionally separate pieces of code that are doing different things. \href{https://github.com/ben-arnold/enterics-seroepi/blob/master/R/Fig1-haiti-ab-distributions.Rmd}{This is another example} in a \texttt{.Rmd} format, where chunking is made even more obvious by the interleaving of markdown text and R code in the same notebook file.
 
-\hypertarget{documenting-your-code}{%
-\section{Documenting your code}\label{documenting-your-code}}
+\section{Documenting your code}\label{documenting-your-code}
 
-\hypertarget{file-headers}{%
-\subsection{File headers}\label{file-headers}}
+\subsection{File headers}\label{file-headers}
 
 Every file in a project should have a header that allows it to be interpreted on its own. It should include the name of the project and a short description for what this file (among the many in your project) does specifically. You may optionally wish to include the inputs and outputs of the script as well, though the next section makes this significantly less necessary. It can be very helpful to include your name and email address as well so others can identify who wrote the code. This is unnecessary if you are using version control (\texttt{git/GitHub}) becuase that information will be tracked by commits.
 
@@ -496,17 +457,15 @@ works equally well as
 ##############################
 \end{verbatim}
 
-\hypertarget{comments-in-the-body-of-your-script}{%
-\subsection{Comments in the body of your script}\label{comments-in-the-body-of-your-script}}
+\subsection{Comments in the body of your script}\label{comments-in-the-body-of-your-script}
 
-Commenting your code is an important part of reproducibility and helps document your code for the future. When things change or break, you'll be thankful for comments. When you revisit code you wrote two years earlier, you'll be thankful for comments. There's no need to comment excessively or unnecessarily, but a comment describing what a large or complex chunk of code does is always helpful. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's\%20Thesis\%20-\%20Spatial\%20Epidemiology\%20of\%20Influenza/1b\%20-\%20Map-Management.R}{this file} for an example of how to comment your code and notice that comments are always in the form of:
+Commenting your code is an important part of reproducibility and helps document your code for the future. When things change or break, you'll be thankful for comments. When you revisit code you wrote two years earlier, you'll be thankful for comments. There's no need to comment excessively or unnecessarily, but a comment describing what a large or complex chunk of code does is always helpful. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's%20Thesis%20-%20Spatial%20Epidemiology%20of%20Influenza/1b%20-%20Map-Management.R}{this file} for an example of how to comment your code and notice that comments are always in the form of:
 
 \texttt{\#\ This\ is\ a\ comment\ -\/-\ first\ letter\ is\ capitalized\ and\ spaced\ away\ from\ the\ pound\ sign}
 
-\hypertarget{function-documentation}{%
-\subsection{Function documentation}\label{function-documentation}}
+\subsection{Function documentation}\label{function-documentation}
 
-Every function you write must include a header to document its purpose, inputs, and outputs. For any reproducible workflows, they are essential, because R is dynamically typed. This means, you can pass a \texttt{string} into an argument that is meant to be a \texttt{data.table}, or a \texttt{list} into an argument meant for a \texttt{tibble}. It is the responsibility of a function's author to document what each argument is meant to do and its basic type. This is an example for documenting a function (inspired by \href{https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html\#format}{JavaDocs}, R's \href{https://blog.rstudio.com/2018/10/23/rstudio-1-2-preview-plumber-integration/}{Plumber API docs}, and \href{https://kbroman.org/pkg_primer/pages/docs.html}{Roxygen2}):
+Every function you write must include a header to document its purpose, inputs, and outputs. For any reproducible workflows, they are essential, because R is dynamically typed. This means, you can pass a \texttt{string} into an argument that is meant to be a \texttt{data.table}, or a \texttt{list} into an argument meant for a \texttt{tibble}. It is the responsibility of a function's author to document what each argument is meant to do and its basic type. This is an example for documenting a function (inspired by \href{https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html#format}{JavaDocs}, R's \href{https://blog.rstudio.com/2018/10/23/rstudio-1-2-preview-plumber-integration/}{Plumber API docs}, and \href{https://kbroman.org/pkg_primer/pages/docs.html}{Roxygen2}):
 
 \begin{verbatim}
 #-----------------------------------------------------------------------------
@@ -540,8 +499,7 @@ The header tells you what the function does, its various inputs, and how you mig
   \textbf{Note}: Depending on how important your function is, the complexity of your function code, and the complexity of different types of data in your project, you can also add ``type-checking'' to your function with the \texttt{assertthat::assert\_that()} function. You can, for example, \texttt{assert\_that(is.data.frame(statistical\_input))}, which will ensure that collaborators or reviewers of your project attempting to use your function are using it in the way that it is intended by calling it with (at the minimum) the correct type of arguments. You can extend this to ensure that certain assumptions regarding the inputs are fulfilled as well (i.e.~that \texttt{time\_column}, \texttt{location\_column}, \texttt{value\_column}, and \texttt{population\_column} all exist within the \texttt{statistical\_input} tibble).
 \end{itemize}
 
-\hypertarget{object-naming}{%
-\section{Object naming}\label{object-naming}}
+\section{Object naming}\label{object-naming}
 
 Generally we recommend using nouns for objects and verbs for functions. This is because functions are performing actions, while objects are not.
 
@@ -557,15 +515,14 @@ We recommend you use \textbf{Snake\_Case}.
 
 \begin{itemize}
 \item
-  Base R allows \texttt{.} in variable names and functions (such as \texttt{read.csv()}), but this goes against best practices for variable naming in many other coding languages. For consistency's sake, \texttt{snake\_case} has been adopted across languages, and modern packages and functions typically use it (i.e. \texttt{readr::read\_csv()}). As a very general rule of thumb, if a package you're using doesn't use \texttt{snake\_case}, there may be an updated version or more modern package that \emph{does}, bringing with it the variety of performance improvements and bug fixes inherent in more mature and modern software.
+  Base R allows \texttt{.} in variable names and functions (such as \texttt{read.csv()}), but this goes against best practices for variable naming in many other coding languages. For consistency's sake, \texttt{snake\_case} has been adopted across languages, and modern packages and functions typically use it (i.e.~\texttt{readr::read\_csv()}). As a very general rule of thumb, if a package you're using doesn't use \texttt{snake\_case}, there may be an updated version or more modern package that \emph{does}, bringing with it the variety of performance improvements and bug fixes inherent in more mature and modern software.
 \item
   \textbf{Note}: you may also see \texttt{camelCase} throughout the R code you come across. This is \emph{okay} but not ideal -- try to stay consistent across all your code with \texttt{snake\_case}.
 \item
   \textbf{Note}: there is nothing inherently wrong with using \texttt{.} in variable names, just that it goes against style best practices that are cropping up in data science, so its worth getting rid of these bad habits now.
 \end{itemize}
 
-\hypertarget{function-calls}{%
-\section{Function calls}\label{function-calls}}
+\section{Function calls}\label{function-calls}
 
 In a function call, use ``named arguments'' and separate arguments by to make your code more readable.
 
@@ -585,15 +542,13 @@ mean_Y = calc_fluseas_mean(
 )
 \end{verbatim}
 
-\hypertarget{the-here-package}{%
-\section{\texorpdfstring{The \texttt{here} package}{The here package}}\label{the-here-package}}
+\section{\texorpdfstring{The \texttt{here} package}{The here package}}\label{the-here-package}
 
 The \texttt{here} package is one great R package that helps multiple collaborators deal with the mess that is working directories within an R project structure. Let's say we have an R project at the path \texttt{/home/oski/Some-R-Project}. My collaborator might clone the repository and work with it at some other path, such as \texttt{/home/bear/R-Code/Some-R-Project}. Dealing with working directories and paths explicitly can be a very large pain, and as you might imagine, setting up a Config with paths requires those paths to flexibly work for all contributors to a project. This is where the \texttt{here} package comes in and this a \href{https://github.com/jennybc/here_here}{great vignette describing it}.
 
 For more motivation on why you should use the \texttt{here} and R projects (\texttt{.Rproj}), read this excellent blog post from \href{https://www.tidyverse.org/articles/2017/12/workflow-vs-script/}{Tidyverse}.
 
-\hypertarget{tidyverse}{%
-\section{Tidyverse}\label{tidyverse}}
+\section{Tidyverse}\label{tidyverse}
 
 Throughout this document there have been references to the Tidyverse, but this section is to explicitly show you how to transform your Base R tendencies to Tidyverse (or Data.Table, Tidyverse's performance-optimized competitor). For most of our work that does not utilize very large datasets, we recommend that you code in Tidyverse rather than Base R. Tidyverse is quickly becoming \href{https://rviews.rstudio.com/2017/06/08/what-is-the-tidyverse/}{the gold standard} in R data analysis and modern data science packages and code should use Tidyverse style and packages unless there's a significant reason not to (i.e.~big data pipelines that would benefit from Data.Table's performance optimizations).
 
@@ -601,129 +556,44 @@ The package author has published a \href{https://r4ds.had.co.nz/}{great textbook
 
 The following list is not exhaustive, but is a compact overview to begin to translate Base R into something better:
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.47\columnwidth}\raggedright
-Base R\strut
-\end{minipage} & \begin{minipage}[b]{0.47\columnwidth}\raggedright
-Better Style, Performance, and Utility\strut
-\end{minipage}\tabularnewline
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Base R
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Better Style, Performance, and Utility
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\_\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\_\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{read.csv()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{readr::read\_csv()} or \texttt{data.table::fread()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{write.csv()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{readr::write\_csv()} or \texttt{data.table::fwrite()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{readRDS}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{readr::read\_rds()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{saveRDS()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{readr::write\_rds()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\_\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\_\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{data.frame()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{tibble::tibble()} or \texttt{data.table::data.table()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{rbind()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{dplyr::bind\_rows()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{cbind()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{dplyr::bind\_cols()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df\$some\_column}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df\ \%\textgreater{}\%\ dplyr::pull(some\_column)}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df\$some\_column\ =\ ...}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df\ \%\textgreater{}\%\ dplyr::mutate(some\_column\ =\ ...)}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df{[}get\_rows\_condition,{]}}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df\ \%\textgreater{}\%\ dplyr::filter(get\_rows\_condition)}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df{[},c(col1,\ col2){]}}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df\ \%\textgreater{}\%\ dplyr::select(col1,\ col2)}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{merge(df1,\ df2,\ by\ =\ ...,\ all.x\ =\ ...,\ all.y\ =\ ...)}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{df1\ \%\textgreater{}\%\ dplyr::left\_join(df2,\ by\ =\ ...)} or \texttt{dplyr::full\_join} or \texttt{dplyr::inner\_join} or \texttt{dplyr::right\_join}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\_\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\_\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{str()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{dplyr::glimpse()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{grep(pattern,\ x)}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{stringr::str\_which(string,\ pattern)}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{gsub(pattern,\ replacement,\ x)}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{stringr::str\_replace(string,\ pattern,\ replacement)}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{ifelse(test\_expression,\ yes,\ no)}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{if\_else(condition,\ true,\ false)}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-Nested: \texttt{ifelse(test\_expression1,\ yes1,\ ifelse(test\_expression2,\ yes2,\ ifelse(test\_expression3,\ yes3,\ no)))}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{case\_when(test\_expression1\ \textasciitilde{}\ yes1,\ \ test\_expression2\ \textasciitilde{}\ yes2,\ test\_expression3\ \textasciitilde{}\ yes3,\ TRUE\ \textasciitilde{}\ no)}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{proc.time()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{tictoc::tic()} and \texttt{tictoc::toc()}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{stopifnot()}\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\texttt{assertthat::assert\_that()} or \texttt{assertthat::see\_if()} or \texttt{assertthat::validate\_that()}\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+\_ & \_ \\
+\texttt{read.csv()} & \texttt{readr::read\_csv()} or \texttt{data.table::fread()} \\
+\texttt{write.csv()} & \texttt{readr::write\_csv()} or \texttt{data.table::fwrite()} \\
+\texttt{readRDS} & \texttt{readr::read\_rds()} \\
+\texttt{saveRDS()} & \texttt{readr::write\_rds()} \\
+\_ & \_ \\
+\texttt{data.frame()} & \texttt{tibble::tibble()} or \texttt{data.table::data.table()} \\
+\texttt{rbind()} & \texttt{dplyr::bind\_rows()} \\
+\texttt{cbind()} & \texttt{dplyr::bind\_cols()} \\
+\texttt{df\$some\_column} & \texttt{df\ \%\textgreater{}\%\ dplyr::pull(some\_column)} \\
+\texttt{df\$some\_column\ =\ ...} & \texttt{df\ \%\textgreater{}\%\ dplyr::mutate(some\_column\ =\ ...)} \\
+\texttt{df{[}get\_rows\_condition,{]}} & \texttt{df\ \%\textgreater{}\%\ dplyr::filter(get\_rows\_condition)} \\
+\texttt{df{[},c(col1,\ col2){]}} & \texttt{df\ \%\textgreater{}\%\ dplyr::select(col1,\ col2)} \\
+\texttt{merge(df1,\ df2,\ by\ =\ ...,\ all.x\ =\ ...,\ all.y\ =\ ...)} & \texttt{df1\ \%\textgreater{}\%\ dplyr::left\_join(df2,\ by\ =\ ...)} or \texttt{dplyr::full\_join} or \texttt{dplyr::inner\_join} or \texttt{dplyr::right\_join} \\
+\_ & \_ \\
+\texttt{str()} & \texttt{dplyr::glimpse()} \\
+\texttt{grep(pattern,\ x)} & \texttt{stringr::str\_which(string,\ pattern)} \\
+\texttt{gsub(pattern,\ replacement,\ x)} & \texttt{stringr::str\_replace(string,\ pattern,\ replacement)} \\
+\texttt{ifelse(test\_expression,\ yes,\ no)} & \texttt{if\_else(condition,\ true,\ false)} \\
+Nested: \texttt{ifelse(test\_expression1,\ yes1,\ ifelse(test\_expression2,\ yes2,\ ifelse(test\_expression3,\ yes3,\ no)))} & \texttt{case\_when(test\_expression1\ \textasciitilde{}\ yes1,\ \ test\_expression2\ \textasciitilde{}\ yes2,\ test\_expression3\ \textasciitilde{}\ yes3,\ TRUE\ \textasciitilde{}\ no)} \\
+\texttt{proc.time()} & \texttt{tictoc::tic()} and \texttt{tictoc::toc()} \\
+\texttt{stopifnot()} & \texttt{assertthat::assert\_that()} or \texttt{assertthat::see\_if()} or \texttt{assertthat::validate\_that()} \\
 \end{longtable}
 
-For a more extensive set of syntactical translations to Tidyverse, you can check out \href{https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html\#reshaping_data}{this document}.
+For a more extensive set of syntactical translations to Tidyverse, you can check out \href{https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html#reshaping_data}{this document}.
 
 Working with Tidyverse within functions can be somewhat of a pain due to non-standard evaluation (NSE) semantics. If you're an avid function writer, we'd recommend checking out the following resources:
 
@@ -741,18 +611,15 @@ Working with Tidyverse within functions can be somewhat of a pain due to non-sta
   \href{https://dplyr.tidyverse.org/articles/programming.html}{Programming with dplyr} (package vignette)
 \end{itemize}
 
-\hypertarget{coding-with-r-and-python}{%
-\section{Coding with R and Python}\label{coding-with-r-and-python}}
+\section{Coding with R and Python}\label{coding-with-r-and-python}
 
 If you're using both R and Python, you may wish to check out the \href{https://www.rdocumentation.org/packages/feather/versions/0.3.3}{Feather package} for exchanging data between the two languages \href{https://blog.rstudio.com/2016/03/29/feather/}{extremely quickly}.
 
-\hypertarget{codingstyle}{%
-\chapter{Coding Style}\label{codingstyle}}
+\chapter{Coding Style}\label{codingstyle}
 
 \emph{Contributors: Kunal Mishra, Jade Benjamin-Chung, and Ben Arnold}
 
-\hypertarget{line-breaks}{%
-\section{Line breaks}\label{line-breaks}}
+\section{Line breaks}\label{line-breaks}
 
 \begin{itemize}
 \item
@@ -826,11 +693,9 @@ ggplot(data=data,
 
 Imagine (or perhaps mournfully recall) the mess that can occur when you don't strictly style a complicated \texttt{ggplot} call. Trying to fix bugs and ensure your code is working can be a nightmare. Now imagine trying to do it with the same code 6 months after you've written it. Invest the time now and reap the rewards as the code practically explains itself, line by line.
 
-\hypertarget{automated-tools-for-style-and-project-workflow}{%
-\section{Automated Tools for Style and Project Workflow}\label{automated-tools-for-style-and-project-workflow}}
+\section{Automated Tools for Style and Project Workflow}\label{automated-tools-for-style-and-project-workflow}
 
-\hypertarget{styling}{%
-\subsection{Styling}\label{styling}}
+\subsection{Styling}\label{styling}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -892,15 +757,13 @@ OUSD_not_found_aliases <- list(
   \end{itemize}
 \end{enumerate}
 
-\hypertarget{datawrangling}{%
-\chapter{Data Wrangling}\label{datawrangling}}
+\chapter{Data Wrangling}\label{datawrangling}
 
 \emph{Contributors: Kunal Mishra, Jade Benjamin-Chung, Ben Arnold}
 
-\hypertarget{overview}{%
-\section{Overview}\label{overview}}
+\section{Overview}\label{overview}
 
-Processing data from raw inputs to final data for analysis is the foundation of the data science \protect\hyperlink{workflows}{workflow}. ``Management'' is a bad word in both academia and hip parts of the private sector, so what used to be called ``data management'' is now called ``data wrangling'' or ``data munging''.
+Processing data from raw inputs to final data for analysis is the foundation of the data science \hyperref[workflows]{workflow}. ``Management'' is a bad word in both academia and hip parts of the private sector, so what used to be called ``data management'' is now called ``data wrangling'' or ``data munging''.
 
 By any name, it is by far the most tedious and time consuming step in the data analysis workflow. Data wrangling is also the most error prone. Errors are likely because data processing usually requires hundreds or thousands of lines of code. Generating final datasets often requires programmers to merge and append multiple different raw datasets; often, the process requires them to re-shape the data from wide format to long format.
 
@@ -908,8 +771,7 @@ Read the chapters on \href{https://r4ds.had.co.nz/}{Data Wrangling} in \emph{R f
 
 Here, we provide some additional recommendations for best practices related to data wrangling and highlight a few topics not covered in the excellent R for Data Science book.
 
-\hypertarget{cardinal-rule}{%
-\section{Cardinal rule}\label{cardinal-rule}}
+\section{Cardinal rule}\label{cardinal-rule}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -921,20 +783,17 @@ Here, we provide some additional recommendations for best practices related to d
 
 Untouched datasets include data output from data collection software, distributed by the data team, outside collaborators, or downloaded from a data repository. They should be left untouched. All data cleaning and processing activities should read in untouched data and output either temporary files or final datasets. Never, ever overwrite an untouched dataset.
 
-\hypertarget{data-inputoutput-io}{%
-\section{Data input/output (I/O)}\label{data-inputoutput-io}}
+\section{Data input/output (I/O)}\label{data-inputoutput-io}
 
 Read the \href{https://r4ds.had.co.nz/data-import.html}{Data Import} section of \emph{R for Data Science}.
 
-\hypertarget{excel-files}{%
-\subsection{Excel files}\label{excel-files}}
+\subsection{Excel files}\label{excel-files}
 
 Often collaborators share data as Excel files (\texttt{.xlsx}). In this case, we recommend making a copy of the file in the untouched repository and converting it into a \texttt{.csv} file (one per tab) to input into the data processing workflow.
 
 This step should mark the end of your use of Excel in your data analysis, aside from inspecting \texttt{.csv} files. Excel is extremely error prone because it does not have good fidelity with variable types (e.g., dates, leading zeros), and has no real programmatic interface (VBA?). Avoid it. We can find no compelling case for its use in data science.
 
-\hypertarget{rds-vs-.rdata-files}{%
-\subsection{\texorpdfstring{\texttt{.RDS} vs \texttt{.RData} Files}{.RDS vs .RData Files}}\label{rds-vs-.rdata-files}}
+\subsection{\texorpdfstring{\texttt{.RDS} vs \texttt{.RData} Files}{.RDS vs .RData Files}}\label{rds-vs-.rdata-files}
 
 One of the most common ways to load and save data in Base R is with the \texttt{load()} and \texttt{save()} functions to serialize multiple objects in a single \texttt{.RData} file. The biggest problems with this practice include an inability to control the names of things getting loaded in, the inherent confusion this creates in understanding older code, and the inability to load individual elements of a saved file. For this, we recommend using the RDS format to save R objects using \texttt{saveRDS()} and its complement \texttt{readRDS()}.
 
@@ -945,32 +804,11 @@ One of the most common ways to load and save data in Base R is with the \texttt{
   \textbf{Note}: there is an important caveat for \texttt{.rds} files: they are not automatically backward compatible across different versions of R! So, while they are very useful in general, beware. See, for example, this thread on \href{https://stackoverflow.com/questions/56704638/write-a-file-using-saverds-so-that-it-is-backwards-compatible-with-old-versi}{StackExchange}. \texttt{.csv} files embed slightly less information (typically), but are more stable across different versions of R.
 \end{itemize}
 
-\hypertarget{csv-files}{%
-\subsection{\texorpdfstring{\texttt{.CSV} Files}{.CSV Files}}\label{csv-files}}
+\subsection{\texorpdfstring{\texttt{.CSV} Files}{.CSV Files}}\label{csv-files}
 
 Once again, the \texttt{readr} package as part of the Tidvyerse is great, with a much faster \texttt{read\_csv()} than Base R's \texttt{read.csv()}. For massive CSVs (\textgreater{} 5 GB), you'll find \texttt{data.table::fread()} to be the fastest CSV reader in any data science language out there. For writing CSVs, \texttt{readr::write\_csv()} and \texttt{data.table::fwrite()} outclass Base R's \texttt{write.csv()} by a significant margin as well.
 
-\hypertarget{publishing-public-data}{%
-\subsection{Publishing public data}\label{publishing-public-data}}
-
-\textbf{NEVER} push a dataset into the public domain (e.g., GitHub, OSF) without first checking with Ben to ensure that it is appropriately de-identified and we have approval from the sponsor and/or human subjects review board to do so. For example, we will need to re-code participant IDs (even if they contain no identifying information) before making data public to completely break the link between IDs and identifiable information stored on our servers.
-
-If you are releasing data into the public domain, then consider making available \emph{at minimum} a \texttt{.csv} file and a codebook of the same name (note: you should have a codebook for internal data as well). We often also make available \texttt{.rds} files as well. For example, your \texttt{mystudy/data/public} directory could include three files for a single dataset, two with the actual data in \texttt{.rds} and \texttt{.csv} formats, and a third that describes their contents:
-
-\begin{verbatim}
-analysis_data_public.csv
-analysis_data_public.rds
-analysis_data_public_codebook.txt
-\end{verbatim}
-
-In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: \url{https://github.com/ben-arnold/enterics-seroepi/tree/master/data} .
-
-If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (\href{https://osf.io}{osf.io}). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: \url{https://osf.io/tprw2/}. Another good option is Dryad (\href{https://datadryad.org/}{datadryad.org}), which normally costs a nominal fee to archive data but is free to investigators in the University of California system.
-
-As of this time, we recommend cross-linking public files in GitHub (scripts/notebooks only), OSF, and Dryad.
-
-\hypertarget{documenting-datasets}{%
-\section{Documenting datasets}\label{documenting-datasets}}
+\section{Documenting datasets}\label{documenting-datasets}
 
 Datasets need to have metadata (documentation) associated with them to help people understand them. Well documented datasets save an enormous amount of time because it helps avoid lots of back-and-forth with new people orienting themselves with the data. This applies to both private and public data used in your work flow.
 
@@ -980,8 +818,7 @@ The file \href{https://github.com/ben-arnold/enterics-seroepi/blob/master/data/a
 
 For complex studies with multiple, relational data files, it is exceptionally helpful to also include a README overview in plain text or markdown that explains the relationships between the datasets. Here is an example from the WASH Benefits Bangladesh trial primary outcomes analysis: \href{https://osf.io/v3nfs/}{README-WBB-primary-outcomes-datasets.md}.
 
-\hypertarget{mapping-data-from-untouched---final}{%
-\section{Mapping data from untouched -\textgreater{} final}\label{mapping-data-from-untouched---final}}
+\section{Mapping data from untouched -\textgreater{} final}\label{mapping-data-from-untouched---final}
 
 An important step for the data processing is to come up with a plan for which final datasets you want to create.
 
@@ -989,20 +826,15 @@ Best pracice is to scope out the flow of data from the original forms/modules/ta
 
 These are probably the two most common models for the end product:
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1923}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8077}}@{}}
+\toprule\noalign{}
 \endhead
-\begin{minipage}[t]{0.18\columnwidth}\raggedright
-Single Massive Dataset\strut
-\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright
-A single, large, final dataset for the whole project with potentially multiple levels of data (e.g., household, individual) and hundreds or thousands of variables.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.18\columnwidth}\raggedright
-Multiple Relational datasets\strut
-\end{minipage} & \begin{minipage}[t]{0.76\columnwidth}\raggedright
-Multiple relational datasets, each tailored to a specific type of data collected in the study. Smaller, relational datasets can be recombined as needed for analyses.\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+Single Massive Dataset & A single, large, final dataset for the whole project with potentially multiple levels of data (e.g., household, individual) and hundreds or thousands of variables. \\
+Multiple Relational datasets & Multiple relational datasets, each tailored to a specific type of data collected in the study. Smaller, relational datasets can be recombined as needed for analyses. \\
 \end{longtable}
 
 We strongly recommend using the second model, relational data tables, in almost every case. The chapter on \href{https://r4ds.had.co.nz/relational-data.html}{Relational Data} in R for Data Science explains details.
@@ -1011,8 +843,7 @@ We strongly recommend using the second model, relational data tables, in almost 
 Rationale: If you create a single massive dataset that includes information at multiple levels, then it can create challenges. First, the datasets are unwieldy, often consisting of hundreds or thousands of variables; this makes it difficult to find variables, difficult to view the data through a software browser, and easy to forget about variables. \emph{But there are bigger problems}. Datasets with an exceptionally large number of variables or multiple levels of data in the same file make it difficult to visually detect pathological problems in the data (e.g., unexpected missing values). For studies that include data from multiple levels (e.g., communities, households, individuals) the inclusion of multiple types of data in the same file makes analyses error prone because it requires the programmer to keep track of when variables include duplicated observations. For example, the inclusion of household characteristics in an individual-level data file means that if there are multiple individuals per household, that simple means of household characteristics cannot be calculated without first restricting the file to unique observations at the household level.
 \end{quote}
 
-\hypertarget{relational-data}{%
-\section{Relational data}\label{relational-data}}
+\section{Relational data}\label{relational-data}
 
 Refer to \href{https://r4ds.had.co.nz/relational-data.html}{Relational Data} in \emph{R for Data Science} for a good example of what a good relational database can look like.
 
@@ -1020,13 +851,12 @@ Refer to \href{https://r4ds.had.co.nz/relational-data.html}{Relational Data} in 
 
 Practical advice on \texttt{Key} variables / IDs used to link datasets. Numeric IDs can occasionally cause problems with merges due to machine rounding errors so character values can sometimes be a good alternative. Whatever format you use, ensure that they do not in some way encode identifying information (e.g., using a social security number or medical record number would be a poor choice of ID for a final dataset).
 
-\hypertarget{be-careful-with-joins-merges}{%
-\section{Be careful with joins / merges}\label{be-careful-with-joins-merges}}
+\section{Be careful with joins / merges}\label{be-careful-with-joins-merges}
 
 Experience shows that merging datasets is one of the most error prone steps in data wrangling. Merges can be particularly tricky for less experienced programmers. Errors are likely early in the data processing work flow, and less likely when merging final datasets with clean key variables (IDs) and clear relationships between datasets. Carefully check each merge to ensure it is working as you expect.
 
 \begin{quote}
-\textbf{ESSENTIAL READING:} \href{https://r4ds.had.co.nz/relational-data.html\#join-problems}{Join Problems} in \emph{R for Data Science}
+\textbf{ESSENTIAL READING:} \href{https://r4ds.had.co.nz/relational-data.html#join-problems}{Join Problems} in \emph{R for Data Science}
 \end{quote}
 
 In the Stata software there is a really nice feature with \texttt{merge} that allows you to specify the type of merge/join and then examine the diagnostics of that merge.
@@ -1045,101 +875,233 @@ In our experience, the two most common types of joins in our work are mutating j
 
 Familiarize yourself with these types of operations. The \href{https://r4ds.had.co.nz/relational-data.html}{Relational data} chapter of \emph{R for Data Science} includes details.
 
-\hypertarget{reshaping-data}{%
-\section{Reshaping data}\label{reshaping-data}}
+\section{Reshaping data}\label{reshaping-data}
 
 The \texttt{dplyr} package introduced the \texttt{pivot\_wider} and \texttt{pivot\_longer} functions in 2019. They make reshaping data dramatically easier than any previous functions, including \texttt{reshape()} (base R) or \texttt{gather}/\texttt{spread} (Tidyverse). This excellent article includes details:
 
 \url{https://tidyr.tidyverse.org/dev/articles/pivot.html}
 
-\hypertarget{data-cleaning}{%
-\section{Data cleaning}\label{data-cleaning}}
+\section{Data cleaning}\label{data-cleaning}
 
 Data cleaning is typically an iterative process that you should conduct on a variable-by-variable basis. Occasionally it is useful to clean an entire questionnaire module at the same time since variables in the same module can be related to one another, and since it can help to proceed through the cleaning process in well-defined chunks. I find it helpful to have a copy of the survey questionnaire (if relevant) handy while cleaning specific variables. This enables you to check skip patterns and codes in the survey against the dataset.
 
-We don't have a lot of general advice for data cleaning except the following. First, there is something to be said for ``trolling'' (in the fishing sense) or visually scrolling through parts of the dataset to see what the data look like and to make sure you have a feel for how information is stored in different variables (e.g., are missing values coded or simply recored as ``\texttt{.}'' or \texttt{NA}). Use the \texttt{View()} utility in \texttt{RStudio} to look at your data often during the cleaning process. Second, it can be helpful to consolidate all data cleaning into a single program for each dataset. The data cleaning program corrects entry errors, labels variables, formats variables, and outputs either a temporary or final dataset (but does not, ever, overwrite the untouched data). As noted in the \protect\hyperlink{workflows}{Workflows} chapter, \emph{key data processing should be done once, at the earliest possible place in the workflow}.
+We don't have a lot of general advice for data cleaning except the following. First, there is something to be said for ``trolling'' (in the fishing sense) or visually scrolling through parts of the dataset to see what the data look like and to make sure you have a feel for how information is stored in different variables (e.g., are missing values coded or simply recored as ``\texttt{.}'' or \texttt{NA}). Use the \texttt{View()} utility in \texttt{RStudio} to look at your data often during the cleaning process. Second, it can be helpful to consolidate all data cleaning into a single program for each dataset. The data cleaning program corrects entry errors, labels variables, formats variables, and outputs either a temporary or final dataset (but does not, ever, overwrite the untouched data). As noted in the \hyperref[workflows]{Workflows} chapter, \emph{key data processing should be done once, at the earliest possible place in the workflow}.
 
-\hypertarget{bigdata}{%
-\chapter{Working with Big Data}\label{bigdata}}
+\chapter{Making Data Public}\label{publicdata}
+
+\emph{Contributors: Fanice Nyatigo, Ben Arnold}
+
+\section{Overview}\label{overview-1}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\emph{\textbf{Warning! } \textbf{NEVER} push a dataset into the public domain (e.g., GitHub, OSF) without first checking with Ben to ensure that it is appropriately de-identified and we have approval from the sponsor and/or human subjects review board to do so. For example, we will need to re-code participant IDs (even if they contain no identifying information) before making data public to completely break the link between IDs and identifiable information stored on our servers. }
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+If you are releasing data into the public domain, then consider making available \emph{at minimum} a \texttt{.csv} file and a codebook of the same name (note: you should have a codebook for internal data as well). We often also make available \texttt{.rds} files as well. For example, your \texttt{mystudy/data/public} directory could include three files for a single dataset, two with the actual data in \texttt{.rds} and \texttt{.csv} formats, and a third that describes their contents:
+
+\begin{verbatim}
+analysis_data_public.csv
+analysis_data_public.rds
+analysis_data_public_codebook.txt
+\end{verbatim}
+
+In general, datasets are usually too big to save on GitHub, but occasionally they are small. Here is an example of where we actually pushed the data directly to GitHub: \url{https://github.com/ben-arnold/enterics-seroepi/tree/master/data} .
+
+If the data are bigger, then maintaining them under version control in your git repository can be unweildy. Instead, we recommend using another stable repository that has version control, such as the Open Science Framework (\href{https://osf.io}{osf.io}). For example, all of the data from the WASH Benefits trials (led by investigators at Berkeley, icddr,b, IPA-Kenya and others) are all stored through data components nested within in OSF projects: \url{https://osf.io/tprw2/}. Another good option is Dryad (\href{https://datadryad.org/}{datadryad.org}), which normally costs a nominal fee to archive data but is free to investigators in the University of California system.
+
+As of this time, we recommend cross-linking public files in GitHub (scripts/notebooks only), OSF, and Dryad.
+
+Below are the main steps to making data public, after finalizing the analysis datasets and scripts:\\
+1. Remove Protected Health Information (PHI)\\
+2. Create public IDs or join already created public IDs to the data\\
+3. Create an OSF repository and/or Dryad repository\\
+4. Edit analysis scripts to run using the public datasets and test (optional)\\
+5. Create a public github page for analysis scripts and link to OSF and/or Dryad/Zenodo\\
+6. Go live
+
+\section{Removing PHI}\label{removing-phi}
+
+Once the data is finalized for analysis, the first step is to strip it of Protected Health Information (PHI), or any other data that could be used to link back to specific participants, such as names, birth dates, or GPS coordinates at the village/neighborhood level or below. PHI includes, but is not limited to:
+
+\subsection{Personal information}\label{personal-information}
+
+These are identifiers that directly point to specific individuals, such as:\\
+- Names, addresses, photographs, date of birth\\
+- A combination of age, sex, and geographic location (below population 20,000) is considered identifiable
+
+\subsection{Dates}\label{dates}
+
+Any specific dates (e.g., study visit dates, birth dates, treatment dates) are usually problematic.\\
+- If a dataset requires high resolution temporal information, coarsen visit or measurement dates to be two variables: year and week of the year (1-52).\\
+- If a dataset requires age, provide that information without a birth date (typically month resolution is sufficient)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\emph{\textbf{Caution!} If making changes to the format of dates or ages, make sure your analysis code runs on these modified versions of the data (step 3)! }
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Geographic information}\label{geographic-information}
+
+Do not include GPS coordinates (longitude, latitude) except in special circumstances where they have been obfuscated/shifted. Reach out to your PI and the study's biostatistician before doing this because it can be complicated.
+
+Do not include place names or codes (e.g., US Zip Codes) if the place contains \textless20,000 people. For villages or neighborhoods, code them with uninformative IDs. For sub-districts or districts, names are fine.
+
+If an analysis requires GPS locations (e.g., to make a map), then typically we include a disclaimer in the article's data availability statement that explains we cannot make GPS locations public to protect participant confidentiality. As a middle ground, we typically make our \emph{code} public that runs on the geo-located data for transparency, even if independent researchers can't actually run that code (although please be careful to ensure the code itself does not in any way include geographic identifiers).
+
+For more examples of what constitutes PHI, please refer to this link: \url{https://cphs.berkeley.edu/hipaa/hipaa18.html}
+
+\section{Create public IDs}\label{create-public-ids}
+
+\subsection{Rationale}\label{rationale}
+
+The UCSF IRB requires that public datasets not include the original study IDs to identify participants or other units in the study (such as village IDs). The reason is that those IDs are linked in our private datasets to PHI. By creating a new set of public IDs, the public dataset is one step further removed from the potential to link to PHI.
+
+\subsection{A single set of public IDs for each study}\label{a-single-set-of-public-ids-for-each-study}
+
+For each study, it is ideal to create a single set of public IDs whenever possible. We could create a new set of public IDs for every public dataset, but the downside is that independent researchers could no longer link data that might be related. By creating a single set of public IDs associated with each internal study ID, public files retain the link.
+
+Maintaining a single set of public IDs requires a shared ``bridge'' dataset, that includes a row for each study ID and has the associated public ID. For studies with multiple levels of ID, we would typically have separate bridge datasets for each type of ID (e.g,. cluster ID, participant ID, etc.)
+
+Create a public ID that can be used to uniquely identify participants and that can internally be linked to the original study IDs. We recommend creating a subdirectory in the study's shared data directory to store the public IDs. The shared location enables multiple projects to use the same IDs. Create the IDs using a script that reads in the study IDs, creates a unique (uninformative) public ID for the study IDs, and then saves the bridge dataset. The script should be saved in the same directory as the public ID files.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\emph{\textbf{Caution!} Note that small differences may arise if the new public IDs do not necessarily order participants in the same way as the internal IDs. The small differences are all in estimates that rely on resampling, such as Bootstrap CIs, permutation P-values, and TMLE, as the resampling process may lead tp slightly different re-samples. The key here, to ensure the results are consistent irrespective of the dataset used, is simply to not assign public IDs randomly. Use \texttt{rank()} on the internal ID instead of \texttt{row\_number()} to ensure that the order is always the same. }
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Example scripts}\label{example-scripts}
+
+We have created a self-contained and reproducible example that you can run and replicate when making data public for your projects. It contains the following files and folders:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{data/final/}- folder containing the projects final data in both csv and rds formats\\
+\item
+  \texttt{code/DEMO\_generate\_public\_IDs.R}- creates randomly generated public IDs that can be matched to the trial's assigned patient IDs.\\
+\item
+  \texttt{data/make\_public/DEMO\_internal\_to\_publicID.csv}- the output from step \#2, a bridge dataset with two variables- the new public ID and the patient's assigned ID.\\
+\item
+  \texttt{code/DEMO\_create\_public\_datasets.R}- joins the public IDs to the trial's full dataset, and strips it of the assigned patient ID.
+\item
+  \texttt{data/public/}- folder containing the output from step \#3- de-identified public dataset, in csv and rds formats, with uniquely identifying public IDs that cannot be easily linked back to the patient's ID.
+\end{enumerate}
+
+The example workflow is accessible via GitHub: \url{https://github.com/proctor-ucsf/dcc-handbook/tree/master/templates/making-data-public}
+
+\section{Create a data repository}\label{create-a-data-repository}
+
+First, ensure that you create a codebook and metadata file for each public dataset \href{https://proctor-ucsf.github.io/dcc-handbook/datawrangling.html#documenting-datasets}{See the DCC guide on Documenting datasets}. Use the same name as the datasets, but with ``-codebook.txt'' / ``-codebook.html'' / ``-codebook.csv'' at the end (depending on the file format for the codebook). One nice option is the R codebook package, which also generates JSON output that is machine-readable.
+
+\subsection{Steps for creating an Open Science Framework (OSF) repository:}\label{steps-for-creating-an-open-science-framework-osf-repository}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a new OSF project per these instructions: \url{https://help.osf.io/article/252-create-a-project}
+\item
+  Create a data component and upload the datasets in .csv and .rds format along with the codebooks. The primary format for public dissemination is .csv but we make the .rds files available too as auxiliary files for convenience.
+\item
+  Create a notebook component and upload the final .html files (which will not be on github\ldots{} but see optional item below)
+\item
+  On the OSF landing Wiki, provide some context. Here is a recent example: \url{https://osf.io/954bt/}
+\item
+  Create a Digital Object Identifier (DOI) for the repository. A DOI is a unique identifier that provides a persistent link to content, such as a dataset in this case. \href{https://researchdata.princeton.edu/research-lifecycle-guide/whats-doi-and-what-should-i-know-about-citing-datasets}{Learn more about DOIs}
+\item
+  Optional: Complete the software checklist and system requirement guide for the analysis to guide others. Include it on the GitHub README for the project: \url{https://github.com/proctor-ucsf/mordor-antibody}
+\end{enumerate}
+
+\subsection{Steps for creating a Dryad data repository:}\label{steps-for-creating-a-dryad-data-repository}
+
+TBD
+\url{https://datadryad.org/stash/submission_process}
+
+\section{Edit and test analysis scripts}\label{edit-and-test-analysis-scripts}
+
+Make minor changes to the analysis scripts so that they run on public data. If using version control in GitHub, the most straight-forward way is to create a branch from the main git branch that reads in the public files, and then renames the new public ID variable, e.g., ``id\_public'' to the internally recognized ID variable name, e.g.~``recordID'', when reading in the public data. Re-run all the analysis scripts to ensure that they still work with the public version of the dataset.
+
+\section{Create a public GitHub page for public scripts}\label{create-a-public-github-page-for-public-scripts}
+
+At minimum, we should include all of the scripts required to run the analyses .
+
+See examples:\\
+- ACTION - \url{https://github.com/proctor-ucsf/ACTION-public}\\
+- NAITRE - \url{https://github.com/proctor-ucsf/NAITRE-primary}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\emph{\textbf{Caution!} Read through the scripts carefully to ensure there is no PHI in the code itself }
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Once a public GitHub page exists, you can create a new component on an OSF project (step 3, above) and link it to the public version of the GitHub repo.
+
+\section{Go live}\label{go-live}
+
+On GitHub, it is useful to create an official ``release'' version to freeze the repository, where you can have ``associated files'' with each version. Include the .html notebook output as additional files --- since they aren't tracked in GitHub, it does provide a way of freezing / saving the HTML output for us and others. OSF examples of a few Proctor trials:\\
+- ACTION - \url{https://osf.io/ca3pe/}\\
+- NAITRE - \url{https://osf.io/ujeyb/}\\
+- MORDOR Niger antibody study - \url{https://osf.io/dgsq3/}
+
+Further reading on end-to-end data management: \href{https://plos.org/resource/how-to-store-and-manage-your-data/#data-management-plan}{How to Store and Manage Your Data - PLOS}
+
+\chapter{Working with Big Data}\label{bigdata}
 
 \emph{Contributors: Eric Kim, Kunal Mishra and Jade Benjamin-Chung}
 
-\hypertarget{basics}{%
-\section{Basics}\label{basics}}
+\section{Basics}\label{basics}
 
 A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we'll explore some alternatives to working with big data.
 
 The Berkeley Statistical Computing Facility also has many good \href{http://statistics.berkeley.edu/computing/training}{training resources}.
 
-\hypertarget{using-downsampled-data}{%
-\section{Using downsampled data}\label{using-downsampled-data}}
+\section{Using downsampled data}\label{using-downsampled-data}
 
 In studies with very large datasets, we save ``downsampled'' data that usually includes a 1\% random sample stratified by any important variables, such as year or household id. This allows us to efficiently write and test our code without having to load in large, slow datasets that can cause RStudio to freeze. Be very careful to be sure which dataset you are working with and to label results output accordingly.
 
-\hypertarget{big-data-unix}{%
-\section{Unix}\label{big-data-unix}}
+\section{Unix}\label{big-data-unix}
 
 Though bash is very commonly used for management of your file system (see Chapter \ref{unix}), it is also a very capable at doing basic data manipulation with big data. At the core, since the data is stored on disk, you avoid having to overload memory when using bash commands as it will work with the files directly. By default, these commands will print the results to standard output (probably your terminal screen), but you can then redirect the results to other files on disk to save your results. These commands can also be chained via pipes (represented as \texttt{\textbar{}}, similar to \texttt{\%\textgreater{}\%} in tidyverse). All of these have a list of arguments that can be passed in via flags (check the \texttt{man} page for more details on each).
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.41\columnwidth}\raggedright
-Command\strut
-\end{minipage} & \begin{minipage}[b]{0.53\columnwidth}\raggedright
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4348}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5652}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Command
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{head}/\texttt{tail}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Displays the first few or last few rows of a file\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{cat}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Concatenates files and prints them\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{sort}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Sorts the file\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{cut}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Cuts out portions of each line and prints it\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{grep}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Finds lines of a file that matches inputted patterns\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{sed}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Find and replace\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{awk}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Similar to \texttt{grep} and \texttt{sed} but with some extra programmatic functionality\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{uniq}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Unifies repeated lines (combine with \texttt{sort} to get unique rows)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{wget} / \texttt{curl}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Downloads data/files from websites\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{head}/\texttt{tail} & Displays the first few or last few rows of a file \\
+\texttt{cat} & Concatenates files and prints them \\
+\texttt{sort} & Sorts the file \\
+\texttt{cut} & Cuts out portions of each line and prints it \\
+\texttt{grep} & Finds lines of a file that matches inputted patterns \\
+\texttt{sed} & Find and replace \\
+\texttt{awk} & Similar to \texttt{grep} and \texttt{sed} but with some extra programmatic functionality \\
+\texttt{uniq} & Unifies repeated lines (combine with \texttt{sort} to get unique rows) \\
+\texttt{wget} / \texttt{curl} & Downloads data/files from websites \\
 \end{longtable}
 
-\hypertarget{sql-and-dbplyr}{%
-\section{\texorpdfstring{SQL and \texttt{dbplyr}}{SQL and dbplyr}}\label{sql-and-dbplyr}}
+\section{\texorpdfstring{SQL and \texttt{dbplyr}}{SQL and dbplyr}}\label{sql-and-dbplyr}
 
 SQL databases are relational databases that are a collection of \emph{tables} that consists of \emph{fields} or \emph{attributes}, each containing a single \emph{type}. If you use \texttt{dplyr} a lot, you will find that it is heavily inspired with a SQL flavor in mind. Formally, data gets loaded onto a database system and it is stored on disk. This alone makes working with data fast, but the real efficiency gain is in the concept of indexing. If you are curious, most SQL databases implement their index with B trees or B+ trees, which allow for log time complexity for search operations in average and worst case scenarios while providing constant time complexity in best case scenario.
 
@@ -1165,42 +1127,35 @@ table %>%
 
 There is ample support for connection to databases in R, and, in particular, there is the \href{https://dbplyr.tidyverse.org}{\texttt{dbplyr}} package, which allows you to interface with the data with \texttt{dplyr} code instead of SQL code.
 
-\hypertarget{data.table-and-dtplyr}{%
-\section{\texorpdfstring{\texttt{data.table} and \texttt{dtplyr}}{data.table and dtplyr}}\label{data.table-and-dtplyr}}
+\section{\texorpdfstring{\texttt{data.table} and \texttt{dtplyr}}{data.table and dtplyr}}\label{data.table-and-dtplyr}
 
 It is often possible to load large datasets into memory in R, but computations will require more consumption of memory and will probably be very slow. One way around this is to use \texttt{data.table}. You will find that operations on the data are much faster than base R or \texttt{dplyr} even though data is loaded into memory - this is because of clever programming in C as well as internally creating a \emph{key} (the SQL equivalent of an index) by default when loading in the data. You can improve on this even more by setting extra keys for variables you know you will be doing filter or join operations on.
 
 More recently from the tidyverse, is the implementation of \href{https://dtplyr.tidyverse.org}{\texttt{dtplyr}}, which allows for \texttt{dplyr} syntax on \texttt{data.table} objects.
 
-An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349\#27840349}{this stackoverflow post} and all 3 answers are worth a read.
+An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349#27840349}{this stackoverflow post} and all 3 answers are worth a read.
 
-\hypertarget{ff-bigmemory-biglm}{%
-\section{\texorpdfstring{\texttt{ff}, \texttt{bigmemory}, \texttt{biglm}}{ff, bigmemory, biglm}}\label{ff-bigmemory-biglm}}
+\section{\texorpdfstring{\texttt{ff}, \texttt{bigmemory}, \texttt{biglm}}{ff, bigmemory, biglm}}\label{ff-bigmemory-biglm}
 
 Sometimes, it may be impossible to load data into memory. Because of the overhead required, you can expect at least twice as much memory needed as the size of the file on disk to just load in a sufficiently large dataset and with all the other things that your computer needs to put on RAM in order to just run, you'll run out of space. One way to work around this is to keep the data on disk and instead create clever data structures that allow for natural interfacing with the data by mapping operations to the data on disk. Two R packages that implement these ideas are \texttt{ff} and \texttt{bigmemory}.
 
 We can interface with the data while avoiding loading it into memory with these packages, but we run into issues when we try to fit models on it. For an \(n \times p\) dataset, linear regression has a time complexity of \(O(np^2 + p^3)\) and a space complexity of \(O(np + p^2)\) (this just means it will take a while and take up a lot of space for large \(n\) and even moreso for large \(p\)). So even if we \emph{could} load the data on disk, fitting these models would be out of question. This is where standard solutions used in machine learning (iterative algorithms like stochastic gradient descent) can help us. The idea is to take a smaller portion of our data (which will fit in memory), fit the regression (which will take a reasonable amount of time), then update the coefficient based on another run of linear regression on another small portion of the data until convergence. For GLM models, this can be done with the \texttt{biglm} package which has integration with \texttt{ff} and \texttt{bigmemory}.
 
-\hypertarget{parallel-computing}{%
-\section{Parallel computing}\label{parallel-computing}}
+\section{Parallel computing}\label{parallel-computing}
 
-\hypertarget{embarrassingly-parallel-problems}{%
-\subsection{Embarrassingly Parallel Problems}\label{embarrassingly-parallel-problems}}
+\subsection{Embarrassingly Parallel Problems}\label{embarrassingly-parallel-problems}
 
 Sometimes, we have to do something in a loop-like structure where each iteration may be independent of each other, such as simulations or bootstrap. These types of loops are referred to as \href{https://en.wikipedia.org/wiki/Embarrassingly_parallel}{\emph{embarrassingly parallel}} problems. Each iteration takes some time and every iteration thereafter must wait because the loop is operating as a queue, which gives a very obvious way to parallelize (hence ``embarrassingly''). Every computer these days come with at least 2 cores in the CPU and each CPU core can operate independently, so after some overhead, we can speed up our loop by about a factor of the number of cores our computers have.
 
-\hypertarget{packages}{%
-\subsection{Packages}\label{packages}}
+\subsection{Packages}\label{packages}
 
 In R, the popular packages to do this are \texttt{parallel}, \texttt{foreach}, and \texttt{doParallel} (the backend that connects \texttt{foreach} and \texttt{parallel}). More modern parallel computing packages in R are \texttt{future} and \texttt{furrr} (inspired by \texttt{future\ purrr}, it allows for \texttt{purrr} like syntax using the \texttt{future} data structure from its namesake package). In Python, the \texttt{Dask} library has similar functionality to R's \texttt{future}. Note: the \texttt{parallel} package comes with a \texttt{detectCores} function, but I sometimes find that it is not accurate. On a Mac, you can manually check the number of cores by going into About This Mac then System Report then checking the Total Number of Cores in the Hardware tab.
 
-\hypertarget{gpus}{%
-\subsection{GPU's}\label{gpus}}
+\subsection{GPU's}\label{gpus}
 
 For most everyday tasks, CPU will be sufficient, but for large problems even an 8x speed boost from a computer with 8 cores might not be enough. This is where GPU's come into play. While CPU cores are good at complex operations, GPU cores are good at many small operations like matrix multiplication. GPU cores come in the hundreds for cheaper graphics cards and thousands for top end graphics cards, so they are ideal for training machine learning models, particularly neural networks. However, as these GPU cores were intended for the rendering of graphics on our computers, we cannot easily access their computing power out of R or Python without some translation in between. Graphics manufacturers have been catching up to this market, with one of the most popular platforms for parallel computing on GPU's being Nvidia's \href{https://developer.nvidia.com/cuda-zone}{CUDA} for use with Nvidia graphics cards.
 
-\hypertarget{the-mapreduce-paradigm}{%
-\subsection{\texorpdfstring{The \emph{MapReduce} paradigm}{The MapReduce paradigm}}\label{the-mapreduce-paradigm}}
+\subsection{\texorpdfstring{The \emph{MapReduce} paradigm}{The MapReduce paradigm}}\label{the-mapreduce-paradigm}
 
 The idea of the \emph{MapReduce} paradigm is that we can distribute the data across many nodes and try to do the computation on each piece of the data in each node. One benefit of this is that if our data is too large to fit on disk for a single machine, we can instead spread it across many then do our operations in parallel and aggregate the results back together. We can formalize this paradigm into three steps
 
@@ -1218,8 +1173,7 @@ An excellent example is included at the bottom of this \href{https://www.journal
 
 The popular infrastructures for doing parallel computing with the MapReduce paradigm are Hadoop and Spark (think of Spark as an in-memory version of Hadoop). Spark can be more easily interfaced with than Hadoop through Python via \texttt{PySpark} and through R via \texttt{SparkR} (from Apache) or \texttt{sparklyr} (from RStudio). However, note that because Spark is natively implemented in Java and Scala, the overhead of serialization between R/Python to Java/Scala may be a time expensive operation.
 
-\hypertarget{optimal-rstudio-set-up}{%
-\section{Optimal RStudio set up}\label{optimal-rstudio-set-up}}
+\section{Optimal RStudio set up}\label{optimal-rstudio-set-up}
 
 Using the following settings will help ensure a smooth experience when working with big data. In RStudio, go to the ``Tools'' menu, then select ``Global Options''. Under ``General'':
 
@@ -1243,13 +1197,11 @@ Using the following settings will help ensure a smooth experience when working w
 
 Unfortunately RStudio often gets slow and/or freezes after hours working with big datasets. Sometimes it is much more efficient to just use Terminal / gitbash to run code and make updates in git.
 
-\hypertarget{github}{%
-\chapter{GitHub and Version Control}\label{github}}
+\chapter{GitHub and Version Control}\label{github}
 
 \emph{Contributors: Stephanie Djajadi, Nolan Pokpongkiat, and Ben Arnold}
 
-\hypertarget{basics-1}{%
-\section{Basics}\label{basics-1}}
+\section{Basics}\label{basics-1}
 
 Git is a version control system. It has very good documentation online: \url{https://git-scm.com/doc}
 
@@ -1260,9 +1212,9 @@ Git is often used in conjunction with GitHub, which is an online platform to hel
 \begin{itemize}
 \tightlist
 \item
-  A detailed tutorial of Git can be found \href{https://sp19.datastructur.es/materials/guides/using-git\#b-local-repositories-narrative-introduction}{here on UC Berkeley's CS61B website}.
+  A detailed tutorial of Git can be found \href{https://sp19.datastructur.es/materials/guides/using-git#b-local-repositories-narrative-introduction}{here on UC Berkeley's CS61B website}.
 \item
-  If you are already familiar with Git, you can reference the summary at the end of \href{https://sp19.datastructur.es/materials/guides/using-git\#b-local-repositories-narrative-introduction}{Section B}.
+  If you are already familiar with Git, you can reference the summary at the end of \href{https://sp19.datastructur.es/materials/guides/using-git#b-local-repositories-narrative-introduction}{Section B}.
 \item
   If you have made a mistake in Git, you can refer to this \href{https://sethrobertson.github.io/GitFixUm/fixup.html}{article} to undo, fix, or remove commits in git.
 \end{itemize}
@@ -1273,8 +1225,7 @@ Blischak JD, Davenport ER, Wilson G. A Quick Introduction to Version Control wit
 
 Perez-Riverol Y, Gatto L, Wang R, Sachsenberg T, Uszkoreit J, Leprevost F da V, et al.~Ten Simple Rules for Taking Advantage of Git and GitHub. \emph{PLoS Comput Biol.} 2016;12: e1004947. \url{https://www.ncbi.nlm.nih.gov/pubmed/27415786}
 
-\hypertarget{git-branching}{%
-\section{Git Branching}\label{git-branching}}
+\section{Git Branching}\label{git-branching}
 
 A terrific overview of branching workflow and its rationale is here: \url{https://guides.github.com/introduction/flow/}
 
@@ -1290,200 +1241,92 @@ Branches allow you to keep track of multiple versions of your work simultaneousl
   You are working with others and don't want to mix up your current work with theirs, even if you want to bring your work together later in the future.
 \end{itemize}
 
-A detailed tutorial on Git Branching can be found \href{https://sp19.datastructur.es/materials/guides/using-git\#e-git-branching-advanced-git-optional}{here}. You can also find instructions on how to handle merge conflicts when joining branches together.
+A detailed tutorial on Git Branching can be found \href{https://sp19.datastructur.es/materials/guides/using-git#e-git-branching-advanced-git-optional}{here}. You can also find instructions on how to handle merge conflicts when joining branches together.
 
-\hypertarget{example-workflow}{%
-\section{Example Workflow}\label{example-workflow}}
+\section{Example Workflow}\label{example-workflow}
 
 A standard workflow when starting on a new project and contributing code looks like this:
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.34\columnwidth}\raggedright
-Command\strut
-\end{minipage} & \begin{minipage}[b]{0.60\columnwidth}\raggedright
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6400}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Command
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-SETUP: FIRST TIME ONLY: \texttt{git\ clone\ \textless{}url\textgreater{}\ \textless{}directory\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-Clone the repo. This copies of all the project files in its current state on Github to your local computer.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-1. \texttt{git\ pull\ origin\ master}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-update the state of your files to match the most current version on GitHub\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-2. \texttt{git\ checkout\ -b\ \textless{}new\_branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-create new branch that you'll be working on and go to it\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-3. Make some file changes\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-work on your feature/implementation\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-4. \texttt{git\ add\ \textless{}filename\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-add file to stage for commit\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-5. \texttt{git\ commit\ -m\ \textless{}commit\ message\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-commit file with a message\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-6. \texttt{git\ push\ -u\ origin\ \textless{}branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-push branch to remote and set to track (-u only works if this is first push)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-7. Repeat step 4-5.\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-work and commit often\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-8. \texttt{git\ push}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-push work to remote branch for others to view\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-9. Follow the link given from the \texttt{git\ push} command to submit a pull request (PR) on GitHub online\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-PR merges in work from your branch into master\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-(10.) Your changes and PR get approved, your reviewer deletes your remote branch upon merging\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-11. \texttt{git\ fetch\ -\/-all\ -\/-prune}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-clean up your local git by untracking deleted remote branches\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+SETUP: FIRST TIME ONLY: \texttt{git\ clone\ \textless{}url\textgreater{}\ \textless{}directory\_name\textgreater{}} & Clone the repo. This copies of all the project files in its current state on Github to your local computer. \\
+1. \texttt{git\ pull\ origin\ master} & update the state of your files to match the most current version on GitHub \\
+2. \texttt{git\ checkout\ -b\ \textless{}new\_branch\_name\textgreater{}} & create new branch that you'll be working on and go to it \\
+3. Make some file changes & work on your feature/implementation \\
+4. \texttt{git\ add\ \textless{}filename\textgreater{}} & add file to stage for commit \\
+5. \texttt{git\ commit\ -m\ \textless{}commit\ message\textgreater{}} & commit file with a message \\
+6. \texttt{git\ push\ -u\ origin\ \textless{}branch\_name\textgreater{}} & push branch to remote and set to track (-u only works if this is first push) \\
+7. Repeat step 4-5. & work and commit often \\
+8. \texttt{git\ push} & push work to remote branch for others to view \\
+9. Follow the link given from the \texttt{git\ push} command to submit a pull request (PR) on GitHub online & PR merges in work from your branch into master \\
+(10.) Your changes and PR get approved, your reviewer deletes your remote branch upon merging & \\
+11. \texttt{git\ fetch\ -\/-all\ -\/-prune} & clean up your local git by untracking deleted remote branches \\
 \end{longtable}
 
 Other helpful commands are listed below.
 
-\hypertarget{commonly-used-git-commands}{%
-\section{Commonly Used Git Commands}\label{commonly-used-git-commands}}
+\section{Commonly Used Git Commands}\label{commonly-used-git-commands}
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.34\columnwidth}\raggedright
-Command\strut
-\end{minipage} & \begin{minipage}[b]{0.60\columnwidth}\raggedright
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6400}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Command
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ clone\ \textless{}url\textgreater{}\ \textless{}directory\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-clone a repository, only needs to be done the first time\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ pull\ origin\ master}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-pull before making any changes\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ branch}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-check what branch you are on\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ branch\ -a}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-check what branch you are on + all remote branches\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ checkout\ -b\ \textless{}new\_branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-create new branch and go to it (only necessary when you create a new branch)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ checkout\ \textless{}branch\ name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-switch to branch\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ add\ \textless{}file\ name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-add file to stage for commit\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ commit\ -m\ \textless{}commit\ message\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-commit file with a message\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ push\ -u\ origin\ \textless{}branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-push branch to remote and set to track (-u only works if this is first push)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ branch\ -\/-set-upstream-to\ origin\ \textless{}branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-set upstream to origin/ (use if you forgot -u on first push)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ push\ origin\ \textless{}branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-push work to branch\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ checkout\ -\/-track\ origin/\textless{}branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-pulls a remote branch and creates a local branch to track it (use when trying to pull someone else's branch onto your local computer)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ push\ -\/-delete\ \textless{}remote\_name\textgreater{}\ \textless{}branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-delete remote branch\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ branch\ -d\ \textless{}branch\_name\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-deletes local branch, -D to force\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{git\ fetch\ -\/-all\ -\/-prune}\strut
-\end{minipage} & \begin{minipage}[t]{0.60\columnwidth}\raggedright
-untrack deleted remote branches\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{git\ clone\ \textless{}url\textgreater{}\ \textless{}directory\_name\textgreater{}} & clone a repository, only needs to be done the first time \\
+\texttt{git\ pull\ origin\ master} & pull before making any changes \\
+\texttt{git\ branch} & check what branch you are on \\
+\texttt{git\ branch\ -a} & check what branch you are on + all remote branches \\
+\texttt{git\ checkout\ -b\ \textless{}new\_branch\_name\textgreater{}} & create new branch and go to it (only necessary when you create a new branch) \\
+\texttt{git\ checkout\ \textless{}branch\ name\textgreater{}} & switch to branch \\
+\texttt{git\ add\ \textless{}file\ name\textgreater{}} & add file to stage for commit \\
+\texttt{git\ commit\ -m\ \textless{}commit\ message\textgreater{}} & commit file with a message \\
+\texttt{git\ push\ -u\ origin\ \textless{}branch\_name\textgreater{}} & push branch to remote and set to track (-u only works if this is first push) \\
+\texttt{git\ branch\ -\/-set-upstream-to\ origin\ \textless{}branch\_name\textgreater{}} & set upstream to origin/ (use if you forgot -u on first push) \\
+\texttt{git\ push\ origin\ \textless{}branch\_name\textgreater{}} & push work to branch \\
+\texttt{git\ checkout\ -\/-track\ origin/\textless{}branch\_name\textgreater{}} & pulls a remote branch and creates a local branch to track it (use when trying to pull someone else's branch onto your local computer) \\
+\texttt{git\ push\ -\/-delete\ \textless{}remote\_name\textgreater{}\ \textless{}branch\_name\textgreater{}} & delete remote branch \\
+\texttt{git\ branch\ -d\ \textless{}branch\_name\textgreater{}} & deletes local branch, -D to force \\
+\texttt{git\ fetch\ -\/-all\ -\/-prune} & untrack deleted remote branches \\
 \end{longtable}
 
-\hypertarget{how-often-should-i-commit}{%
-\section{How often should I commit?}\label{how-often-should-i-commit}}
+\section{How often should I commit?}\label{how-often-should-i-commit}
 
 Stephanie and Nolan (trained in CS and Data Science) suggest it is good practice to commit every 15 minutes (a time-based guideline), or every time you make a significant change (progress-based guideline). Ben's perspective aligns with this view, but is weighted toward committing around completion of discrete chunks of work; for him, a discrete chunk of work will often take quite a bit longer than 15 minutes time. Take home message: \emph{It is better to commit more rather than less.}
 
-\hypertarget{what-should-be-pushed-to-github}{%
-\section{What should be pushed to Github?}\label{what-should-be-pushed-to-github}}
+\section{What should be pushed to Github?}\label{what-should-be-pushed-to-github}
 
-In general, it is better to track text-based files (\texttt{.R}, \texttt{.Rmd}, \texttt{.md},\texttt{.txt},etc\ldots{}) compared with binary files (\texttt{.pdf},\texttt{.png},\texttt{.docx}, etc\ldots{}) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don't change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.
+In general, it is better to track text-based files (\texttt{.R}, \texttt{.Rmd}, \texttt{.md},\texttt{.txt},etc\ldots) compared with binary files (\texttt{.pdf},\texttt{.png},\texttt{.docx}, etc\ldots) because Git will store changes to a binary file as a completely new file in your Git directory. If you store 100 versions of the same binary file, your directory will quickly become very bloated. If the binary files don't change often, then you could consider including them under version control, but it is usually cleaner to keep them under a separate version control, such as through an Open Science Framework project with a specific data component.
 
 Be careful before you push .Rout log files! If someone else runs an R script and creates an .Rout file at the same time and both of you try to push to github, it is incredibly difficult to reconcile these two logs. If you run logs, keep them on your own system or (preferably) set up a shared directory where all logs are name and date timestamped.
 
 There is a standardized \texttt{.gitignore} for \texttt{R} which you \href{https://github.com/github/gitignore/blob/master/R.gitignore}{can download} and add to your project. This ensures you're not committing log files or things that would otherwise best be left ignored to GitHub. This is a \href{https://www.tidyverse.org/articles/2017/12/workflow-vs-script/}{great discussion of project-oriented workflows}, extolling the virtues of a self-contained, portable projects, for your reference.
 
-\hypertarget{how-should-i-describe-my-commit}{%
-\section{How should I describe my commit?}\label{how-should-i-describe-my-commit}}
+\section{How should I describe my commit?}\label{how-should-i-describe-my-commit}
 
 When you commit, always include a short commit message that describes what the commit does. In the command line, you can achieve this after you have staged files to commit with the \texttt{commit\ -m\ \textless{}"your\ commit\ message\ here"\textgreater{}} syntax. This helps track-back through work flow. For example, if the commit message is \texttt{new}, that doesn't provide any information about what the commit includes. A more descriptive commit message would be \texttt{Create\ first\ draft\ of\ Fig\ 1\ distribution\ plot} or \texttt{Change\ color\ scheme\ for\ distribution\ plot}.
 
 For more lengthy and detailed commit messages, which go beyond the simple, single line \texttt{commit\ -m\ \textless{}your\ commit\ message\ here\textgreater{}} synatax, this \href{https://medium.com/@andrewhowdencom/anatomy-of-a-good-commit-message-acd9c4490437}{Medium post} on the anatomy of a good commit message includes additional discussion. (Note, we don't typically use commits that are this detailed!)
 
-\hypertarget{unix}{%
-\chapter{UNIX Commands}\label{unix}}
+\chapter{UNIX Commands}\label{unix}
 
 \emph{Contributors: Stephanie Djajadi, Kunal Mishra, Anna Nguyen, Jade Benjamin-Chung, and Ben Arnold}
 
@@ -1500,26 +1343,26 @@ We typically use Unix commands in Terminal (for Mac users) or Git Bash (for Wind
   To use git and push to github
 \end{enumerate}
 
-\hypertarget{environment}{%
-\section{Environment}\label{environment}}
+\section{Environment}\label{environment}
 
 On Mac OS, there is an application named \texttt{Terminal} that provides a bash shell interface to Unix. In Windows, one option is to install the \texttt{git\ for\ Windows} package: \url{https://gitforwindows.org/}.
 
 The default coloring in a terminal window is pretty basic. If you want to make it more colorful in Mac OS, you can do that by saving a \texttt{.bash\_profile} file in your home directory (note the ``.'' prefix on the file name). This is one example of how you can add color to your terminal by including custom coloring in your bash profile (copied from Ben's profile):
 
-\begin{verbatim}
-# color terminal
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
-export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\# color terminal}
+\NormalTok{export CLICOLOR=1}
+\NormalTok{export LSCOLORS=GxFxCxDxBxegedabagaced}
+\NormalTok{export PS1=\textquotesingle{}\textbackslash{}[\textbackslash{}033[01;32m\textbackslash{}]\textbackslash{}u@\textbackslash{}h\textbackslash{}[\textbackslash{}033[00m\textbackslash{}]:\textbackslash{}[\textbackslash{}033[01;34m\textbackslash{}]\textbackslash{}w\textbackslash{}[\textbackslash{}033[00m\textbackslash{}]\textbackslash{}$ \textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
 
 The encoding is extremely cryptic, but there are decodings online (e.g., \href{http://www.marinamele.com/2014/05/customize-colors-of-your-terminal-in-mac-os-x.html}{link}).
 
 Another bash shell that provides a large array of colors for Mac OS is iTerm2 (\url{https://iterm2.com/}). There are over 200 color schemes to choose from: \url{https://github.com/mbadolato/iTerm2-Color-Schemes}.
 
-\hypertarget{basics-2}{%
-\section{Basics}\label{basics-2}}
+\section{Basics}\label{basics-2}
 
 On the computer, there is a desktop with two folders, \texttt{folder1} and \texttt{folder2}, and a file called \texttt{file1.} Inside \texttt{folder1}, we have a file called \texttt{file2.} Mac users can run these commands on their terminal; we recommend that Windows users use Git Bash, not Windows PowerShell.
 
@@ -1529,76 +1372,34 @@ On the computer, there is a desktop with two folders, \texttt{folder1} and \text
 \caption{Here is our example desktop.}
 \end{figure}
 
-\hypertarget{syntax-for-both-macwindows}{%
-\section{Syntax for both Mac/Windows}\label{syntax-for-both-macwindows}}
+\section{Syntax for both Mac/Windows}\label{syntax-for-both-macwindows}
 
 When typing in directories or file names, quotes are necessary if the name includes spaces.
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.41\columnwidth}\raggedright
-Command\strut
-\end{minipage} & \begin{minipage}[b]{0.53\columnwidth}\raggedright
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4348}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5652}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Command
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{cd\ desktop/folder1}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Change directory to \texttt{folder1}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{pwd}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Print working directory\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{ls}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-List files in the directory\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{cp\ "file2"\ "newfile2"}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Copy file (remember to include file extensions when typing in file names like \texttt{.pdf} or \texttt{.R})\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{mv\ “newfile2”\ “file3”}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Rename \texttt{newfile2} to \texttt{file3}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{cd\ ..}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Go to parent of the working directory (in this case, \texttt{desktop})\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{mv\ “file1”\ folder2}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Move \texttt{file1} to \texttt{folder2}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{mkdir\ folder3}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Make a new folder in \texttt{folder2}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{rm\ \textless{}filename\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Remove files\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{rm\ -rf\ folder3}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Remove directories (\texttt{-r} will attempt to remove the directory recursively, \texttt{-rf} will force removal of the directory)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright
-\texttt{clear}\strut
-\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
-Clear terminal screen of all previous commands\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{cd\ desktop/folder1} & Change directory to \texttt{folder1} \\
+\texttt{pwd} & Print working directory \\
+\texttt{ls} & List files in the directory \\
+\texttt{cp\ "file2"\ "newfile2"} & Copy file (remember to include file extensions when typing in file names like \texttt{.pdf} or \texttt{.R}) \\
+\texttt{mv\ “newfile2”\ “file3”} & Rename \texttt{newfile2} to \texttt{file3} \\
+\texttt{cd\ ..} & Go to parent of the working directory (in this case, \texttt{desktop}) \\
+\texttt{mv\ “file1”\ folder2} & Move \texttt{file1} to \texttt{folder2} \\
+\texttt{mkdir\ folder3} & Make a new folder in \texttt{folder2} \\
+\texttt{rm\ \textless{}filename\textgreater{}} & Remove files \\
+\texttt{rm\ -rf\ folder3} & Remove directories (\texttt{-r} will attempt to remove the directory recursively, \texttt{-rf} will force removal of the directory) \\
+\texttt{clear} & Clear terminal screen of all previous commands \\
 \end{longtable}
 
 \begin{figure}
@@ -1607,46 +1408,30 @@ Clear terminal screen of all previous commands\strut
 \caption{Here is an example of what your terminal might look like after executing the commands in the order listed above.}
 \end{figure}
 
-\hypertarget{running-bash-scripts}{%
-\section{Running Bash Scripts}\label{running-bash-scripts}}
+\section{Running Bash Scripts}\label{running-bash-scripts}
 
-\begin{longtable}[]{@{}lll@{}}
-\toprule
-\begin{minipage}[b]{0.23\columnwidth}\raggedright
-Windows\strut
-\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
-Mac / Linux\strut
-\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2571}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3714}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3714}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Windows
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mac / Linux
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\texttt{chmod\ +750\ \textless{}filename.sh\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{chmod\ +x\ \textless{}filename.sh\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Change access permissions for a file (only needs to be done once)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\texttt{./\textless{}filename.sh\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{./\textless{}filename.sh\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Run file (\texttt{./} to run any executable file)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\texttt{bash\ bash\_script\_name.sh\ \&}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{bash\ bash\_script\_name.sh\ \&}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Run shell script in the background\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{chmod\ +750\ \textless{}filename.sh\textgreater{}} & \texttt{chmod\ +x\ \textless{}filename.sh\textgreater{}} & Change access permissions for a file (only needs to be done once) \\
+\texttt{./\textless{}filename.sh\textgreater{}} & \texttt{./\textless{}filename.sh\textgreater{}} & Run file (\texttt{./} to run any executable file) \\
+\texttt{bash\ bash\_script\_name.sh\ \&} & \texttt{bash\ bash\_script\_name.sh\ \&} & Run shell script in the background \\
 \end{longtable}
 
-\hypertarget{running-rscripts-in-windows}{%
-\section{Running Rscripts in Windows}\label{running-rscripts-in-windows}}
+\section{Running Rscripts in Windows}\label{running-rscripts-in-windows}
 
 \textbf{Note: This code seems to work only with Windows Command Prompt, not with Git Bash.}
 
@@ -1665,8 +1450,7 @@ If you do not add the PATH as an environment variable, then you can run this lin
 To run an R script from the command line, we can say:
 \texttt{Rscript\ -e\ “source(‘C:/path/to/script/some\_code.R’)”}
 
-\hypertarget{common-mistakes}{%
-\subsection{Common Mistakes}\label{common-mistakes}}
+\subsection{Common Mistakes}\label{common-mistakes}
 
 \begin{itemize}
 \tightlist
@@ -1676,85 +1460,39 @@ To run an R script from the command line, we can say:
   If you attempt to run an R script but run into \texttt{Error:\ \textquotesingle{}\textbackslash{}U\textquotesingle{}\ used\ without\ hex\ digits\ in\ character\ string\ starting\ "\textquotesingle{}C:\textbackslash{}U"}, try replacing all \texttt{\textbackslash{}} with \texttt{\textbackslash{}\textbackslash{}} or \texttt{/}.
 \end{itemize}
 
-\hypertarget{checking-tasks-and-killing-jobs}{%
-\section{Checking tasks and killing jobs}\label{checking-tasks-and-killing-jobs}}
+\section{Checking tasks and killing jobs}\label{checking-tasks-and-killing-jobs}
 
-\begin{longtable}[]{@{}lll@{}}
-\toprule
-\begin{minipage}[b]{0.23\columnwidth}\raggedright
-Windows\strut
-\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
-Mac / Linux\strut
-\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
-Description\strut
-\end{minipage}\tabularnewline
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2571}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3714}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3714}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Windows
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mac / Linux
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\texttt{tasklist}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{ps\ -v}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-List all processes on the command line\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{top\ -o\ {[}cpu/rsize{]}}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-List all running processes, sorted by CPU or memory usage\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\texttt{taskkill\ /F\ /PID\ pid\_number}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{kill\ \textless{}PID\_number\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Kill a process by its process ID\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\texttt{taskkill\ /IM\ "process\ name"\ /F}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Kill a process by its name\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\texttt{start\ /b\ program.exe}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Runs jobs in the background (exclude \texttt{/b} if you want the program to run in a new console)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{nohup}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Prevents jobs from stopping\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\texttt{disown}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Keeps jobs running in the background even if you close R\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright
-\texttt{taskkill\ /?}\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
-Help, lists out other commands\strut
-\end{minipage}\tabularnewline
-\bottomrule
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{tasklist} & \texttt{ps\ -v} & List all processes on the command line \\
+& \texttt{top\ -o\ {[}cpu/rsize{]}} & List all running processes, sorted by CPU or memory usage \\
+\texttt{taskkill\ /F\ /PID\ pid\_number} & \texttt{kill\ \textless{}PID\_number\textgreater{}} & Kill a process by its process ID \\
+\texttt{taskkill\ /IM\ "process\ name"\ /F} & & Kill a process by its name \\
+\texttt{start\ /b\ program.exe} & & Runs jobs in the background (exclude \texttt{/b} if you want the program to run in a new console) \\
+& \texttt{nohup} & Prevents jobs from stopping \\
+& \texttt{disown} & Keeps jobs running in the background even if you close R \\
+\texttt{taskkill\ /?} & & Help, lists out other commands \\
 \end{longtable}
 
 To kill a task in Windows, you can also go to Task Manager \textgreater{} More details \textgreater{} Select your desired app \textgreater{} Click on End Task.
 
-\hypertarget{running-big-jobs}{%
-\section{Running big jobs}\label{running-big-jobs}}
+\section{Running big jobs}\label{running-big-jobs}
 
-For big data workflows, the concept of ``backgrounding'' a bash script allows you to start a ``job'' (i.e.~run the script) and leave it overnight to run. At the top level, a bash script (\texttt{0-run-project.sh}) that simply calls the directory-level bash scripts (i.e. \texttt{0-prep-data.sh}, \texttt{0-run-analysis.sh}, \texttt{0-run-figures.sh}, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.
+For big data workflows, the concept of ``backgrounding'' a bash script allows you to start a ``job'' (i.e.~run the script) and leave it overnight to run. At the top level, a bash script (\texttt{0-run-project.sh}) that simply calls the directory-level bash scripts (i.e.~\texttt{0-prep-data.sh}, \texttt{0-run-analysis.sh}, \texttt{0-run-figures.sh}, etc.) is a powerful tool to rerun every script in your project. See the included example bash scripts for more details.
 
 \begin{itemize}
 \tightlist
@@ -1764,24 +1502,26 @@ For big data workflows, the concept of ``backgrounding'' a bash script allows yo
 
 Alternatively, to keep code running in the background even when an SSH connection is broken, you can use \texttt{tmux}. In terminal or gitbash follow the steps below. This \href{https://medium.com/@jeongwhanchoi/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e}{site} has useful tips on using \texttt{tmux}.
 
-\begin{verbatim}
-# create a new tmux session called session_name
-tmux new -ssession_name
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\# create a new tmux session called session\_name}
+\NormalTok{tmux new {-}ssession\_name}
 
-# run your job of interest
-R CMD BATCH myjob.R & 
+\NormalTok{\# run your job of interest}
+\NormalTok{R CMD BATCH myjob.R \& }
   
-# check that it is running
-ps -v
+\NormalTok{\# check that it is running}
+\NormalTok{ps {-}v}
 
-# to exit the tmux session (Mac)
-ctrl + b 
-d
+\NormalTok{\# to exit the tmux session (Mac)}
+\NormalTok{ctrl + b }
+\NormalTok{d}
 
-# to reopen the tmux session to kill the job or 
-# start another job
-tmux attach -tsession_name 
-\end{verbatim}
+\NormalTok{\# to reopen the tmux session to kill the job or }
+\NormalTok{\# start another job}
+\NormalTok{tmux attach {-}tsession\_name }
+\end{Highlighting}
+\end{Shaded}
 
 \begin{itemize}
 \item
@@ -1790,8 +1530,7 @@ tmux attach -tsession_name
   \textbf{Ensuring Things Ran Correctly}: You should check the \texttt{.Rout} files generated by the R scripts run by your bash scripts for errors once things are run.
 \end{itemize}
 
-\hypertarget{building-automated-markdown-reports}{%
-\chapter{Building Automated Markdown Reports}\label{building-automated-markdown-reports}}
+\chapter{Building Automated Markdown Reports}\label{building-automated-markdown-reports}
 
 ``Never forget Murphy's Law 2.0: Anything that can't go wrong, will go wrong.'' -T. Porco
 
@@ -1801,11 +1540,9 @@ Many teams at Proctor conduct trials that utilize electronic data collection, wi
 
 \(~\)
 
-\hypertarget{setting-up-the-markdown}{%
-\section{Setting up the markdown}\label{setting-up-the-markdown}}
+\section{Setting up the markdown}\label{setting-up-the-markdown}
 
-\hypertarget{yaml}{%
-\subsection{YAML}\label{yaml}}
+\subsection{YAML}\label{yaml}
 
 The YAML is the opening header to most R markdown documents and allows the user to specify parameters regarding the layout and output of the document. Among other things, here is where you can add a table of contents, a subtitle, or specify the default output to be pdf file. For a monitoring report, the YAML might look as follows:
 
@@ -1815,7 +1552,7 @@ title: "EXAMPLE Weekly Report"
 subtitle:
 - <h1><u>CONFIDENTIAL-DO NOT DISSEMINATE</u></h1>
 author: "Will Godwin"
-date: "14 April 2020"
+date: "08 May 2024"
 output:
   pdf_document:
     toc: true
@@ -1825,31 +1562,27 @@ output:
 
 \(~\)
 
-\hypertarget{directory-structure-1}{%
-\subsection{Directory structure}\label{directory-structure-1}}
+\subsection{Directory structure}\label{directory-structure-1}
 
 Your report may begin as a couple files in a folder but as it grows in size and complexity, I highly recommend systematizing and standardizing the process for posterity and your own sanity. Refer to \href{directory-structure-and-code-repositories.html}{chapter 3} for guidance on building a standardized directory structure and \href{codingpractices.html}{chapter 4} for information on coding practices and utilizing the \emph{here} package, which I use throughout the process.
 
 \(~\)
 
-\hypertarget{automating-the-data-export-process}{%
-\section{Automating the data export process}\label{automating-the-data-export-process}}
+\section{Automating the data export process}\label{automating-the-data-export-process}
 
 Creating a system that enables you to run some code and download new data in a systematic manner, as opposed to manually downloading the data, is critical to saving time and headaches down the road. This is especially important if you're building a report that will be run weekly or daily. It may require a little more work on the front end but programmatically downloading data rather than manually will likely be faster, better documented, and standardized. If you work on a team that uses the World Bank's \emph{Survey Solutions} for data collection and storage, there is a great API tool that allows you to export data directly from the project's server. Example code for that process can be found \href{templates/api_example.R}{here}. Salesforce, REDCap, and other electronic data capture systems likely have a similar functionality that other Proctor researchers may be more familiar with.
 
 \(~\)
 
-\hypertarget{loading-the-data}{%
-\section{Loading the data}\label{loading-the-data}}
+\section{Loading the data}\label{loading-the-data}
 
 Depending on the nature of the trial, there may be multiple files to load after exporting the data. I would suggest using a table (ie simple .csv file) to track all necessary files for the report, as shown below. Refer to the \href{templates/read_clean_data_example.R}{example script} for how this looks in a setting that utilizes \emph{Survey Solutions}.
 
-\includegraphics[width=0.6\linewidth,height=0.4\textheight]{/Users/benarnold/dcc-handbook/images/report-images/api_meta}
+\includegraphics[width=0.6\linewidth,height=0.4\textheight]{images/report-images/api_meta}
 
 \(~\)
 
-\hypertarget{data-cleaningprocessing}{%
-\section{Data cleaning/processing}\label{data-cleaningprocessing}}
+\section{Data cleaning/processing}\label{data-cleaningprocessing}
 
 I won't focus explicitly on data cleaning and processing since this process is usually fairly project specific. Briefly, after reading data into R, spend some time making sure all relevant variables (columns) were loaded and checking that variable classes are encoded as expected. Below is an example that checks the structure of the data and converts all variables that should be ``Date'' class to be so.
 
@@ -1863,16 +1596,13 @@ dt.anthro %<>% mutate_at(vars(matches("childID")), tolower)
 
 \(~\)
 
-\hypertarget{data-monitoring}{%
-\section{Data monitoring}\label{data-monitoring}}
+\section{Data monitoring}\label{data-monitoring}
 
 Now that we have data read into R and structured appropriately, we can focus on the (2) primary aims of the report: data validation to be used internally and DSMC-style presentation of the data. Of course the aims of your report may vary but the monitoring examples below represent evaluations critical to almost any RCT.
 
-\hypertarget{data-validation}{%
-\subsection{Data validation}\label{data-validation}}
+\subsection{Data validation}\label{data-validation}
 
-\hypertarget{missinginappropriately-structured-data}{%
-\subsubsection{Missing/inappropriately structured data}\label{missinginappropriately-structured-data}}
+\subsubsection{Missing/inappropriately structured data}\label{missinginappropriately-structured-data}
 
 While not the most glamorous component of the report, checking for missing data is critical. It's helpful once all the data have been read in, to conduct some important checks of the data integrity. Did R (or python, etc) correctly interpret and load the data files? Are there any participant IDs missing? Are there participant's with reported birthdates in the future? This is an important stage to think about the plethora of maladies that could befall the data in between when it was recorded and when it got to you. Below are examples of how you could check for some common issues.
 
@@ -1888,8 +1618,7 @@ There are 4 rows with missing values for child sex.
 
 \(~\)
 
-\hypertarget{reporting-inconsistencies}{%
-\subsubsection{Reporting inconsistencies}\label{reporting-inconsistencies}}
+\subsubsection{Reporting inconsistencies}\label{reporting-inconsistencies}
 
 Many studies may use multiple independent questionnaires to gather information at different timepoints and ask the same demographic information. For example, in an individually randomized trial, each participant receives an ID that links the participant responses across all timepoints of the study. Below is an example showing how to check that the responses are consistent across all questionnaires.
 
@@ -1917,41 +1646,37 @@ dt.anthro %>%
     ylab("Count")
 \end{verbatim}
 
-\includegraphics[width=0.6\linewidth,height=0.4\textheight]{/Users/benarnold/dcc-handbook/images/report-images/birthweight}
+\includegraphics[width=0.6\linewidth,height=0.4\textheight]{images/report-images/birthweight}
 
 Distribution of participant birthweights in grams
 
 \(~\)
 
-\hypertarget{data-presentation-dsmc-style}{%
-\subsection{Data presentation (DSMC-style)}\label{data-presentation-dsmc-style}}
+\subsection{Data presentation (DSMC-style)}\label{data-presentation-dsmc-style}
 
 The ultimate arbiter of whether a trial remains running is often the Data and Safety Monitoring Committee (DSMC) and these reports can be used to present preliminary findings/analyses as well as detail all relevant safety metrics.
 
-\hypertarget{enrollment}{%
-\subsubsection{Enrollment}\label{enrollment}}
+\subsubsection{Enrollment}\label{enrollment}
 
 Any study investigator cares a lot about enrollment, since it determines the length and cost of the trial, among other things. Therefore, any report needs tables/figures showing enrollment trends and trajectory. Below are a couple examples of what they can look like.
 
-\includegraphics[width=0.5\linewidth,height=0.3\textheight]{/Users/benarnold/dcc-handbook/images/report-images/enrollment1}
+\includegraphics[width=0.5\linewidth,height=0.3\textheight]{images/report-images/enrollment1}
 
-\includegraphics[width=0.7\linewidth,height=0.5\textheight]{/Users/benarnold/dcc-handbook/images/report-images/enrollment2}
+\includegraphics[width=0.7\linewidth,height=0.5\textheight]{images/report-images/enrollment2}
 
 Enrollment counts across the length of the study period.
 
 \(~\)
 
-\hypertarget{baseline-characteristics}{%
-\subsubsection{Baseline characteristics}\label{baseline-characteristics}}
+\subsubsection{Baseline characteristics}\label{baseline-characteristics}
 
 Demographic characteristics of the enrolled participants at baseline are often necessary.
 
-\includegraphics[width=0.6\linewidth,height=0.4\textheight]{/Users/benarnold/dcc-handbook/images/report-images/baseline}
+\includegraphics[width=0.6\linewidth,height=0.4\textheight]{images/report-images/baseline}
 
 \(~\)
 
-\hypertarget{treatment}{%
-\subsubsection{Treatment}\label{treatment}}
+\subsubsection{Treatment}\label{treatment}
 
 There is usually a treatment component to an RCT, where participants are treated according to their assigned arm (i.e.~treatment or placebo). The report should include checks that confirm particpants actually received the treatment that they were randomized to. Otherwise, the results of the study lack interpretability and are likely null.
 
@@ -1965,65 +1690,59 @@ wrong_random <- dt.treatment %>%
 Number of IDs where treatment letter given does not match database: 0
 \end{verbatim}
 
-\includegraphics[width=0.4\linewidth,height=0.2\textheight]{/Users/benarnold/dcc-handbook/images/report-images/treatment}
+\includegraphics[width=0.4\linewidth,height=0.2\textheight]{images/report-images/treatment}
 
 Counts of number treated and number eligible, along with percent treated (coverage), by region.
 
 \(~\)
 
-\hypertarget{primarysecondary-outcomes-masked}{%
-\subsubsection{\texorpdfstring{Primary/secondary outcomes (\textbf{\emph{masked!}})}{Primary/secondary outcomes (masked!)}}\label{primarysecondary-outcomes-masked}}
+\subsubsection{\texorpdfstring{Primary/secondary outcomes (\textbf{\emph{masked!}})}{Primary/secondary outcomes (masked!)}}\label{primarysecondary-outcomes-masked}
 
 This is probably the most exciting section for an investigator to see since these metrics are the motivation of the trial itself. Be especially vigilient to make sure that the figures remain masked when sending to trial investigators and coordinators. This means making sure that you send no information regarding the treatment assignments while the trial is still active.
 
-\includegraphics[width=0.5\linewidth,height=0.35\textheight]{/Users/benarnold/dcc-handbook/images/report-images/primary_outcome}
+\includegraphics[width=0.5\linewidth,height=0.35\textheight]{images/report-images/primary_outcome}
 
 Preliminary mortality rate and total person-years by region.
 
 \(~\)
 
-\includegraphics[width=0.5\linewidth,height=0.4\textheight]{/Users/benarnold/dcc-handbook/images/report-images/growth_curves}
+\includegraphics[width=0.5\linewidth,height=0.4\textheight]{images/report-images/growth_curves}
 
 Height growth curves of participants at Baseline and 6-month timepoints.
 
 \(~\)
 
-\hypertarget{follow-upadverse-events}{%
-\subsubsection{Follow-up/Adverse events}\label{follow-upadverse-events}}
+\subsubsection{Follow-up/Adverse events}\label{follow-upadverse-events}
 
 This report can serve as guard against loss to follow-up, an issue that plagues many trials. By actively monitoring the number of participants that have, and have not, been followed-up on, we can communicate where participants or clusters need to more attention to workers in the field. Below is an example showing follow-up percentages by region.
 
-\includegraphics[width=0.5\linewidth,height=0.35\textheight]{/Users/benarnold/dcc-handbook/images/report-images/followup}
+\includegraphics[width=0.5\linewidth,height=0.35\textheight]{images/report-images/followup}
 
 As mentioned above, adverse events should be tabulated and closely watched throughout the study to monitor if the intervention may be causing increased harm.
 
-\includegraphics[width=0.65\linewidth,height=0.45\textheight]{/Users/benarnold/dcc-handbook/images/report-images/adverse_events}
+\includegraphics[width=0.65\linewidth,height=0.45\textheight]{images/report-images/adverse_events}
 
 \(~\)
 
-\hypertarget{appendix-if-necessary}{%
-\subsection{Appendix (if necessary)}\label{appendix-if-necessary}}
+\subsection{Appendix (if necessary)}\label{appendix-if-necessary}
 
 Sometimes an appendix can be helpful to display long lists or addendums to tables shown earlier in the report. Below is an example of a list enumerating all adverse events that were not included in the AE table within the main report.
 
-\includegraphics[width=0.7\linewidth,height=0.5\textheight]{/Users/benarnold/dcc-handbook/images/report-images/appendix}
+\includegraphics[width=0.7\linewidth,height=0.5\textheight]{images/report-images/appendix}
 
 \(~\)
 
-\hypertarget{summary}{%
-\section{Summary}\label{summary}}
+\section{Summary}\label{summary}
 
 This chapter described and illustrated an example of a data monitoring report using R markdown. This is, by no means, an exhaustive list of what to include in a monitoring report but meant to serve as a template as you create your own report. It is specifically geared towards continuous monitoring of randomized-controlled trials but the overarching concepts apply to other types of trials or even retrospective analyses.
 
-\hypertarget{commcoord}{%
-\chapter{Communication and Coordination}\label{commcoord}}
+\chapter{Communication and Coordination}\label{commcoord}
 
 \emph{Contributors: Jade Benjamin-Chung, Ben Arnold}
 
 \textbf{These communications guidelines are evolving as we increasingly adopt Slack, but here some general principles if you work closely with Ben.}
 
-\hypertarget{slack}{%
-\section{Slack}\label{slack}}
+\section{Slack}\label{slack}
 
 \begin{itemize}
 \item
@@ -2044,19 +1763,17 @@ This chapter described and illustrated an example of a data monitoring report us
   Please thread messages in Slack as much as possible.
 \end{itemize}
 
-\hypertarget{email}{%
-\section{Email}\label{email}}
+\section{Email}\label{email}
 
 \begin{itemize}
 \tightlist
 \item
-  Use email for longer messages (\textgreater{}200 words) or messages that merit preservation.
+  Use email for longer messages (\textgreater200 words) or messages that merit preservation.
 \item
   Generally, strive to respond within 24 hours. If you are unusually busy or on vacation please alert the team in advance so we can expect you not to respond at all / as quickly as usual.
 \end{itemize}
 
-\hypertarget{trello}{%
-\section{Trello}\label{trello}}
+\section{Trello}\label{trello}
 
 \begin{itemize}
 \tightlist
@@ -2076,8 +1793,7 @@ This chapter described and illustrated an example of a data monitoring report us
   Move cards to the ``DONE'' list on a board when they are done.
 \end{itemize}
 
-\hypertarget{google-drive}{%
-\section{Google Drive}\label{google-drive}}
+\section{Google Drive}\label{google-drive}
 
 \begin{itemize}
 \tightlist
@@ -2087,8 +1803,7 @@ This chapter described and illustrated an example of a data monitoring report us
   Please invite both of Ben's email addresses to any documents you create (\href{mailto:bfarnold@gmail.com}{\nolinkurl{bfarnold@gmail.com}}, \href{mailto:ben.arnold@ucsf.edu}{\nolinkurl{ben.arnold@ucsf.edu}}).
 \end{itemize}
 
-\hypertarget{calendar-meetings}{%
-\section{Calendar / Meetings}\label{calendar-meetings}}
+\section{Calendar / Meetings}\label{calendar-meetings}
 
 \begin{itemize}
 \tightlist
@@ -2104,22 +1819,19 @@ This chapter described and illustrated an example of a data monitoring report us
   Add hoc meetings are welcome. If Ben's office door is open, come in!
 \end{itemize}
 
-\hypertarget{code-of-conduct}{%
-\chapter{Code of conduct}\label{code-of-conduct}}
+\chapter{Code of conduct}\label{code-of-conduct}
 
 \emph{Contributors: Jade Benjamin-Chung, Ben Arnold}
 
-\hypertarget{group-culture}{%
-\section{Group culture}\label{group-culture}}
+\section{Group culture}\label{group-culture}
 
 We strive to work in an environment that is collaborative, supportive, open, and free from discrimination and harassment, per University policies.
 
 We encourage students / staff of all experience levels to respectfully share their honest opinions and ideas on any topic. Our group has thrived upon such respectful honest input from team members over the years, and this document is a product of years of student and staff input (and even debate) that has gradually improved our productivity and overall quality of our work.
 
-If Ben is your PI, be forewarned that he tends to batch his email communication (\textasciitilde{}30 mins in the morning and afternoon, 15 mins mid-day), and doesn't tend to answer Slack or email during evenings or weekends. If you need to reach him urgently then give him a call or text on his mobile.
+If Ben is your PI, be forewarned that he tends to batch his email communication (\textasciitilde30 mins in the morning and afternoon, 15 mins mid-day), and doesn't tend to answer Slack or email during evenings or weekends. If you need to reach him urgently then give him a call or text on his mobile.
 
-\hypertarget{protecting-human-subjects}{%
-\section{Protecting human subjects}\label{protecting-human-subjects}}
+\section{Protecting human subjects}\label{protecting-human-subjects}
 
 All lab members must complete \href{https://irb.ucsf.edu/citi-human-subjects-training}{CITI Human Subjects Training} and share their certificate with Ben. We will will add team members to relevant Institutional Review Board protocols to ensure they have permission to work with identifiable datasets.
 
@@ -2137,21 +1849,18 @@ One of the most relevant aspects of protecting human subjects in our work in the
 
 Remember, data that looks like it does not contain identifiers to you might still be classified as data that requires special protection by our IRB or under HIPAA, so always proceed with caution and ask for help if you have any concerns about how to maintain study participant confidentiality. For example, the combination of age, sex, and geographic location of the individual's town or neighborhood is typically considered identifiable.
 
-\hypertarget{authorship}{%
-\section{Authorship}\label{authorship}}
+\section{Authorship}\label{authorship}
 
 We adhere to the \href{http://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html}{ICMJE Definition of authorship} and are happy for team members who meet the definition of authorship to be included as co-authors on scientific manuscripts.
 
-\hypertarget{work-hours}{%
-\section{Work hours}\label{work-hours}}
+\section{Work hours}\label{work-hours}
 
 Please follow the Proctor Foundation's employee guidelines for work hours, and discuss the specifics with your PI. If Ben is your PI, then work with him on your schedule to ensure we have overlap in the office and that you are around at key times for group meetings, etc.
 
-\hypertarget{resources}{%
-\chapter{Additional Resources}\label{resources}}
+\chapter{Additional Resources}\label{resources}
 
 TBD
 
-\bibliography{book.bib,packages.bib}
+  \bibliography{book.bib,packages.bib}
 
 \end{document}

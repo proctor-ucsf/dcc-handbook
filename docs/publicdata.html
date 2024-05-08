@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Making Data Public | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Making Data Public | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin, Fanice Nyatigo (many from UC Berkeley in addition to Proctor)" />
 
 
-<meta name="date" content="2022-08-08" />
+<meta name="date" content="2024-05-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,6 +55,10 @@
 
 
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -87,7 +91,7 @@
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#first-level-data-and-analyses"><i class="fa fa-check"></i><b>3.2.1</b> First level: data and analyses</a></li>
 <li class="chapter" data-level="3.2.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#second-level-data"><i class="fa fa-check"></i><b>3.2.2</b> Second level: data</a></li>
-<li class="chapter" data-level="3.2.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#second-level-analysis"><i class="fa fa-check"></i><b>3.2.3</b> Second level: analysis</a></li>
+<li class="chapter" data-level="3.2.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#second-level-projects"><i class="fa fa-check"></i><b>3.2.3</b> Second level: projects</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#code-repositories"><i class="fa fa-check"></i><b>3.3</b> Code Repositories</a>
 <ul>
@@ -95,7 +99,7 @@
 <li class="chapter" data-level="3.3.2" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#configuration-config-file"><i class="fa fa-check"></i><b>3.3.2</b> Configuration (‘config’) File</a></li>
 <li class="chapter" data-level="3.3.3" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#shared-functions-file"><i class="fa fa-check"></i><b>3.3.3</b> Shared Functions File</a></li>
 <li class="chapter" data-level="3.3.4" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#order-files-and-subdirectories"><i class="fa fa-check"></i><b>3.3.4</b> Order Files and Subdirectories</a></li>
-<li class="chapter" data-level="3.3.5" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#use-bash-scripts-to-ensure-reproducibility"><i class="fa fa-check"></i><b>3.3.5</b> Use Bash scripts to ensure reproducibility</a></li>
+<li class="chapter" data-level="3.3.5" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#use-bash-scripts-or-r-scripts-to-ensure-reproducibility"><i class="fa fa-check"></i><b>3.3.5</b> Use Bash scripts or R scripts to ensure reproducibility</a></li>
 <li class="chapter" data-level="3.3.6" data-path="directory-structure-and-code-repositories.html"><a href="directory-structure-and-code-repositories.html#alternative-approach-for-code-repos"><i class="fa fa-check"></i><b>3.3.6</b> Alternative approach for code repos</a></li>
 </ul></li>
 </ul></li>
@@ -366,7 +370,7 @@ analysis_data_public_codebook.txt</code></pre>
 </div>
 <div id="edit-and-test-analysis-scripts" class="section level2 hasAnchor" number="7.5">
 <h2><span class="header-section-number">7.5</span> Edit and test analysis scripts<a href="publicdata.html#edit-and-test-analysis-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Make minor changes to the analysis scripts so that they run on public data. If using version control in GitHub, the most straight-forward way is to create a branch from the main git branch that reads in the public files, and then renames the new public ID variable, e.g., “id_public” to the internally recognized ID variable name, e.g. “recordID,” when reading in the public data. Re-run all the analysis scripts to ensure that they still work with the public version of the dataset.</p>
+<p>Make minor changes to the analysis scripts so that they run on public data. If using version control in GitHub, the most straight-forward way is to create a branch from the main git branch that reads in the public files, and then renames the new public ID variable, e.g., “id_public” to the internally recognized ID variable name, e.g. “recordID”, when reading in the public data. Re-run all the analysis scripts to ensure that they still work with the public version of the dataset.</p>
 </div>
 <div id="create-a-public-github-page-for-public-scripts" class="section level2 hasAnchor" number="7.6">
 <h2><span class="header-section-number">7.6</span> Create a public GitHub page for public scripts<a href="publicdata.html#create-a-public-github-page-for-public-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -451,6 +455,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

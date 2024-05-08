@@ -1,3 +1,7 @@
+fig:fig-workflow
+fig:fig-workflow2
+tab:workflow
+fig:dir-fig1
 intro
 workflow
 reproducibility
@@ -8,13 +12,13 @@ small-and-large-projects
 directory-structure
 first-level-data-and-analyses
 second-level-data
-second-level-analysis
+second-level-projects
 code-repositories
 rproj-files
 configuration-config-file
 shared-functions-file
 order-files-and-subdirectories
-use-bash-scripts-to-ensure-reproducibility
+use-bash-scripts-or-r-scripts-to-ensure-reproducibility
 alternative-approach-for-code-repos
 codingpractices
 organizing-scripts
@@ -121,7 +125,3 @@ protecting-human-subjects
 authorship
 work-hours
 resources
-fig:fig-workflow
-fig:dir-fig1
-second-level-projects
-use-bash-scripts-or-r-scripts-to-ensure-reproducibility
