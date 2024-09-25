@@ -120,7 +120,7 @@
 
 \title{Proctor Foundation Data Science Handbook}
 \author{Contributors: Ben Arnold, Jade Benjamin-Chung, Kunal Mishra, Anna Nguyen, Nolan Pokpongkiat, Stephanie Djajadi, Eric Kim, Will Godwin, Fanice Nyatigo (many from UC Berkeley in addition to Proctor)}
-\date{2024-05-08}
+\date{2024-09-25}
 
 \begin{document}
 \maketitle
@@ -173,13 +173,15 @@ Broadly speaking, a typical scientific data science work flow involves four step
 
 When starting a new project, the work flow tends to evolve gradually and by iteration. Data cleaning, data processing, exploratory analyses, back to data cleaning, and so forth. If the work takes place in an unstructured environment with no system to organize files and work flow, it rapidly devolves into into a disorganized mess; analyses become difficult or impossible to replicate and they are anything but scientific. Projects with short deadlines (e.g., proposals, conference abstract submissions, article revisions) are particularly vulnerable to this type of organizational entropy. Putting together a directory and workflow plan from the start helps keep files organized and prevent disorder. Modifications are inevitable -- as long as the system is organized, modifications are usually no problem.
 
-Depending on the project, each step involves a different amount of work. Step 1 is by far the most time consuming, and often the most error-prone. We devote an entire chapter to it below (\hyperref[datacleaning]{Data cleaning and processing})
+Depending on the project, each step involves a different amount of work. Step 1 is by far the most time consuming, and often the most error-prone. We devote an entire chapter to it below (\hyperref[datawrangling]{Data wrangling})
 
 \section{Reproducibility}\label{reproducibility}
 
 As a guiding directive, this process should be reproducible. If you are not familiar with the concept of reproducible research, start with this manifesto (\href{https://www.nature.com/articles/s41562-016-0021}{Munafo et al.~2017}). For a deeper dive, we highly recommend the recent book from Christensen, Freese, and Miguel (\href{https://www.ucpress.edu/book/9780520296954/transparent-and-reproducible-social-science-research}{2019}). Although it is framed around social science, the ideas apply generally.
 
 \textbf{Essential reading: Ten Simple Rules for Reproducible Computational Research} Please read this excellent paper on computational reproducibility from \href{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285}{Sandve et al 2013}. It encapsulates many of the practices described herein (we elaborate more, and provide concrete examples).
+
+A key tool to help ensure your R code runs reliably on different machines and over time is \texttt{renv} (\hyperref[renv]{\texttt{renv}}).
 
 \section{Automation}\label{automation}
 
@@ -428,7 +430,7 @@ Just as your data ``flows'' through your project, data should flow naturally thr
   save your results
 \end{enumerate}
 
-Each section should be ``chunked together'' using comments, often with many chunks in a single section. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's%20Thesis%20-%20Spatial%20Epidemiology%20of%20Influenza/2a%20-%20Statistical-Inputs.R}{this file} for a good example of how to cleanly organize a file in a way that follows this ``flow'' and functionally separate pieces of code that are doing different things. \href{https://github.com/ben-arnold/enterics-seroepi/blob/master/R/Fig1-haiti-ab-distributions.Rmd}{This is another example} in a \texttt{.Rmd} format, where chunking is made even more obvious by the interleaving of markdown text and R code in the same notebook file.
+Each section should be ``chunked together'' using comments, often with many chunks in a single section. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's\%20Thesis\%20-\%20Spatial\%20Epidemiology\%20of\%20Influenza/2a\%20-\%20Statistical-Inputs.R}{this file} for a good example of how to cleanly organize a file in a way that follows this ``flow'' and functionally separate pieces of code that are doing different things. \href{https://github.com/ben-arnold/enterics-seroepi/blob/master/R/Fig1-haiti-ab-distributions.Rmd}{This is another example} in a \texttt{.Rmd} format, where chunking is made even more obvious by the interleaving of markdown text and R code in the same notebook file.
 
 \section{Documenting your code}\label{documenting-your-code}
 
@@ -461,13 +463,13 @@ works equally well as
 
 \subsection{Comments in the body of your script}\label{comments-in-the-body-of-your-script}
 
-Commenting your code is an important part of reproducibility and helps document your code for the future. When things change or break, you'll be thankful for comments. When you revisit code you wrote two years earlier, you'll be thankful for comments. There's no need to comment excessively or unnecessarily, but a comment describing what a large or complex chunk of code does is always helpful. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's%20Thesis%20-%20Spatial%20Epidemiology%20of%20Influenza/1b%20-%20Map-Management.R}{this file} for an example of how to comment your code and notice that comments are always in the form of:
+Commenting your code is an important part of reproducibility and helps document your code for the future. When things change or break, you'll be thankful for comments. When you revisit code you wrote two years earlier, you'll be thankful for comments. There's no need to comment excessively or unnecessarily, but a comment describing what a large or complex chunk of code does is always helpful. See \href{https://github.com/kmishra9/Flu-Absenteeism/blob/master/Master's\%20Thesis\%20-\%20Spatial\%20Epidemiology\%20of\%20Influenza/1b\%20-\%20Map-Management.R}{this file} for an example of how to comment your code and notice that comments are always in the form of:
 
 \texttt{\#\ This\ is\ a\ comment\ -\/-\ first\ letter\ is\ capitalized\ and\ spaced\ away\ from\ the\ pound\ sign}
 
 \subsection{Function documentation}\label{function-documentation}
 
-Every function you write must include a header to document its purpose, inputs, and outputs. For any reproducible workflows, they are essential, because R is dynamically typed. This means, you can pass a \texttt{string} into an argument that is meant to be a \texttt{data.table}, or a \texttt{list} into an argument meant for a \texttt{tibble}. It is the responsibility of a function's author to document what each argument is meant to do and its basic type. This is an example for documenting a function (inspired by \href{https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html#format}{JavaDocs}, R's \href{https://blog.rstudio.com/2018/10/23/rstudio-1-2-preview-plumber-integration/}{Plumber API docs}, and \href{https://kbroman.org/pkg_primer/pages/docs.html}{Roxygen2}):
+Every function you write must include a header to document its purpose, inputs, and outputs. For any reproducible workflows, they are essential, because R is dynamically typed. This means, you can pass a \texttt{string} into an argument that is meant to be a \texttt{data.table}, or a \texttt{list} into an argument meant for a \texttt{tibble}. It is the responsibility of a function's author to document what each argument is meant to do and its basic type. This is an example for documenting a function (inspired by \href{https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html\#format}{JavaDocs}, R's \href{https://blog.rstudio.com/2018/10/23/rstudio-1-2-preview-plumber-integration/}{Plumber API docs}, and \href{https://kbroman.org/pkg_primer/pages/docs.html}{Roxygen2}):
 
 \begin{verbatim}
 #-----------------------------------------------------------------------------
@@ -595,7 +597,7 @@ Nested: \texttt{ifelse(test\_expression1,\ yes1,\ ifelse(test\_expression2,\ yes
 \texttt{stopifnot()} & \texttt{assertthat::assert\_that()} or \texttt{assertthat::see\_if()} or \texttt{assertthat::validate\_that()} \\
 \end{longtable}
 
-For a more extensive set of syntactical translations to Tidyverse, you can check out \href{https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html#reshaping_data}{this document}.
+For a more extensive set of syntactical translations to Tidyverse, you can check out \href{https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html\#reshaping_data}{this document}.
 
 Working with Tidyverse within functions can be somewhat of a pain due to non-standard evaluation (NSE) semantics. If you're an avid function writer, we'd recommend checking out the following resources:
 
@@ -858,7 +860,7 @@ Practical advice on \texttt{Key} variables / IDs used to link datasets. Numeric 
 Experience shows that merging datasets is one of the most error prone steps in data wrangling. Merges can be particularly tricky for less experienced programmers. Errors are likely early in the data processing work flow, and less likely when merging final datasets with clean key variables (IDs) and clear relationships between datasets. Carefully check each merge to ensure it is working as you expect.
 
 \begin{quote}
-\textbf{ESSENTIAL READING:} \href{https://r4ds.had.co.nz/relational-data.html#join-problems}{Join Problems} in \emph{R for Data Science}
+\textbf{ESSENTIAL READING:} \href{https://r4ds.had.co.nz/relational-data.html\#join-problems}{Join Problems} in \emph{R for Data Science}
 \end{quote}
 
 In the Stata software there is a really nice feature with \texttt{merge} that allows you to specify the type of merge/join and then examine the diagnostics of that merge.
@@ -888,6 +890,60 @@ The \texttt{dplyr} package introduced the \texttt{pivot\_wider} and \texttt{pivo
 Data cleaning is typically an iterative process that you should conduct on a variable-by-variable basis. Occasionally it is useful to clean an entire questionnaire module at the same time since variables in the same module can be related to one another, and since it can help to proceed through the cleaning process in well-defined chunks. I find it helpful to have a copy of the survey questionnaire (if relevant) handy while cleaning specific variables. This enables you to check skip patterns and codes in the survey against the dataset.
 
 We don't have a lot of general advice for data cleaning except the following. First, there is something to be said for ``trolling'' (in the fishing sense) or visually scrolling through parts of the dataset to see what the data look like and to make sure you have a feel for how information is stored in different variables (e.g., are missing values coded or simply recored as ``\texttt{.}'' or \texttt{NA}). Use the \texttt{View()} utility in \texttt{RStudio} to look at your data often during the cleaning process. Second, it can be helpful to consolidate all data cleaning into a single program for each dataset. The data cleaning program corrects entry errors, labels variables, formats variables, and outputs either a temporary or final dataset (but does not, ever, overwrite the untouched data). As noted in the \hyperref[workflows]{Workflows} chapter, \emph{key data processing should be done once, at the earliest possible place in the workflow}.
+
+\chapter{Reproducible Environments}\label{reproducible-environments}
+
+\emph{Contributors: Christine Tedijanto and Ben Arnold}
+
+\section{Basics}\label{basics}
+
+Running the same code on two different machines is not guaranteed to produce identical results due to potential differences in the computational environment. The computational environment consists of the operating system, installed software, software versions, and more. In this section, we focus on tools for packaging and sharing of computational environments to facilitate reproducibility.
+
+For more on reproducible environments, see the Turing Way section \href{https://the-turing-way.netlify.app/reproducible-research/renv.html}{here}.
+
+\section{\texorpdfstring{\texttt{renv}}{renv}}\label{renv}
+
+A package management system is used to track downloaded packages and their versions. One common package management system in R is the \texttt{renv} package. The package has nice documentation that can be found \href{https://rstudio.github.io/renv/articles/renv.html}{here}. When using \texttt{renv}, the state of your project library will be saved to a file in your project called \texttt{renv.lock}.
+
+The most common commands are as follows:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2193}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7807}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Command
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{renv::init()} & to initialize a project-local environment with a private R library \\
+\texttt{renv::snapshot()} & to save the current state of the project library to the \texttt{renv.lock} file \\
+\texttt{renv::restore()} & to revert to the state of the project library previously saved in the \texttt{renv.lock} file \\
+\end{longtable}
+
+\section{Docker}\label{docker}
+
+\href{https://docs.docker.com/}{Docker} is a platform that allows for containerizing environments. The environments can then be shared and launched on a different machine. In our case, we are will often be launching an online browser version of RStudio with a pre-specified R version and packages.
+
+To get started with Docker, download and install Docker on your local machine. Docker is run using the command line, and the accompanying desktop application provides information on which containers and images are currently running. Docker \textbf{images} are the outline for an environment that can be either downloaded or built locally. Images are built using instructions in a text file called a \texttt{Dockerfile}. Although it may take additional time to build an image locally, sharing the \texttt{Dockerfile} allows users to see all the steps that were taken to build the image. A \textbf{container} is an instance of a particular image.
+
+The \href{https://www.rocker-project.org/}{Rocker Project} includes many Docker images that are good starting points for building a reproducible environment with R. More information can be found in this \href{https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf}{article} by the creators of Rocker.
+
+Data can also be shared from your local machine to the Docker container as \href{https://docs.docker.com/storage/volumes/}{volumes}.
+
+Our experience so far is that Docker can be really great, but it can also be a hassle! The most important step in a reproducible environment is \texttt{renv} (above). Add Docker on top of \texttt{renv} for extra syle points, but never omit \texttt{renv}!
+
+\section{\texorpdfstring{Putting \texttt{renv} and Docker together}{Putting renv and Docker together}}\label{putting-renv-and-docker-together}
+
+Docker and \texttt{renv} can be combined to define reproducible environments including the operating system, R version, R packages and respective versions, and other dependencies. The \texttt{renv} team has written documentation on how to combine the systems \href{https://rstudio.github.io/renv/articles/docker.html}{here}.
+
+For an example using Docker and \texttt{renv} together to recreate a computational environment, see the repository \href{https://github.com/proctor-ucsf/trachoma-sero-transmission}{here}.
+
+Other approaches to building reproducible environments include \href{https://mybinder.org/}{Binder}.
 
 \chapter{Making Data Public}\label{publicdata}
 
@@ -1004,7 +1060,7 @@ The example workflow is accessible via GitHub: \url{https://github.com/proctor-u
 
 \section{Create a data repository}\label{create-a-data-repository}
 
-First, ensure that you create a codebook and metadata file for each public dataset \href{https://proctor-ucsf.github.io/dcc-handbook/datawrangling.html#documenting-datasets}{See the DCC guide on Documenting datasets}. Use the same name as the datasets, but with ``-codebook.txt'' / ``-codebook.html'' / ``-codebook.csv'' at the end (depending on the file format for the codebook). One nice option is the R codebook package, which also generates JSON output that is machine-readable.
+First, ensure that you create a codebook and metadata file for each public dataset \href{https://proctor-ucsf.github.io/dcc-handbook/datawrangling.html\#documenting-datasets}{See the DCC guide on Documenting datasets}. Use the same name as the datasets, but with ``-codebook.txt'' / ``-codebook.html'' / ``-codebook.csv'' at the end (depending on the file format for the codebook). One nice option is the R codebook package, which also generates JSON output that is machine-readable.
 
 \subsection{Steps for creating an Open Science Framework (OSF) repository:}\label{steps-for-creating-an-open-science-framework-osf-repository}
 
@@ -1036,7 +1092,7 @@ Make minor changes to the analysis scripts so that they run on public data. If u
 
 \section{Create a public GitHub page for public scripts}\label{create-a-public-github-page-for-public-scripts}
 
-At minimum, we should include all of the scripts required to run the analyses .
+At minimum, we should include all of the scripts required to run the analyses. \textbf{IMPORTANT}: ensure you have taken a snapshot and saved your computing environment using the \texttt{renv} package (\hyperref[renv]{\texttt{renv}}).
 
 See examples:\\
 - ACTION - \url{https://github.com/proctor-ucsf/ACTION-public}\\
@@ -1059,13 +1115,13 @@ On GitHub, it is useful to create an official ``release'' version to freeze the 
 - NAITRE - \url{https://osf.io/ujeyb/}\\
 - MORDOR Niger antibody study - \url{https://osf.io/dgsq3/}
 
-Further reading on end-to-end data management: \href{https://plos.org/resource/how-to-store-and-manage-your-data/#data-management-plan}{How to Store and Manage Your Data - PLOS}
+Further reading on end-to-end data management: \href{https://plos.org/resource/how-to-store-and-manage-your-data/\#data-management-plan}{How to Store and Manage Your Data - PLOS}
 
 \chapter{Working with Big Data}\label{bigdata}
 
 \emph{Contributors: Eric Kim, Kunal Mishra and Jade Benjamin-Chung}
 
-\section{Basics}\label{basics}
+\section{Basics}\label{basics-1}
 
 A pitfall of working in R is that all objects are stored in memory - this makes it very difficult to work with datasets that are larger than 1-2 Gb for most standard computers. Here, we'll explore some alternatives to working with big data.
 
@@ -1135,7 +1191,7 @@ It is often possible to load large datasets into memory in R, but computations w
 
 More recently from the tidyverse, is the implementation of \href{https://dtplyr.tidyverse.org}{\texttt{dtplyr}}, which allows for \texttt{dplyr} syntax on \texttt{data.table} objects.
 
-An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349#27840349}{this stackoverflow post} and all 3 answers are worth a read.
+An overview of the \texttt{dplyr} vs \texttt{data.table} debate can be found in \href{https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly/27840349\#27840349}{this stackoverflow post} and all 3 answers are worth a read.
 
 \section{\texorpdfstring{\texttt{ff}, \texttt{bigmemory}, \texttt{biglm}}{ff, bigmemory, biglm}}\label{ff-bigmemory-biglm}
 
@@ -1203,7 +1259,7 @@ Unfortunately RStudio often gets slow and/or freezes after hours working with bi
 
 \emph{Contributors: Stephanie Djajadi, Nolan Pokpongkiat, and Ben Arnold}
 
-\section{Basics}\label{basics-1}
+\section{Basics}\label{basics-2}
 
 Git is a version control system. It has very good documentation online: \url{https://git-scm.com/doc}
 
@@ -1214,9 +1270,9 @@ Git is often used in conjunction with GitHub, which is an online platform to hel
 \begin{itemize}
 \tightlist
 \item
-  A detailed tutorial of Git can be found \href{https://sp19.datastructur.es/materials/guides/using-git#b-local-repositories-narrative-introduction}{here on UC Berkeley's CS61B website}.
+  A detailed tutorial of Git can be found \href{https://sp19.datastructur.es/materials/guides/using-git\#b-local-repositories-narrative-introduction}{here on UC Berkeley's CS61B website}.
 \item
-  If you are already familiar with Git, you can reference the summary at the end of \href{https://sp19.datastructur.es/materials/guides/using-git#b-local-repositories-narrative-introduction}{Section B}.
+  If you are already familiar with Git, you can reference the summary at the end of \href{https://sp19.datastructur.es/materials/guides/using-git\#b-local-repositories-narrative-introduction}{Section B}.
 \item
   If you have made a mistake in Git, you can refer to this \href{https://sethrobertson.github.io/GitFixUm/fixup.html}{article} to undo, fix, or remove commits in git.
 \end{itemize}
@@ -1243,7 +1299,7 @@ Branches allow you to keep track of multiple versions of your work simultaneousl
   You are working with others and don't want to mix up your current work with theirs, even if you want to bring your work together later in the future.
 \end{itemize}
 
-A detailed tutorial on Git Branching can be found \href{https://sp19.datastructur.es/materials/guides/using-git#e-git-branching-advanced-git-optional}{here}. You can also find instructions on how to handle merge conflicts when joining branches together.
+A detailed tutorial on Git Branching can be found \href{https://sp19.datastructur.es/materials/guides/using-git\#e-git-branching-advanced-git-optional}{here}. You can also find instructions on how to handle merge conflicts when joining branches together.
 
 \section{Example Workflow}\label{example-workflow}
 
@@ -1364,7 +1420,7 @@ The encoding is extremely cryptic, but there are decodings online (e.g., \href{h
 
 Another bash shell that provides a large array of colors for Mac OS is iTerm2 (\url{https://iterm2.com/}). There are over 200 color schemes to choose from: \url{https://github.com/mbadolato/iTerm2-Color-Schemes}.
 
-\section{Basics}\label{basics-2}
+\section{Basics}\label{basics-3}
 
 On the computer, there is a desktop with two folders, \texttt{folder1} and \texttt{folder2}, and a file called \texttt{file1.} Inside \texttt{folder1}, we have a file called \texttt{file2.} Mac users can run these commands on their terminal; we recommend that Windows users use Git Bash, not Windows PowerShell.
 
@@ -1554,7 +1610,7 @@ title: "EXAMPLE Weekly Report"
 subtitle:
 - <h1><u>CONFIDENTIAL-DO NOT DISSEMINATE</u></h1>
 author: "Will Godwin"
-date: "08 May 2024"
+date: "25 September 2024"
 output:
   pdf_document:
     toc: true

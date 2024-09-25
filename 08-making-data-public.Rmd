@@ -120,7 +120,7 @@ Make minor changes to the analysis scripts so that they run on public data. If u
 
 ## Create a public GitHub page for public scripts
 
-At minimum, we should include all of the scripts required to run the analyses . 
+At minimum, we should include all of the scripts required to run the analyses. **IMPORTANT**: ensure you have taken a snapshot and saved your computing environment using the `renv` package ([`renv`](#renv)).
 
 See examples:   
 - ACTION - https://github.com/proctor-ucsf/ACTION-public     
@@ -142,8 +142,7 @@ On GitHub, it is useful to create an official "release" version to freeze the re
 - MORDOR Niger antibody study - https://osf.io/dgsq3/   
 
         
-        
-        
+
 Further reading on end-to-end data management: [How to Store and Manage Your Data - PLOS](https://plos.org/resource/how-to-store-and-manage-your-data/#data-management-plan) 
  
  

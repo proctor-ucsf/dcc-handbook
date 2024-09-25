@@ -48,6 +48,11 @@ relational-data
 be-careful-with-joins-merges
 reshaping-data
 data-cleaning
+reproducible-environments
+basics
+renv
+docker
+putting-renv-and-docker-together
 publicdata
 overview-1
 removing-phi
@@ -65,7 +70,7 @@ edit-and-test-analysis-scripts
 create-a-public-github-page-for-public-scripts
 go-live
 bigdata
-basics
+basics-1
 using-downsampled-data
 big-data-unix
 sql-and-dbplyr
@@ -78,7 +83,7 @@ gpus
 the-mapreduce-paradigm
 optimal-rstudio-set-up
 github
-basics-1
+basics-2
 git-branching
 example-workflow
 commonly-used-git-commands
@@ -87,7 +92,7 @@ what-should-be-pushed-to-github
 how-should-i-describe-my-commit
 unix
 environment
-basics-2
+basics-3
 syntax-for-both-macwindows
 running-bash-scripts
 running-rscripts-in-windows

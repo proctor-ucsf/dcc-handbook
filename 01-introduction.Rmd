@@ -22,7 +22,7 @@ knitr::include_graphics(here("images","workflow.png"))
 
 When starting a new project, the work flow tends to evolve gradually and by iteration. Data cleaning, data processing, exploratory analyses, back to data cleaning, and so forth. If the work takes place in an unstructured environment with no system to organize files and work flow, it rapidly devolves into into a disorganized mess; analyses become difficult or impossible to replicate and they are anything but scientific. Projects with short deadlines (e.g., proposals, conference abstract submissions, article revisions) are particularly vulnerable to this type of organizational entropy. Putting together a directory and workflow plan from the start helps keep files organized and prevent disorder. Modifications are inevitable – as long as the system is organized, modifications are usually no problem.
 
-Depending on the project, each step involves a different amount of work. Step 1 is by far the most time consuming, and often the most error-prone. We devote an entire chapter to it below ([Data cleaning and processing](#datacleaning))
+Depending on the project, each step involves a different amount of work. Step 1 is by far the most time consuming, and often the most error-prone. We devote an entire chapter to it below ([Data wrangling](#datawrangling))
 
 
 ## Reproducibility
@@ -30,6 +30,8 @@ Depending on the project, each step involves a different amount of work. Step 1 
 As a guiding directive, this process should be reproducible. If you are not familiar with the concept of reproducible research, start with this manifesto ([Munafo et al. 2017](https://www.nature.com/articles/s41562-016-0021)). For a deeper dive, we highly recommend the recent book from Christensen, Freese, and Miguel ([2019](https://www.ucpress.edu/book/9780520296954/transparent-and-reproducible-social-science-research)). Although it is framed around social science, the ideas apply generally.
 
 **Essential reading: Ten Simple Rules for Reproducible Computational Research** Please read this excellent paper on computational reproducibility from [Sandve et al 2013](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285).  It encapsulates many of the practices described herein (we elaborate more, and provide concrete examples). 
+
+A key tool to help ensure your R code runs reliably on different machines and over time is `renv` ([`renv`](#renv)).
 
 ## Automation
 

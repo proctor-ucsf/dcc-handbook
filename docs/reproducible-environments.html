@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Building Automated Markdown Reports | Proctor Foundation Data Science Handbook</title>
+  <title>Chapter 7 Reproducible Environments | Proctor Foundation Data Science Handbook</title>
   <meta name="description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 Building Automated Markdown Reports | Proctor Foundation Data Science Handbook" />
+  <meta property="og:title" content="Chapter 7 Reproducible Environments | Proctor Foundation Data Science Handbook" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Building Automated Markdown Reports | Proctor Foundation Data Science Handbook" />
+  <meta name="twitter:title" content="Chapter 7 Reproducible Environments | Proctor Foundation Data Science Handbook" />
   
   <meta name="twitter:description" content="This is a handbook to help summarize best practices in data science among team members at the Francis I. Proctor Foundation." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="unix.html"/>
-<link rel="next" href="commcoord.html"/>
+<link rel="prev" href="datawrangling.html"/>
+<link rel="next" href="publicdata.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -269,178 +269,58 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="building-automated-markdown-reports" class="section level1 hasAnchor" number="12">
-<h1><span class="header-section-number">Chapter 12</span> Building Automated Markdown Reports<a href="building-automated-markdown-reports.html#building-automated-markdown-reports" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>“Never forget Murphy’s Law 2.0: Anything that can’t go wrong, will go wrong.” -T. Porco</p>
-<p><em>Contributors: Will Godwin, Ying Lin, Ben Arnold</em></p>
-<p>Many teams at Proctor conduct trials that utilize electronic data collection, with data flowing in daily. In order to identify potential errors in the field, we have found it very valuable to download, process, and visualize the data on a weekly and daily basis. On numerous occassions, Thanks to monitoring reports, we have been able to identify and rectify impossibly tall 3-month olds or a toddler with different birthdates on separate interviews. Proactively identifying preventable error saves hassle when processing the final data and ultimately makes trials more accurate and efficient. We visualize the data using reports of tables and figures generated in R markdown. This document provides a template for building your own R markdown report, whether for DSMC meeting or internal use. I’ve also included an <a href="templates/example_report.Rmd">example script</a> to show how a report can look in practice.</p>
-<p><span class="math inline">\(~\)</span></p>
-<div id="setting-up-the-markdown" class="section level2 hasAnchor" number="12.1">
-<h2><span class="header-section-number">12.1</span> Setting up the markdown<a href="building-automated-markdown-reports.html#setting-up-the-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="yaml" class="section level3 hasAnchor" number="12.1.1">
-<h3><span class="header-section-number">12.1.1</span> YAML<a href="building-automated-markdown-reports.html#yaml" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The YAML is the opening header to most R markdown documents and allows the user to specify parameters regarding the layout and output of the document. Among other things, here is where you can add a table of contents, a subtitle, or specify the default output to be pdf file. For a monitoring report, the YAML might look as follows:</p>
-<pre><code>---
-title: &quot;EXAMPLE Weekly Report&quot;
-subtitle:
-- &lt;h1&gt;&lt;u&gt;CONFIDENTIAL-DO NOT DISSEMINATE&lt;/u&gt;&lt;/h1&gt;
-author: &quot;Will Godwin&quot;
-date: &quot;25 September 2024&quot;
-output:
-  pdf_document:
-    toc: true
-    toc_depth: 2
----</code></pre>
-<p><span class="math inline">\(~\)</span></p>
+<div id="reproducible-environments" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Reproducible Environments<a href="reproducible-environments.html#reproducible-environments" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><em>Contributors: Christine Tedijanto and Ben Arnold</em></p>
+<div id="basics" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Basics<a href="reproducible-environments.html#basics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Running the same code on two different machines is not guaranteed to produce identical results due to potential differences in the computational environment. The computational environment consists of the operating system, installed software, software versions, and more. In this section, we focus on tools for packaging and sharing of computational environments to facilitate reproducibility.</p>
+<p>For more on reproducible environments, see the Turing Way section <a href="https://the-turing-way.netlify.app/reproducible-research/renv.html">here</a>.</p>
 </div>
-<div id="directory-structure-1" class="section level3 hasAnchor" number="12.1.2">
-<h3><span class="header-section-number">12.1.2</span> Directory structure<a href="building-automated-markdown-reports.html#directory-structure-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Your report may begin as a couple files in a folder but as it grows in size and complexity, I highly recommend systematizing and standardizing the process for posterity and your own sanity. Refer to <a href="directory-structure-and-code-repositories.html">chapter 3</a> for guidance on building a standardized directory structure and <a href="codingpractices.html">chapter 4</a> for information on coding practices and utilizing the <em>here</em> package, which I use throughout the process.</p>
-<p><span class="math inline">\(~\)</span></p>
+<div id="renv" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> <code>renv</code><a href="reproducible-environments.html#renv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A package management system is used to track downloaded packages and their versions. One common package management system in R is the <code>renv</code> package. The package has nice documentation that can be found <a href="https://rstudio.github.io/renv/articles/renv.html">here</a>. When using <code>renv</code>, the state of your project library will be saved to a file in your project called <code>renv.lock</code>.</p>
+<p>The most common commands are as follows:</p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="78%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>renv::init()</code></td>
+<td>to initialize a project-local environment with a private R library</td>
+</tr>
+<tr class="even">
+<td><code>renv::snapshot()</code></td>
+<td>to save the current state of the project library to the <code>renv.lock</code> file</td>
+</tr>
+<tr class="odd">
+<td><code>renv::restore()</code></td>
+<td>to revert to the state of the project library previously saved in the <code>renv.lock</code> file</td>
+</tr>
+</tbody>
+</table>
 </div>
+<div id="docker" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Docker<a href="reproducible-environments.html#docker" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://docs.docker.com/">Docker</a> is a platform that allows for containerizing environments. The environments can then be shared and launched on a different machine. In our case, we are will often be launching an online browser version of RStudio with a pre-specified R version and packages.</p>
+<p>To get started with Docker, download and install Docker on your local machine. Docker is run using the command line, and the accompanying desktop application provides information on which containers and images are currently running. Docker <strong>images</strong> are the outline for an environment that can be either downloaded or built locally. Images are built using instructions in a text file called a <code>Dockerfile</code>. Although it may take additional time to build an image locally, sharing the <code>Dockerfile</code> allows users to see all the steps that were taken to build the image. A <strong>container</strong> is an instance of a particular image.</p>
+<p>The <a href="https://www.rocker-project.org/">Rocker Project</a> includes many Docker images that are good starting points for building a reproducible environment with R. More information can be found in this <a href="https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf">article</a> by the creators of Rocker.</p>
+<p>Data can also be shared from your local machine to the Docker container as <a href="https://docs.docker.com/storage/volumes/">volumes</a>.</p>
+<p>Our experience so far is that Docker can be really great, but it can also be a hassle! The most important step in a reproducible environment is <code>renv</code> (above). Add Docker on top of <code>renv</code> for extra syle points, but never omit <code>renv</code>!</p>
 </div>
-<div id="automating-the-data-export-process" class="section level2 hasAnchor" number="12.2">
-<h2><span class="header-section-number">12.2</span> Automating the data export process<a href="building-automated-markdown-reports.html#automating-the-data-export-process" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Creating a system that enables you to run some code and download new data in a systematic manner, as opposed to manually downloading the data, is critical to saving time and headaches down the road. This is especially important if you’re building a report that will be run weekly or daily. It may require a little more work on the front end but programmatically downloading data rather than manually will likely be faster, better documented, and standardized. If you work on a team that uses the World Bank’s <em>Survey Solutions</em> for data collection and storage, there is a great API tool that allows you to export data directly from the project’s server. Example code for that process can be found <a href="templates/api_example.R">here</a>. Salesforce, REDCap, and other electronic data capture systems likely have a similar functionality that other Proctor researchers may be more familiar with.</p>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-<div id="loading-the-data" class="section level2 hasAnchor" number="12.3">
-<h2><span class="header-section-number">12.3</span> Loading the data<a href="building-automated-markdown-reports.html#loading-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Depending on the nature of the trial, there may be multiple files to load after exporting the data. I would suggest using a table (ie simple .csv file) to track all necessary files for the report, as shown below. Refer to the <a href="templates/read_clean_data_example.R">example script</a> for how this looks in a setting that utilizes <em>Survey Solutions</em>.</p>
-<center>
-<img src="images/report-images/api_meta.png" width="60%" height="40%" />
-</center>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-<div id="data-cleaningprocessing" class="section level2 hasAnchor" number="12.4">
-<h2><span class="header-section-number">12.4</span> Data cleaning/processing<a href="building-automated-markdown-reports.html#data-cleaningprocessing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I won’t focus explicitly on data cleaning and processing since this process is usually fairly project specific. Briefly, after reading data into R, spend some time making sure all relevant variables (columns) were loaded and checking that variable classes are encoded as expected. Below is an example that checks the structure of the data and converts all variables that should be “Date” class to be so.</p>
-<pre><code>#convert all variables with &quot;date&quot; within the name to date class
-dt.anthro %&lt;&gt;% mutate_at(vars(matches(&quot;date&quot;)), as.Date)
-
-#convert all values within &quot;childID&quot; variable to lowercase
-dt.anthro %&lt;&gt;% mutate_at(vars(matches(&quot;childID&quot;)), tolower)</code></pre>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-<div id="data-monitoring" class="section level2 hasAnchor" number="12.5">
-<h2><span class="header-section-number">12.5</span> Data monitoring<a href="building-automated-markdown-reports.html#data-monitoring" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now that we have data read into R and structured appropriately, we can focus on the (2) primary aims of the report: data validation to be used internally and DSMC-style presentation of the data. Of course the aims of your report may vary but the monitoring examples below represent evaluations critical to almost any RCT.</p>
-<div id="data-validation" class="section level3 hasAnchor" number="12.5.1">
-<h3><span class="header-section-number">12.5.1</span> Data validation<a href="building-automated-markdown-reports.html#data-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="missinginappropriately-structured-data" class="section level4 hasAnchor" number="12.5.1.1">
-<h4><span class="header-section-number">12.5.1.1</span> Missing/inappropriately structured data<a href="building-automated-markdown-reports.html#missinginappropriately-structured-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>While not the most glamorous component of the report, checking for missing data is critical. It’s helpful once all the data have been read in, to conduct some important checks of the data integrity. Did R (or python, etc) correctly interpret and load the data files? Are there any participant IDs missing? Are there participant’s with reported birthdates in the future? This is an important stage to think about the plethora of maladies that could befall the data in between when it was recorded and when it got to you. Below are examples of how you could check for some common issues.</p>
-<pre><code>#check for missing values across all columns
-map(dt.anthro, ~sum(is.na(.)))
-
-#check for missing values in childsex
-na_childSex &lt;- sum(is.na(dt.anthro$childSex))
-
-There are 4 rows with missing values for child sex.</code></pre>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-<div id="reporting-inconsistencies" class="section level4 hasAnchor" number="12.5.1.2">
-<h4><span class="header-section-number">12.5.1.2</span> Reporting inconsistencies<a href="building-automated-markdown-reports.html#reporting-inconsistencies" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Many studies may use multiple independent questionnaires to gather information at different timepoints and ask the same demographic information. For example, in an individually randomized trial, each participant receives an ID that links the participant responses across all timepoints of the study. Below is an example showing how to check that the responses are consistent across all questionnaires.</p>
-<pre><code>#join anthro and swabs data by childID to check where childSex is different
-dt.anthro %&gt;%
-  select(childSex, childID) %&gt;%
-  inner_join(
-    dt.swabs %&gt;% select(childSex, childID),
-    by=&quot;childID&quot;
-  ) %&gt;%
-  filter(childSex.x!=childSex.y)</code></pre>
-<p>Another component of data validation is checking for overt errors and outliers, many of which can often be fixed in the field. One example is when interviewers may accidentally record a study participant’s weight in kilograms instead of grams, resulting in an error 3 magnitudes in size. This error is easily identified (red circle) from plotting the distribution of the birthweights in a histogram.</p>
-<pre><code>#age histogram
-dt.anthro %&gt;%
-  mutate(weeks = difftime(startTime, date_of_birth, units = &quot;weeks&quot;)) %&gt;%
-  ggplot(dt.anthro, aes(weeks)) +
-    geom_histogram(binwidth = .2) +
-    theme_bw() +
-    xlab(&quot;Age (weeks)&quot;) +
-    ylab(&quot;Count&quot;)</code></pre>
-<center>
-<p><img src="images/report-images/birthweight.png" width="60%" height="40%" /></p>
-Distribution of participant birthweights in grams
-</center>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-</div>
-<div id="data-presentation-dsmc-style" class="section level3 hasAnchor" number="12.5.2">
-<h3><span class="header-section-number">12.5.2</span> Data presentation (DSMC-style)<a href="building-automated-markdown-reports.html#data-presentation-dsmc-style" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The ultimate arbiter of whether a trial remains running is often the Data and Safety Monitoring Committee (DSMC) and these reports can be used to present preliminary findings/analyses as well as detail all relevant safety metrics.</p>
-<div id="enrollment" class="section level4 hasAnchor" number="12.5.2.1">
-<h4><span class="header-section-number">12.5.2.1</span> Enrollment<a href="building-automated-markdown-reports.html#enrollment" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Any study investigator cares a lot about enrollment, since it determines the length and cost of the trial, among other things. Therefore, any report needs tables/figures showing enrollment trends and trajectory. Below are a couple examples of what they can look like.
-<!-- ![](images/report-images/enrollment1.png) --></p>
-<center>
-<p><img src="images/report-images/enrollment1.png" width="50%" height="30%" /></p>
-<p><img src="images/report-images/enrollment2.png" width="70%" height="50%" /></p>
-Enrollment counts across the length of the study period.
-</center>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-<div id="baseline-characteristics" class="section level4 hasAnchor" number="12.5.2.2">
-<h4><span class="header-section-number">12.5.2.2</span> Baseline characteristics<a href="building-automated-markdown-reports.html#baseline-characteristics" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-Demographic characteristics of the enrolled participants at baseline are often necessary.
-<center>
-<img src="images/report-images/baseline.png" width="60%" height="40%" />
-</center>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-<div id="treatment" class="section level4 hasAnchor" number="12.5.2.3">
-<h4><span class="header-section-number">12.5.2.3</span> Treatment<a href="building-automated-markdown-reports.html#treatment" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>There is usually a treatment component to an RCT, where participants are treated according to their assigned arm (i.e. treatment or placebo). The report should include checks that confirm particpants actually received the treatment that they were randomized to. Otherwise, the results of the study lack interpretability and are likely null.</p>
-<pre><code>#merge with treatment letters
-wrong_random &lt;- dt.treatment %&gt;%
-  left_join(dt_letters, by=&quot;childID&quot;) %&gt;%
-  #the treatment letter does not match what&#39;s in database
-  tally(TL != assignment) %&gt;% as.numeric()
-
-Number of IDs where treatment letter given does not match database: 0</code></pre>
-<center>
-<p><img src="images/report-images/treatment.png" width="40%" height="20%" /></p>
-Counts of number treated and number eligible, along with percent treated (coverage), by region.
-</center>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-<div id="primarysecondary-outcomes-masked" class="section level4 hasAnchor" number="12.5.2.4">
-<h4><span class="header-section-number">12.5.2.4</span> Primary/secondary outcomes (<strong><em>masked!</em></strong>)<a href="building-automated-markdown-reports.html#primarysecondary-outcomes-masked" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>This is probably the most exciting section for an investigator to see since these metrics are the motivation of the trial itself. Be especially vigilient to make sure that the figures remain masked when sending to trial investigators and coordinators. This means making sure that you send no information regarding the treatment assignments while the trial is still active.</p>
-<center>
-<p><img src="images/report-images/primary_outcome.png" width="50%" height="35%" /></p>
-<p>Preliminary mortality rate and total person-years by region.</p>
-<p><span class="math inline">\(~\)</span></p>
-<p><img src="images/report-images/growth_curves.png" width="50%" height="40%" /></p>
-Height growth curves of participants at Baseline and 6-month timepoints.
-</center>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-<div id="follow-upadverse-events" class="section level4 hasAnchor" number="12.5.2.5">
-<h4><span class="header-section-number">12.5.2.5</span> Follow-up/Adverse events<a href="building-automated-markdown-reports.html#follow-upadverse-events" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>This report can serve as guard against loss to follow-up, an issue that plagues many trials. By actively monitoring the number of participants that have, and have not, been followed-up on, we can communicate where participants or clusters need to more attention to workers in the field. Below is an example showing follow-up percentages by region.</p>
-<center>
-<img src="images/report-images/followup.png" width="50%" height="35%" />
-</center>
-<p>As mentioned above, adverse events should be tabulated and closely watched throughout the study to monitor if the intervention may be causing increased harm.</p>
-<center>
-<img src="images/report-images/adverse_events.png" width="65%" height="45%" />
-</center>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-</div>
-<div id="appendix-if-necessary" class="section level3 hasAnchor" number="12.5.3">
-<h3><span class="header-section-number">12.5.3</span> Appendix (if necessary)<a href="building-automated-markdown-reports.html#appendix-if-necessary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Sometimes an appendix can be helpful to display long lists or addendums to tables shown earlier in the report. Below is an example of a list enumerating all adverse events that were not included in the AE table within the main report.</p>
-<center>
-<img src="images/report-images/appendix.png" width="70%" height="50%" />
-</center>
-<p><span class="math inline">\(~\)</span></p>
-</div>
-</div>
-<div id="summary" class="section level2 hasAnchor" number="12.6">
-<h2><span class="header-section-number">12.6</span> Summary<a href="building-automated-markdown-reports.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This chapter described and illustrated an example of a data monitoring report using R markdown. This is, by no means, an exhaustive list of what to include in a monitoring report but meant to serve as a template as you create your own report. It is specifically geared towards continuous monitoring of randomized-controlled trials but the overarching concepts apply to other types of trials or even retrospective analyses.</p>
+<div id="putting-renv-and-docker-together" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Putting <code>renv</code> and Docker together<a href="reproducible-environments.html#putting-renv-and-docker-together" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Docker and <code>renv</code> can be combined to define reproducible environments including the operating system, R version, R packages and respective versions, and other dependencies. The <code>renv</code> team has written documentation on how to combine the systems <a href="https://rstudio.github.io/renv/articles/docker.html">here</a>.</p>
+<p>For an example using Docker and <code>renv</code> together to recreate a computational environment, see the repository <a href="https://github.com/proctor-ucsf/trachoma-sero-transmission">here</a>.</p>
+<p>Other approaches to building reproducible environments include <a href="https://mybinder.org/">Binder</a>.</p>
 
 </div>
 </div>
@@ -449,8 +329,8 @@ Height growth curves of participants at Baseline and 6-month timepoints.
           </div>
         </div>
       </div>
-<a href="unix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="commcoord.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="datawrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="publicdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

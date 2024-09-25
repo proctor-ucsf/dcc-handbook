@@ -1,0 +1,46 @@
+# Reproducible Environments
+
+*Contributors: Christine Tedijanto and Ben Arnold*
+
+## Basics
+
+Running the same code on two different machines is not guaranteed to produce identical results due to potential differences in the computational environment. The computational environment consists of the operating system, installed software, software versions, and more. In this section, we focus on tools for packaging and sharing of computational environments to facilitate reproducibility.
+
+For more on reproducible environments, see the Turing Way section [here](https://the-turing-way.netlify.app/reproducible-research/renv.html).
+
+## `renv` {#renv}
+
+A package management system is used to track downloaded packages and their versions. One common package management system in R is the `renv` package. The package has nice documentation that can be found [here](https://rstudio.github.io/renv/articles/renv.html). When using `renv`, the state of your project library will be saved to a file in your project called `renv.lock`.
+
+The most common commands are as follows:
+
++------------------------+----------------------------------------------------------------------------------------+
+| Command                | Description                                                                            |
++========================+========================================================================================+
+| `renv::init()`         | to initialize a project-local environment with a private R library                     |
++------------------------+----------------------------------------------------------------------------------------+
+| `renv::snapshot()`     | to save the current state of the project library to the `renv.lock` file               |
++------------------------+----------------------------------------------------------------------------------------+
+| `renv::restore()`      | to revert to the state of the project library previously saved in the `renv.lock` file |
++------------------------+----------------------------------------------------------------------------------------+
+
+## Docker
+
+[Docker](https://docs.docker.com/) is a platform that allows for containerizing environments. The environments can then be shared and launched on a different machine. In our case, we are will often be launching an online browser version of RStudio with a pre-specified R version and packages. 
+
+To get started with Docker, download and install Docker on your local machine. Docker is run using the command line, and the accompanying desktop application provides information on which containers and images are currently running. Docker **images** are the outline for an environment that can be either downloaded or built locally. Images are built using instructions in a text file called a `Dockerfile`. Although it may take additional time to build an image locally, sharing the `Dockerfile` allows users to see all the steps that were taken to build the image. A **container** is an instance of a particular image.
+
+The [Rocker Project](https://www.rocker-project.org/) includes many Docker images that are good starting points for building a reproducible environment with R. More information can be found in this [article](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf) by the creators of Rocker.
+
+Data can also be shared from your local machine to the Docker container as [volumes](https://docs.docker.com/storage/volumes/).
+
+Our experience so far is that Docker can be really great, but it can also be a hassle!  The most important step in a reproducible environment is `renv` (above). Add Docker on top of `renv` for extra syle points, but never omit `renv`!
+
+
+## Putting `renv` and Docker together
+
+Docker and `renv` can be combined to define reproducible environments including the operating system, R version, R packages and respective versions, and other dependencies. The `renv` team has written documentation on how to combine the systems [here](https://rstudio.github.io/renv/articles/docker.html).
+
+For an example using Docker and `renv` together to recreate a computational environment, see the repository [here](https://github.com/proctor-ucsf/trachoma-sero-transmission).
+
+Other approaches to building reproducible environments include [Binder](https://mybinder.org/). 
